@@ -266,76 +266,160 @@ function classifyAccess(tags) {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-// CLUSTERING
+// CLUSTERING — one dot per complex
 // ═══════════════════════════════════════════════════════════════════
 
-function clusterCourts(elements) {
-  const map = new Map();
+function haversineMeters(lat1, lon1, lat2, lon2) {
+  const R = 6371000;
+  const φ1 = lat1 * Math.PI/180, φ2 = lat2 * Math.PI/180;
+  const Δφ = (lat2-lat1) * Math.PI/180, Δλ = (lon2-lon1) * Math.PI/180;
+  const a = Math.sin(Δφ/2)**2 + Math.cos(φ1)*Math.cos(φ2)*Math.sin(Δλ/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
 
+function mergeTags(base, extra) {
+  for (const [k, v] of Object.entries(extra)) { if (v && !base[k]) base[k] = v; }
+  return base;
+}
+
+function clusterCourts(elements) {
+  // ── Step 1: parse raw elements ──────────────────────────────────
+  const raw = [];
   for (const el of elements) {
     const lat = el.lat ?? el.center?.lat;
     const lon = el.lon ?? el.center?.lon;
     if (!lat || !lon) continue;
-
     const tags  = el.tags || {};
     const sport = tags.sport;
     if (sport !== 'tennis' && sport !== 'padel') continue;
-
-    const name  = (tags.name || '').trim();
-    const lower = name.toLowerCase();
-    const ov    = findOverride(name);
+    const ov = findOverride(tags.name || '');
     if (ov?.remove) continue;
+    raw.push({ lat, lon, tags: { ...tags }, sport });
+  }
 
-    let key;
+  // ── Step 2: group by specific name (within 2 km) ────────────────
+  // Named groups prevent nearby same-named courts merging across parks
+  const namedGroups = new Map();  // key → { lats[], lons[], tags, sport }
+  const unnamed     = [];
+
+  for (const pt of raw) {
+    const name  = (pt.tags.name || '').trim();
+    const lower = name.toLowerCase();
     if (name && name.length > 4 && !GENERIC_NAMES.has(lower)) {
-      key = `${sport}:${lower}:${(lat * 100).toFixed(0)},${(lon * 100).toFixed(0)}`;
-    } else {
-      key = `${sport}:${lat.toFixed(3)},${lon.toFixed(3)}`;
-    }
-
-    if (map.has(key)) {
-      const c = map.get(key);
-      c.lats.push(lat); c.lons.push(lon);
-      for (const [k, v] of Object.entries(tags)) {
-        if (v && !c.tags[k]) c.tags[k] = v;
+      // 2 km grid cell keeps same-named courts in different areas separate
+      const cell = `${pt.sport}:${lower}:${(pt.lat*50).toFixed(0)},${(pt.lon*50).toFixed(0)}`;
+      if (namedGroups.has(cell)) {
+        const g = namedGroups.get(cell);
+        g.lats.push(pt.lat); g.lons.push(pt.lon);
+        mergeTags(g.tags, pt.tags);
+      } else {
+        namedGroups.set(cell, { lats:[pt.lat], lons:[pt.lon], tags:{ ...pt.tags }, sport:pt.sport });
       }
     } else {
-      map.set(key, { lats: [lat], lons: [lon], tags: { ...tags }, sport });
+      unnamed.push(pt);
     }
   }
 
-  return Array.from(map.values()).map(c => ({
-    lat: c.lats.reduce((a,b) => a+b,0) / c.lats.length,
-    lon: c.lons.reduce((a,b) => a+b,0) / c.lons.length,
-    tags: c.tags, sport: c.sport, count: c.lats.length,
+  // ── Step 3: greedy spatial clustering for unnamed (300 m radius) ─
+  const unnamedGroups = [];
+  const used = new Uint8Array(unnamed.length);
+
+  for (let i = 0; i < unnamed.length; i++) {
+    if (used[i]) continue;
+    const g = { lats:[unnamed[i].lat], lons:[unnamed[i].lon],
+                tags:{ ...unnamed[i].tags }, sport:unnamed[i].sport };
+    used[i] = 1;
+    // Only merge same-sport courts in the same rough 300 m area
+    for (let j = i+1; j < unnamed.length; j++) {
+      if (used[j] || unnamed[j].sport !== unnamed[i].sport) continue;
+      if (haversineMeters(unnamed[i].lat, unnamed[i].lon,
+                          unnamed[j].lat, unnamed[j].lon) < 300) {
+        g.lats.push(unnamed[j].lat); g.lons.push(unnamed[j].lon);
+        mergeTags(g.tags, unnamed[j].tags);
+        used[j] = 1;
+      }
+    }
+    unnamedGroups.push(g);
+  }
+
+  // ── Step 4: convert to cluster objects ───────────────────────────
+  return [...namedGroups.values(), ...unnamedGroups].map(g => ({
+    lat:   g.lats.reduce((a,b)=>a+b,0) / g.lats.length,
+    lon:   g.lons.reduce((a,b)=>a+b,0) / g.lons.length,
+    tags:  g.tags,
+    sport: g.sport,
+    count: g.lats.length,
+    needsName: !g.tags.name || GENERIC_NAMES.has((g.tags.name||'').toLowerCase()),
   }));
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// REVERSE GEOCODING — lazy, cached, rate-limited
+// ═══════════════════════════════════════════════════════════════════
+
+const geocodeCache = new Map();
+
+async function reverseGeocode(lat, lon) {
+  const key = `${lat.toFixed(4)},${lon.toFixed(4)}`;
+  if (geocodeCache.has(key)) return geocodeCache.get(key);
+
+  try {
+    const resp = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&zoom=17`,
+      { headers: { 'Accept': 'application/json' } }
+    );
+    const d = await resp.json();
+    // Best name candidates in priority order
+    const name =
+      d.name ||
+      d.address?.park ||
+      d.address?.leisure ||
+      d.address?.amenity ||
+      d.address?.building ||
+      (d.address?.road ? d.address.road : null);
+    geocodeCache.set(key, name || null);
+    return name || null;
+  } catch {
+    return null;
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════════
 // POPUP
 // ═══════════════════════════════════════════════════════════════════
 
-function buildPopup(court, accessType, website, note) {
+function resolveName(court) {
   const { tags, sport } = court;
+  // Use cached geocoded name if available
+  if (court.resolvedName) return court.resolvedName;
+  // OSM name tag
+  if (tags.name && !GENERIC_NAMES.has(tags.name.toLowerCase())) return tags.name;
+  // Operator (skip NYC Parks — not a useful facility name)
+  if (tags.operator && !tags.operator.toLowerCase().includes('nyc parks')
+                    && !tags.operator.toLowerCase().includes('department of parks'))
+    return tags.operator;
+  // Street address
+  if (tags['addr:street'])
+    return `${sport === 'padel' ? 'Padel' : 'Tennis'} Courts · ${tags['addr:street']}`;
+  // Fallback — will be replaced when user clicks (reverse geocode fires then)
+  return sport === 'padel' ? 'Padel Courts' : 'Tennis Courts';
+}
 
-  let name = tags.name;
-  if (!name || GENERIC_NAMES.has(name.toLowerCase())) {
-    if (tags.operator && !tags.operator.toLowerCase().includes('nyc parks')) {
-      name = tags.operator;
-    } else if (tags['addr:street']) {
-      name = `${sport === 'padel' ? 'Padel' : 'Tennis'} Courts – ${tags['addr:street']}`;
-    } else {
-      name = sport === 'padel' ? 'Padel Court Complex' : 'Tennis Court Complex';
-    }
-  }
-
+function buildPopup(court, accessType, website, note, nameOverride) {
+  const { tags, sport, count } = court;
+  const name       = nameOverride || resolveName(court);
   const sportLabel = sport.charAt(0).toUpperCase() + sport.slice(1);
+
   const rows = [];
-  if (tags.operator && tags.operator !== name) rows.push(`<b>Operator:</b> ${tags.operator}`);
-  if (tags.surface)        rows.push(`<b>Surface:</b> ${tags.surface}`);
+  const resolvedName = resolveName(court);
+  if (tags.operator && tags.operator !== resolvedName
+      && !tags.operator.toLowerCase().includes('nyc parks'))
+    rows.push(`<b>Operator:</b> ${tags.operator}`);
+  if (count > 1)          rows.push(`<b>Courts:</b> ${count}`);
+  if (tags.surface)       rows.push(`<b>Surface:</b> ${tags.surface}`);
   if (tags.fee && tags.fee !== 'no') rows.push(`<b>Fee:</b> ${tags.fee}`);
-  if (tags.opening_hours)  rows.push(`<b>Hours:</b> ${tags.opening_hours}`);
-  if (tags.phone)          rows.push(`<b>Phone:</b> <a href="tel:${tags.phone}">${tags.phone}</a>`);
+  if (tags.opening_hours) rows.push(`<b>Hours:</b> ${tags.opening_hours}`);
+  if (tags.phone)         rows.push(`<b>Phone:</b> <a href="tel:${tags.phone}">${tags.phone}</a>`);
   const link = website || tags.website;
   if (link) rows.push(`<b>Website:</b> <a href="${link}" target="_blank">Visit ↗</a>`);
 
@@ -529,10 +613,23 @@ function buildCourts(elements) {
       // not added to map yet — updateMap() handles visibility
     });
 
-    // Single click → info window
-    marker.addListener('click', () => {
+    // Single click → info window (reverse-geocode unnamed courts on first click)
+    marker.addListener('click', async () => {
+      // Show popup immediately with best available name
       infoWindow.instance.setContent(buildPopup(court, accessType, website, note));
       infoWindow.instance.open(gmap, marker);
+
+      // If no good name yet, fetch one in background and refresh popup
+      if (court.needsName && !court.resolvedName) {
+        const geo = await reverseGeocode(court.lat, court.lon);
+        if (geo) {
+          court.resolvedName = geo;
+          // Refresh popup if still open on this marker
+          if (infoWindow.instance.getAnchor() === marker) {
+            infoWindow.instance.setContent(buildPopup(court, accessType, website, note));
+          }
+        }
+      }
     });
 
     // Double click → open website
