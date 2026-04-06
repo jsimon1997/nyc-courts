@@ -84,6 +84,25 @@
     #address-status.error { color: #ef4444; }
     #address-status.ok    { color: #22c55e; font-weight: 500; }
 
+    /* Time pills */
+    .time-pills { display: flex; gap: 5px; }
+    .time-pill {
+      flex: 1; padding: 5px 0; font-size: 11.5px; font-weight: 600;
+      font-family: inherit; cursor: pointer;
+      border: 1.5px solid #e2e8f0; border-radius: 6px;
+      background: #f8fafc; color: #64748b;
+      transition: all .15s;
+    }
+    .time-pill:hover  { border-color: #a5b4fc; color: #4f46e5; }
+    .time-pill.active { background: #4f46e5; border-color: #4f46e5; color: white; }
+
+    /* Active drive filter banner */
+    #drive-active-banner {
+      display: none; font-size: 11px; color: #4338ca;
+      background: #eef2ff; border-radius: 6px;
+      padding: 5px 9px; line-height: 1.4;
+    }
+
     /* Filter rows */
     .filter-row {
       display: flex; align-items: center; gap: 10px;
@@ -211,8 +230,15 @@
 
     <div class="section-label">Drive Time Filter</div>
     <div id="address-wrap">
-      <input id="address-input" type="text" placeholder="Your address…">
-      <button id="address-btn">Filter ≤ 20 min drive</button>
+      <input id="address-input" type="text" placeholder="e.g. 350 W 42nd St, NY">
+      <div class="time-pills">
+        <button class="time-pill" data-min="10">10 min</button>
+        <button class="time-pill" data-min="15">15 min</button>
+        <button class="time-pill active" data-min="20">20 min</button>
+        <button class="time-pill" data-min="30">30 min</button>
+      </div>
+      <button id="address-btn">Filter by drive time</button>
+      <div id="drive-active-banner"></div>
       <span id="address-clear" onclick="clearDriveFilter()">✕ Remove filter</span>
       <div id="address-status"></div>
     </div>
@@ -243,6 +269,24 @@
     <div class="filter-row">
       <input type="checkbox" id="f-unknown" checked>
       <label for="f-unknown"><div class="swatch" style="background:#94a3b8"></div>Unknown access</label>
+    </div>
+
+    <div class="section-label">Surface</div>
+    <div class="filter-row">
+      <input type="checkbox" id="f-clay" checked>
+      <label for="f-clay"><div class="swatch" style="background:#c2410c"></div>Clay</label>
+    </div>
+    <div class="filter-row">
+      <input type="checkbox" id="f-hard" checked>
+      <label for="f-hard"><div class="swatch" style="background:#64748b"></div>Hard</label>
+    </div>
+    <div class="filter-row">
+      <input type="checkbox" id="f-grass" checked>
+      <label for="f-grass"><div class="swatch" style="background:#16a34a"></div>Grass</label>
+    </div>
+    <div class="filter-row">
+      <input type="checkbox" id="f-surface-other" checked>
+      <label for="f-surface-other"><div class="swatch" style="background:#cbd5e1"></div>Other / Unknown</label>
     </div>
 
     <div class="divider"></div>
@@ -570,8 +614,9 @@ async function getDriveTimes(homeLat, homeLon, courts) {
 // STATE
 // ═══════════════════════════════════════════════════════════════════
 
-let allCourts  = [];
-let driveFilter = null;
+let allCourts    = [];
+let driveFilter  = null;
+let driveMinutes = 20;
 
 // ═══════════════════════════════════════════════════════════════════
 // RENDER
@@ -585,6 +630,10 @@ function updateMap() {
     reservable: document.getElementById('f-reservable').checked,
     private:    document.getElementById('f-private').checked,
     unknown:    document.getElementById('f-unknown').checked,
+    clay:       document.getElementById('f-clay').checked,
+    hard:       document.getElementById('f-hard').checked,
+    grass:      document.getElementById('f-grass').checked,
+    other:      document.getElementById('f-surface-other').checked,
   };
 
   const counts = { tennis: 0, padel: 0, public: 0, reservable: 0, private: 0, unknown: 0 };
@@ -593,6 +642,7 @@ function updateMap() {
     const visible =
       show[c.sport] &&
       show[c.accessType] &&
+      show[c.surface] &&
       (!driveFilter || driveFilter[idx]);
 
     if (visible) {
@@ -636,12 +686,16 @@ async function applyDriveFilter() {
     status.textContent = 'Fetching drive times…';
 
     const times = await getDriveTimes(lat, lon, allCourts);
-    driveFilter = times.map(t => t !== null && t <= 1200); // 20 min
+    driveFilter = times.map(t => t !== null && t <= driveMinutes * 60);
 
     const within = driveFilter.filter(Boolean).length;
-    status.textContent = `${within} facilit${within !== 1 ? 'ies' : 'y'} within 20 min`;
+    status.textContent = `${within} facilit${within !== 1 ? 'ies' : 'y'} within ${driveMinutes} min`;
     status.className = 'ok';
     document.getElementById('address-clear').style.display = 'block';
+    const banner = document.getElementById('drive-active-banner');
+    const shortAddr = address.length > 28 ? address.slice(0, 28) + '…' : address;
+    banner.textContent = `Within ${driveMinutes} min of ${shortAddr}`;
+    banner.style.display = 'block';
 
     // Home marker
     if (window._homeMarker) window._homeMarker.remove();
@@ -659,7 +713,7 @@ async function applyDriveFilter() {
     status.className = 'error';
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Filter ≤ 20 min drive';
+    btn.textContent = 'Filter by drive time';
   }
 }
 
@@ -669,12 +723,21 @@ function clearDriveFilter() {
   document.getElementById('address-status').textContent = '';
   document.getElementById('address-status').className = '';
   document.getElementById('address-clear').style.display = 'none';
+  document.getElementById('drive-active-banner').style.display = 'none';
   updateMap();
 }
 
 // ═══════════════════════════════════════════════════════════════════
 // BUILD COURTS
 // ═══════════════════════════════════════════════════════════════════
+
+function normalizeSurface(tags) {
+  const s = (tags.surface || '').toLowerCase();
+  if (s === 'clay') return 'clay';
+  if (['hard','asphalt','concrete','acrylic','artificial'].includes(s)) return 'hard';
+  if (s === 'grass' || s === 'natural_grass') return 'grass';
+  return 'other';
+}
 
 function buildCourts(elements) {
   const clusters = clusterCourts(elements);
@@ -696,6 +759,7 @@ function buildCourts(elements) {
     court.accessType = accessType;
     court.website    = website;
     court.note       = note;
+    court.surface    = normalizeSurface(tags);
 
     const marker = L.circleMarker([lat, lon], {
       radius: 8,
@@ -704,6 +768,10 @@ function buildCourts(elements) {
       color: SPORT_STROKE[sport],
       weight: 2,
     });
+
+    // Hover → grow marker
+    marker.on('mouseover', () => marker.setStyle({ radius: 11, fillOpacity: 1 }));
+    marker.on('mouseout',  () => marker.setStyle({ radius: 8,  fillOpacity: 0.9 }));
 
     // Single click → popup (reverse-geocode unnamed courts on first click)
     marker.on('click', async () => {
@@ -784,9 +852,17 @@ async function initMap() {
     buildCourts(elements);
     document.getElementById('loading').style.display = 'none';
 
-    ['f-tennis','f-padel','f-public','f-reservable','f-private','f-unknown'].forEach(id =>
+    ['f-tennis','f-padel','f-public','f-reservable','f-private','f-unknown',
+     'f-clay','f-hard','f-grass','f-surface-other'].forEach(id =>
       document.getElementById(id).addEventListener('change', updateMap)
     );
+    document.querySelectorAll('.time-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.time-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        driveMinutes = parseInt(pill.dataset.min, 10);
+      });
+    });
     document.getElementById('address-btn').addEventListener('click', applyDriveFilter);
     document.getElementById('address-input').addEventListener('keydown', e => {
       if (e.key === 'Enter') applyDriveFilter();
