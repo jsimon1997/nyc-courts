@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NYC Tennis & Padel Courts</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    #map { height: 100vh; width: 100%; }
+
+    /* ── Side panel ─────────────────────────────────────── */
+    #panel {
+      position: absolute;
+      top: 12px; left: 12px;
+      z-index: 1000;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 16px rgba(0,0,0,.18);
+      width: 250px;
+      max-height: calc(100vh - 24px);
+      overflow-y: auto;
+    }
+    #panel-header {
+      background: #111827;
+      color: white;
+      padding: 14px 16px;
+      border-radius: 10px 10px 0 0;
+      position: sticky; top: 0; z-index: 1;
+    }
+    #panel-header h2 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+    #panel-header p  { font-size: 11px; opacity: .6; }
+
+    #panel-body { padding: 14px 16px; }
+
+    .section-label {
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .07em;
+      color: #9ca3af; margin: 14px 0 7px;
+    }
+    .section-label:first-child { margin-top: 0; }
+
+    /* address input */
+    #address-wrap { display: flex; flex-direction: column; gap: 6px; }
+    #address-input {
+      width: 100%; padding: 7px 9px; font-size: 12px;
+      border: 1.5px solid #d1d5db; border-radius: 6px; outline: none;
+    }
+    #address-input:focus { border-color: #6366f1; }
+    #address-btn {
+      background: #111827; color: white; border: none;
+      padding: 7px 10px; border-radius: 6px;
+      font-size: 12px; font-weight: 600; cursor: pointer;
+    }
+    #address-btn:hover { background: #374151; }
+    #address-btn:disabled { background: #9ca3af; cursor: wait; }
+    #address-clear {
+      font-size: 11px; color: #6b7280; cursor: pointer;
+      text-decoration: underline; display: none; margin-top: 2px;
+    }
+    #address-status { font-size: 11px; color: #6b7280; min-height: 14px; }
+    #address-status.error { color: #dc2626; }
+    #address-status.ok    { color: #16a34a; }
+
+    /* filter rows */
+    .filter-row {
+      display: flex; align-items: center; gap: 9px;
+      margin-bottom: 7px; cursor: pointer;
+    }
+    .filter-row input[type="checkbox"] {
+      width: 15px; height: 15px; cursor: pointer; flex-shrink: 0;
+      accent-color: #111827;
+    }
+    .filter-row label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; cursor: pointer; line-height: 1.2;
+    }
+    .swatch {
+      width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0;
+    }
+
+    .divider { height: 1px; background: #f3f4f6; margin: 12px 0; }
+
+    #stats { font-size: 12px; color: #6b7280; line-height: 1.9; }
+    #stats b { color: #111827; }
+
+    #hint {
+      font-size: 10.5px; color: #9ca3af; margin-top: 10px;
+      line-height: 1.5; font-style: italic;
+    }
+
+    /* ── Loading overlay ─────────────────────────────────── */
+    #loading {
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,.88);
+      z-index: 2000;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 14px;
+    }
+    .spinner {
+      width: 38px; height: 38px;
+      border: 3px solid #e5e7eb; border-top-color: #111827;
+      border-radius: 50%;
+      animation: spin .75s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #loading p { font-size: 14px; color: #374151; }
+
+    /* ── Google Maps InfoWindow override ─────────────────── */
+    .gm-popup { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .popup-name   { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+    .popup-sport  { font-size: 11px; font-weight: 600; text-transform: uppercase;
+                    letter-spacing: .06em; color: #6b7280; margin-bottom: 2px; }
+    .popup-access { font-size: 12px; margin-bottom: 6px; }
+    .popup-details { font-size: 12px; line-height: 1.75; }
+    .popup-details a { color: #2563eb; }
+    .popup-note { font-size: 11px; color: #6b7280; margin-top: 5px;
+                  padding: 4px 6px; background: #f9fafb; border-radius: 4px; }
+    .popup-dblclick { font-size: 10px; color: #9ca3af; margin-top: 6px; font-style: italic; }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<div id="panel">
+  <div id="panel-header">
+    <h2>NYC Tennis &amp; Padel</h2>
+    <p>Manhattan · Brooklyn · Queens · Bronx</p>
+  </div>
+  <div id="panel-body">
+
+    <div class="section-label">Drive Time Filter</div>
+    <div id="address-wrap">
+      <input id="address-input" type="text" placeholder="Your address (e.g. 100 Ave A, NYC)">
+      <button id="address-btn">Filter ≤ 20 min drive</button>
+      <span id="address-clear" onclick="clearDriveFilter()">✕ Clear filter</span>
+      <div id="address-status"></div>
+    </div>
+
+    <div class="section-label">Sport</div>
+    <div class="filter-row">
+      <input type="checkbox" id="f-tennis" checked>
+      <label for="f-tennis"><div class="swatch" style="background:#3b82f6;border:2px solid #1d4ed8"></div>Tennis</label>
+    </div>
+    <div class="filter-row">
+      <input type="checkbox" id="f-padel" checked>
+      <label for="f-padel"><div class="swatch" style="background:#f97316;border:2px solid #c2410c"></div>Padel</label>
+    </div>
+
+    <div class="section-label">Access</div>
+    <div class="filter-row">
+      <input type="checkbox" id="f-public" checked>
+      <label for="f-public"><div class="swatch" style="background:#22c55e"></div>First come, first serve</label>
+    </div>
+    <div class="filter-row">
+      <input type="checkbox" id="f-reservable" checked>
+      <label for="f-reservable"><div class="swatch" style="background:#eab308"></div>Reservable / permit</label>
+    </div>
+    <div class="filter-row">
+      <input type="checkbox" id="f-private" checked>
+      <label for="f-private"><div class="swatch" style="background:#a855f7"></div>Membership only</label>
+    </div>
+    <div class="filter-row">
+      <input type="checkbox" id="f-unknown" checked>
+      <label for="f-unknown"><div class="swatch" style="background:#9ca3af"></div>Unknown access</label>
+    </div>
+
+    <div class="divider"></div>
+    <div id="stats">Loading courts…</div>
+    <div id="hint">Click marker for details.<br>Double-click to open facility website.</div>
+  </div>
+</div>
+
+<div id="loading">
+  <div class="spinner"></div>
+  <p>Loading courts…</p>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+// CONSTANTS & OVERRIDES
+// ═══════════════════════════════════════════════════════════════════
+
+const OVERRIDES = [
+  // FALSE POSITIVES / CLOSED
+  { match: 'racquet and tennis club',  remove: true },
+  { match: 'racquet & tennis club',    remove: true },
+  { match: 'midtown tennis center',    remove: true },
+  { match: 'midtown tennis club',      remove: true },
+  // PRIVATE
+  { match: 'west side tennis club',     access: 'private', website: 'https://thewestsidetennisclub.com' },
+  { match: 'town tennis club',          access: 'private', website: 'https://towntennisclub.com' },
+  { match: 'cityview racquet',          access: 'private', website: 'https://cityviewracquet.com' },
+  { match: 'manhattan plaza racquet',   access: 'private', website: 'https://advantagetennisclubs.com' },
+  { match: 'roosevelt island racquet',  access: 'private', website: 'https://advantagetennisclubs.com' },
+  { match: 'new york tennis club',      access: 'private', website: 'https://advantagetennisclubs.com' },
+  // RESERVABLE
+  { match: 'padel haus',         access: 'reservable', website: 'https://padel.haus',               note: 'Book online at padel.haus' },
+  { match: 'reserve padel',      access: 'reservable', website: 'https://reservepadel.com',         note: 'Book online at reservepadel.com' },
+  { match: 'mink padel',         access: 'reservable', website: 'https://minkpadel.com',            note: 'Book online at minkpadel.com' },
+  { match: 'padel&',             access: 'reservable', website: 'https://padeland.us',              note: 'Book online at padeland.us' },
+  { match: 'padel and',          access: 'reservable', website: 'https://padeland.us',              note: 'Book online at padeland.us' },
+  { match: 'vanderbilt tennis',  access: 'reservable', website: 'https://vanderbilttennisclub.com', note: 'No membership required. Book by the hour. Open until 2am.' },
+  { match: 'sutton east',        access: 'reservable', website: 'https://suttoneasttennis.com',     note: 'Indoor clay courts. No membership required.' },
+  { match: 'billie jean king',   access: 'reservable', website: 'https://ntc.usta.com',             note: '45 public courts. Book online at ntc.usta.com' },
+  { match: 'national tennis center', access: 'reservable', website: 'https://ntc.usta.com',         note: 'Book online at ntc.usta.com' },
+  { match: 'sportime',           access: 'reservable', website: 'https://sportimeny.com',           note: 'Non-members can book courts at premium rate' },
+  { match: 'john mcenroe',       access: 'reservable', website: 'https://sportimeny.com/manhattan', note: 'Non-members can book courts at premium rate' },
+  { match: 'central park tennis',access: 'reservable', website: 'https://www.nycgovparks.org/tennisreservation', note: 'NYC Parks permit required Apr–Nov. $15/session or $100/season.' },
+  { match: 'prospect park tennis',access:'reservable', website: 'https://www.prospectpark.org/visit-the-park/places-to-go/tennis-center/', note: 'NYC Parks permit required in season.' },
+  { match: 'matchpoint',         access: 'reservable', website: 'https://matchpoint.nyc',           note: 'Primarily membership-based; non-members can book courts.' },
+  { match: 'yorkville tennis',   access: 'reservable', website: 'https://yorkvilletennisclub.com',  note: 'No membership required. Pay per hour.' },
+  { match: 'court 16',           access: 'private',    website: 'https://court16.com',              note: 'Membership enrollment required.' },
+];
+
+const GENERIC_NAMES = new Set([
+  'tennis court','tennis courts','padel court','padel courts',
+  'court','courts','tennis','padel','pitch',
+]);
+
+const ACCESS_COLOR = { public:'#22c55e', reservable:'#eab308', private:'#a855f7', unknown:'#9ca3af' };
+const SPORT_STROKE = { tennis:'#1d4ed8', padel:'#c2410c' };
+const ACCESS_LABEL = {
+  public:     '🟢 First come, first serve',
+  reservable: '🟡 Reservable / permit required',
+  private:    '🟣 Membership only',
+  unknown:    '⚪ Access unknown',
+};
+
+// ═══════════════════════════════════════════════════════════════════
+// GOOGLE MAPS STATE
+// ═══════════════════════════════════════════════════════════════════
+
+let gmap;
+const infoWindow = { instance: null };  // created after API loads
+
+// ═══════════════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════════════
+
+function findOverride(name) {
+  if (!name) return null;
+  const lower = name.toLowerCase();
+  return OVERRIDES.find(o => lower.includes(o.match)) || null;
+}
+
+function classifyAccess(tags) {
+  const access   = (tags.access     || '').toLowerCase();
+  const fee      = (tags.fee        || '').toLowerCase();
+  const member   = (tags.membership || '').toLowerCase();
+  const operator = (tags.operator   || '').toLowerCase();
+
+  if (operator.includes('nyc parks') ||
+      operator.includes('new york city department of parks') ||
+      operator.includes('department of parks')) return 'reservable';
+
+  if (access === 'private' || access === 'members' ||
+      member === 'required' || member === 'yes') return 'private';
+
+  if (tags.reservation || tags.booking ||
+      fee === 'yes' || fee === 'seasonal' || fee === 'interval') return 'reservable';
+
+  if (access === 'yes' || access === 'public') return 'public';
+  return 'unknown';
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// CLUSTERING
+// ═══════════════════════════════════════════════════════════════════
+
+function clusterCourts(elements) {
+  const map = new Map();
+
+  for (const el of elements) {
+    const lat = el.lat ?? el.center?.lat;
+    const lon = el.lon ?? el.center?.lon;
+    if (!lat || !lon) continue;
+
+    const tags  = el.tags || {};
+    const sport = tags.sport;
+    if (sport !== 'tennis' && sport !== 'padel') continue;
+
+    const name  = (tags.name || '').trim();
+    const lower = name.toLowerCase();
+    const ov    = findOverride(name);
+    if (ov?.remove) continue;
+
+    let key;
+    if (name && name.length > 4 && !GENERIC_NAMES.has(lower)) {
+      key = `${sport}:${lower}:${(lat * 100).toFixed(0)},${(lon * 100).toFixed(0)}`;
+    } else {
+      key = `${sport}:${lat.toFixed(3)},${lon.toFixed(3)}`;
+    }
+
+    if (map.has(key)) {
+      const c = map.get(key);
+      c.lats.push(lat); c.lons.push(lon);
+      for (const [k, v] of Object.entries(tags)) {
+        if (v && !c.tags[k]) c.tags[k] = v;
+      }
+    } else {
+      map.set(key, { lats: [lat], lons: [lon], tags: { ...tags }, sport });
+    }
+  }
+
+  return Array.from(map.values()).map(c => ({
+    lat: c.lats.reduce((a,b) => a+b,0) / c.lats.length,
+    lon: c.lons.reduce((a,b) => a+b,0) / c.lons.length,
+    tags: c.tags, sport: c.sport, count: c.lats.length,
+  }));
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// POPUP
+// ═══════════════════════════════════════════════════════════════════
+
+function buildPopup(court, accessType, website, note) {
+  const { tags, sport } = court;
+
+  let name = tags.name;
+  if (!name || GENERIC_NAMES.has(name.toLowerCase())) {
+    if (tags.operator && !tags.operator.toLowerCase().includes('nyc parks')) {
+      name = tags.operator;
+    } else if (tags['addr:street']) {
+      name = `${sport === 'padel' ? 'Padel' : 'Tennis'} Courts – ${tags['addr:street']}`;
+    } else {
+      name = sport === 'padel' ? 'Padel Court Complex' : 'Tennis Court Complex';
+    }
+  }
+
+  const sportLabel = sport.charAt(0).toUpperCase() + sport.slice(1);
+  const rows = [];
+  if (tags.operator && tags.operator !== name) rows.push(`<b>Operator:</b> ${tags.operator}`);
+  if (tags.surface)        rows.push(`<b>Surface:</b> ${tags.surface}`);
+  if (tags.fee && tags.fee !== 'no') rows.push(`<b>Fee:</b> ${tags.fee}`);
+  if (tags.opening_hours)  rows.push(`<b>Hours:</b> ${tags.opening_hours}`);
+  if (tags.phone)          rows.push(`<b>Phone:</b> <a href="tel:${tags.phone}">${tags.phone}</a>`);
+  const link = website || tags.website;
+  if (link) rows.push(`<b>Website:</b> <a href="${link}" target="_blank">Visit ↗</a>`);
+
+  return `
+    <div class="gm-popup">
+      <div class="popup-name">${name}</div>
+      <div class="popup-sport">${sportLabel}</div>
+      <div class="popup-access">${ACCESS_LABEL[accessType]}</div>
+      ${rows.length ? `<div class="popup-details">${rows.join('<br>')}</div>` : ''}
+      ${note ? `<div class="popup-note">ℹ️ ${note}</div>` : ''}
+      ${link ? `<div class="popup-dblclick">Double-click marker to open website</div>` : ''}
+    </div>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// DRIVE TIME (Nominatim geocode + OSRM table)
+// ═══════════════════════════════════════════════════════════════════
+
+async function geocodeAddress(address) {
+  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address + ', New York')}&format=json&limit=1&countrycodes=us`;
+  const resp = await fetch(url, { headers: { 'Accept': 'application/json' } });
+  const data = await resp.json();
+  if (!data.length) throw new Error('Address not found — try adding your zip code');
+  return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
+}
+
+async function getDriveTimes(homeLat, homeLon, courts) {
+  const BATCH = 99;
+  const results = new Array(courts.length).fill(null);
+  for (let i = 0; i < courts.length; i += BATCH) {
+    const slice  = courts.slice(i, i + BATCH);
+    const coords = [
+      `${homeLon.toFixed(6)},${homeLat.toFixed(6)}`,
+      ...slice.map(c => `${c.lon.toFixed(6)},${c.lat.toFixed(6)}`),
+    ].join(';');
+    const resp = await fetch(
+      `https://router.project-osrm.org/table/v1/driving/${coords}?sources=0&annotations=duration`
+    );
+    const data = await resp.json();
+    data.durations?.[0]?.slice(1).forEach((dur, j) => { results[i + j] = dur; });
+  }
+  return results;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════════
+
+let allCourts  = [];
+let driveFilter = null;
+
+// ═══════════════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════════════
+
+function updateMap() {
+  const show = {
+    tennis:     document.getElementById('f-tennis').checked,
+    padel:      document.getElementById('f-padel').checked,
+    public:     document.getElementById('f-public').checked,
+    reservable: document.getElementById('f-reservable').checked,
+    private:    document.getElementById('f-private').checked,
+    unknown:    document.getElementById('f-unknown').checked,
+  };
+
+  const counts = { tennis: 0, padel: 0, public: 0, reservable: 0, private: 0, unknown: 0 };
+
+  allCourts.forEach((c, idx) => {
+    const visible =
+      show[c.sport] &&
+      show[c.accessType] &&
+      (!driveFilter || driveFilter[idx]);
+
+    c.marker.setMap(visible ? gmap : null);
+    if (visible) { counts[c.sport]++; counts[c.accessType]++; }
+  });
+
+  const total = counts.tennis + counts.padel;
+  document.getElementById('stats').innerHTML = `
+    <b>${total} facilit${total !== 1 ? 'ies' : 'y'} shown</b><br>
+    🎾 Tennis: ${counts.tennis} &nbsp;·&nbsp; 🏓 Padel: ${counts.padel}<br><br>
+    🟢 FCFS: ${counts.public}<br>
+    🟡 Reservable: ${counts.reservable}<br>
+    🟣 Members only: ${counts.private}<br>
+    ⚪ Unknown: ${counts.unknown}
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// DRIVE TIME UI
+// ═══════════════════════════════════════════════════════════════════
+
+async function applyDriveFilter() {
+  const address = document.getElementById('address-input').value.trim();
+  if (!address) return;
+
+  const btn    = document.getElementById('address-btn');
+  const status = document.getElementById('address-status');
+
+  btn.disabled = true;
+  btn.textContent = 'Calculating…';
+  status.textContent = 'Geocoding address…';
+  status.className = '';
+
+  try {
+    const { lat, lon } = await geocodeAddress(address);
+    status.textContent = 'Fetching drive times…';
+
+    const times = await getDriveTimes(lat, lon, allCourts);
+    driveFilter = times.map(t => t !== null && t <= 1200); // 20 min
+
+    const within = driveFilter.filter(Boolean).length;
+    status.textContent = `${within} facilit${within !== 1 ? 'ies' : 'y'} within 20 min`;
+    status.className = 'ok';
+    document.getElementById('address-clear').style.display = 'block';
+
+    // Home marker
+    if (window._homeMarker) window._homeMarker.setMap(null);
+    window._homeMarker = new google.maps.Marker({
+      position: { lat, lng: lon },
+      map: gmap,
+      title: 'Your location',
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: '#6366f1', fillOpacity: 1,
+        strokeColor: '#4338ca', strokeWeight: 2.5,
+        scale: 9,
+      },
+      zIndex: 999,
+    });
+    window._homeMarker.addListener('click', () => {
+      infoWindow.instance.setContent('<b>Your location</b>');
+      infoWindow.instance.open(gmap, window._homeMarker);
+    });
+
+    updateMap();
+  } catch (err) {
+    status.textContent = err.message || 'Error — try again';
+    status.className = 'error';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Filter ≤ 20 min drive';
+  }
+}
+
+function clearDriveFilter() {
+  driveFilter = null;
+  if (window._homeMarker) { window._homeMarker.setMap(null); window._homeMarker = null; }
+  document.getElementById('address-status').textContent = '';
+  document.getElementById('address-status').className = '';
+  document.getElementById('address-clear').style.display = 'none';
+  updateMap();
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// BUILD COURTS
+// ═══════════════════════════════════════════════════════════════════
+
+function buildCourts(elements) {
+  const clusters = clusterCourts(elements);
+
+  for (const court of clusters) {
+    const { lat, lon, tags, sport } = court;
+    const name = tags.name || '';
+    const ov   = findOverride(name);
+
+    const accessType = ov?.access || classifyAccess(tags);
+    const website    = ov?.website || tags.website || null;
+    const operator   = (tags.operator || '').toLowerCase();
+    const note       = ov?.note || (
+      (operator.includes('nyc parks') || operator.includes('department of parks'))
+        ? 'NYC Parks permit required Apr–Nov. $15/session or $100/season.'
+        : null
+    );
+
+    court.accessType = accessType;
+    court.website    = website;
+    court.note       = note;
+
+    const marker = new google.maps.Marker({
+      position: { lat, lng: lon },
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        fillColor: ACCESS_COLOR[accessType],
+        fillOpacity: 0.9,
+        strokeColor: SPORT_STROKE[sport],
+        strokeWeight: 2,
+        scale: 8,
+      },
+      // not added to map yet — updateMap() handles visibility
+    });
+
+    // Single click → info window
+    marker.addListener('click', () => {
+      infoWindow.instance.setContent(buildPopup(court, accessType, website, note));
+      infoWindow.instance.open(gmap, marker);
+    });
+
+    // Double click → open website
+    const link = website || tags.website;
+    if (link) {
+      marker.addListener('dblclick', () => window.open(link, '_blank'));
+    }
+
+    court.marker = marker;
+    allCourts.push(court);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// OVERPASS FETCH
+// ═══════════════════════════════════════════════════════════════════
+
+async function fetchFromOverpass() {
+  const bbox  = '40.47,-74.05,40.93,-73.68';
+  const query = `
+[out:json][timeout:40];
+(
+  node["sport"="tennis"](${bbox});
+  way["sport"="tennis"](${bbox});
+  node["sport"="padel"](${bbox});
+  way["sport"="padel"](${bbox});
+);
+out center tags;`.trim();
+
+  const resp = await fetch('https://overpass-api.de/api/interpreter', {
+    method: 'POST',
+    body: 'data=' + encodeURIComponent(query),
+  });
+  if (!resp.ok) throw new Error(`Overpass HTTP ${resp.status}`);
+  return (await resp.json()).elements;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// INIT (called by Google Maps callback)
+// ═══════════════════════════════════════════════════════════════════
+
+async function initMap() {
+  gmap = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: 40.72, lng: -73.96 },
+    zoom: 12,
+    disableDoubleClickZoom: true,
+    mapTypeControl: true,
+    mapTypeControlOptions: {
+      style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+      position: google.maps.ControlPosition.TOP_RIGHT,
+    },
+    fullscreenControl: false,
+    streetViewControl: false,
+    zoomControlOptions: {
+      position: google.maps.ControlPosition.RIGHT_BOTTOM,
+    },
+  });
+
+  infoWindow.instance = new google.maps.InfoWindow({ maxWidth: 280 });
+
+  try {
+    const elements = await fetchFromOverpass();
+    buildCourts(elements);
+    document.getElementById('loading').style.display = 'none';
+
+    ['f-tennis','f-padel','f-public','f-reservable','f-private','f-unknown'].forEach(id =>
+      document.getElementById(id).addEventListener('change', updateMap)
+    );
+    document.getElementById('address-btn').addEventListener('click', applyDriveFilter);
+    document.getElementById('address-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') applyDriveFilter();
+    });
+
+    updateMap();
+  } catch (err) {
+    document.getElementById('loading').innerHTML =
+      `<p style="color:#dc2626;text-align:center;padding:20px">
+        Failed to load courts.<br>Check your connection and refresh.<br>
+        <small>${err.message}</small>
+      </p>`;
+  }
+}
+</script>
+
+<!-- Google Maps API -->
+<script async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZbqPi3ZUKsfYvINsINQ5WTCJL2-yZ2v8&callback=initMap">
+</script>
+
+</body>
+</html>
