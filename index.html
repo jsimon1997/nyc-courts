@@ -4,137 +4,208 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NYC Tennis & Padel Courts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
     #map { height: 100vh; width: 100%; }
 
-    /* ── Side panel ─────────────────────────────────────── */
+    /* ── Panel ───────────────────────────────────────────── */
     #panel {
       position: absolute;
-      top: 12px; left: 12px;
+      top: 16px; left: 16px;
       z-index: 1000;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 16px rgba(0,0,0,.18);
-      width: 250px;
-      max-height: calc(100vh - 24px);
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.12), 0 1px 4px rgba(0,0,0,.08);
+      width: 264px;
+      max-height: calc(100vh - 32px);
       overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: #e2e8f0 transparent;
     }
+    #panel::-webkit-scrollbar { width: 4px; }
+    #panel::-webkit-scrollbar-track { background: transparent; }
+    #panel::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 2px; }
+
     #panel-header {
-      background: #111827;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
       color: white;
-      padding: 14px 16px;
-      border-radius: 10px 10px 0 0;
+      padding: 18px 18px 16px;
+      border-radius: 16px 16px 0 0;
       position: sticky; top: 0; z-index: 1;
     }
-    #panel-header h2 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
-    #panel-header p  { font-size: 11px; opacity: .6; }
+    #panel-header .header-icon { font-size: 22px; margin-bottom: 6px; display: block; }
+    #panel-header h2 { font-size: 16px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 3px; }
+    #panel-header p  { font-size: 11px; opacity: .55; letter-spacing: .02em; }
 
-    #panel-body { padding: 14px 16px; }
+    #panel-body { padding: 16px 16px 18px; }
 
     .section-label {
-      font-size: 10px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .07em;
-      color: #9ca3af; margin: 14px 0 7px;
+      font-size: 10px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .08em;
+      color: #94a3b8; margin: 16px 0 8px;
     }
     .section-label:first-child { margin-top: 0; }
 
-    /* address input */
-    #address-wrap { display: flex; flex-direction: column; gap: 6px; }
+    /* Address input */
+    #address-wrap { display: flex; flex-direction: column; gap: 7px; }
     #address-input {
-      width: 100%; padding: 7px 9px; font-size: 12px;
-      border: 1.5px solid #d1d5db; border-radius: 6px; outline: none;
+      width: 100%; padding: 9px 11px; font-size: 12.5px;
+      font-family: inherit;
+      border: 1.5px solid #e2e8f0; border-radius: 8px; outline: none;
+      background: #f8fafc; color: #1e293b;
+      transition: border-color .15s, background .15s;
     }
-    #address-input:focus { border-color: #6366f1; }
+    #address-input::placeholder { color: #94a3b8; }
+    #address-input:focus { border-color: #6366f1; background: #fff; }
     #address-btn {
-      background: #111827; color: white; border: none;
-      padding: 7px 10px; border-radius: 6px;
-      font-size: 12px; font-weight: 600; cursor: pointer;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: white; border: none;
+      padding: 9px 12px; border-radius: 8px;
+      font-size: 12.5px; font-weight: 600; font-family: inherit;
+      cursor: pointer; letter-spacing: .01em;
+      transition: opacity .15s, transform .1s;
     }
-    #address-btn:hover { background: #374151; }
-    #address-btn:disabled { background: #9ca3af; cursor: wait; }
+    #address-btn:hover  { opacity: .9; transform: translateY(-1px); }
+    #address-btn:active { transform: translateY(0); }
+    #address-btn:disabled { background: #cbd5e1; cursor: wait; transform: none; }
     #address-clear {
-      font-size: 11px; color: #6b7280; cursor: pointer;
-      text-decoration: underline; display: none; margin-top: 2px;
+      font-size: 11.5px; color: #64748b; cursor: pointer;
+      display: none; text-align: center;
+      padding: 2px 0;
     }
-    #address-status { font-size: 11px; color: #6b7280; min-height: 14px; }
-    #address-status.error { color: #dc2626; }
-    #address-status.ok    { color: #16a34a; }
+    #address-clear:hover { color: #1e293b; }
+    #address-status { font-size: 11px; color: #64748b; min-height: 14px; }
+    #address-status.error { color: #ef4444; }
+    #address-status.ok    { color: #22c55e; font-weight: 500; }
 
-    /* filter rows */
+    /* Filter rows */
     .filter-row {
-      display: flex; align-items: center; gap: 9px;
-      margin-bottom: 7px; cursor: pointer;
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 8px; cursor: pointer;
+      padding: 2px 0;
     }
     .filter-row input[type="checkbox"] {
       width: 15px; height: 15px; cursor: pointer; flex-shrink: 0;
-      accent-color: #111827;
+      accent-color: #4f46e5;
     }
     .filter-row label {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 13px; cursor: pointer; line-height: 1.2;
+      display: flex; align-items: center; gap: 9px;
+      font-size: 13px; font-weight: 400; cursor: pointer;
+      color: #334155; line-height: 1.2;
     }
     .swatch {
-      width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0;
+      width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,.2);
     }
 
-    .divider { height: 1px; background: #f3f4f6; margin: 12px 0; }
+    .divider { height: 1px; background: #f1f5f9; margin: 14px 0; }
 
-    #stats { font-size: 12px; color: #6b7280; line-height: 1.9; }
-    #stats b { color: #111827; }
+    /* Stats grid */
+    #stats-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; margin-bottom: 10px;
+    }
+    .stat-card {
+      background: #f8fafc; border-radius: 8px; padding: 8px 10px;
+      border: 1px solid #f1f5f9;
+    }
+    .stat-card .stat-val { font-size: 18px; font-weight: 700; color: #0f172a; line-height: 1; }
+    .stat-card .stat-lbl { font-size: 10px; color: #94a3b8; margin-top: 3px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; }
+    #stat-total { grid-column: 1 / -1; background: linear-gradient(135deg,#f0f9ff,#e0f2fe); border-color: #bae6fd; }
+    #stat-total .stat-val { color: #0369a1; }
+
+    #access-stats { font-size: 11.5px; color: #64748b; line-height: 2; }
 
     #hint {
-      font-size: 10.5px; color: #9ca3af; margin-top: 10px;
-      line-height: 1.5; font-style: italic;
+      font-size: 11px; color: #94a3b8; margin-top: 12px;
+      line-height: 1.6; padding: 8px 10px;
+      background: #f8fafc; border-radius: 8px;
     }
+
+    /* ── Zoom controls ───────────────────────────────────── */
+    #zoom-controls {
+      position: absolute;
+      right: 16px; bottom: 32px;
+      z-index: 1000;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .zoom-btn {
+      width: 40px; height: 40px;
+      background: white;
+      border: none; border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.15);
+      font-size: 20px; font-weight: 300; color: #334155;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background .15s, transform .1s, box-shadow .15s;
+      font-family: inherit;
+    }
+    .zoom-btn:hover  { background: #f8fafc; box-shadow: 0 4px 12px rgba(0,0,0,.18); transform: translateY(-1px); }
+    .zoom-btn:active { transform: translateY(0); box-shadow: 0 1px 4px rgba(0,0,0,.12); }
 
     /* ── Loading overlay ─────────────────────────────────── */
     #loading {
       position: absolute; inset: 0;
-      background: rgba(255,255,255,.88);
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(4px);
       z-index: 2000;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 14px;
+      align-items: center; justify-content: center; gap: 16px;
     }
     .spinner {
-      width: 38px; height: 38px;
-      border: 3px solid #e5e7eb; border-top-color: #111827;
+      width: 40px; height: 40px;
+      border: 3px solid #e2e8f0;
+      border-top-color: #4f46e5;
       border-radius: 50%;
-      animation: spin .75s linear infinite;
+      animation: spin .7s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-    #loading p { font-size: 14px; color: #374151; }
+    #loading p { font-size: 14px; color: #475569; font-weight: 500; }
 
-    /* ── Google Maps InfoWindow override ─────────────────── */
-    .gm-popup { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-    .popup-name   { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
-    .popup-sport  { font-size: 11px; font-weight: 600; text-transform: uppercase;
-                    letter-spacing: .06em; color: #6b7280; margin-bottom: 2px; }
-    .popup-access { font-size: 12px; margin-bottom: 6px; }
-    .popup-details { font-size: 12px; line-height: 1.75; }
-    .popup-details a { color: #2563eb; }
-    .popup-note { font-size: 11px; color: #6b7280; margin-top: 5px;
-                  padding: 4px 6px; background: #f9fafb; border-radius: 4px; }
-    .popup-dblclick { font-size: 10px; color: #9ca3af; margin-top: 6px; font-style: italic; }
+    /* ── Popup ───────────────────────────────────────────── */
+    .gm-popup {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 2px 0;
+    }
+    .popup-name   { font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 2px; line-height: 1.3; }
+    .popup-sport  { font-size: 10px; font-weight: 600; text-transform: uppercase;
+                    letter-spacing: .08em; color: #94a3b8; margin-bottom: 6px; }
+    .popup-access { font-size: 12px; margin-bottom: 8px; font-weight: 500; }
+    .popup-details { font-size: 12px; line-height: 1.8; color: #475569; }
+    .popup-details b { color: #334155; }
+    .popup-details a { color: #4f46e5; text-decoration: none; }
+    .popup-details a:hover { text-decoration: underline; }
+    .popup-note {
+      font-size: 11px; color: #64748b; margin-top: 7px;
+      padding: 6px 8px; background: #f8fafc;
+      border-left: 3px solid #c7d2fe;
+      border-radius: 0 6px 6px 0; line-height: 1.5;
+    }
+    .popup-dblclick { font-size: 10px; color: #94a3b8; margin-top: 7px; }
   </style>
 </head>
 <body>
 
 <div id="map"></div>
 
+<!-- Side panel -->
 <div id="panel">
   <div id="panel-header">
-    <h2>NYC Tennis &amp; Padel</h2>
+    <span class="header-icon">🎾</span>
+    <h2>NYC Courts</h2>
     <p>Manhattan · Brooklyn · Queens · Bronx</p>
   </div>
   <div id="panel-body">
 
     <div class="section-label">Drive Time Filter</div>
     <div id="address-wrap">
-      <input id="address-input" type="text" placeholder="Your address (e.g. 100 Ave A, NYC)">
+      <input id="address-input" type="text" placeholder="Your address…">
       <button id="address-btn">Filter ≤ 20 min drive</button>
-      <span id="address-clear" onclick="clearDriveFilter()">✕ Clear filter</span>
+      <span id="address-clear" onclick="clearDriveFilter()">✕ Remove filter</span>
       <div id="address-status"></div>
     </div>
 
@@ -163,15 +234,38 @@
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-unknown" checked>
-      <label for="f-unknown"><div class="swatch" style="background:#9ca3af"></div>Unknown access</label>
+      <label for="f-unknown"><div class="swatch" style="background:#94a3b8"></div>Unknown access</label>
     </div>
 
     <div class="divider"></div>
-    <div id="stats">Loading courts…</div>
-    <div id="hint">Click marker for details.<br>Double-click to open facility website.</div>
+
+    <div id="stats-grid">
+      <div class="stat-card" id="stat-total">
+        <div class="stat-val" id="s-total">—</div>
+        <div class="stat-lbl">Facilities shown</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="s-tennis">—</div>
+        <div class="stat-lbl">Tennis</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="s-padel">—</div>
+        <div class="stat-lbl">Padel</div>
+      </div>
+    </div>
+    <div id="access-stats"></div>
+
+    <div id="hint">💡 Click a marker for details.<br>Double-click to open its website.</div>
   </div>
 </div>
 
+<!-- Zoom controls -->
+<div id="zoom-controls">
+  <button class="zoom-btn" id="zoom-in"  title="Zoom in">+</button>
+  <button class="zoom-btn" id="zoom-out" title="Zoom out">−</button>
+</div>
+
+<!-- Loading overlay -->
 <div id="loading">
   <div class="spinner"></div>
   <p>Loading courts…</p>
@@ -499,13 +593,14 @@ function updateMap() {
   });
 
   const total = counts.tennis + counts.padel;
-  document.getElementById('stats').innerHTML = `
-    <b>${total} facilit${total !== 1 ? 'ies' : 'y'} shown</b><br>
-    🎾 Tennis: ${counts.tennis} &nbsp;·&nbsp; 🏓 Padel: ${counts.padel}<br><br>
-    🟢 FCFS: ${counts.public}<br>
-    🟡 Reservable: ${counts.reservable}<br>
-    🟣 Members only: ${counts.private}<br>
-    ⚪ Unknown: ${counts.unknown}
+  document.getElementById('s-total').textContent  = total;
+  document.getElementById('s-tennis').textContent = counts.tennis;
+  document.getElementById('s-padel').textContent  = counts.padel;
+  document.getElementById('access-stats').innerHTML = `
+    <span style="color:#22c55e">●</span> FCFS: <b>${counts.public}</b> &nbsp;
+    <span style="color:#eab308">●</span> Reservable: <b>${counts.reservable}</b><br>
+    <span style="color:#a855f7">●</span> Members only: <b>${counts.private}</b> &nbsp;
+    <span style="color:#94a3b8">●</span> Unknown: <b>${counts.unknown}</b>
   `;
 }
 
@@ -672,21 +767,39 @@ out center tags;`.trim();
 // ═══════════════════════════════════════════════════════════════════
 
 async function initMap() {
+  // Clean, minimal map style — mutes POI clutter, keeps parks green
+  const MAP_STYLE = [
+    { featureType: 'poi',                                    stylers: [{ visibility: 'off' }] },
+    { featureType: 'poi.park',                               stylers: [{ visibility: 'on'  }] },
+    { featureType: 'poi.park',  elementType: 'geometry.fill',stylers: [{ color: '#d1fae5'  }] },
+    { featureType: 'poi.park',  elementType: 'labels.text.fill', stylers:[{ color:'#6b7280'}] },
+    { featureType: 'transit',                                stylers: [{ visibility: 'simplified' }] },
+    { featureType: 'road.highway', elementType: 'geometry', stylers: [{ color: '#fef3c7'  }] },
+    { featureType: 'road.arterial',elementType: 'geometry', stylers: [{ color: '#ffffff'  }] },
+    { featureType: 'road.local',   elementType: 'geometry', stylers: [{ color: '#f8fafc'  }] },
+    { featureType: 'water',        elementType: 'geometry', stylers: [{ color: '#bfdbfe'  }] },
+    {                              elementType: 'geometry',  stylers: [{ color: '#f1f5f9'  }] },
+    {                              elementType: 'labels.text.fill',   stylers:[{ color:'#64748b'}]},
+    {                              elementType: 'labels.text.stroke', stylers:[{ color:'#ffffff'}]},
+    { featureType: 'road', elementType: 'labels.text.fill',  stylers: [{ color: '#64748b'  }] },
+    { featureType: 'administrative.locality', elementType: 'labels.text.fill', stylers:[{color:'#334155'}]},
+  ];
+
   gmap = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 40.72, lng: -73.96 },
     zoom: 12,
     disableDoubleClickZoom: true,
-    mapTypeControl: true,
-    mapTypeControlOptions: {
-      style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-      position: google.maps.ControlPosition.TOP_RIGHT,
-    },
+    styles: MAP_STYLE,
+    mapTypeControl: false,
     fullscreenControl: false,
     streetViewControl: false,
-    zoomControlOptions: {
-      position: google.maps.ControlPosition.RIGHT_BOTTOM,
-    },
+    zoomControl: false,   // we use our own zoom buttons
+    gestureHandling: 'greedy',
   });
+
+  // Wire up custom zoom buttons
+  document.getElementById('zoom-in') .addEventListener('click', () => gmap.setZoom(gmap.getZoom() + 1));
+  document.getElementById('zoom-out').addEventListener('click', () => gmap.setZoom(gmap.getZoom() - 1));
 
   infoWindow.instance = new google.maps.InfoWindow({ maxWidth: 280 });
 
