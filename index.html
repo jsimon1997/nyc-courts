@@ -334,6 +334,32 @@ const OVERRIDES = [
   { match: 'racquet & tennis club',    remove: true },
   { match: 'midtown tennis center',    remove: true },
   { match: 'midtown tennis club',      remove: true },
+  // FALSE POSITIVES — outside NYC
+  { match: 'binghamton racquet club',        remove: true },  // Edgewater, NJ (addr:state=NJ)
+  { match: 'port washington tennis academy', remove: true },  // Nassau County, Long Island
+  { match: 'park hill racquet club',         remove: true },  // Yonkers, Westchester
+  // USTA NTC — spectator stadiums (not playable courts)
+  { match: 'arthur ashe stadium',            remove: true },
+  { match: 'louis armstrong stadium',        remove: true },
+  { match: 'grandstand',                     remove: true },
+  { match: 'stadium 17',                     remove: true },
+  { match: 'chase center',                   remove: true },
+  // USTA NTC — brand-sponsored practice courts (not public access)
+  { match: 'wilson',                         remove: true },
+  { match: 'nike',                           remove: true },
+  // USTA NTC — individual numbered courts (redundant; NTC already has one marker)
+  { match: 'court 4',  remove: true },
+  { match: 'court 5',  remove: true },
+  { match: 'court 6',  remove: true },
+  { match: 'court 7',  remove: true },
+  { match: 'court 8',  remove: true },
+  { match: 'court 9',  remove: true },
+  { match: 'court 10', remove: true },
+  { match: 'court 11', remove: true },
+  { match: 'court 12', remove: true },
+  { match: 'court 13', remove: true },
+  { match: 'court 14', remove: true },
+  { match: 'court 15', remove: true },
   // PRIVATE
   { match: 'west side tennis club',     access: 'private', website: 'https://thewestsidetennisclub.com' },
   { match: 'town tennis club',          access: 'private', website: 'https://towntennisclub.com' },
@@ -400,8 +426,10 @@ function classifyAccess(tags) {
       operator.includes('new york city department of parks') ||
       operator.includes('department of parks')) return 'reservable';
 
-  if (access === 'private' || access === 'members' ||
+  if (access === 'private' || access === 'members' || access === 'customers' ||
       member === 'required' || member === 'yes') return 'private';
+
+  if (access === 'permit') return 'reservable';
 
   if (tags.reservation || tags.booking ||
       fee === 'yes' || fee === 'seasonal' || fee === 'interval') return 'reservable';
