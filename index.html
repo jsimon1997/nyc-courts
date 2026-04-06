@@ -833,6 +833,17 @@ function buildCourts(elements) {
 // ═══════════════════════════════════════════════════════════════════
 
 async function fetchFromOverpass() {
+  const CACHE_KEY = 'nyc_courts_v1';
+  const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+
+  try {
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      const { ts, elements } = JSON.parse(cached);
+      if (Date.now() - ts < CACHE_TTL) return elements;
+    }
+  } catch {}
+
   const bbox  = '40.47,-74.05,40.93,-73.68';
   const query = `
 [out:json][timeout:40];
@@ -849,7 +860,11 @@ out center tags;`.trim();
     body: 'data=' + encodeURIComponent(query),
   });
   if (!resp.ok) throw new Error(`Overpass HTTP ${resp.status}`);
-  return (await resp.json()).elements;
+  const elements = (await resp.json()).elements;
+
+  try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), elements })); } catch {}
+
+  return elements;
 }
 
 // ═══════════════════════════════════════════════════════════════════
