@@ -368,16 +368,16 @@ const OVERRIDES = [
   { match: 'court 14', remove: true },
   { match: 'court 15', remove: true },
   // PRIVATE
-  // PRIVATE — identified via ID_OVERRIDES (unnamed in OSM, named here)
-  { match: 'sessanta',              access: 'private', website: 'https://sessanta60.com/the-amenities-sessanta/', note: '60 W 60th St. Private rooftop tennis court. Residents only.' },
+  // RESIDENTIAL — identified via ID_OVERRIDES
+  { match: 'sessanta',              access: 'residential', website: 'https://sessanta60.com/the-amenities-sessanta/', note: '60 W 60th St. Private rooftop tennis court. Residents only.' },
   { match: 'hunter college brookdale', access: 'private', website: 'https://www.hunter.cuny.edu/brookdale', note: '425 E 25th St. For Hunter College students and guests only.' },
   // PRIVATE — named clubs
   { match: 'west side tennis club',     access: 'private', website: 'https://thewestsidetennisclub.com' },
   { match: 'town tennis club',          access: 'private', website: 'https://towntennisclub.com' },
   { match: 'cityview racquet',          access: 'private', website: 'https://cityviewracquet.com' },
-  { match: 'manhattan plaza racquet',   access: 'private', website: 'https://advantagetennisclubs.com' },
-  { match: 'roosevelt island racquet',  access: 'private', website: 'https://advantagetennisclubs.com' },
-  { match: 'new york tennis club',      access: 'private', website: 'https://advantagetennisclubs.com' },
+  { match: 'manhattan plaza racquet',   access: 'private', website: 'https://advantagetennisclubs.com', note: '450 W 43rd St (btw 9th–10th Ave). 5 indoor hard courts. Membership required.' },
+  { match: 'roosevelt island racquet',  access: 'private', website: 'https://advantagetennisclubs.com', note: '81 W. Main St, Roosevelt Island. 12 indoor Har-Tru courts. Membership required.' },
+  { match: 'new york tennis club',      access: 'private', website: 'https://newyorktennisclub.com',    note: '6 indoor Har-Tru clay courts. Founded 1886. Membership required.' },
   // RESERVABLE
   { match: 'padel haus',         access: 'reservable', website: 'https://padel.haus',               note: 'Book online at padel.haus' },
   { match: 'reserve padel',      access: 'reservable', website: 'https://reservepadel.com',         note: 'Book online at reservepadel.com' },
@@ -388,8 +388,9 @@ const OVERRIDES = [
   { match: 'sutton east',        access: 'reservable', website: 'https://suttoneasttennis.com',     note: 'Indoor clay courts. No membership required.' },
   { match: 'billie jean king',   access: 'reservable', website: 'https://ntc.usta.com',             note: '45 public courts. Book online at ntc.usta.com' },
   { match: 'national tennis center', access: 'reservable', website: 'https://ntc.usta.com',         note: 'Book online at ntc.usta.com' },
-  { match: 'sportime',           access: 'reservable', website: 'https://sportimeny.com',           note: 'Non-members can book courts at premium rate' },
-  { match: 'john mcenroe',       access: 'reservable', website: 'https://sportimeny.com/manhattan', note: 'Non-members can book courts at premium rate' },
+  { match: 'sportime',           access: 'reservable', website: 'https://www.sportimeny.com/manhattan', note: 'Home of John McEnroe Tennis Academy. 30 courts on Randall\'s Island. Non-members can book at premium rate.' },
+  { match: 'john mcenroe',       access: 'reservable', website: 'https://www.sportimeny.com/manhattan', note: 'Home of John McEnroe Tennis Academy. 30 courts on Randall\'s Island. Non-members can book at premium rate.' },
+  { match: 'hudson river park tennis', access: 'public', website: 'https://hudsonriverpark.org/activities/tennis/', note: '3 free hard courts at Pier 40. First come, first served. Open 6am–1am.' },
   { match: 'pier 42',           access: 'public',     website: 'https://www.nycgovparks.org/parks/pier-42/facilities/tennis', note: '4 free hard courts on the East River. No permit required.' },
   { match: 'central park tennis',access: 'reservable', website: 'https://www.nycgovparks.org/parks/central-park/facilities/tennis', note: 'NYC Parks permit required Apr–Nov. $15/session or $100/season.' },
   { match: 'prospect park tennis',access:'reservable', website: 'https://www.prospectpark.org/visit-the-park/places-to-go/tennis-center/', note: 'NYC Parks permit required in season.' },
@@ -436,12 +437,47 @@ const ID_OVERRIDES = {
   // Manhattan Plaza Racquet Club — unnamed layer:1 courts at W 43rd/10th Ave
   164720437:  { name: 'Manhattan Plaza Racquet Club', access: 'customers' },
   164720438:  { name: 'Manhattan Plaza Racquet Club', access: 'customers' },
-  // Sessanta — private rooftop courts at 60 W 60th St
-  723629959:  { name: 'Sessanta', access: 'private' },
-  1168838721: { name: 'Sessanta', access: 'private' },
+  // Sessanta — private residential rooftop courts at 60 W 60th St
+  723629959:  { name: 'Sessanta' },
+  1168838721: { name: 'Sessanta' },
   // Hunter College Brookdale Campus — private courts for students/guests
   889650165:  { name: 'Hunter College Brookdale Campus', access: 'private' },
   1103888537: { name: 'Hunter College Brookdale Campus', access: 'private' },
+  // Hudson River Park — 3 free courts at Pier 40
+  1047533365: { name: 'Hudson River Park Tennis Courts', access: 'yes' },
+  1047533366: { name: 'Hudson River Park Tennis Courts', access: 'yes' },
+  1047533367: { name: 'Hudson River Park Tennis Courts', access: 'yes' },
+  // Central Park Tennis Center — name all 30 individual court ways so they cluster together
+  161219081: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219082: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219084: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219087: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219088: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219089: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219094: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219095: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219098: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219099: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219100: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219102: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219104: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219106: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219109: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219111: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219113: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219114: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219116: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219119: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219120: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219121: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219125: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219126: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219127: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219133: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219135: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219140: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219144: { name: 'Central Park Tennis Center', access: 'yes' },
+  161219148: { name: 'Central Park Tennis Center', access: 'yes' },
 };
 
 // Hardcoded NYC Parks courts confirmed absent from OSM data
@@ -449,8 +485,8 @@ const PUBLIC_COURTS = [
   {
     lat: 40.7155, lon: -73.9768,
     name: 'Brian Watkins Tennis Center',
-    sport: 'tennis', surface: 'hard',
-    note: 'East River Park, just north of Williamsburg Bridge. 12 hard courts. NYC Parks permit required.',
+    sport: 'tennis', surface: 'hard', accessType: 'public',
+    note: 'East River Park, just north of Williamsburg Bridge. 12 hard courts. First come, first served. No permit required.',
     website: 'https://www.nycgovparks.org/parks/east-river-park/facilities/tennis',
   },
   {
@@ -1021,7 +1057,7 @@ function buildCourts(elements) {
     allCourts.push(court);
   }
 
-  for (const entry of PUBLIC_COURTS)      addCuratedCourt(entry, 'reservable');
+  for (const entry of PUBLIC_COURTS)      addCuratedCourt(entry, entry.accessType || 'reservable');
   for (const entry of PRIVATE_COURTS)     addCuratedCourt(entry, 'private');
   for (const entry of RESIDENTIAL_COURTS) addCuratedCourt(entry, 'residential');
 }
