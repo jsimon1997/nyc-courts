@@ -368,6 +368,10 @@ const OVERRIDES = [
   { match: 'court 14', remove: true },
   { match: 'court 15', remove: true },
   // PRIVATE
+  // PRIVATE — identified via ID_OVERRIDES (unnamed in OSM, named here)
+  { match: 'sessanta',              access: 'private', website: 'https://sessanta60.com/the-amenities-sessanta/', note: '60 W 60th St. Private rooftop tennis court. Residents only.' },
+  { match: 'hunter college brookdale', access: 'private', website: 'https://www.hunter.cuny.edu/brookdale', note: '425 E 25th St. For Hunter College students and guests only.' },
+  // PRIVATE — named clubs
   { match: 'west side tennis club',     access: 'private', website: 'https://thewestsidetennisclub.com' },
   { match: 'town tennis club',          access: 'private', website: 'https://towntennisclub.com' },
   { match: 'cityview racquet',          access: 'private', website: 'https://cityviewracquet.com' },
@@ -386,7 +390,8 @@ const OVERRIDES = [
   { match: 'national tennis center', access: 'reservable', website: 'https://ntc.usta.com',         note: 'Book online at ntc.usta.com' },
   { match: 'sportime',           access: 'reservable', website: 'https://sportimeny.com',           note: 'Non-members can book courts at premium rate' },
   { match: 'john mcenroe',       access: 'reservable', website: 'https://sportimeny.com/manhattan', note: 'Non-members can book courts at premium rate' },
-  { match: 'central park tennis',access: 'reservable', website: 'https://www.nycgovparks.org/tennisreservation', note: 'NYC Parks permit required Apr–Nov. $15/session or $100/season.' },
+  { match: 'pier 42',           access: 'public',     website: 'https://www.nycgovparks.org/parks/pier-42/facilities/tennis', note: '4 free hard courts on the East River. No permit required.' },
+  { match: 'central park tennis',access: 'reservable', website: 'https://www.nycgovparks.org/parks/central-park/facilities/tennis', note: 'NYC Parks permit required Apr–Nov. $15/session or $100/season.' },
   { match: 'prospect park tennis',access:'reservable', website: 'https://www.prospectpark.org/visit-the-park/places-to-go/tennis-center/', note: 'NYC Parks permit required in season.' },
   { match: 'matchpoint',         access: 'reservable', website: 'https://matchpoint.nyc',           note: 'Primarily membership-based; non-members can book courts.' },
   { match: 'yorkville tennis',   access: 'reservable', website: 'https://yorkvilletennisclub.com',  note: 'No membership required. Pay per hour.' },
@@ -415,19 +420,39 @@ const BLOCKED_IDS = new Set([
   413654400, 413654401, 413654402, 413654403,
   413654404, 413654405, 413654406,             // Individual numbered courts 1-7 in Jamaica, Queens
   830193995,                                   // "Tennis Half" — practice half-court, not a full court
+  // Central Park area false positives / mystery clusters
+  429887427, 429887430,                        // ~79th St/5th Ave — inside CP, no real courts there
+  1183846661, 1183846662, 1183846663,          // ~86th St/CPW — the "86th Transverse" mystery courts
 ]);
 
 // OSM element IDs → tag overrides (used to name specific unnamed courts)
 const ID_OVERRIDES = {
+  // Pier 42 — all 5 ways get same name so they cluster into one marker
+  1023668014: { name: 'Pier 42 Tennis Courts', access: 'yes' },
   1149028397: { name: 'Pier 42 Tennis Courts', access: 'yes' },
   1188665134: { name: 'Pier 42 Tennis Courts', access: 'yes' },
   1188665135: { name: 'Pier 42 Tennis Courts', access: 'yes' },
   1188665136: { name: 'Pier 42 Tennis Courts', access: 'yes' },
-  1023668014: { name: 'Brian Watkins Tennis Center', access: 'yes' },
+  // Manhattan Plaza Racquet Club — unnamed layer:1 courts at W 43rd/10th Ave
+  164720437:  { name: 'Manhattan Plaza Racquet Club', access: 'customers' },
+  164720438:  { name: 'Manhattan Plaza Racquet Club', access: 'customers' },
+  // Sessanta — private rooftop courts at 60 W 60th St
+  723629959:  { name: 'Sessanta', access: 'private' },
+  1168838721: { name: 'Sessanta', access: 'private' },
+  // Hunter College Brookdale Campus — private courts for students/guests
+  889650165:  { name: 'Hunter College Brookdale Campus', access: 'private' },
+  1103888537: { name: 'Hunter College Brookdale Campus', access: 'private' },
 };
 
 // Hardcoded NYC Parks courts confirmed absent from OSM data
 const PUBLIC_COURTS = [
+  {
+    lat: 40.7155, lon: -73.9768,
+    name: 'Brian Watkins Tennis Center',
+    sport: 'tennis', surface: 'hard',
+    note: 'East River Park, just north of Williamsburg Bridge. 12 hard courts. NYC Parks permit required.',
+    website: 'https://www.nycgovparks.org/parks/east-river-park/facilities/tennis',
+  },
   {
     lat: 40.8267, lon: -73.9429,
     name: 'Frederick Johnson Playground',
@@ -469,6 +494,17 @@ const PUBLIC_COURTS = [
     sport: 'tennis', surface: 'hard',
     note: 'Fillmore Ave & E 32nd St, Marine Park, Brooklyn. 15 hard courts. NYC Parks permit required.',
     website: 'https://www.nycgovparks.org/parks/marine-park/facilities/tennis',
+  },
+];
+
+// Hardcoded private clubs confirmed absent from OSM
+const PRIVATE_COURTS = [
+  {
+    lat: 40.7572, lon: -73.9572,
+    name: 'Town Tennis Club',
+    sport: 'tennis', surface: 'hard',
+    note: 'E 55th St between 1st & 2nd Ave. Membership only.',
+    website: 'https://towntennisclub.com',
   },
 ];
 
@@ -986,6 +1022,7 @@ function buildCourts(elements) {
   }
 
   for (const entry of PUBLIC_COURTS)      addCuratedCourt(entry, 'reservable');
+  for (const entry of PRIVATE_COURTS)     addCuratedCourt(entry, 'private');
   for (const entry of RESIDENTIAL_COURTS) addCuratedCourt(entry, 'residential');
 }
 
