@@ -392,6 +392,7 @@ const OVERRIDES = [
   { match: 'yorkville tennis',   access: 'reservable', website: 'https://yorkvilletennisclub.com',  note: 'No membership required. Pay per hour.' },
   { match: 'court 16',           access: 'private',    website: 'https://court16.com',              note: 'Membership enrollment required.' },
   // PUBLIC / NYC PARKS — named facilities with their own organizations
+  { match: 'alley pond tennis',  access: 'reservable', website: 'https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis', note: 'Alley Pond Park, Queens. Operated by Commonpoint Queens.' },
   { match: 'dick savitt',        access: 'reservable', website: 'https://perec.columbia.edu/content/dick-savitt-tennis-center', note: 'Columbia University. 6 indoor cushioned hard courts under air dome. Open to the public.' },
   { match: 'queens college indoor tennis', access: 'reservable', website: 'https://www.aptcnyc.com', note: 'Active Pickleball & Tennis Center at Queens College. 6 courts. Book at aptcnyc.com.' },
   { match: 'riverside clay tennis', access: 'reservable', website: 'https://riversidetennis.org', note: '10 public clay courts in Riverside Park at 96th St. Managed by the RCTA.' },
@@ -424,6 +425,52 @@ const ID_OVERRIDES = {
   1188665136: { name: 'Pier 42 Tennis Courts', access: 'yes' },
   1023668014: { name: 'Brian Watkins Tennis Center', access: 'yes' },
 };
+
+// Hardcoded NYC Parks courts confirmed absent from OSM data
+const PUBLIC_COURTS = [
+  {
+    lat: 40.8267, lon: -73.9429,
+    name: 'Frederick Johnson Playground',
+    sport: 'tennis', surface: 'hard',
+    note: 'W 151st St & Adam Clayton Powell Jr Blvd, Harlem. 8 hard courts. NYC Parks permit required.',
+    website: 'https://www.nycgovparks.org/parks/M159/facilities/tennis',
+  },
+  {
+    lat: 40.8243, lon: -73.9443,
+    name: 'Jackie Robinson Park',
+    sport: 'tennis', surface: 'hard',
+    note: 'Bradhurst Ave & W 147th St, Hamilton Heights. 2 hard courts. NYC Parks permit required.',
+    website: 'https://www.nycgovparks.org/parks/jackie-robinson-park_manhattan/facilities/tennis',
+  },
+  {
+    lat: 40.7572, lon: -73.9519,
+    name: 'Queensboro Oval Tennis Courts',
+    sport: 'tennis', surface: 'clay',
+    note: 'York Ave & E 59th–60th St, Manhattan. 6 clay courts. NYC Parks permit required.',
+    website: 'https://www.nycgovparks.org/parks/queensboro-oval/facilities/tennis',
+  },
+  {
+    lat: 40.6900, lon: -73.7736,
+    name: 'Roy Wilkins Recreation Center',
+    sport: 'tennis', surface: 'hard',
+    note: '177-00 Baisley Blvd, St. Albans, Queens. 4 outdoor hard courts. NYC Parks permit required.',
+    website: 'https://www.nycgovparks.org/parks/roy-wilkins-recreation-center/facilities/tennis',
+  },
+  {
+    lat: 40.6247, lon: -74.0290,
+    name: 'Shore Park Tennis Courts',
+    sport: 'tennis', surface: 'hard',
+    note: 'Shore Road & 95th St, Bay Ridge, Brooklyn. 4 hard courts. NYC Parks permit required.',
+    website: 'https://www.nycgovparks.org/parks/shore-park-and-parkway/facilities/tennis',
+  },
+  {
+    lat: 40.5985, lon: -73.9400,
+    name: 'Marine Park Tennis Courts',
+    sport: 'tennis', surface: 'hard',
+    note: 'Fillmore Ave & E 32nd St, Marine Park, Brooklyn. 15 hard courts. NYC Parks permit required.',
+    website: 'https://www.nycgovparks.org/parks/marine-park/facilities/tennis',
+  },
+];
 
 // Hardcoded courts inside private residential buildings (not in OSM)
 const RESIDENTIAL_COURTS = [
@@ -905,38 +952,41 @@ function buildCourts(elements) {
     allCourts.push(court);
   }
 
-  // Add hardcoded residential building courts
-  for (const rc of RESIDENTIAL_COURTS) {
+  // Add hardcoded curated courts (public parks missing from OSM + residential buildings)
+  function addCuratedCourt(entry, accessType) {
     const court = {
-      lat: rc.lat, lon: rc.lon,
-      tags: { name: rc.name },
-      sport: rc.sport,
-      accessType: 'residential',
-      website: rc.website,
-      note: rc.note,
-      surface: 'other',
+      lat: entry.lat, lon: entry.lon,
+      tags: { name: entry.name },
+      sport: entry.sport,
+      accessType,
+      website: entry.website,
+      note: entry.note,
+      surface: entry.surface || 'other',
       count: 1,
       needsName: false,
       resolvedName: null,
     };
-    const marker = L.circleMarker([rc.lat, rc.lon], {
+    const marker = L.circleMarker([entry.lat, entry.lon], {
       radius: 8,
-      fillColor: ACCESS_COLOR['residential'],
+      fillColor: ACCESS_COLOR[accessType],
       fillOpacity: 0.9,
-      color: SPORT_STROKE[rc.sport],
+      color: SPORT_STROKE[entry.sport],
       weight: 2,
     });
     marker.on('mouseover', () => marker.setStyle({ radius: 11, fillOpacity: 1 }));
     marker.on('mouseout',  () => marker.setStyle({ radius: 8,  fillOpacity: 0.9 }));
     marker.on('click', () => {
-      marker.bindPopup(buildPopup(court, 'residential', rc.website, rc.note), { maxWidth: 280 }).openPopup();
+      marker.bindPopup(buildPopup(court, accessType, entry.website, entry.note), { maxWidth: 280 }).openPopup();
     });
-    if (rc.website) {
-      marker.on('dblclick', (e) => { L.DomEvent.stopPropagation(e); window.open(rc.website, '_blank'); });
+    if (entry.website) {
+      marker.on('dblclick', (e) => { L.DomEvent.stopPropagation(e); window.open(entry.website, '_blank'); });
     }
     court.marker = marker;
     allCourts.push(court);
   }
+
+  for (const entry of PUBLIC_COURTS)      addCuratedCourt(entry, 'reservable');
+  for (const entry of RESIDENTIAL_COURTS) addCuratedCourt(entry, 'residential');
 }
 
 // ═══════════════════════════════════════════════════════════════════
