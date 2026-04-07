@@ -379,12 +379,13 @@ const OVERRIDES = [
   // RESIDENTIAL — identified via ID_OVERRIDES
   { match: 'sessanta',              access: 'residential', website: 'https://sessanta60.com/the-amenities-sessanta/', note: '60 W 60th St. Private rooftop tennis court. Residents only.' },
   { match: 'hunter college brookdale', remove: true },
+  { match: 'dwight school', remove: true },
   // PRIVATE — named clubs
   { match: 'west side tennis club',     access: 'private', website: 'https://thewestsidetennisclub.com' },
   { match: 'town tennis club',          access: 'private', website: 'https://towntennisclub.com' },
-  { match: 'cityview racquet',          access: 'private', website: 'https://cityviewracquet.com' },
-  { match: 'manhattan plaza racquet',   access: 'private', indoor: true, website: 'https://advantagetennisclubs.com', note: '450 W 43rd St (btw 9th–10th Ave). 5 indoor hard courts. Membership required.' },
-  { match: 'roosevelt island racquet',  access: 'private', indoor: true, website: 'https://advantagetennisclubs.com', note: '81 W. Main St, Roosevelt Island. 12 indoor Har-Tru courts. Membership required.' },
+  { match: 'cityview racquet',          access: 'private', website: 'https://cityviewracquet.com', note: 'Long Island City, Queens. Tennis and padel courts. Membership only.' },
+  { match: 'manhattan plaza racquet',   access: 'private', indoor: true, website: 'https://advantagetennisclubs.com', note: '450 W 43rd St (btw 9th–10th Ave). 5 indoor hard courts. Membership required. Non-members may book within 24 hrs of court time (~$250/hr).' },
+  { match: 'roosevelt island racquet',  access: 'private', indoor: true, website: 'https://advantagetennisclubs.com', note: '281 Main St, Roosevelt Island. 12 indoor Har-Tru courts. Membership required.' },
   { match: 'new york tennis club',      access: 'private', indoor: true, website: 'https://newyorktennisclub.com',    note: '6 indoor Har-Tru clay courts. Founded 1886. Membership required.' },
   // RESERVABLE
   { match: 'padel haus',         access: 'reservable', website: 'https://padel.haus',               note: 'Book online at padel.haus' },
@@ -413,10 +414,16 @@ const OVERRIDES = [
   { match: 'riverside clay tennis', access: 'reservable', website: 'https://riversidetennis.org', note: '10 public clay courts in Riverside Park at 96th St. Managed by the RCTA.' },
   { match: 'over the tracks',    access: 'reservable', website: 'https://119ta.tennisgroups.us',     note: '10 hard courts in Riverside Park at 119th St. NYC Parks permit required.' },
   { match: 'brookville park tennis', access: 'reservable', website: 'https://www.bptainc.org',      note: '6 hard courts in Rosedale, Queens. NYC Parks permit required.' },
-  { match: 'bill talbert',           access: 'reservable', website: 'https://eastsidetennisassociation.com', note: '231 E 75th St. 4 outdoor hard courts + 2 quickstart + 2 pickleball. Season Apr 1–Nov 16. Book via eastsidetennisassociation.com.' },
-  { match: 'east side tennis association', access: 'reservable', website: 'https://eastsidetennisassociation.com', note: '231 E 75th St. 4 outdoor hard courts + 2 quickstart + 2 pickleball. Season Apr 1–Nov 16.' },
+  { match: 'bill talbert',           access: 'reservable', website: 'https://eastsidetennis.org', note: '231 E 75th St. 4 outdoor hard courts + 2 quickstart + 2 pickleball. Season Apr 1–Nov 16. Book via eastsidetennis.org.' },
+  { match: 'east side tennis association', access: 'reservable', website: 'https://eastsidetennis.org', note: '231 E 75th St. 4 outdoor hard courts + 2 quickstart + 2 pickleball. Season Apr 1–Nov 16.' },
   { match: 'marcus garvey park',     access: 'public',     website: 'https://www.nycgovparks.org/parks/marcus-garvey-park', note: 'Free outdoor hard courts in Marcus Garvey Park (formerly Mt. Morris Park), East Harlem.' },
   { match: 'riverside park tennis 153', access: 'reservable', website: 'https://www.nycgovparks.org/parks/riverside-park/', note: 'Riverside Park at 153rd St. NYC Parks permit required.' },
+  { match: 'fort washington park tennis', access: 'public', website: 'https://www.nycgovparks.org/parks/fort-washington-park/facilities/tennis', note: 'Fort Washington Park, Washington Heights. 10 outdoor hard courts. First come, first served.' },
+  { match: 'howard bennett tennis',      access: 'reservable', website: 'https://www.nycgovparks.org/parks/st-nicholas-park/facilities/tennis', note: '32 W 136th St, Harlem. 2 outdoor hard courts. NYC Parks permit required.' },
+  { match: 'inwood hill park tennis',    access: 'public', website: 'https://www.nycgovparks.org/parks/inwood-hill-park/facilities/tennis', note: 'Inwood Hill Park. 9 outdoor hard courts. First come, first served.' },
+  { match: 'riverbank state park tennis', access: 'reservable', website: 'https://parks.ny.gov/parks/84', note: 'Riverbank State Park, W 145th St. 3 outdoor hard courts. OPRHP permit required.' },
+  { match: 'washington market park tennis', access: 'public', website: 'https://www.nycgovparks.org/parks/washington-market-park', note: 'Washington Market Park, Tribeca. 1 outdoor hard court. First come, first served.' },
+  { match: 'milstein family',            access: 'reservable', website: 'https://www.nycgovparks.org/parks/inwood-hill-park/facilities/tennis', note: '603 W 218th St, Inwood. 6 outdoor + 6 indoor hard courts. NYC Parks permit required.' },
 ];
 
 const GENERIC_NAMES = new Set([
@@ -443,6 +450,8 @@ const BLOCKED_IDS = new Set([
   889650165, 1103888537,
   // 120th St "Henry Hudson Parkway" — duplicate cluster near Riverside Park
   377503730, 377503731, 724645360,
+  // Over the Tracks (119th St) — adjacent unnamed courts that create extra dots
+  740083756, 740083762, 740083763, 740083764, 740083765,
   // USTA NTC unnamed courts — create extra dots; named element handles the cluster
   365686394, 840573222,
   1183844785, 1183844786, 1183844787, 1183844788, 1183844789,
@@ -478,6 +487,34 @@ const ID_OVERRIDES = {
   // Marcus Garvey Park — East Harlem
   224031489:  { name: 'Marcus Garvey Park Tennis Courts', access: 'yes' },
   224031490:  { name: 'Marcus Garvey Park Tennis Courts', access: 'yes' },
+  // Howard Bennett — 32 W 136th St, Harlem (2 courts)
+  224023939:  { name: 'Howard Bennett Tennis Courts', access: 'yes' },
+  224023941:  { name: 'Howard Bennett Tennis Courts', access: 'yes' },
+  // Fort Washington Park — Washington Heights (10 courts)
+  1255414205: { name: 'Fort Washington Park Tennis Courts', access: 'yes' },
+  1255414206: { name: 'Fort Washington Park Tennis Courts', access: 'yes' },
+  1255414207: { name: 'Fort Washington Park Tennis Courts', access: 'yes' },
+  1255414208: { name: 'Fort Washington Park Tennis Courts', access: 'yes' },
+  1255414209: { name: 'Fort Washington Park Tennis Courts', access: 'yes' },
+  1255414210: { name: 'Fort Washington Park Tennis Courts', access: 'yes' },
+  1255414211: { name: 'Fort Washington Park Tennis Courts', access: 'yes' },
+  1255414212: { name: 'Fort Washington Park Tennis Courts', access: 'yes' },
+  1255414213: { name: 'Fort Washington Park Tennis Courts', access: 'yes' },
+  1255414214: { name: 'Fort Washington Park Tennis Courts', access: 'yes' },
+  // Inwood Hill Park — 9 courts
+  193048152:  { name: 'Inwood Hill Park Tennis Courts', access: 'yes' },
+  193048153:  { name: 'Inwood Hill Park Tennis Courts', access: 'yes' },
+  193048154:  { name: 'Inwood Hill Park Tennis Courts', access: 'yes' },
+  193048155:  { name: 'Inwood Hill Park Tennis Courts', access: 'yes' },
+  193048156:  { name: 'Inwood Hill Park Tennis Courts', access: 'yes' },
+  193048157:  { name: 'Inwood Hill Park Tennis Courts', access: 'yes' },
+  193048158:  { name: 'Inwood Hill Park Tennis Courts', access: 'yes' },
+  193048159:  { name: 'Inwood Hill Park Tennis Courts', access: 'yes' },
+  193048160:  { name: 'Inwood Hill Park Tennis Courts', access: 'yes' },
+  // Riverbank State Park — W 145th St (3 courts)
+  367235363:  { name: 'Riverbank State Park Tennis Courts', access: 'yes' },
+  367235365:  { name: 'Riverbank State Park Tennis Courts', access: 'yes' },
+  367235369:  { name: 'Riverbank State Park Tennis Courts', access: 'yes' },
   // Hudson River Park — 3 free courts at Pier 40
   1047533365: { name: 'Hudson River Park Tennis Courts', access: 'yes' },
   1047533366: { name: 'Hudson River Park Tennis Courts', access: 'yes' },
@@ -573,6 +610,20 @@ const PUBLIC_COURTS = [
     note: 'Fillmore Ave & E 32nd St, Marine Park, Brooklyn. 15 hard courts. NYC Parks permit required.',
     website: 'https://www.nycgovparks.org/parks/marine-park/facilities/tennis',
   },
+  {
+    lat: 40.7706, lon: -73.9493,
+    name: 'John Jay Park Tennis Court',
+    sport: 'tennis', surface: 'hard', accessType: 'public',
+    note: 'FDR Dr & E 76th St, Manhattan. 1 outdoor hard court. First come, first served. No permit required.',
+    website: 'https://www.nycgovparks.org/parks/john-jay-park/facilities/tennis',
+  },
+  {
+    lat: 40.8643, lon: -73.9213,
+    name: 'Milstein Family Tennis Center',
+    sport: 'tennis', surface: 'hard',
+    note: '603 W 218th St, Inwood. 6 outdoor + 6 indoor hard courts. NYC Parks permit required.',
+    website: 'https://www.nycgovparks.org/parks/inwood-hill-park/facilities/tennis',
+  },
 ];
 
 // Hardcoded private clubs confirmed absent from OSM
@@ -583,6 +634,17 @@ const PRIVATE_COURTS = [
     sport: 'tennis', surface: 'hard', indoor: true,
     note: '430 E 56th St between 1st & 2nd Ave. 3 indoor hard courts. Founded 1954. Membership only.',
     website: 'https://towntennisclub.com',
+  },
+];
+
+// Hardcoded private clubs confirmed absent from OSM — Millennium Hilton rooftop
+const MILLENNIUM_COURTS = [
+  {
+    lat: 40.7505, lon: -73.9694,
+    name: 'Millennium Hilton New York One UN Plaza Tennis',
+    sport: 'tennis', surface: 'hard', indoor: true,
+    note: '1 United Nations Plaza, Midtown East. 1 indoor rooftop hard court. Available for lessons; guests and members only.',
+    website: 'https://www.hilton.com/en/hotels/nyculhh-millennium-hilton-new-york-one-un-plaza/',
   },
 ];
 
@@ -1107,9 +1169,10 @@ function buildCourts(elements) {
     allCourts.push(court);
   }
 
-  for (const entry of PUBLIC_COURTS)      addCuratedCourt(entry, entry.accessType || 'reservable');
-  for (const entry of PRIVATE_COURTS)     addCuratedCourt(entry, 'private');
-  for (const entry of RESIDENTIAL_COURTS) addCuratedCourt(entry, 'residential');
+  for (const entry of PUBLIC_COURTS)       addCuratedCourt(entry, entry.accessType || 'reservable');
+  for (const entry of PRIVATE_COURTS)      addCuratedCourt(entry, 'private');
+  for (const entry of MILLENNIUM_COURTS)   addCuratedCourt(entry, 'private');
+  for (const entry of RESIDENTIAL_COURTS)  addCuratedCourt(entry, 'residential');
 }
 
 // ═══════════════════════════════════════════════════════════════════
