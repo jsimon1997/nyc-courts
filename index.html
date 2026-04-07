@@ -199,6 +199,8 @@
 
     /* ── Popup content ───────────────────────────────────── */
     .popup-name   { font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 2px; line-height: 1.3; }
+    .popup-name-link { color: #1d4ed8; text-decoration: none; }
+    .popup-name-link:hover { text-decoration: underline; }
     .popup-sport  { font-size: 10px; font-weight: 600; text-transform: uppercase;
                     letter-spacing: .08em; color: #94a3b8; margin-bottom: 6px; }
     .popup-access { font-size: 12px; margin-bottom: 8px; font-weight: 500; }
@@ -389,6 +391,12 @@ const OVERRIDES = [
   { match: 'matchpoint',         access: 'reservable', website: 'https://matchpoint.nyc',           note: 'Primarily membership-based; non-members can book courts.' },
   { match: 'yorkville tennis',   access: 'reservable', website: 'https://yorkvilletennisclub.com',  note: 'No membership required. Pay per hour.' },
   { match: 'court 16',           access: 'private',    website: 'https://court16.com',              note: 'Membership enrollment required.' },
+  // PUBLIC / NYC PARKS — named facilities with their own organizations
+  { match: 'dick savitt',        access: 'reservable', website: 'https://perec.columbia.edu/content/dick-savitt-tennis-center', note: 'Columbia University. 6 indoor cushioned hard courts under air dome. Open to the public.' },
+  { match: 'queens college indoor tennis', access: 'reservable', website: 'https://www.aptcnyc.com', note: 'Active Pickleball & Tennis Center at Queens College. 6 courts. Book at aptcnyc.com.' },
+  { match: 'riverside clay tennis', access: 'reservable', website: 'https://riversidetennis.org', note: '10 public clay courts in Riverside Park at 96th St. Managed by the RCTA.' },
+  { match: 'over the tracks',    access: 'reservable', website: 'https://119ta.tennisgroups.us',     note: '10 hard courts in Riverside Park at 119th St. NYC Parks permit required.' },
+  { match: 'brookville park tennis', access: 'reservable', website: 'https://www.bptainc.org',      note: '6 hard courts in Rosedale, Queens. NYC Parks permit required.' },
 ];
 
 const GENERIC_NAMES = new Set([
@@ -403,6 +411,9 @@ const BLOCKED_IDS = new Set([
   1103888442, 1103888443, 1103888444, 1365375888, // E 21st / E 25th (false positives)
   888695596,                                   // W 16th Kelly Playground (not a court)
   1341079142, 1341079143, 1341079144,          // Reserve Padel duplicate unnamed nodes
+  413654400, 413654401, 413654402, 413654403,
+  413654404, 413654405, 413654406,             // Individual numbered courts 1-7 in Jamaica, Queens
+  830193995,                                   // "Tennis Half" — practice half-court, not a full court
 ]);
 
 // OSM element IDs → tag overrides (used to name specific unnamed courts)
@@ -658,16 +669,18 @@ function buildPopup(court, accessType, website, note, nameOverride) {
   if (tags.opening_hours) rows.push(`<b>Hours:</b> ${tags.opening_hours}`);
   if (tags.phone)         rows.push(`<b>Phone:</b> <a href="tel:${tags.phone}">${tags.phone}</a>`);
   const link = website || tags.website;
-  if (link) rows.push(`<b>Website:</b> <a href="${link}" target="_blank">Visit ↗</a>`);
+
+  const nameHtml = link
+    ? `<a href="${link}" target="_blank" class="popup-name-link">${name}</a>`
+    : name;
 
   return `
     <div class="gm-popup">
-      <div class="popup-name">${name}</div>
+      <div class="popup-name">${nameHtml}</div>
       <div class="popup-sport">${sportLabel}</div>
       <div class="popup-access">${ACCESS_LABEL[accessType]}</div>
       ${rows.length ? `<div class="popup-details">${rows.join('<br>')}</div>` : ''}
       ${note ? `<div class="popup-note">ℹ️ ${note}</div>` : ''}
-      ${link ? `<div class="popup-dblclick">Double-click marker to open website</div>` : ''}
     </div>
   `;
 }
