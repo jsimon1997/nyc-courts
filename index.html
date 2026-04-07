@@ -270,6 +270,10 @@
       <input type="checkbox" id="f-unknown" checked>
       <label for="f-unknown"><div class="swatch" style="background:#94a3b8"></div>Unknown access</label>
     </div>
+    <div class="filter-row">
+      <input type="checkbox" id="f-residential" checked>
+      <label for="f-residential"><div class="swatch" style="background:#0ea5e9"></div>Private residential building</label>
+    </div>
 
     <div class="section-label">Surface</div>
     <div class="filter-row">
@@ -410,13 +414,53 @@ const ID_OVERRIDES = {
   1023668014: { name: 'Brian Watkins Tennis Center', access: 'yes' },
 };
 
-const ACCESS_COLOR = { public:'#22c55e', reservable:'#eab308', private:'#a855f7', unknown:'#9ca3af' };
+// Hardcoded courts inside private residential buildings (not in OSM)
+const RESIDENTIAL_COURTS = [
+  {
+    lat: 40.7718, lon: -73.9953,
+    name: 'Waterline Square',
+    sport: 'tennis',
+    note: '645 W 59th St, Manhattan. Indoor regulation-size tennis court. Residents only.',
+    website: 'https://waterlinesquare.com',
+  },
+  {
+    lat: 40.7459, lon: -73.9567,
+    name: '4545 Center Boulevard',
+    sport: 'tennis',
+    note: '4545 Center Blvd, Long Island City. 2 outdoor rooftop tennis courts. Residents only.',
+    website: 'https://www.4545centerblvd.com',
+  },
+  {
+    lat: 40.8784, lon: -73.9137,
+    name: 'Skyview on Hudson',
+    sport: 'tennis',
+    note: '5700 Arlington Ave, Riverdale. 2 night-lit outdoor tennis courts. Residents only.',
+    website: 'https://skyviewonhudson.com',
+  },
+  {
+    lat: 40.7718, lon: -73.9453,
+    name: 'East River Tower',
+    sport: 'tennis',
+    note: '1725 York Ave, Manhattan. Private tennis courts. Residents only.',
+    website: null,
+  },
+  {
+    lat: 40.7026, lon: -73.9889,
+    name: 'Olympia DUMBO',
+    sport: 'tennis',
+    note: "30 Front St, Brooklyn. NYC's highest private tennis court, overlooking the Brooklyn Bridge. Residents only.",
+    website: 'https://olympiadumbo.com',
+  },
+];
+
+const ACCESS_COLOR = { public:'#22c55e', reservable:'#eab308', private:'#a855f7', unknown:'#9ca3af', residential:'#0ea5e9' };
 const SPORT_STROKE = { tennis:'#1d4ed8', padel:'#c2410c' };
 const ACCESS_LABEL = {
-  public:     '🟢 First come, first serve',
-  reservable: '🟡 Reservable / permit required',
-  private:    '🟣 Membership only',
-  unknown:    '⚪ Access unknown',
+  public:      '🟢 First come, first serve',
+  reservable:  '🟡 Reservable / permit required',
+  private:     '🟣 Membership only',
+  unknown:     '⚪ Access unknown',
+  residential: '🔵 Private residential building',
 };
 
 // ═══════════════════════════════════════════════════════════════════
@@ -677,14 +721,15 @@ function updateMap() {
     public:     document.getElementById('f-public').checked,
     reservable: document.getElementById('f-reservable').checked,
     private:    document.getElementById('f-private').checked,
-    unknown:    document.getElementById('f-unknown').checked,
-    clay:       document.getElementById('f-clay').checked,
+    unknown:     document.getElementById('f-unknown').checked,
+    residential: document.getElementById('f-residential').checked,
+    clay:        document.getElementById('f-clay').checked,
     hard:       document.getElementById('f-hard').checked,
     grass:      document.getElementById('f-grass').checked,
     other:      document.getElementById('f-surface-other').checked,
   };
 
-  const counts = { tennis: 0, padel: 0, public: 0, reservable: 0, private: 0, unknown: 0 };
+  const counts = { tennis: 0, padel: 0, public: 0, reservable: 0, private: 0, unknown: 0, residential: 0 };
 
   allCourts.forEach((c, idx) => {
     const visible =
@@ -846,6 +891,39 @@ function buildCourts(elements) {
     court.marker = marker;
     allCourts.push(court);
   }
+
+  // Add hardcoded residential building courts
+  for (const rc of RESIDENTIAL_COURTS) {
+    const court = {
+      lat: rc.lat, lon: rc.lon,
+      tags: { name: rc.name },
+      sport: rc.sport,
+      accessType: 'residential',
+      website: rc.website,
+      note: rc.note,
+      surface: 'other',
+      count: 1,
+      needsName: false,
+      resolvedName: null,
+    };
+    const marker = L.circleMarker([rc.lat, rc.lon], {
+      radius: 8,
+      fillColor: ACCESS_COLOR['residential'],
+      fillOpacity: 0.9,
+      color: SPORT_STROKE[rc.sport],
+      weight: 2,
+    });
+    marker.on('mouseover', () => marker.setStyle({ radius: 11, fillOpacity: 1 }));
+    marker.on('mouseout',  () => marker.setStyle({ radius: 8,  fillOpacity: 0.9 }));
+    marker.on('click', () => {
+      marker.bindPopup(buildPopup(court, 'residential', rc.website, rc.note), { maxWidth: 280 }).openPopup();
+    });
+    if (rc.website) {
+      marker.on('dblclick', (e) => { L.DomEvent.stopPropagation(e); window.open(rc.website, '_blank'); });
+    }
+    court.marker = marker;
+    allCourts.push(court);
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -907,7 +985,7 @@ async function initMap() {
     buildCourts(elements);
     document.getElementById('loading').style.display = 'none';
 
-    ['f-tennis','f-padel','f-public','f-reservable','f-private','f-unknown',
+    ['f-tennis','f-padel','f-public','f-reservable','f-private','f-unknown','f-residential',
      'f-clay','f-hard','f-grass','f-surface-other'].forEach(id =>
       document.getElementById(id).addEventListener('change', updateMap)
     );
