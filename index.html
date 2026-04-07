@@ -330,6 +330,7 @@
 
 const OVERRIDES = [
   // FALSE POSITIVES / CLOSED
+  { match: 'tennis lab',               remove: true },  // stringing shop, not a court
   { match: 'racquet and tennis club',  remove: true },
   { match: 'racquet & tennis club',    remove: true },
   { match: 'midtown tennis center',    remove: true },
@@ -390,6 +391,24 @@ const GENERIC_NAMES = new Set([
   'tennis court','tennis courts','padel court','padel courts',
   'court','courts','tennis','padel','pitch',
 ]);
+
+// OSM element IDs to exclude entirely (false positives confirmed not to be courts)
+const BLOCKED_IDS = new Set([
+  1238497049, 1238497050, 1238497051,          // Mulberry St (not a court)
+  165434076, 1079338352, 1079338353,           // E 14th / Ave C area (false positive)
+  1103888442, 1103888443, 1103888444, 1365375888, // E 21st / E 25th (false positives)
+  888695596,                                   // W 16th Kelly Playground (not a court)
+  1341079142, 1341079143, 1341079144,          // Reserve Padel duplicate unnamed nodes
+]);
+
+// OSM element IDs → tag overrides (used to name specific unnamed courts)
+const ID_OVERRIDES = {
+  1149028397: { name: 'Pier 42 Tennis Courts', access: 'yes' },
+  1188665134: { name: 'Pier 42 Tennis Courts', access: 'yes' },
+  1188665135: { name: 'Pier 42 Tennis Courts', access: 'yes' },
+  1188665136: { name: 'Pier 42 Tennis Courts', access: 'yes' },
+  1023668014: { name: 'Brian Watkins Tennis Center', access: 'yes' },
+};
 
 const ACCESS_COLOR = { public:'#22c55e', reservable:'#eab308', private:'#a855f7', unknown:'#9ca3af' };
 const SPORT_STROKE = { tennis:'#1d4ed8', padel:'#c2410c' };
@@ -459,15 +478,16 @@ function clusterCourts(elements) {
   // ── Step 1: parse raw elements ──────────────────────────────────
   const raw = [];
   for (const el of elements) {
+    if (BLOCKED_IDS.has(el.id)) continue;
     const lat = el.lat ?? el.center?.lat;
     const lon = el.lon ?? el.center?.lon;
     if (!lat || !lon) continue;
-    const tags  = el.tags || {};
+    const tags  = { ...(el.tags || {}), ...(ID_OVERRIDES[el.id] || {}) };
     const sport = tags.sport;
     if (sport !== 'tennis' && sport !== 'padel') continue;
     const ov = findOverride(tags.name || '');
     if (ov?.remove) continue;
-    raw.push({ lat, lon, tags: { ...tags }, sport });
+    raw.push({ lat, lon, tags, sport });
   }
 
   // ── Step 2: group by specific name (within 2 km) ────────────────
