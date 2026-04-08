@@ -478,10 +478,11 @@
 
 <script>
 // ═══════════════════════════════════════════════════════════════════
-// CONSTANTS & OVERRIDES
+// CURATED DATA — loaded from curated-courts.json at startup
+// Edit that file to add/update courts, overrides, or blocked IDs.
 // ═══════════════════════════════════════════════════════════════════
 
-const OVERRIDES = [
+let OVERRIDES = [
   // FALSE POSITIVES / CLOSED
   { match: 'tennis lab',               remove: true },  // stringing shop, not a court
   { match: 'racquet and tennis club',  remove: true },
@@ -746,7 +747,7 @@ const GENERIC_NAMES = new Set([
 ]);
 
 // OSM element IDs to exclude entirely (false positives confirmed not to be courts)
-const BLOCKED_IDS = new Set([
+let BLOCKED_IDS = new Set([
   1238497049, 1238497050, 1238497051,          // Mulberry St (not a court)
   165434076, 1079338352, 1079338353,           // E 14th / Ave C area (false positive)
   1103888442, 1103888443, 1103888444, 1365375888, // E 21st / E 25th (false positives)
@@ -783,7 +784,7 @@ const BLOCKED_IDS = new Set([
 ]);
 
 // OSM element IDs → tag overrides (used to name specific unnamed courts)
-const ID_OVERRIDES = {
+let ID_OVERRIDES = {
   // Manhattan Plaza Racquet Club — unnamed layer:1 courts at W 43rd/10th Ave
   164720437:  { name: 'Manhattan Plaza Racquet Club', access: 'customers' },
   164720438:  { name: 'Manhattan Plaza Racquet Club', access: 'customers' },
@@ -875,7 +876,7 @@ const ID_OVERRIDES = {
 };
 
 // Hardcoded NYC Parks courts confirmed absent from OSM data
-const PUBLIC_COURTS = [
+let PUBLIC_COURTS = [
   {
     lat: 40.7102, lon: -73.9833,
     name: 'Pier 42 Tennis Courts',
@@ -960,7 +961,7 @@ const PUBLIC_COURTS = [
 ];
 
 // Hardcoded private clubs confirmed absent from OSM
-const PRIVATE_COURTS = [
+let PRIVATE_COURTS = [
   {
     lat: 40.7559, lon: -73.9650,
     name: 'Town Tennis Club',
@@ -1050,7 +1051,7 @@ const PRIVATE_COURTS = [
 ];
 
 // Hardcoded private clubs confirmed absent from OSM — Millennium Hilton rooftop
-const MILLENNIUM_COURTS = [
+let MILLENNIUM_COURTS = [
   {
     lat: 40.7505, lon: -73.9694,
     name: 'Millennium Hilton New York One UN Plaza Tennis',
@@ -1063,7 +1064,7 @@ const MILLENNIUM_COURTS = [
 ];
 
 // Hardcoded courts inside private residential buildings (not in OSM)
-const RESIDENTIAL_COURTS = [
+let RESIDENTIAL_COURTS = [
   {
     lat: 40.7718, lon: -73.9953,
     name: 'Waterline Square',
@@ -2015,7 +2016,23 @@ async function initMap() {
   document.getElementById('zoom-out').addEventListener('click', () => gmap.setZoom(gmap.getZoom() - 1));
 
   try {
-    const elements = await fetchFromOverpass();
+    // Load OSM court data and curated overrides/courts in parallel
+    const [elements, curated] = await Promise.all([
+      fetchFromOverpass(),
+      fetch('./curated-courts.json').then(r => r.json()).catch(() => null),
+    ]);
+
+    // If JSON loaded successfully, overwrite in-memory data with it
+    if (curated) {
+      OVERRIDES          = curated.overrides          || OVERRIDES;
+      BLOCKED_IDS        = new Set(curated.blocked_ids || []);
+      ID_OVERRIDES       = curated.id_overrides        || ID_OVERRIDES;
+      PUBLIC_COURTS      = curated.public_courts        || PUBLIC_COURTS;
+      PRIVATE_COURTS     = curated.private_courts       || PRIVATE_COURTS;
+      MILLENNIUM_COURTS  = curated.millennium_courts    || MILLENNIUM_COURTS;
+      RESIDENTIAL_COURTS = curated.residential_courts   || RESIDENTIAL_COURTS;
+    }
+
     buildCourts(elements);
     document.getElementById('loading').style.display = 'none';
 
