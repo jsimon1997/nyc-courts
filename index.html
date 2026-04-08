@@ -657,10 +657,18 @@ const BLOCKED_IDS = new Set([
   1023668014, 1149028397, 1188665134, 1188665135, 1188665136,
   // Hunter College Brookdale — private, removed per user request
   889650165, 1103888537,
-  // 120th St "Henry Hudson Parkway" — duplicate cluster near Riverside Park
-  377503730, 377503731, 724645360,
-  // Over the Tracks (119th St) — adjacent unnamed courts that create extra dots
-  740083756, 740083762, 740083763, 740083764, 740083765,
+  // Henry Hudson Parkway clusters — unnamed courts on/near HHP right-of-way;
+  // Nominatim reverse-geocodes them as "Henry Hudson Parkway" (not real named courts)
+  377503730, 377503731, 724645360,          // lon -73.955 cluster (Morningside area)
+  377588830, 377588831,                     // lon -73.999 cluster (108th–112th St side)
+  1028148101, 1028148105, 1028148106, 1028148107, 1028148108,
+  1028148109, 1028148110, 1028148111, 1028148112, 1028148113,
+  1028148114, 1028148115,                   // lon -73.999 cluster (cont.)
+  1192695405, 1192695406, 1192695407,       // lon -73.999 cluster (~96th–100th St side)
+  813550190, 813550191,                     // lon -73.989 cluster (upper Riverside side)
+  // Over the Tracks (119th St) — all adjacent unnamed individual court ways
+  740083756, 740083757, 740083758, 740083759, 740083760,
+  740083761, 740083762, 740083763, 740083764, 740083765,
   // USTA NTC unnamed courts — create extra dots; named element handles the cluster
   365686394, 840573222,
   1183844785, 1183844786, 1183844787, 1183844788, 1183844789,
