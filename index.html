@@ -971,14 +971,81 @@ const PRIVATE_COURTS = [
     website: 'https://towntennisclub.com',
   },
   {
-    lat: 40.7446, lon: -73.9341,
+    lat: 40.7448, lon: -73.9339,
+    name: 'City View Racquet Club — Tennis',
+    sport: 'tennis', surface: 'clay', indoor: true,
+    hours: 'Mon–Sun 6am–midnight',
+    phone: '(718) 389-6252',
+    bookingUrl: 'https://book.cityviewracquet.com',
+    note: '43-34 32nd Pl, Long Island City, Queens. 7 indoor Har-Tru clay courts in a climate-controlled bubble. Also has 3 padel courts + squash. Membership only.',
+    website: 'https://cityviewracquet.com',
+  },
+  {
+    lat: 40.7444, lon: -73.9343,
     name: 'City View Racquet Club — Padel',
     sport: 'padel', surface: 'hard', indoor: true,
     hours: 'Mon–Sun 6am–midnight',
     phone: '(718) 389-6252',
     bookingUrl: 'https://book.cityviewracquet.com',
-    note: '43-34 32nd Pl, Long Island City, Queens. 3 indoor padel courts ("Brisas"). Also has 7 clay tennis courts + squash. Membership only.',
+    note: '43-34 32nd Pl, Long Island City, Queens. 3 indoor padel courts in a 50ft climate-controlled bubble. Also has 7 clay tennis courts + squash. Membership only.',
     website: 'https://cityviewracquet.com',
+  },
+  // ── Reserve Padel ─────────────────────────────────────────────────
+  {
+    lat: 40.7640, lon: -73.9694,
+    name: 'Reserve Padel — Upper East Side',
+    sport: 'padel', surface: 'hard', indoor: true,
+    hours: 'Daily 7am–11pm',
+    phone: '(917) 599-1545',
+    bookingUrl: 'https://reservepadeluppereastside.playbycourt.com',
+    note: 'E 61st St, Upper East Side. 2 indoor courts with 28-ft ceilings. Full gym, lap pool & cold plunges. Members only.',
+    website: 'https://www.reservepadel.com/61st-streetold',
+  },
+  {
+    lat: 40.7531, lon: -74.0018,
+    name: 'Reserve Padel — Hudson Yards',
+    sport: 'padel', surface: 'hard', indoor: false,
+    accessType: 'reservable',
+    hours: 'Daily 7am–11pm',
+    phone: '(917) 599-1545',
+    bookingUrl: 'https://nyc.reservepadel.com',
+    note: '360 10th Ave, Hudson Yards. 3 outdoor glass-enclosed courts. Book online — no membership required.',
+    website: 'https://www.reservepadel.com/hudson-yards',
+  },
+  // ── Padel& ────────────────────────────────────────────────────────
+  {
+    lat: 40.7284, lon: -73.9601,
+    name: 'Padel& Greenpoint',
+    sport: 'padel', surface: 'hard', indoor: true,
+    accessType: 'reservable',
+    hours: 'Daily 7am–11:30pm',
+    phone: '(929) 255-5471',
+    bookingUrl: 'https://playtomic.com/clubs/padel-greenpoint',
+    note: '73 West St, Greenpoint, Brooklyn. 4 doubles + 2 singles courts under a 36-ft ceiling. Drop-in & membership available.',
+    website: 'https://www.padeland.us/greenpoint',
+  },
+  // ── Padel Haus ────────────────────────────────────────────────────
+  {
+    lat: 40.7149, lon: -73.9658,
+    name: 'Padel Haus — Williamsburg',
+    sport: 'padel', surface: 'hard', indoor: true,
+    accessType: 'reservable',
+    hours: 'Mon–Fri 7am–11pm, Sat–Sun 8am–10pm',
+    phone: '(917) 970-0036',
+    bookingUrl: 'https://bookings.padel.haus',
+    note: '307 Kent Ave, Williamsburg, Brooklyn. 4 indoor glass courts on the waterfront. Juice bar, lounge & locker rooms. Drop-in & membership.',
+    website: 'https://www.padel.haus/locations/williamsburg',
+  },
+  {
+    lat: 40.7024, lon: -73.9919,
+    name: 'Padel Haus — DUMBO',
+    sport: 'padel', surface: 'hard', indoor: true,
+    accessType: 'reservable',
+    hours: 'Mon–Fri 7am–11pm, Sat–Sun 8am–10pm',
+    phone: '(917) 970-0036',
+    bookingUrl: 'https://bookings.padel.haus',
+    note: '257 Water St, DUMBO, Brooklyn. Indoor padel courts. Drop-in & membership available.',
+    website: 'https://www.padel.haus/dumbo',
   },
 ];
 
@@ -1585,7 +1652,7 @@ function buildCourts(elements) {
   }
 
   for (const entry of PUBLIC_COURTS)       addCuratedCourt(entry, entry.accessType || 'reservable');
-  for (const entry of PRIVATE_COURTS)      addCuratedCourt(entry, 'private');
+  for (const entry of PRIVATE_COURTS)      addCuratedCourt(entry, entry.accessType || 'private');
   for (const entry of MILLENNIUM_COURTS)   addCuratedCourt(entry, 'private');
   for (const entry of RESIDENTIAL_COURTS)  addCuratedCourt(entry, 'residential');
 }
