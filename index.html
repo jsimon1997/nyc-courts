@@ -1714,7 +1714,11 @@ function buildCourts(elements) {
       if (!needsName && !needsAddress) return;
       const geo = await reverseGeocode(court.lat, court.lon);
       let updated = false;
-      if (needsName    && geo.name)    { court.resolvedName    = geo.name;    updated = true; }
+      if (needsName && geo.name) {
+        // If geocoded name matches a removed override, hide this unnamed court
+        if (findOverride(geo.name)?.remove) { marker.remove(); return; }
+        court.resolvedName = geo.name; updated = true;
+      }
       if (needsAddress && geo.address) { court.resolvedAddress = geo.address; updated = true; }
       if (updated) marker.setPopupContent(buildPopup(court, accessType, website, note));
     });
