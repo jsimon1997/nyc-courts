@@ -303,7 +303,7 @@
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-reservable" checked>
-      <label for="f-reservable"><div class="swatch" style="background:#eab308"></div>Book by the hour</label>
+      <label for="f-reservable"><div class="swatch" style="background:#eab308"></div>Reservable</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-private" checked>
@@ -947,7 +947,7 @@ const SPORT_STROKE = { tennis:'#1d4ed8', padel:'#9a3412' };
 const ACCESS_LABEL = {
   public:      '🟢 Free / first come, first serve',
   permit:      '🟠 NYC Parks permit required',
-  reservable:  '🟡 Book by the hour',
+  reservable:  '🟡 Reservable',
   private:     '🟣 Membership only',
   unknown:     '⚪ Access unknown',
   residential: '🔵 Private residential building',
@@ -1290,7 +1290,7 @@ function updateMap() {
   document.getElementById('access-stats').innerHTML = `
     <span style="color:#22c55e">●</span> Free: <b>${counts.public}</b> &nbsp;
     <span style="color:#f97316">●</span> Permit: <b>${counts.permit}</b><br>
-    <span style="color:#eab308">●</span> Book/hr: <b>${counts.reservable}</b> &nbsp;
+    <span style="color:#eab308">●</span> Reservable: <b>${counts.reservable}</b> &nbsp;
     <span style="color:#a855f7">●</span> Members: <b>${counts.private}</b>
   `;
 }
@@ -1330,9 +1330,9 @@ async function applyDriveFilter() {
     // Home marker
     if (window._homeMarker) window._homeMarker.remove();
     window._homeMarker = L.circleMarker([lat, lon], {
-      radius: 9,
+      radius: 7,
       fillColor: '#6366f1', fillOpacity: 1,
-      color: '#4338ca', weight: 2.5,
+      color: '#4338ca', weight: 2,
     }).addTo(gmap);
     window._homeMarker.bindPopup('<b>Your location</b>');
     window._homeMarker.on('click', () => window._homeMarker.openPopup());
@@ -1398,16 +1398,16 @@ function buildCourts(elements) {
     court.bookingApp  = ov?.bookingApp  || null;
 
     const marker = L.circleMarker([lat, lon], {
-      radius: 8,
+      radius: 6,
       fillColor: ACCESS_COLOR[accessType],
-      fillOpacity: 0.9,
+      fillOpacity: 0.88,
       color: SPORT_STROKE[sport],
-      weight: 2,
+      weight: 1.5,
     });
 
     // Hover → grow marker
-    marker.on('mouseover', () => marker.setStyle({ radius: 11, fillOpacity: 1 }));
-    marker.on('mouseout',  () => marker.setStyle({ radius: 8,  fillOpacity: 0.9 }));
+    marker.on('mouseover', () => marker.setStyle({ radius: 8, fillOpacity: 1 }));
+    marker.on('mouseout',  () => marker.setStyle({ radius: 6, fillOpacity: 0.88 }));
 
     // Single click → popup (reverse-geocode unnamed courts on first click)
     marker.on('click', async () => {
@@ -1456,14 +1456,14 @@ function buildCourts(elements) {
       bookingApp: entry.bookingApp || null,
     };
     const marker = L.circleMarker([entry.lat, entry.lon], {
-      radius: 8,
+      radius: 6,
       fillColor: ACCESS_COLOR[accessType],
-      fillOpacity: 0.9,
+      fillOpacity: 0.88,
       color: SPORT_STROKE[entry.sport],
-      weight: 2,
+      weight: 1.5,
     });
-    marker.on('mouseover', () => marker.setStyle({ radius: 11, fillOpacity: 1 }));
-    marker.on('mouseout',  () => marker.setStyle({ radius: 8,  fillOpacity: 0.9 }));
+    marker.on('mouseover', () => marker.setStyle({ radius: 8, fillOpacity: 1 }));
+    marker.on('mouseout',  () => marker.setStyle({ radius: 6, fillOpacity: 0.88 }));
     marker.on('click', () => {
       marker.bindPopup(buildPopup(court, accessType, entry.website, entry.note), { maxWidth: 300 }).openPopup();
     });
