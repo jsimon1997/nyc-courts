@@ -323,26 +323,26 @@
       #panel-drag-handle {
         display: flex;
         justify-content: center;
-        padding: 10px 0 6px;
+        align-items: center;
+        padding: 10px 0 8px;
         background: #162521;
         border-radius: 20px 20px 0 0;
         cursor: pointer;
         flex-shrink: 0;
       }
-      #panel-drag-handle::before {
-        content: '';
-        display: block;
-        width: 32px; height: 4px;
-        background: rgba(255,255,255,.25);
-        border-radius: 2px;
+      #panel-chevron {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 48px; height: 48px;
+        background: rgba(255,255,255,.18);
+        border-radius: 50%;
+        font-size: 22px;
+        color: white;
+        transition: transform .3s;
       }
-      #panel-header {
-        border-radius: 0 !important;
-        cursor: pointer;
-        padding-top: 10px !important;
-      }
-      #panel-chevron { display: block !important; }
-      #panel.mob-open #panel-chevron { transform: rotate(180deg); transition: transform .3s; }
+      #panel.mob-open #panel-chevron { transform: rotate(180deg); }
+      #panel-header { border-radius: 0 !important; }
       #zoom-controls { bottom: 96px; right: 12px; }
       .zoom-btn {
         width: 48px; height: 48px;
@@ -406,15 +406,12 @@
 
 <!-- Side panel -->
 <div id="panel">
-  <div id="panel-drag-handle"></div>
+  <div id="panel-drag-handle">
+    <span id="panel-chevron">▲</span>
+  </div>
   <div id="panel-header">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start">
-      <div>
-        <h2>NYC Courts</h2>
-        <p>Manhattan · Brooklyn · Queens · Bronx</p>
-      </div>
-      <span id="panel-chevron" style="display:none;color:rgba(255,255,255,.85);font-size:28px;line-height:1;flex-shrink:0;padding:4px 0 4px 12px">▾</span>
-    </div>
+    <h2>NYC Courts</h2>
+    <p>Manhattan · Brooklyn · Queens · Bronx</p>
   </div>
   <div id="panel-body">
 
