@@ -1603,21 +1603,21 @@ function buildCourts(elements) {
 
     const marker = L.marker([lat, lon], { icon: makeRacketIcon(accessType, sport) });
 
-    // Single click → popup (reverse-geocode unnamed courts on first click)
-    marker.on('click', async () => {
-      marker.bindPopup(buildPopup(court, accessType, website, note), { maxWidth: 300 }).openPopup();
+    // Bind popup once — Leaflet handles open/close toggle on click automatically
+    marker.bindPopup(buildPopup(court, accessType, website, note), { maxWidth: 300 });
 
-      // If no good name yet, fetch one in background and refresh popup
-      if (court.needsName && !court.resolvedName) {
-        const geo = await reverseGeocode(court.lat, court.lon);
-        if (geo) {
-          court.resolvedName = geo;
-          if (marker.isPopupOpen()) {
+    // On click: reverse-geocode unnamed courts and refresh popup content if needed
+    if (court.needsName) {
+      marker.on('click', async () => {
+        if (!court.resolvedName) {
+          const geo = await reverseGeocode(court.lat, court.lon);
+          if (geo) {
+            court.resolvedName = geo;
             marker.setPopupContent(buildPopup(court, accessType, website, note));
           }
         }
-      }
-    });
+      });
+    }
 
     // Double click → open website
     const link = website || tags.website;
@@ -1652,9 +1652,7 @@ function buildCourts(elements) {
       address:    entry.address    || null,
     };
     const marker = L.marker([entry.lat, entry.lon], { icon: makeRacketIcon(accessType, entry.sport) });
-    marker.on('click', () => {
-      marker.bindPopup(buildPopup(court, accessType, entry.website, entry.note), { maxWidth: 300 }).openPopup();
-    });
+    marker.bindPopup(buildPopup(court, accessType, entry.website, entry.note), { maxWidth: 300 });
     if (entry.website) {
       marker.on('dblclick', (e) => { L.DomEvent.stopPropagation(e); window.open(entry.website, '_blank'); });
     }
