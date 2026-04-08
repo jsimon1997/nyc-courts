@@ -1263,7 +1263,7 @@ function clusterCourts(elements) {
 // REVERSE GEOCODING — lazy, cached, rate-limited
 // ═══════════════════════════════════════════════════════════════════
 
-const geocodeCache = new Map();
+const geocodeCache = new Map(); // key → { name, address }
 
 async function reverseGeocode(lat, lon) {
   const key = `${lat.toFixed(4)},${lon.toFixed(4)}`;
@@ -1275,18 +1275,24 @@ async function reverseGeocode(lat, lon) {
       { headers: { 'Accept': 'application/json' } }
     );
     const d = await resp.json();
-    // Best name candidates in priority order
-    const name =
-      d.name ||
-      d.address?.park ||
-      d.address?.leisure ||
-      d.address?.amenity ||
-      d.address?.building ||
-      (d.address?.road ? d.address.road : null);
-    geocodeCache.set(key, name || null);
-    return name || null;
+    const a = d.address || {};
+    // Name: best candidate in priority order
+    const name = d.name || a.park || a.leisure || a.amenity || a.building || a.road || null;
+    // Street address
+    const addrParts = [];
+    if (a.house_number && a.road) addrParts.push(`${a.house_number} ${a.road}`);
+    else if (a.road) addrParts.push(a.road);
+    const city = a.city || a.town || a.suburb || null;
+    if (city) addrParts.push(city);
+    const state = a.state === 'New York' ? 'NY' : a.state === 'New Jersey' ? 'NJ' : (a.state || null);
+    if (state) addrParts.push(state);
+    if (a.postcode) addrParts.push(a.postcode);
+    const result = { name: name || null, address: addrParts.length ? addrParts.join(', ') : null };
+    geocodeCache.set(key, result);
+    return result;
   } catch {
-    return null;
+    geocodeCache.set(key, { name: null, address: null });
+    return { name: null, address: null };
   }
 }
 
@@ -1348,10 +1354,13 @@ function buildPopup(court, accessType, website, note, nameOverride) {
   const dotStroke = lightFills.has(accessType) ? ';-webkit-text-stroke:.4px #3C474B' : '';
   const accessHtml = `<div class="popup-access" style="margin-bottom:10px"><span style="color:${dotColor}${dotStroke}">●</span> ${ACCESS_LABEL[accessType]}</div>`;
 
-  // Info rows: courts count, hours, phone, booking
+  // Info rows: courts count, address, hours, phone, booking
   const infoRows = [];
   const courtsNum = court.courts || (count > 1 ? count : null);
   if (courtsNum)      infoRows.push(`<div class="popup-info-row"><span class="popup-info-icon">🎾</span><span>${courtsNum} courts</span></div>`);
+
+  const address = court.address || court.resolvedAddress || null;
+  if (address)        infoRows.push(`<div class="popup-info-row"><span class="popup-info-icon">📍</span><span>${address}</span></div>`);
 
   const hours = court.hours || null;
   if (hours)          infoRows.push(`<div class="popup-info-row"><span class="popup-info-icon">🕐</span><span>${hours}</span></div>`);
@@ -1600,24 +1609,24 @@ function buildCourts(elements) {
     court.phone       = ov?.phone       || tags.phone || null;
     court.bookingUrl  = ov?.bookingUrl  || null;
     court.bookingApp  = ov?.bookingApp  || null;
+    court.address     = ov?.address     || null;
 
     const marker = L.marker([lat, lon], { icon: makeRacketIcon(accessType, sport) });
 
     // Bind popup once — Leaflet handles open/close toggle on click automatically
     marker.bindPopup(buildPopup(court, accessType, website, note), { maxWidth: 300 });
 
-    // On click: reverse-geocode unnamed courts and refresh popup content if needed
-    if (court.needsName) {
-      marker.on('click', async () => {
-        if (!court.resolvedName) {
-          const geo = await reverseGeocode(court.lat, court.lon);
-          if (geo) {
-            court.resolvedName = geo;
-            marker.setPopupContent(buildPopup(court, accessType, website, note));
-          }
-        }
-      });
-    }
+    // On click: reverse-geocode name (unnamed courts) and address (all courts) on first click
+    marker.on('click', async () => {
+      const needsName    = court.needsName && !court.resolvedName;
+      const needsAddress = !court.address  && !court.resolvedAddress;
+      if (!needsName && !needsAddress) return;
+      const geo = await reverseGeocode(court.lat, court.lon);
+      let updated = false;
+      if (needsName    && geo.name)    { court.resolvedName    = geo.name;    updated = true; }
+      if (needsAddress && geo.address) { court.resolvedAddress = geo.address; updated = true; }
+      if (updated) marker.setPopupContent(buildPopup(court, accessType, website, note));
+    });
 
     // Double click → open website
     const link = website || tags.website;
