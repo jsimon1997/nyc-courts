@@ -417,15 +417,7 @@
                       },
                       {
                           "match":  "court 16",
-                          "access":  "private",
-                          "indoor":  true,
-                          "website":  "https://court16.com",
-                          "hours":  "Mon-Thu 8am-10pm, Fri 8am-9pm, Sat-Sun 9am-7:30pm",
-                          "phone":  "(718) 875-5550",
-                          "bookingUrl":  "https://court16.com",
-                          "bookingApp":  "Court 16 app / Mindbody",
-                          "note":  "2 NYC locations (FiDi + Brooklyn City Point). Indoor cushioned courts. Membership enrollment required.",
-                          "address":  "13-06 Queens Plaza S, Long Island City, NY 11101, USA"
+                          "remove":  true
                       },
                       {
                           "match":  "alley pond tennis",
