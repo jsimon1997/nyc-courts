@@ -388,16 +388,54 @@
       <div id="address-status"></div>
     </div>
 
-    <div class="section-label">Sport</div>
-    <div class="filter-row">
-      <input type="checkbox" id="f-tennis" checked>
-      <label for="f-tennis"><span id="legend-tennis"></span>Tennis</label>
-    </div>
-    <div class="filter-row">
-      <input type="checkbox" id="f-padel" checked>
-      <label for="f-padel"><span id="legend-padel"></span>Padel</label>
+    <!-- Sport + Location side by side -->
+    <div style="display:flex;gap:0">
+      <div style="flex:1">
+        <div class="section-label">Sport</div>
+        <div class="filter-row">
+          <input type="checkbox" id="f-tennis" checked>
+          <label for="f-tennis"><span id="legend-tennis"></span>Tennis</label>
+        </div>
+        <div class="filter-row">
+          <input type="checkbox" id="f-padel" checked>
+          <label for="f-padel"><span id="legend-padel"></span>Padel</label>
+        </div>
+      </div>
+      <div style="flex:1">
+        <div class="section-label">Location</div>
+        <div class="filter-row">
+          <input type="checkbox" id="f-outdoor" checked>
+          <label for="f-outdoor"><span id="legend-outdoor"></span>Outdoor</label>
+        </div>
+        <div class="filter-row">
+          <input type="checkbox" id="f-indoor" checked>
+          <label for="f-indoor"><span id="legend-indoor"></span>Indoor</label>
+        </div>
+      </div>
     </div>
 
+    <!-- Surface in 2x2 grid -->
+    <div class="section-label">Surface</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 8px">
+      <div class="filter-row">
+        <input type="checkbox" id="f-hard" checked>
+        <label for="f-hard"><span id="legend-hard"></span>Hard</label>
+      </div>
+      <div class="filter-row">
+        <input type="checkbox" id="f-clay" checked>
+        <label for="f-clay"><span id="legend-clay"></span>Clay</label>
+      </div>
+      <div class="filter-row">
+        <input type="checkbox" id="f-grass" checked>
+        <label for="f-grass"><span id="legend-grass"></span>Grass</label>
+      </div>
+      <div class="filter-row">
+        <input type="checkbox" id="f-surface-other" checked>
+        <label for="f-surface-other"><span id="legend-other"></span>Unknown</label>
+      </div>
+    </div>
+
+    <!-- Access -->
     <div class="section-label">Access</div>
     <div class="filter-row">
       <input type="checkbox" id="f-public" checked>
@@ -426,34 +464,6 @@
     <div class="filter-row">
       <input type="checkbox" id="f-residential" checked>
       <label for="f-residential">Private residential building</label>
-    </div>
-
-    <div class="section-label">Surface</div>
-    <div class="filter-row">
-      <input type="checkbox" id="f-hard" checked>
-      <label for="f-hard"><span id="legend-hard"></span>Hard</label>
-    </div>
-    <div class="filter-row">
-      <input type="checkbox" id="f-clay" checked>
-      <label for="f-clay"><span id="legend-clay"></span>Clay</label>
-    </div>
-    <div class="filter-row">
-      <input type="checkbox" id="f-grass" checked>
-      <label for="f-grass"><span id="legend-grass"></span>Grass</label>
-    </div>
-    <div class="filter-row">
-      <input type="checkbox" id="f-surface-other" checked>
-      <label for="f-surface-other"><span id="legend-other"></span>Other / Unknown</label>
-    </div>
-
-    <div class="section-label">Location</div>
-    <div class="filter-row">
-      <input type="checkbox" id="f-outdoor" checked>
-      <label for="f-outdoor"><span id="legend-outdoor"></span>Outdoor</label>
-    </div>
-    <div class="filter-row">
-      <input type="checkbox" id="f-indoor" checked>
-      <label for="f-indoor"><span id="legend-indoor"></span>Indoor</label>
     </div>
 
     <div class="divider"></div>
