@@ -302,6 +302,50 @@
     }
     .leaflet-control-attribution a { color: #bbb !important; }
 
+    /* ── Mobile bottom sheet ───────────────────────────────── */
+    #panel-drag-handle { display: none; }
+
+    @media (max-width: 600px) {
+      #panel {
+        top: auto !important;
+        left: 0 !important;
+        bottom: 0;
+        right: 0;
+        width: 100% !important;
+        border-radius: 20px 20px 0 0;
+        max-height: 85vh;
+        transform: translateY(calc(100% - 80px));
+        transition: transform .3s cubic-bezier(.25,.8,.25,1);
+      }
+      #panel.mob-open {
+        transform: translateY(0);
+      }
+      #panel-drag-handle {
+        display: flex;
+        justify-content: center;
+        padding: 10px 0 6px;
+        background: #162521;
+        border-radius: 20px 20px 0 0;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+      #panel-drag-handle::before {
+        content: '';
+        display: block;
+        width: 32px; height: 4px;
+        background: rgba(255,255,255,.25);
+        border-radius: 2px;
+      }
+      #panel-header {
+        border-radius: 0 !important;
+        cursor: pointer;
+        padding-top: 10px !important;
+      }
+      #panel-chevron { display: block !important; }
+      #panel.mob-open #panel-chevron { transform: rotate(180deg); transition: transform .3s; }
+      #zoom-controls { bottom: 96px; }
+    }
+
     /* ── Racket markers ─────────────────────────────────────── */
     .racket-icon {
       background: none !important;
@@ -355,9 +399,15 @@
 
 <!-- Side panel -->
 <div id="panel">
+  <div id="panel-drag-handle"></div>
   <div id="panel-header">
-    <h2>NYC Courts</h2>
-    <p>Manhattan · Brooklyn · Queens · Bronx</p>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div>
+        <h2>NYC Courts</h2>
+        <p>Manhattan · Brooklyn · Queens · Bronx</p>
+      </div>
+      <span id="panel-chevron" style="display:none;color:rgba(255,255,255,.55);font-size:22px;line-height:1;margin-top:1px;flex-shrink:0">▾</span>
+    </div>
   </div>
   <div id="panel-body">
 
@@ -2000,6 +2050,16 @@ function initLegend() {
   document.getElementById('legend-indoor').outerHTML  = makeLegendSVG(blue,                  'tennis', true);
 }
 
+function initMobilePanel() {
+  if (window.innerWidth > 600) return;
+  const panel  = document.getElementById('panel');
+  const handle = document.getElementById('panel-drag-handle');
+  const header = document.getElementById('panel-header');
+  function toggle() { panel.classList.toggle('mob-open'); }
+  handle.addEventListener('click', toggle);
+  header.addEventListener('click', toggle);
+}
+
 function initAddressAutocomplete() {
   const input    = document.getElementById('address-input');
   const results  = document.getElementById('address-results');
@@ -2164,6 +2224,7 @@ async function initMap() {
     initAddressAutocomplete();
     initSearch();
     initLegend();
+    initMobilePanel();
     updateMap();
   } catch (err) {
     document.getElementById('loading').innerHTML =
