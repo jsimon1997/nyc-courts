@@ -1854,7 +1854,7 @@ function _racketSVG(fill, strings, stroke, sport, w, h) {
 function makeRacketIcon(surface, sport, indoor) {
   const fill    = SURFACE_COLOR[surface] || SURFACE_COLOR.other;
   const stroke  = MARKER_STROKE;
-  const whiteStr = surface === 'hard' || surface === 'clay';
+  const whiteStr = surface === 'hard' || surface === 'clay' || surface === 'grass';
   const strings  = whiteStr ? 'rgba(255,255,255,0.9)' : stroke;
   const svg = _racketSVG(fill, strings, stroke, sport, 13, 20);
 
@@ -2032,7 +2032,7 @@ async function fetchNominatimSuggestions(query) {
 
 function makeLegendSVG(fill, sport, indoor) {
   const stroke   = '#162521';
-  const whiteStr = fill === SURFACE_COLOR.hard || fill === SURFACE_COLOR.clay;
+  const whiteStr = fill === SURFACE_COLOR.hard || fill === SURFACE_COLOR.clay || fill === SURFACE_COLOR.grass;
   const strings  = whiteStr ? 'rgba(255,255,255,0.9)' : stroke;
   const racket   = _racketSVG(fill, strings, stroke, sport, 20, 29);
   if (indoor) {
