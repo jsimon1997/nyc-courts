@@ -420,30 +420,34 @@
 
     <div class="section-label">Surface</div>
     <div class="filter-row">
-      <input type="checkbox" id="f-clay" checked>
-      <label for="f-clay"><div class="swatch" style="background:#c2410c"></div>Clay</label>
+      <input type="checkbox" id="f-hard" checked>
+      <label for="f-hard"><div class="swatch" style="background:#3A7FC1"></div>Hard (US Open)</label>
     </div>
     <div class="filter-row">
-      <input type="checkbox" id="f-hard" checked>
-      <label for="f-hard"><div class="swatch" style="background:#64748b"></div>Hard</label>
+      <input type="checkbox" id="f-clay" checked>
+      <label for="f-clay"><div class="swatch" style="background:#C2522B"></div>Clay (Roland Garros)</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-grass" checked>
-      <label for="f-grass"><div class="swatch" style="background:#16a34a"></div>Grass</label>
+      <label for="f-grass"><div class="swatch" style="background:#3E7A3C"></div>Grass (Wimbledon)</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-surface-other" checked>
-      <label for="f-surface-other"><div class="swatch" style="background:#cbd5e1"></div>Other / Unknown</label>
+      <label for="f-surface-other"><div class="swatch" style="background:#9EAAB4"></div>Other / Unknown</label>
     </div>
 
     <div class="section-label">Location</div>
     <div class="filter-row">
       <input type="checkbox" id="f-outdoor" checked>
-      <label for="f-outdoor"><div class="swatch" style="background:#0d9488"></div>Outdoor</label>
+      <label for="f-outdoor"><div class="swatch" style="background:#9EAAB4"></div>Outdoor</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-indoor" checked>
-      <label for="f-indoor"><div class="swatch" style="background:#7c3aed"></div>Indoor</label>
+      <label for="f-indoor">
+        <div class="swatch" style="background:#9EAAB4;position:relative">
+          <div style="position:absolute;top:2px;left:2px;right:2px;height:2px;background:#162521;border-radius:1px"></div>
+        </div>Indoor (line above icon)
+      </label>
     </div>
 
     <div class="divider"></div>
@@ -1115,7 +1119,13 @@ const ACCESS_COLOR = {
   unknown:     '#C0E0DE',  // Frozen Water
   residential: '#3C474B',  // Iron Grey
 };
-const SPORT_STROKE = { tennis:'#162521', padel:'#2a5a82' };
+const SURFACE_COLOR = {
+  hard:  '#3A7FC1',  // US Open blue
+  clay:  '#C2522B',  // French Open red
+  grass: '#3E7A3C',  // Wimbledon green
+  other: '#9EAAB4',  // Neutral grey
+};
+const MARKER_STROKE = '#162521';
 
 // ── Address Autocomplete ──────────────────────────────────────────────
 // Google Places REST API (no SDK needed). Paste your key here.
@@ -1625,7 +1635,7 @@ function buildCourts(elements) {
     court.bookingApp  = ov?.bookingApp  || null;
     court.address     = ov?.address     || null;
 
-    const marker = L.marker([lat, lon], { icon: makeRacketIcon(accessType, sport) });
+    const marker = L.marker([lat, lon], { icon: makeRacketIcon(court.surface, sport, court.indoor) });
 
     // Bind popup once — Leaflet handles open/close toggle on click automatically
     marker.bindPopup(buildPopup(court, accessType, website, note), { maxWidth: 300 });
@@ -1728,13 +1738,12 @@ out center tags;`.trim();
 // RACKET ICON
 // ═══════════════════════════════════════════════════════════════════
 
-function makeRacketIcon(accessType, sport) {
-  const fill   = ACCESS_COLOR[accessType];
-  const stroke = SPORT_STROKE[sport];
+function makeRacketIcon(surface, sport, indoor) {
+  const fill   = SURFACE_COLOR[surface] || SURFACE_COLOR.other;
+  const stroke = MARKER_STROKE;
 
   let svg;
   if (sport === 'padel') {
-    // Padel racket — solid rounded-rectangle head (no strings, like a real padel paddle)
     svg = `<svg width="13" height="19" viewBox="0 0 18 26" xmlns="http://www.w3.org/2000/svg">
       <rect x="1" y="1" width="16" height="15" rx="3.5" fill="${fill}" stroke="${stroke}" stroke-width="1.6"/>
       <line x1="5"  y1="1.5" x2="5"  y2="15.5" stroke="${stroke}" stroke-width="0.7" opacity="0.35"/>
@@ -1746,7 +1755,6 @@ function makeRacketIcon(accessType, sport) {
       <rect x="7.5" y="16" width="3" height="9" rx="1.5" fill="${fill}" stroke="${stroke}" stroke-width="1.6"/>
     </svg>`;
   } else {
-    // Tennis racket — oval head with string grid
     svg = `<svg width="13" height="19" viewBox="0 0 18 26" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="9" cy="9" rx="8" ry="8" fill="${fill}" stroke="${stroke}" stroke-width="1.6"/>
       <line x1="2"   y1="6"  x2="16"  y2="6"  stroke="${stroke}" stroke-width="0.7" opacity="0.35"/>
@@ -1759,12 +1767,16 @@ function makeRacketIcon(accessType, sport) {
     </svg>`;
   }
 
+  const indoorLine = indoor
+    ? `<div style="width:13px;height:2px;background:${stroke};border-radius:1px;margin-bottom:2px"></div>`
+    : '';
+
   return L.divIcon({
-    html:        svg,
+    html:        `<div style="display:flex;flex-direction:column;align-items:center">${indoorLine}${svg}</div>`,
     className:   'racket-icon',
-    iconSize:    [13, 19],
-    iconAnchor:  [6, 19],
-    popupAnchor: [0, -21],
+    iconSize:    [13, indoor ? 23 : 19],
+    iconAnchor:  [6, indoor ? 23 : 19],
+    popupAnchor: [0, indoor ? -25 : -21],
   });
 }
 
