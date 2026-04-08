@@ -31,6 +31,33 @@
     { "match": "sessanta", "access": "residential", "website": "https://sessanta60.com/the-amenities-sessanta/", "note": "60 W 60th St. Private rooftop tennis court. Residents only." },
     { "match": "hunter college brookdale", "remove": true },
     { "match": "dwight school", "remove": true },
+    { "match": "new york athletic club", "remove": true },
+    {
+      "match": "stadium tennis center", "access": "reservable", "indoor": true,
+      "website": "https://www.stadiumtenniscenter.com",
+      "hours": "Daily 6am–11pm",
+      "phone": "(718) 328-7070",
+      "courts": 12,
+      "note": "725 Gateway Blvd, Hunts Point, Bronx. 12 indoor hard courts. Book by the hour — no membership required."
+    },
+    {
+      "match": "parkwood indoor tennis", "access": "reservable", "indoor": true,
+      "website": "https://www.parkwoodindoortennis.com",
+      "courts": 8,
+      "note": "65-65 Fitchett St, Rego Park, Queens. 8 indoor hard courts. Book by the hour."
+    },
+    {
+      "match": "sound shore", "access": "reservable", "indoor": true,
+      "website": "https://www.soundshoretennis.com",
+      "courts": 8,
+      "note": "2850 E Main St, Mohegan Lake, Westchester. 8 indoor hard courts. No membership required."
+    },
+    {
+      "match": "yonkers tennis center", "access": "reservable", "indoor": true,
+      "website": "https://www.yonkerstenniscenter.com",
+      "courts": 8,
+      "note": "Yonkers, Westchester. 8 indoor hard courts. Book by the hour."
+    },
     {
       "match": "west side tennis club", "access": "private",
       "website": "https://thewestsidetennisclub.com",
@@ -59,6 +86,7 @@
       "hours": "Mon–Fri 5:30am–midnight, Sat–Sun 7am–midnight",
       "phone": "(212) 594-0554",
       "bookingUrl": "https://advantagetennisclubs.com/book-courts/",
+      "courts": 5,
       "note": "450 W 43rd St (btw 9th–10th Ave). 5 indoor hard courts. Members up to 14 days ahead; non-members within 24 hrs (~$250/hr)."
     },
     {
@@ -67,6 +95,7 @@
       "hours": "Mon–Sun 7am–11pm",
       "phone": "(212) 935-0250",
       "bookingUrl": "https://advantagetennisclubs.com/book-courts/",
+      "courts": 12,
       "note": "281 Main St, Roosevelt Island. 12 indoor Har-Tru clay courts. Membership required."
     },
     {
@@ -111,12 +140,13 @@
     },
     {
       "match": "vanderbilt tennis", "access": "reservable", "indoor": true,
-      "website": "https://vanderbilttennisclub.com",
+      "website": "https://vanderbilttennisclub.com/online_reservations/",
       "hours": "Mon–Fri 6am–1am, Sat–Sun 7am–11pm",
       "phone": "(212) 599-6500",
-      "bookingUrl": "https://vanderbilttennisclub.com",
+      "bookingUrl": "https://vanderbilttennisclub.com/online_reservations/",
       "bookingApp": "Mindbody",
-      "note": "15 Vanderbilt Ave (inside Grand Central Terminal). Indoor hard courts. No membership required. Book by the hour."
+      "courts": 8,
+      "note": "15 Vanderbilt Ave (inside Grand Central Terminal). 8 indoor hard courts. No membership required. Book by the hour."
     },
     {
       "match": "sutton east", "access": "reservable", "indoor": true,
@@ -124,6 +154,7 @@
       "hours": "Mon–Sun 6am–11pm",
       "phone": "(212) 751-3452",
       "bookingUrl": "https://suttoneasttennis.com/courttime/",
+      "courts": 8,
       "note": "488 E 60th St (under the Queensboro Bridge). 8 indoor red clay courts. No membership required."
     },
     {
@@ -134,6 +165,7 @@
       "phone": "(718) 760-6200",
       "bookingUrl": "https://www.ntc.usta.com/book-a-court",
       "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/USTA_Billie_Jean_King_National_Tennis_Center.jpg/800px-USTA_Billie_Jean_King_National_Tennis_Center.jpg",
+      "courts": 42,
       "note": "Flushing Meadows–Corona Park, Queens. 33 outdoor + 9 indoor hard courts. Home of the US Open. Book up to 48 hrs ahead."
     },
     {
@@ -144,6 +176,7 @@
       "phone": "(718) 760-6200",
       "bookingUrl": "https://www.ntc.usta.com/book-a-court",
       "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/USTA_Billie_Jean_King_National_Tennis_Center.jpg/800px-USTA_Billie_Jean_King_National_Tennis_Center.jpg",
+      "courts": 42,
       "note": "Flushing Meadows–Corona Park, Queens. 33 outdoor + 9 indoor hard courts. Home of the US Open. Book up to 48 hrs ahead."
     },
     {
@@ -153,6 +186,7 @@
       "phone": "(212) 427-6150",
       "bookingUrl": "https://www.sportimeny.com/manhattan",
       "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Randalls_Island_tennis_courts_jeh.jpg/1280px-Randalls_Island_tennis_courts_jeh.jpg",
+      "courts": 30,
       "note": "Randall's Island. Home of John McEnroe Tennis Academy. 30+ courts. Non-members can book at sportimeny.com."
     },
     {
@@ -167,6 +201,7 @@
       "phone": "(212) 427-6150",
       "bookingUrl": "https://www.sportimeny.com/manhattan",
       "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Randalls_Island_tennis_courts_jeh.jpg/1280px-Randalls_Island_tennis_courts_jeh.jpg",
+      "courts": 30,
       "note": "Randall's Island. Home of John McEnroe Tennis Academy. 30+ courts. Non-members can book at sportimeny.com."
     },
     {
@@ -188,6 +223,7 @@
       "phone": "(212) 280-0205",
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Central_Park_-_Tennis_Courts_%288038834490%29.jpg/1280px-Central_Park_-_Tennis_Courts_%288038834490%29.jpg",
+      "courts": 30,
       "note": "West Drive & W 96th St, Central Park. 26 clay + 4 hard courts. NYC Parks permit required: $100/season (adult), $20 (senior 62+), $10 (youth). Single play $15."
     },
     {
@@ -204,6 +240,7 @@
       "phone": "(718) 769-0001",
       "bookingUrl": "https://matchpoint.nyc",
       "bookingApp": "MatchPoint NYC app",
+      "courts": 9,
       "note": "2781 Shell Rd, Brooklyn. 9 indoor hard courts. Membership-based; non-members can book courts."
     },
     {
@@ -212,7 +249,8 @@
       "hours": "Mon–Sun 6am–11pm",
       "phone": "(212) 987-0301",
       "bookingUrl": "https://yorkvilletennisclub.com/courttime/",
-      "note": "1725 York Ave (3rd floor), UES. 2 indoor hard courts. No membership required."
+      "courts": 2,
+      "note": "1725 York Ave (3rd floor), UES. 2 indoor hard courts. No membership required. To reserve hourly court time, please call 212-987-0301."
     },
     {
       "match": "court 16", "access": "private", "indoor": true,
@@ -235,6 +273,7 @@
       "hours": "Mon–Fri 7am–11:30pm, Sat–Sun 8am–10pm",
       "phone": "(212) 851-7100",
       "bookingUrl": "https://perec.columbia.edu/content/dick-savitt-tennis-center",
+      "courts": 12,
       "note": "Baker Athletics Complex, 603 W 218th St. Columbia University. 6 indoor + 6 outdoor hard courts. Open to the public."
     },
     {
@@ -249,6 +288,7 @@
       "hours": "Apr–Nov: 7am–8pm daily (seasonal)",
       "phone": "(212) 978-0277",
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
+      "courts": 10,
       "note": "Riverside Park at W 96th St. 10 outdoor red clay courts. NYC Parks permit required: $100/season or $15/day. Managed by RCTA."
     },
     {
@@ -256,6 +296,7 @@
       "website": "https://119ta.tennisgroups.us",
       "hours": "Apr–Nov: 7am–8pm daily (seasonal)",
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
+      "courts": 10,
       "note": "10 outdoor hard courts in Riverside Park at 119th St. NYC Parks permit required: $100/season or $15/day."
     },
     {
@@ -270,6 +311,7 @@
       "hours": "Apr–Nov: Mon–Fri 6pm–8pm, Sat–Sun 7am–8pm",
       "phone": "(212) 737-0185",
       "bookingUrl": "https://eastsidetennis.org",
+      "courts": 4,
       "note": "231 E 75th St. 4 outdoor hard courts + 2 quickstart + 2 pickleball. Season Apr 1–Nov 16. Book by the hour at eastsidetennis.org — no annual permit needed."
     },
     {
@@ -298,6 +340,7 @@
       "hours": "Apr–Nov: 8am–dusk (no lights)",
       "phone": "(212) 304-2322",
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
+      "courts": 10,
       "note": "Fort Washington Park, Washington Heights. 10 outdoor hard courts. NYC Parks permit required: $100/season or $15/day."
     },
     {
@@ -309,6 +352,7 @@
     {
       "match": "inwood hill park tennis", "access": "public",
       "website": "https://www.nycgovparks.org/parks/inwood-hill-park/facilities/tennis",
+      "courts": 9,
       "note": "Inwood Hill Park. 9 outdoor hard courts. Free, first come first served — unstaffed."
     },
     {
@@ -328,6 +372,7 @@
       "hours": "Mon–Fri 7am–11:30pm, Sat–Sun 8am–10pm",
       "phone": "(212) 851-7100",
       "bookingUrl": "https://perec.columbia.edu/content/dick-savitt-tennis-center",
+      "courts": 12,
       "note": "603 W 218th St, Inwood (Columbia University). 6 outdoor + 6 indoor hard courts. Book by the hour — open to public."
     }
   ],
@@ -445,6 +490,7 @@
       "lat": 40.7102, "lon": -73.9833,
       "name": "Pier 42 Tennis Courts",
       "sport": "tennis", "surface": "hard", "accessType": "public",
+      "courts": 4,
       "hours": "Dawn to dusk (no lights)",
       "bookingUrl": null,
       "note": "Pier 42, East River waterfront, Lower East Side. 4 free hard courts. First come, first served. No permit required.",
@@ -454,6 +500,7 @@
       "lat": 40.7155, "lon": -73.9768,
       "name": "Brian Watkins Tennis Center",
       "sport": "tennis", "surface": "hard", "accessType": "public",
+      "courts": 12,
       "hours": "Dawn to dusk (seasonal lighting)",
       "bookingUrl": "https://www.nycgovparks.org/parks/east-river-park/facilities/tennis",
       "note": "East River Park, just north of Williamsburg Bridge. 12 hard courts. First come, first served. No permit required.",
@@ -463,6 +510,7 @@
       "lat": 40.8267, "lon": -73.9429,
       "name": "Frederick Johnson Playground",
       "sport": "tennis", "surface": "hard", "accessType": "permit",
+      "courts": 8,
       "hours": "Apr–Nov: dawn to dusk",
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "note": "W 151st St & Adam Clayton Powell Jr Blvd, Harlem. 8 hard courts. NYC Parks permit required: $100/season or $15/day.",
@@ -472,6 +520,7 @@
       "lat": 40.8243, "lon": -73.9443,
       "name": "Jackie Robinson Park",
       "sport": "tennis", "surface": "hard", "accessType": "permit",
+      "courts": 2,
       "hours": "Apr–Nov: dawn to dusk",
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "note": "Bradhurst Ave & W 147th St, Hamilton Heights. 2 hard courts. NYC Parks permit required: $100/season or $15/day.",
@@ -481,6 +530,7 @@
       "lat": 40.7572, "lon": -73.9519,
       "name": "Queensboro Oval Tennis Courts",
       "sport": "tennis", "surface": "clay", "accessType": "permit",
+      "courts": 6,
       "hours": "Apr–Nov: 7am–8pm daily (seasonal)",
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "note": "York Ave & E 59th–60th St, Manhattan. 6 clay courts. NYC Parks permit required: $100/season or $15/day.",
@@ -490,6 +540,7 @@
       "lat": 40.6900, "lon": -73.7736,
       "name": "Roy Wilkins Recreation Center",
       "sport": "tennis", "surface": "hard", "accessType": "permit",
+      "courts": 4,
       "hours": "Apr–Nov: dawn to dusk",
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "note": "177-00 Baisley Blvd, St. Albans, Queens. 4 outdoor hard courts. NYC Parks permit required: $100/season or $15/day.",
@@ -499,6 +550,7 @@
       "lat": 40.6247, "lon": -74.0290,
       "name": "Shore Park Tennis Courts",
       "sport": "tennis", "surface": "hard", "accessType": "permit",
+      "courts": 4,
       "hours": "Apr–Nov: dawn to dusk",
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "note": "Shore Road & 95th St, Bay Ridge, Brooklyn. 4 hard courts. NYC Parks permit required: $100/season or $15/day.",
@@ -508,6 +560,7 @@
       "lat": 40.5985, "lon": -73.9400,
       "name": "Marine Park Tennis Courts",
       "sport": "tennis", "surface": "hard", "accessType": "permit",
+      "courts": 15,
       "hours": "Apr–Nov: dawn to dusk",
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "note": "Fillmore Ave & E 32nd St, Marine Park, Brooklyn. 15 hard courts. NYC Parks permit required: $100/season or $15/day.",
@@ -517,10 +570,148 @@
       "lat": 40.7706, "lon": -73.9493,
       "name": "John Jay Park Tennis Court",
       "sport": "tennis", "surface": "hard", "accessType": "public",
+      "courts": 1,
       "hours": "Dawn to dusk",
       "bookingUrl": null,
       "note": "FDR Dr & E 76th St, Manhattan. 1 outdoor hard court. First come, first served. No permit required.",
       "website": "https://www.nycgovparks.org/parks/john-jay-park/facilities/tennis"
+    },
+    {
+      "lat": 40.7190, "lon": -73.8784,
+      "name": "Juniper Valley Park Tennis",
+      "address": "Juniper Valley Park, Middle Village, Queens",
+      "sport": "tennis", "surface": "hard", "accessType": "permit",
+      "courts": 12,
+      "hours": "Apr–Nov: dawn to dusk",
+      "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
+      "note": "Juniper Valley Park, Middle Village, Queens. 12 outdoor hard courts. NYC Parks permit required: $100/season or $15/day.",
+      "website": "https://www.nycgovparks.org/parks/juniper-valley-park/facilities/tennis"
+    },
+    {
+      "lat": 40.7392, "lon": -73.7858,
+      "name": "Cunningham Park Tennis Center",
+      "address": "Cunningham Park, Fresh Meadows, Queens",
+      "sport": "tennis", "surface": "hard", "accessType": "permit",
+      "courts": 16,
+      "hours": "Apr–Nov: 7am–9pm daily",
+      "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
+      "note": "Cunningham Park, Fresh Meadows, Queens. 16 outdoor hard courts. NYC Parks permit required.",
+      "website": "https://www.nycgovparks.org/parks/cunningham-park/facilities/tennis"
+    },
+    {
+      "lat": 40.7756, "lon": -73.9269,
+      "name": "Astoria Park Tennis Courts",
+      "address": "Astoria Park, Queens",
+      "sport": "tennis", "surface": "hard", "accessType": "public",
+      "courts": 4,
+      "hours": "Dawn to dusk",
+      "note": "Astoria Park, Queens. 4 free outdoor hard courts. First come, first served.",
+      "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis"
+    },
+    {
+      "lat": 40.6987, "lon": -73.8518,
+      "name": "Forest Park Tennis Courts",
+      "address": "Forest Park, Woodhaven, Queens",
+      "sport": "tennis", "surface": "hard", "accessType": "permit",
+      "courts": 8,
+      "hours": "Apr–Nov: dawn to dusk",
+      "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
+      "note": "Forest Park, Woodhaven, Queens. 8 outdoor hard courts. NYC Parks permit required.",
+      "website": "https://www.nycgovparks.org/parks/forest-park/facilities/tennis"
+    },
+    {
+      "lat": 40.8898, "lon": -73.8886,
+      "name": "Van Cortlandt Park Tennis Courts",
+      "address": "Van Cortlandt Park, Bronx",
+      "sport": "tennis", "surface": "hard", "accessType": "permit",
+      "courts": 8,
+      "hours": "Apr–Nov: dawn to dusk",
+      "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
+      "note": "Van Cortlandt Park, Bronx. 8 outdoor hard courts. NYC Parks permit required.",
+      "website": "https://www.nycgovparks.org/parks/van-cortlandt-park/facilities/tennis"
+    },
+    {
+      "lat": 40.8451, "lon": -73.8961,
+      "name": "Crotona Park Tennis Courts",
+      "address": "Crotona Park, Tremont, Bronx",
+      "sport": "tennis", "surface": "hard", "accessType": "permit",
+      "courts": 6,
+      "hours": "Apr–Nov: dawn to dusk",
+      "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
+      "note": "Crotona Park, Tremont, Bronx. 6 outdoor hard courts. NYC Parks permit required.",
+      "website": "https://www.nycgovparks.org/parks/crotona-park/facilities/tennis"
+    },
+    {
+      "lat": 40.8683, "lon": -73.8059,
+      "name": "Pelham Bay Park Tennis Courts",
+      "address": "Pelham Bay Park, Bronx",
+      "sport": "tennis", "surface": "hard", "accessType": "permit",
+      "courts": 6,
+      "hours": "Apr–Nov: dawn to dusk",
+      "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
+      "note": "Pelham Bay Park, Bronx. 6 outdoor hard courts. NYC Parks permit required.",
+      "website": "https://www.nycgovparks.org/parks/pelham-bay-park/facilities/tennis"
+    },
+    {
+      "lat": 40.8818, "lon": -73.8656,
+      "name": "Haffen Park Tennis Courts",
+      "address": "Haffen Park, Baychester, Bronx",
+      "sport": "tennis", "surface": "hard", "accessType": "public",
+      "courts": 4,
+      "hours": "Dawn to dusk",
+      "note": "Haffen Park, Baychester, Bronx. 4 free outdoor hard courts. First come, first served.",
+      "website": "https://www.nycgovparks.org/parks/haffen-park/facilities/tennis"
+    },
+    {
+      "lat": 40.6199, "lon": -74.0042,
+      "name": "Dyker Beach Park Tennis Courts",
+      "address": "Dyker Beach Park, Dyker Heights, Brooklyn",
+      "sport": "tennis", "surface": "hard", "accessType": "permit",
+      "courts": 6,
+      "hours": "Apr–Nov: dawn to dusk",
+      "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
+      "note": "Dyker Beach Park, Dyker Heights, Brooklyn. 6 outdoor hard courts. NYC Parks permit required.",
+      "website": "https://www.nycgovparks.org/parks/dyker-beach-park/facilities/tennis"
+    },
+    {
+      "lat": 40.6422, "lon": -73.9029,
+      "name": "Canarsie Park Tennis Courts",
+      "address": "Canarsie Park, Brooklyn",
+      "sport": "tennis", "surface": "hard", "accessType": "public",
+      "courts": 4,
+      "hours": "Dawn to dusk",
+      "note": "Canarsie Park, Brooklyn. 4 free outdoor hard courts. First come, first served.",
+      "website": "https://www.nycgovparks.org/parks/canarsie-park/facilities/tennis"
+    },
+    {
+      "lat": 40.6888, "lon": -73.9741,
+      "name": "South Oxford Park Tennis Courts",
+      "address": "South Oxford Park, Fort Greene, Brooklyn",
+      "sport": "tennis", "surface": "hard", "accessType": "public",
+      "courts": 2,
+      "hours": "Dawn to dusk",
+      "note": "South Oxford Park, Fort Greene, Brooklyn. 2 free outdoor hard courts. First come, first served.",
+      "website": "https://www.nycgovparks.org/parks/south-oxford-park/facilities/tennis"
+    },
+    {
+      "lat": 40.6940, "lon": -73.9768,
+      "name": "Commodore Barry Park Tennis Courts",
+      "address": "Commodore Barry Park, Fort Greene, Brooklyn",
+      "sport": "tennis", "surface": "hard", "accessType": "public",
+      "courts": 4,
+      "hours": "Dawn to dusk",
+      "note": "Commodore Barry Park, Fort Greene, Brooklyn. 4 free outdoor hard courts. First come, first served.",
+      "website": "https://www.nycgovparks.org/parks/commodore-barry-park/facilities/tennis"
+    },
+    {
+      "lat": 40.6638, "lon": -73.9107,
+      "name": "Betsy Head Park Tennis Courts",
+      "address": "Betsy Head Park, Brownsville, Brooklyn",
+      "sport": "tennis", "surface": "hard", "accessType": "public",
+      "courts": 4,
+      "hours": "Dawn to dusk",
+      "note": "Betsy Head Park, Brownsville, Brooklyn. 4 free outdoor hard courts. First come, first served.",
+      "website": "https://www.nycgovparks.org/parks/betsy-head-park/facilities/tennis"
     }
   ],
 
@@ -529,6 +720,7 @@
       "lat": 40.7559, "lon": -73.9650,
       "name": "Town Tennis Club",
       "sport": "tennis", "surface": "hard", "indoor": true,
+      "courts": 3,
       "hours": "Mon–Sun 7am–11pm (seasonal)",
       "phone": "(212) 752-2048",
       "note": "430 E 56th St between 1st & 2nd Ave. 3 indoor hard courts. Founded 1954. Membership only.",
@@ -538,6 +730,7 @@
       "lat": 40.7448, "lon": -73.9339,
       "name": "City View Racquet Club — Tennis",
       "sport": "tennis", "surface": "clay", "indoor": true,
+      "courts": 7,
       "hours": "Mon–Sun 6am–midnight",
       "phone": "(718) 389-6252",
       "bookingUrl": "https://book.cityviewracquet.com",
@@ -549,6 +742,7 @@
       "lat": 40.7444, "lon": -73.9343,
       "name": "City View Racquet Club — Padel",
       "sport": "padel", "surface": "hard", "indoor": true,
+      "courts": 3,
       "hours": "Mon–Sun 6am–midnight",
       "phone": "(718) 389-6252",
       "bookingUrl": "https://book.cityviewracquet.com",
@@ -560,6 +754,7 @@
       "lat": 40.7640, "lon": -73.9694,
       "name": "Reserve Padel — Upper East Side",
       "sport": "padel", "surface": "hard", "indoor": true,
+      "courts": 2,
       "hours": "Daily 7am–11pm",
       "phone": "(917) 599-1545",
       "bookingUrl": "https://reservepadeluppereastside.playbycourt.com",
@@ -572,6 +767,7 @@
       "name": "Reserve Padel — Hudson Yards",
       "sport": "padel", "surface": "hard", "indoor": false,
       "accessType": "reservable",
+      "courts": 3,
       "hours": "Daily 7am–11pm",
       "phone": "(917) 599-1545",
       "bookingUrl": "https://nyc.reservepadel.com",
@@ -584,6 +780,7 @@
       "name": "Padel& Greenpoint",
       "sport": "padel", "surface": "hard", "indoor": true,
       "accessType": "reservable",
+      "courts": 6,
       "hours": "Daily 7am–11:30pm",
       "phone": "(929) 255-5471",
       "bookingUrl": "https://playtomic.com/clubs/padel-greenpoint",
@@ -596,6 +793,7 @@
       "name": "Padel Haus — Williamsburg",
       "sport": "padel", "surface": "hard", "indoor": true,
       "accessType": "reservable",
+      "courts": 4,
       "hours": "Mon–Fri 7am–11pm, Sat–Sun 8am–10pm",
       "phone": "(917) 970-0036",
       "bookingUrl": "https://bookings.padel.haus",
@@ -608,12 +806,103 @@
       "name": "Padel Haus — DUMBO",
       "sport": "padel", "surface": "hard", "indoor": true,
       "accessType": "reservable",
+      "courts": 4,
       "hours": "Mon–Fri 7am–11pm, Sat–Sun 8am–10pm",
       "phone": "(917) 970-0036",
       "bookingUrl": "https://bookings.padel.haus",
       "photo": null,
       "note": "257 Water St, DUMBO, Brooklyn. Indoor padel courts. Drop-in & membership available.",
       "website": "https://www.padel.haus/dumbo"
+    },
+    {
+      "lat": 40.7448, "lon": -73.9454,
+      "name": "QUIK PARK Tennis Courts",
+      "address": "45-45 Center Blvd, Long Island City, Queens",
+      "sport": "tennis", "surface": "hard", "indoor": false,
+      "accessType": "reservable",
+      "courts": 2,
+      "hours": "Lighted — hours vary",
+      "note": "45-45 Center Blvd, Long Island City, Queens. 2 private outdoor lighted tennis courts.",
+      "website": null
+    },
+    {
+      "lat": 40.7131, "lon": -73.8341,
+      "name": "Parkwood Indoor Tennis",
+      "address": "65-65 Fitchett St, Rego Park, Queens",
+      "sport": "tennis", "surface": "hard", "indoor": true,
+      "accessType": "reservable",
+      "courts": 8,
+      "hours": "Daily — call for hours",
+      "phone": "(718) 459-5252",
+      "note": "65-65 Fitchett St, Rego Park, Queens. 8 indoor hard courts. Book by the hour.",
+      "website": "https://www.parkwoodindoortennis.com"
+    },
+    {
+      "lat": 40.7849, "lon": -73.7688,
+      "name": "Bay Terrace Indoor Tennis",
+      "address": "Bayside, Queens",
+      "sport": "tennis", "surface": "hard", "indoor": true,
+      "accessType": "reservable",
+      "courts": 6,
+      "hours": "Daily — call for hours",
+      "note": "Bay Terrace area, Bayside, Queens. 6 indoor courts.",
+      "website": "https://www.nycgovparks.org/parks/Q406/facilities/tennis"
+    },
+    {
+      "lat": 40.8080, "lon": -73.8959,
+      "name": "Stadium Tennis Center",
+      "address": "725 Gateway Blvd, Hunts Point, Bronx",
+      "sport": "tennis", "surface": "hard", "indoor": true,
+      "accessType": "reservable",
+      "courts": 12,
+      "hours": "Daily 6am–11pm",
+      "phone": "(718) 328-7070",
+      "note": "725 Gateway Blvd, Hunts Point, Bronx. 12 indoor hard courts. Book by the hour — no membership required.",
+      "website": "https://www.stadiumtenniscenter.com"
+    },
+    {
+      "lat": 41.3360, "lon": -73.8540,
+      "name": "Sound Shore Indoor Tennis",
+      "address": "2850 E Main St, Mohegan Lake, NY 10547",
+      "sport": "tennis", "surface": "hard", "indoor": true,
+      "accessType": "reservable",
+      "courts": 8,
+      "hours": "Mon–Fri 6am–11pm, Sat–Sun 7am–10pm",
+      "note": "Mohegan Lake, Westchester. 8 indoor hard courts. No membership required.",
+      "website": "https://www.soundshoretennis.com"
+    },
+    {
+      "lat": 40.9312, "lon": -73.8988,
+      "name": "Yonkers Tennis Center",
+      "address": "Yonkers, NY 10701",
+      "sport": "tennis", "surface": "hard", "indoor": true,
+      "accessType": "reservable",
+      "courts": 8,
+      "hours": "Mon–Fri 6am–11pm, Sat–Sun 7am–10pm",
+      "note": "Yonkers, Westchester. 8 indoor hard courts. Book by the hour.",
+      "website": "https://www.yonkerstenniscenter.com"
+    },
+    {
+      "lat": 40.8354, "lon": -74.0026,
+      "name": "Bergen County Tennis Center",
+      "address": "Overpeck County Park, Leonia, NJ 07605",
+      "sport": "tennis", "surface": "hard", "indoor": false,
+      "accessType": "reservable",
+      "courts": 12,
+      "hours": "Year-round",
+      "note": "Overpeck County Park, Leonia, NJ. 12 indoor/outdoor courts. County-run pay-to-play. No membership required.",
+      "website": "https://www.bergencountytennis.com"
+    },
+    {
+      "lat": 40.7481, "lon": -74.1718,
+      "name": "Althea Gibson Tennis Center",
+      "address": "Branch Brook Park, Newark, NJ 07104",
+      "sport": "tennis", "surface": "hard", "indoor": false,
+      "accessType": "public",
+      "courts": 33,
+      "hours": "Daily 8am–dusk",
+      "note": "Branch Brook Park, Newark NJ. 33 outdoor DecoTurf cushioned courts. Named for Althea Gibson. Open to public — book through Essex County Parks.",
+      "website": "https://www.essexcountyparks.org"
     }
   ],
 

@@ -395,7 +395,7 @@
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-permit" checked>
-      <label for="f-permit"><div class="swatch" style="background:#4F7CAC"></div>NYC Parks permit required</label>
+      <label for="f-permit"><div class="swatch" style="background:#4F7CAC"></div>NYC Parks Permit</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-reservable" checked>
@@ -404,6 +404,10 @@
     <div class="filter-row">
       <input type="checkbox" id="f-private" checked>
       <label for="f-private"><div class="swatch" style="background:#8C705F"></div>Membership only</label>
+    </div>
+    <div class="filter-row">
+      <input type="checkbox" id="f-school" checked>
+      <label for="f-school"><div class="swatch" style="background:#B5C4A0;border:1px solid #3C474B"></div>School / Limited Public</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-unknown" checked>
@@ -1107,6 +1111,7 @@ const ACCESS_COLOR = {
   permit:      '#4F7CAC',  // Steel Blue
   reservable:  '#7A9E8E',  // Sage Mist
   private:     '#8C705F',  // Warm Taupe
+  school:      '#B5C4A0',  // Light Olive
   unknown:     '#C0E0DE',  // Frozen Water
   residential: '#3C474B',  // Iron Grey
 };
@@ -1119,9 +1124,10 @@ const SPORT_STROKE = { tennis:'#162521', padel:'#2a5a82' };
 const GOOGLE_PLACES_KEY = 'AIzaSyCZbqPi3ZUKsfYvINsINQ5WTCJL2-yZ2v8';
 const ACCESS_LABEL = {
   public:      'Free / first come, first serve',
-  permit:      'NYC Parks permit required',
+  permit:      'NYC Parks Permit',
   reservable:  'Reservable',
   private:     'Membership only',
+  school:      'School / Limited Public',
   unknown:     'Access unknown',
   residential: 'Private residential building',
 };
@@ -1344,7 +1350,8 @@ function buildPopup(court, accessType, website, note, nameOverride) {
 
   // Info rows: courts count, hours, phone, booking
   const infoRows = [];
-  if (count > 1)      infoRows.push(`<div class="popup-info-row"><span class="popup-info-icon">🎾</span><span>${count} courts</span></div>`);
+  const courtsNum = court.courts || (count > 1 ? count : null);
+  if (courtsNum)      infoRows.push(`<div class="popup-info-row"><span class="popup-info-icon">🎾</span><span>${courtsNum} courts</span></div>`);
 
   const hours = court.hours || null;
   if (hours)          infoRows.push(`<div class="popup-info-row"><span class="popup-info-icon">🕐</span><span>${hours}</span></div>`);
@@ -1432,6 +1439,7 @@ function updateMap() {
     permit:      document.getElementById('f-permit').checked,
     reservable:  document.getElementById('f-reservable').checked,
     private:     document.getElementById('f-private').checked,
+    school:      document.getElementById('f-school').checked,
     unknown:     document.getElementById('f-unknown').checked,
     residential: document.getElementById('f-residential').checked,
     clay:        document.getElementById('f-clay').checked,
@@ -1640,6 +1648,8 @@ function buildCourts(elements) {
       phone:      entry.phone      || null,
       bookingUrl: entry.bookingUrl || null,
       bookingApp: entry.bookingApp || null,
+      courts:     entry.courts     || null,
+      address:    entry.address    || null,
     };
     const marker = L.marker([entry.lat, entry.lon], { icon: makeRacketIcon(accessType, entry.sport) });
     marker.on('click', () => {
@@ -2036,7 +2046,7 @@ async function initMap() {
     buildCourts(elements);
     document.getElementById('loading').style.display = 'none';
 
-    ['f-tennis','f-padel','f-public','f-permit','f-reservable','f-private','f-unknown','f-residential',
+    ['f-tennis','f-padel','f-public','f-permit','f-reservable','f-private','f-school','f-unknown','f-residential',
      'f-clay','f-hard','f-grass','f-surface-other','f-indoor','f-outdoor'].forEach(id =>
       document.getElementById(id).addEventListener('change', updateMap)
     );
