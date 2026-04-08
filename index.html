@@ -421,15 +421,15 @@
     <div class="section-label">Surface</div>
     <div class="filter-row">
       <input type="checkbox" id="f-hard" checked>
-      <label for="f-hard"><div class="swatch" style="background:#3A7FC1"></div>Hard (US Open)</label>
+      <label for="f-hard"><div class="swatch" style="background:#3A7FC1"></div>Hard</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-clay" checked>
-      <label for="f-clay"><div class="swatch" style="background:#C2522B"></div>Clay (Roland Garros)</label>
+      <label for="f-clay"><div class="swatch" style="background:#C2522B"></div>Clay</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-grass" checked>
-      <label for="f-grass"><div class="swatch" style="background:#3E7A3C"></div>Grass (Wimbledon)</label>
+      <label for="f-grass"><div class="swatch" style="background:#3E7A3C"></div>Grass</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-surface-other" checked>
@@ -491,6 +491,8 @@
 // ═══════════════════════════════════════════════════════════════════
 
 let OVERRIDES = [
+  // DUPLICATES
+  { match: 'dekalb avenue',            remove: true },  // duplicate of Fort Greene Park
   // FALSE POSITIVES / CLOSED
   { match: 'tennis lab',               remove: true },  // stringing shop, not a court
   { match: 'racquet and tennis club',  remove: true },
@@ -1602,7 +1604,7 @@ function normalizeSurface(tags) {
   if (s === 'clay') return 'clay';
   if (['hard','asphalt','concrete','acrylic','artificial'].includes(s)) return 'hard';
   if (s === 'grass' || s === 'natural_grass') return 'grass';
-  return 'other';
+  return 'hard';
 }
 
 function buildCourts(elements) {
@@ -2045,7 +2047,9 @@ async function initMap() {
     zoom: 12,
     zoomControl: false,
     doubleClickZoom: false,
+    attributionControl: false,
   });
+  L.control.attribution({ prefix: false }).addTo(gmap);
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
