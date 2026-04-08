@@ -1403,6 +1403,20 @@ function buildPopup(court, accessType, website, note, nameOverride) {
 // ═══════════════════════════════════════════════════════════════════
 
 async function geocodeAddress(address) {
+  // Try Google Geocoding API first (more reliable for NYC addresses)
+  if (GOOGLE_PLACES_KEY) {
+    try {
+      const resp = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${GOOGLE_PLACES_KEY}`
+      );
+      const data = await resp.json();
+      if (data.status === 'OK' && data.results.length) {
+        const loc = data.results[0].geometry.location;
+        return { lat: loc.lat, lon: loc.lng };
+      }
+    } catch { /* fall through to Nominatim */ }
+  }
+  // Nominatim fallback
   const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address + ', New York')}&format=json&limit=1&countrycodes=us`;
   const resp = await fetch(url, { headers: { 'Accept': 'application/json' } });
   const data = await resp.json();
@@ -2021,12 +2035,7 @@ async function initMap() {
     doubleClickZoom: false,
   });
 
-  // CartoDB Positron — clean, light tiles with clear borders, no API key needed
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    subdomains: 'abcd',
-    maxZoom: 19,
-  }).addTo(gmap);
+  L.gridLayer.googleMutant({ type: 'roadmap' }).addTo(gmap);
 
   // Wire up custom zoom buttons
   document.getElementById('zoom-in') .addEventListener('click', () => gmap.setZoom(gmap.getZoom() + 1));
@@ -2087,6 +2096,8 @@ async function initMap() {
 </script>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZbqPi3ZUKsfYvINsINQ5WTCJL2-yZ2v8"></script>
+<script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/dist/Leaflet.GoogleMutant.js"></script>
 <script>initMap();</script>
 
 </body>
