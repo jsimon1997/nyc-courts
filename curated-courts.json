@@ -217,16 +217,7 @@
       "website": "https://www.nycgovparks.org/parks/pier-42/facilities/tennis",
       "note": "Pier 42, East River waterfront, Lower East Side. 4 free hard courts. First come, first served. No permit required."
     },
-    {
-      "match": "central park tennis", "access": "permit",
-      "website": "https://www.centralparktenniscenter.com",
-      "hours": "Apr–Nov: 7am–8pm daily (seasonal)",
-      "phone": "(212) 280-0205",
-      "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
-      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Central_Park_-_Tennis_Courts_%288038834490%29.jpg/1280px-Central_Park_-_Tennis_Courts_%288038834490%29.jpg",
-      "courts": 30,
-      "note": "West Drive & W 96th St, Central Park. 26 clay + 4 hard courts. NYC Parks permit required: $100/season (adult), $20 (senior 62+), $10 (youth). Single play $15."
-    },
+    { "match": "central park tennis", "remove": true },
     {
       "match": "prospect park tennis", "access": "permit",
       "website": "https://www.prospectpark.org/visit-the-park/places-to-go/tennis-center/",
@@ -404,7 +395,12 @@
     1183844785, 1183844786, 1183844787, 1183844788, 1183844789,
     1183844800, 1183844801, 1183844802, 1183844803, 1183844804,
     1183844805, 1183844806, 1183844807, 1183844810, 1183844811,
-    1183844812, 1183844813, 1183844814, 1183844816
+    1183844812, 1183844813, 1183844814, 1183844816,
+    161219081, 161219082, 161219084, 161219087, 161219088, 161219089,
+    161219094, 161219095, 161219098, 161219099, 161219100, 161219102,
+    161219104, 161219106, 161219109, 161219111, 161219113, 161219114,
+    161219116, 161219119, 161219120, 161219121, 161219125, 161219126,
+    161219127, 161219133, 161219135, 161219140, 161219144, 161219148
   ],
 
   "id_overrides": {
@@ -453,40 +449,23 @@
     "367235369":  { "name": "Riverbank State Park Tennis Courts", "access": "yes" },
     "1047533365": { "name": "Hudson River Park Tennis Courts", "access": "yes" },
     "1047533366": { "name": "Hudson River Park Tennis Courts", "access": "yes" },
-    "1047533367": { "name": "Hudson River Park Tennis Courts", "access": "yes" },
-    "161219081": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219082": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219084": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219087": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219088": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219089": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219094": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219095": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219098": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219099": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219100": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219102": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219104": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219106": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219109": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219111": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219113": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219114": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219116": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219119": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219120": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219121": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219125": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219126": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219127": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219133": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219135": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219140": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219144": { "name": "Central Park Tennis Center", "access": "yes" },
-    "161219148": { "name": "Central Park Tennis Center", "access": "yes" }
+    "1047533367": { "name": "Hudson River Park Tennis Courts", "access": "yes" }
   },
 
   "public_courts": [
+    {
+      "lat": 40.7975, "lon": -73.9599,
+      "name": "Central Park Tennis Center",
+      "address": "West Drive & W 96th St, Central Park, Manhattan",
+      "sport": "tennis", "surface": "clay", "accessType": "permit",
+      "courts": 30,
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Central_Park_-_Tennis_Courts_%288038834490%29.jpg/1280px-Central_Park_-_Tennis_Courts_%288038834490%29.jpg",
+      "hours": "Apr–Nov: 7am–8pm daily (seasonal)",
+      "phone": "(212) 280-0205",
+      "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
+      "note": "West Drive & W 96th St, Central Park. 26 clay + 4 hard courts. NYC Parks permit required: $100/season (adult), $20 (senior 62+), $10 (youth). Single play $15.",
+      "website": "https://www.centralparktenniscenter.com"
+    },
     {
       "lat": 40.7102, "lon": -73.9833,
       "name": "Pier 42 Tennis Courts",
