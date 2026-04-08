@@ -129,6 +129,11 @@
     }
     .address-result:last-child { border-bottom: none; }
     .address-result:hover { background: #f0f6ff; }
+    .address-results-footer {
+      padding: 5px 10px; font-size: 10px; color: #bbb;
+      border-top: 1px solid #f0f0f0; text-align: right;
+      background: #fafafa; letter-spacing: .01em;
+    }
     #address-btn {
       background: #162521;
       color: white; border: none;
@@ -1038,6 +1043,12 @@ const ACCESS_COLOR = {
   residential: '#3C474B',  // Iron Grey
 };
 const SPORT_STROKE = { tennis:'#162521', padel:'#2a5a82' };
+
+// ── Address Autocomplete ──────────────────────────────────────────────
+// Google Places REST API (no SDK needed). Paste your key here.
+// Enable "Places API (New)" at console.cloud.google.com → APIs & Services.
+// Falls back to Nominatim automatically when quota is exhausted or key is blank.
+const GOOGLE_PLACES_KEY = '';
 const ACCESS_LABEL = {
   public:      'Free / first come, first serve',
   permit:      'NYC Parks permit required',
@@ -1740,75 +1751,165 @@ function initSearch() {
   });
 }
 
+// ── Address autocomplete helpers ─────────────────────────────────────
+
+// Flipped to true when Google returns a quota/auth error; stays true for the session
+let _googleQuotaExceeded = false;
+
+// NYC metro bounding box used by both Google and Nominatim
+const NYC_BOUNDS = {
+  google:    { low: { latitude: 40.45, longitude: -74.30 }, high: { latitude: 40.95, longitude: -73.65 } },
+  nominatim: '-74.30,40.95,-73.65,40.45',   // minLon,maxLat,maxLon,minLat
+};
+
+// Normalized suggestion: { label, lat|null, lon|null, placeId|null, source }
+async function fetchGoogleSuggestions(query) {
+  try {
+    const resp = await fetch('https://places.googleapis.com/v1/places:autocomplete', {
+      method: 'POST',
+      headers: {
+        'Content-Type':    'application/json',
+        'X-Goog-Api-Key':  GOOGLE_PLACES_KEY,
+        'X-Goog-FieldMask': 'suggestions.placePrediction.text,suggestions.placePrediction.placeId',
+      },
+      body: JSON.stringify({
+        input: query,
+        includedRegionCodes: ['us'],
+        locationBias: { rectangle: NYC_BOUNDS.google },
+      }),
+    });
+    if (resp.status === 429 || resp.status === 403) { _googleQuotaExceeded = true; return null; }
+    const data = await resp.json();
+    if (data.error) {
+      if ([429, 403, 400].includes(data.error.code)) _googleQuotaExceeded = true;
+      return null;
+    }
+    return (data.suggestions || []).map(s => ({
+      label:   s.placePrediction.text.text,
+      lat:     null,
+      lon:     null,
+      placeId: s.placePrediction.placeId,
+      source:  'google',
+    }));
+  } catch { return null; }
+}
+
+async function resolveGoogleCoords(placeId) {
+  try {
+    const resp = await fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${GOOGLE_PLACES_KEY}`
+    );
+    const data = await resp.json();
+    if (data.status !== 'OK' || !data.results.length) return null;
+    const loc = data.results[0].geometry.location;
+    return { lat: loc.lat, lon: loc.lng };
+  } catch { return null; }
+}
+
+async function fetchNominatimSuggestions(query) {
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=6&addressdetails=1&countrycodes=us&viewbox=${NYC_BOUNDS.nominatim}&bounded=1`;
+    const resp = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    const data = await resp.json();
+    return data.map(item => {
+      const a = item.address || {};
+      const short = [
+        a.house_number && a.road ? `${a.house_number} ${a.road}` : a.road || a.neighbourhood || a.suburb,
+        a.city || a.town || a.county || 'New York',
+      ].filter(Boolean).join(', ');
+      return {
+        label:   short || item.display_name,
+        lat:     parseFloat(item.lat),
+        lon:     parseFloat(item.lon),
+        placeId: null,
+        source:  'nominatim',
+      };
+    });
+  } catch { return []; }
+}
+
 function initAddressAutocomplete() {
-  const input   = document.getElementById('address-input');
-  const results = document.getElementById('address-results');
+  const input    = document.getElementById('address-input');
+  const results  = document.getElementById('address-results');
   const clearBtn = document.getElementById('address-input-clear');
 
   let debounceTimer = null;
 
   async function fetchSuggestions(query) {
     if (query.length < 3) { results.style.display = 'none'; return; }
-    try {
-      // viewbox = NYC metro bounding box; bounded=1 strictly limits results to this area
-      const NYC_BOX = '-74.30,40.95,-73.65,40.45'; // minLon,maxLat,maxLon,minLat
-      const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=6&addressdetails=1&countrycodes=us&viewbox=${NYC_BOX}&bounded=1`;
-      const resp = await fetch(url, { headers: { 'Accept': 'application/json' } });
-      const data = await resp.json();
-      showSuggestions(data);
-    } catch { results.style.display = 'none'; }
+
+    let suggestions = null;
+    let source = 'nominatim';
+
+    if (GOOGLE_PLACES_KEY && !_googleQuotaExceeded) {
+      suggestions = await fetchGoogleSuggestions(query);
+      if (suggestions !== null) source = 'google';
+    }
+
+    // Fall back to Nominatim if Google is unavailable/quota-exceeded
+    if (suggestions === null) {
+      suggestions = await fetchNominatimSuggestions(query);
+      source = 'nominatim';
+    }
+
+    showSuggestions(suggestions, source);
   }
 
-  function showSuggestions(data) {
+  function showSuggestions(suggestions, source) {
     results.innerHTML = '';
-    if (!data.length) { results.style.display = 'none'; return; }
-    data.forEach(item => {
+    if (!suggestions.length) { results.style.display = 'none'; return; }
+
+    suggestions.forEach(s => {
       const div = document.createElement('div');
       div.className = 'address-result';
-      // Trim long display names to keep the UI clean
-      const label = item.display_name.length > 60
-        ? item.display_name.slice(0, 60) + '…'
-        : item.display_name;
+      const label = s.label.length > 62 ? s.label.slice(0, 62) + '…' : s.label;
       div.textContent = label;
-      div.title = item.display_name;
-      div.addEventListener('mousedown', e => {
-        // mousedown fires before blur; use it to prevent input blur hiding dropdown
-        e.preventDefault();
-        const lat = parseFloat(item.lat);
-        const lon = parseFloat(item.lon);
-        // Fill input with a clean short address
-        const a = item.address || {};
-        const short = [
-          a.house_number && a.road ? `${a.house_number} ${a.road}` : a.road || a.neighbourhood || a.suburb,
-          a.city || a.town || a.county || 'New York'
-        ].filter(Boolean).join(', ');
-        input.value = short || item.display_name;
+      div.title = s.label;
+
+      div.addEventListener('mousedown', async e => {
+        e.preventDefault(); // prevent input blur closing dropdown before we handle click
         results.style.display = 'none';
+        input.value = s.label;
         clearBtn.style.display = 'block';
+        window._pendingGeocode = null;
 
-        // Store geocoded coords so applyDriveFilter can skip geocoding
-        window._pendingGeocode = { lat, lon };
+        let lat = s.lat, lon = s.lon;
 
-        // Place pin immediately and pan map so user can visually confirm
-        placeHomePin(lat, lon, input.value);
-        gmap.flyTo([lat, lon], 14);
+        // Google results don't have coords — resolve via Geocoding API
+        if (s.placeId) {
+          const coords = await resolveGoogleCoords(s.placeId);
+          if (coords) { lat = coords.lat; lon = coords.lon; }
+        }
+
+        if (lat && lon) {
+          window._pendingGeocode = { lat, lon };
+          placeHomePin(lat, lon, s.label);
+          gmap.flyTo([lat, lon], 14);
+        }
       });
+
       results.appendChild(div);
     });
+
+    // Attribution footer (required by both Google and OSM terms)
+    const footer = document.createElement('div');
+    footer.className = 'address-results-footer';
+    footer.textContent = source === 'google' ? 'Powered by Google' : '© OpenStreetMap contributors';
+    results.appendChild(footer);
+
     results.style.display = 'block';
   }
 
   input.addEventListener('input', () => {
     clearBtn.style.display = input.value ? 'block' : 'none';
-    // If user edits text after autocomplete selection, invalidate cached coords
-    window._pendingGeocode = null;
+    window._pendingGeocode = null; // invalidate cached coords when user edits
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => fetchSuggestions(input.value.trim()), 300);
   });
 
   input.addEventListener('keydown', e => {
     if (e.key === 'Escape') { results.style.display = 'none'; input.blur(); }
-    if (e.key === 'Enter') { results.style.display = 'none'; }
+    if (e.key === 'Enter')  { results.style.display = 'none'; }
   });
 
   clearBtn.addEventListener('click', () => {
