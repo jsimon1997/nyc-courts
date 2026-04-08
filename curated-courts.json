@@ -32,6 +32,7 @@
     { "match": "hunter college brookdale", "remove": true },
     { "match": "dwight school", "remove": true },
     { "match": "new york athletic club", "remove": true },
+    { "match": "queensboro oval", "remove": true },
     {
       "match": "stadium tennis center", "access": "reservable", "indoor": true,
       "website": "https://www.stadiumtenniscenter.com",
@@ -527,16 +528,6 @@
       "website": "https://www.nycgovparks.org/parks/jackie-robinson-park_manhattan/facilities/tennis"
     },
     {
-      "lat": 40.7572, "lon": -73.9519,
-      "name": "Queensboro Oval Tennis Courts",
-      "sport": "tennis", "surface": "clay", "accessType": "permit",
-      "courts": 6,
-      "hours": "Apr–Nov: 7am–8pm daily (seasonal)",
-      "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
-      "note": "York Ave & E 59th–60th St, Manhattan. 6 clay courts. NYC Parks permit required: $100/season or $15/day.",
-      "website": "https://www.nycgovparks.org/parks/queensboro-oval/facilities/tennis"
-    },
-    {
       "lat": 40.6900, "lon": -73.7736,
       "name": "Roy Wilkins Recreation Center",
       "sport": "tennis", "surface": "hard", "accessType": "permit",
@@ -712,6 +703,17 @@
       "hours": "Dawn to dusk",
       "note": "Betsy Head Park, Brownsville, Brooklyn. 4 free outdoor hard courts. First come, first served.",
       "website": "https://www.nycgovparks.org/parks/betsy-head-park/facilities/tennis"
+    },
+    {
+      "lat": 40.6899, "lon": -73.9748,
+      "name": "Fort Greene Park Tennis Courts",
+      "address": "Fort Greene Park, Brooklyn",
+      "sport": "tennis", "surface": "hard", "accessType": "public",
+      "courts": 4,
+      "photo": null,
+      "hours": "Dawn to dusk (weather permitting)",
+      "note": "Fort Greene Park, Brooklyn. Free outdoor courts open dawn to dusk. Day-of signup sheet posted at 6:30am — reserve 1 hr singles or 2 hrs doubles for that day. Managed by Fort Greene Tennis Association.",
+      "website": "https://www.fortgreenetennis.org/"
     }
   ],
 
@@ -751,7 +753,7 @@
       "website": "https://cityviewracquet.com"
     },
     {
-      "lat": 40.7640, "lon": -73.9694,
+      "lat": 40.7607, "lon": -73.9561,
       "name": "Reserve Padel — Upper East Side",
       "sport": "padel", "surface": "hard", "indoor": true,
       "courts": 2,
