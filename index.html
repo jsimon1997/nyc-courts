@@ -292,6 +292,16 @@
       border-radius: 0 8px 8px 0; line-height: 1.6;
     }
 
+    /* ── Attribution ────────────────────────────────────────── */
+    .leaflet-control-attribution {
+      font-size: 9px !important;
+      background: rgba(255,255,255,0.55) !important;
+      color: #aaa !important;
+      padding: 1px 4px !important;
+      border-radius: 4px 0 0 0 !important;
+    }
+    .leaflet-control-attribution a { color: #bbb !important; }
+
     /* ── Racket markers ─────────────────────────────────────── */
     .racket-icon {
       background: none !important;
@@ -542,7 +552,7 @@ let OVERRIDES = [
     hours: 'Mon–Sun 7am–11pm (seasonal)',
     phone: '(212) 752-2048',
     note: '430 E 56th St, Midtown East. 3 indoor hard courts. Founded 1954. Membership only.' },
-  { match: 'cityview racquet',          access: 'private', indoor: true,
+  { match: 'cityview racquet',          access: 'private', indoor: true, surface: 'clay',
     website: 'https://cityviewracquet.com',
     hours: 'Mon–Sun 6am–midnight',
     phone: '(718) 389-6252',
@@ -596,7 +606,7 @@ let OVERRIDES = [
     bookingUrl: 'https://vanderbilttennisclub.com',
     bookingApp: 'Mindbody',
     note: '15 Vanderbilt Ave (inside Grand Central Terminal). Indoor hard courts. No membership required. Book by the hour.' },
-  { match: 'sutton east',        access: 'reservable', indoor: true,
+  { match: 'sutton east',        access: 'reservable', indoor: true, surface: 'clay',
     website: 'https://suttoneasttennis.com',
     hours: 'Mon–Sun 6am–11pm',
     phone: '(212) 751-3452',
@@ -1741,30 +1751,31 @@ out center tags;`.trim();
 // ═══════════════════════════════════════════════════════════════════
 
 function makeRacketIcon(surface, sport, indoor) {
-  const fill   = SURFACE_COLOR[surface] || SURFACE_COLOR.other;
-  const stroke = MARKER_STROKE;
+  const fill    = SURFACE_COLOR[surface] || SURFACE_COLOR.other;
+  const stroke  = MARKER_STROKE;
+  const strings = surface === 'hard' ? 'rgba(255,255,255,0.75)' : stroke;
 
   let svg;
   if (sport === 'padel') {
     svg = `<svg width="13" height="19" viewBox="0 0 18 26" xmlns="http://www.w3.org/2000/svg">
       <rect x="1" y="1" width="16" height="15" rx="3.5" fill="${fill}" stroke="${stroke}" stroke-width="1.6"/>
-      <line x1="5"  y1="1.5" x2="5"  y2="15.5" stroke="${stroke}" stroke-width="0.7" opacity="0.35"/>
-      <line x1="9"  y1="1"   x2="9"  y2="16"   stroke="${stroke}" stroke-width="0.7" opacity="0.35"/>
-      <line x1="13" y1="1.5" x2="13" y2="15.5" stroke="${stroke}" stroke-width="0.7" opacity="0.35"/>
-      <line x1="1"  y1="5.5" x2="17" y2="5.5"  stroke="${stroke}" stroke-width="0.7" opacity="0.35"/>
-      <line x1="1"  y1="8.5" x2="17" y2="8.5"  stroke="${stroke}" stroke-width="0.7" opacity="0.35"/>
-      <line x1="1"  y1="11.5" x2="17" y2="11.5" stroke="${stroke}" stroke-width="0.7" opacity="0.35"/>
+      <line x1="5"  y1="1.5" x2="5"  y2="15.5" stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="9"  y1="1"   x2="9"  y2="16"   stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="13" y1="1.5" x2="13" y2="15.5" stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="1"  y1="5.5" x2="17" y2="5.5"  stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="1"  y1="8.5" x2="17" y2="8.5"  stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="1"  y1="11.5" x2="17" y2="11.5" stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
       <rect x="7.5" y="16" width="3" height="9" rx="1.5" fill="${fill}" stroke="${stroke}" stroke-width="1.6"/>
     </svg>`;
   } else {
     svg = `<svg width="13" height="19" viewBox="0 0 18 26" xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="9" cy="9" rx="8" ry="8" fill="${fill}" stroke="${stroke}" stroke-width="1.6"/>
-      <line x1="2"   y1="6"  x2="16"  y2="6"  stroke="${stroke}" stroke-width="0.7" opacity="0.35"/>
-      <line x1="1"   y1="9"  x2="17"  y2="9"  stroke="${stroke}" stroke-width="0.7" opacity="0.35"/>
-      <line x1="2"   y1="12" x2="16"  y2="12" stroke="${stroke}" stroke-width="0.7" opacity="0.35"/>
-      <line x1="6"   y1="1"  x2="6"   y2="17" stroke="${stroke}" stroke-width="0.7" opacity="0.35"/>
-      <line x1="9"   y1="1"  x2="9"   y2="17" stroke="${stroke}" stroke-width="0.7" opacity="0.35"/>
-      <line x1="12"  y1="1"  x2="12"  y2="17" stroke="${stroke}" stroke-width="0.7" opacity="0.35"/>
+      <line x1="2"   y1="6"  x2="16"  y2="6"  stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="1"   y1="9"  x2="17"  y2="9"  stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="2"   y1="12" x2="16"  y2="12" stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="6"   y1="1"  x2="6"   y2="17" stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="9"   y1="1"  x2="9"   y2="17" stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="12"  y1="1"  x2="12"  y2="17" stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
       <rect x="7.5" y="17" width="3" height="8" rx="1.5" fill="${fill}" stroke="${stroke}" stroke-width="1.6"/>
     </svg>`;
   }
