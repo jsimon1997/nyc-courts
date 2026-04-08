@@ -60,7 +60,7 @@
     /* Search bar */
     #search-wrap { position: relative; margin-bottom: 4px; }
     #search-input {
-      width: 100%; padding: 10px 12px; font-size: 13px;
+      width: 100%; padding: 10px 32px 10px 12px; font-size: 13px;
       font-family: inherit;
       border: 1px solid #e8e8e8; border-radius: 10px; outline: none;
       background: #f8f8f8; color: #162521;
@@ -89,10 +89,21 @@
     .search-result-meta { font-size: 11px; color: #888; }
     .search-no-results { padding: 10px 13px; font-size: 12px; color: #aaa; }
 
+    /* Input clear (×) button */
+    .input-clear {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      color: #c0c0c0; font-size: 15px; line-height: 1;
+      display: none; padding: 2px 0; z-index: 3;
+      transition: color .15s;
+    }
+    .input-clear:hover { color: #162521; }
+
     /* Address input */
     #address-wrap { display: flex; flex-direction: column; gap: 8px; }
+    #address-input-wrap { position: relative; }
     #address-input {
-      width: 100%; padding: 10px 12px; font-size: 13px;
+      width: 100%; padding: 10px 32px 10px 12px; font-size: 13px;
       font-family: inherit;
       border: 1px solid #e8e8e8; border-radius: 10px; outline: none;
       background: #f8f8f8; color: #162521;
@@ -100,6 +111,24 @@
     }
     #address-input::placeholder { color: #b0b0b0; }
     #address-input:focus { border-color: #162521; background: #fff; }
+
+    /* Address autocomplete dropdown */
+    #address-results {
+      display: none;
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+      background: #fff;
+      border: 1px solid #e8e8e8; border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.10);
+      z-index: 2000; overflow: hidden;
+      max-height: 210px; overflow-y: auto;
+    }
+    .address-result {
+      padding: 9px 13px; font-size: 12px; cursor: pointer;
+      border-bottom: 1px solid #f4f4f4; line-height: 1.4;
+      transition: background .15s; color: #2d2d2d;
+    }
+    .address-result:last-child { border-bottom: none; }
+    .address-result:hover { background: #f0f6ff; }
     #address-btn {
       background: #162521;
       color: white; border: none;
@@ -320,13 +349,18 @@
     <div class="section-label">Search</div>
     <div id="search-wrap">
       <input id="search-input" type="text" placeholder="Search courts by name…" autocomplete="off">
+      <button class="input-clear" id="search-clear" title="Clear">✕</button>
       <div id="search-results"></div>
     </div>
 
     <div class="section-label">Drive Time Filter</div>
     <p class="section-hint">See which courts are within driving distance of your home or office</p>
     <div id="address-wrap">
-      <input id="address-input" type="text" placeholder="e.g. 350 W 42nd St, NY">
+      <div id="address-input-wrap">
+        <input id="address-input" type="text" placeholder="e.g. 350 W 42nd St, NY" autocomplete="off">
+        <button class="input-clear" id="address-input-clear" title="Clear">✕</button>
+        <div id="address-results"></div>
+      </div>
       <div class="time-pills">
         <button class="time-pill" data-min="10">10 min</button>
         <button class="time-pill" data-min="15">15 min</button>
@@ -1361,6 +1395,24 @@ function updateMap() {
 // DRIVE TIME UI
 // ═══════════════════════════════════════════════════════════════════
 
+function placeHomePin(lat, lon, label) {
+  if (window._homeMarker) window._homeMarker.remove();
+  const icon = L.divIcon({
+    html: `<svg width="22" height="30" viewBox="0 0 22 30" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="11" cy="28" rx="5" ry="2" fill="rgba(0,0,0,.18)"/>
+      <path d="M11 1 C5.48 1 1 5.48 1 11 C1 18.5 11 27 11 27 C11 27 21 18.5 21 11 C21 5.48 16.52 1 11 1Z" fill="#6366f1" stroke="#4338ca" stroke-width="1.5"/>
+      <circle cx="11" cy="11" r="4" fill="white" opacity=".9"/>
+    </svg>`,
+    className: '',
+    iconSize: [22, 30],
+    iconAnchor: [11, 30],
+    popupAnchor: [0, -32],
+  });
+  window._homeMarker = L.marker([lat, lon], { icon, zIndexOffset: 1000 }).addTo(gmap);
+  window._homeMarker.bindPopup(`<b>${label || 'Your location'}</b>`);
+  window._homeMarker.on('click', () => window._homeMarker.openPopup());
+}
+
 async function applyDriveFilter() {
   const address = document.getElementById('address-input').value.trim();
   if (!address) return;
@@ -1370,12 +1422,21 @@ async function applyDriveFilter() {
 
   btn.disabled = true;
   btn.textContent = 'Calculating…';
-  status.textContent = 'Geocoding address…';
   status.className = '';
 
   try {
-    const { lat, lon } = await geocodeAddress(address);
-    status.textContent = 'Fetching drive times…';
+    let lat, lon;
+    // Use pre-geocoded coordinates from autocomplete selection if available
+    if (window._pendingGeocode) {
+      ({ lat, lon } = window._pendingGeocode);
+      status.textContent = 'Fetching drive times…';
+    } else {
+      status.textContent = 'Geocoding address…';
+      ({ lat, lon } = await geocodeAddress(address));
+      placeHomePin(lat, lon, address);
+      gmap.flyTo([lat, lon], 13);
+      status.textContent = 'Fetching drive times…';
+    }
 
     const times = await getDriveTimes(lat, lon, allCourts);
     driveFilter = times.map(t => t !== null && t <= driveMinutes * 60);
@@ -1389,16 +1450,6 @@ async function applyDriveFilter() {
     banner.textContent = `Within ${driveMinutes} min of ${shortAddr}`;
     banner.style.display = 'block';
 
-    // Home marker
-    if (window._homeMarker) window._homeMarker.remove();
-    window._homeMarker = L.circleMarker([lat, lon], {
-      radius: 7,
-      fillColor: '#6366f1', fillOpacity: 1,
-      color: '#4338ca', weight: 2,
-    }).addTo(gmap);
-    window._homeMarker.bindPopup('<b>Your location</b>');
-    window._homeMarker.on('click', () => window._homeMarker.openPopup());
-
     updateMap();
   } catch (err) {
     status.textContent = err.message || 'Error — try again';
@@ -1411,6 +1462,7 @@ async function applyDriveFilter() {
 
 function clearDriveFilter() {
   driveFilter = null;
+  window._pendingGeocode = null;
   if (window._homeMarker) { window._homeMarker.remove(); window._homeMarker = null; }
   document.getElementById('address-status').textContent = '';
   document.getElementById('address-status').className = '';
@@ -1645,28 +1697,127 @@ function initSearch() {
         <span class="search-result-meta">${sportLabel} · ${accessLabel}</span>
       `;
       div.addEventListener('click', () => {
-        // Pan map to court, open popup
-        gmap.setView([court.lat, court.lon], 15, { animate: true });
-        if (court.marker) {
-          court.marker.addTo(gmap);
-          court.marker.fire('click');
-        }
         input.value = name;
         results.style.display = 'none';
+        document.getElementById('search-clear').style.display = 'block';
+        // Fly to court, then open popup once map settles
+        gmap.flyTo([court.lat, court.lon], 15);
+        gmap.once('moveend', () => {
+          if (court.marker) {
+            court.marker.addTo(gmap);
+            court.marker.fire('click');
+          }
+        });
       });
       results.appendChild(div);
     });
     results.style.display = 'block';
   }
 
-  input.addEventListener('input', () => showResults(input.value));
+  input.addEventListener('input', () => {
+    showResults(input.value);
+    document.getElementById('search-clear').style.display = input.value ? 'block' : 'none';
+  });
   input.addEventListener('keydown', e => {
     if (e.key === 'Escape') { results.style.display = 'none'; input.blur(); }
+  });
+
+  // Clear button
+  document.getElementById('search-clear').addEventListener('click', () => {
+    input.value = '';
+    results.style.display = 'none';
+    document.getElementById('search-clear').style.display = 'none';
+    input.focus();
   });
 
   // Close dropdown when clicking outside
   document.addEventListener('click', e => {
     if (!document.getElementById('search-wrap').contains(e.target)) {
+      results.style.display = 'none';
+    }
+  });
+}
+
+function initAddressAutocomplete() {
+  const input   = document.getElementById('address-input');
+  const results = document.getElementById('address-results');
+  const clearBtn = document.getElementById('address-input-clear');
+
+  let debounceTimer = null;
+
+  async function fetchSuggestions(query) {
+    if (query.length < 3) { results.style.display = 'none'; return; }
+    try {
+      const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=6&addressdetails=1&countrycodes=us`;
+      const resp = await fetch(url, { headers: { 'Accept': 'application/json' } });
+      const data = await resp.json();
+      showSuggestions(data);
+    } catch { results.style.display = 'none'; }
+  }
+
+  function showSuggestions(data) {
+    results.innerHTML = '';
+    if (!data.length) { results.style.display = 'none'; return; }
+    data.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'address-result';
+      // Trim long display names to keep the UI clean
+      const label = item.display_name.length > 60
+        ? item.display_name.slice(0, 60) + '…'
+        : item.display_name;
+      div.textContent = label;
+      div.title = item.display_name;
+      div.addEventListener('mousedown', e => {
+        // mousedown fires before blur; use it to prevent input blur hiding dropdown
+        e.preventDefault();
+        const lat = parseFloat(item.lat);
+        const lon = parseFloat(item.lon);
+        // Fill input with a clean short address
+        const a = item.address || {};
+        const short = [
+          a.house_number && a.road ? `${a.house_number} ${a.road}` : a.road || a.neighbourhood || a.suburb,
+          a.city || a.town || a.county || 'New York'
+        ].filter(Boolean).join(', ');
+        input.value = short || item.display_name;
+        results.style.display = 'none';
+        clearBtn.style.display = 'block';
+
+        // Store geocoded coords so applyDriveFilter can skip geocoding
+        window._pendingGeocode = { lat, lon };
+
+        // Place pin immediately and pan map so user can visually confirm
+        placeHomePin(lat, lon, input.value);
+        gmap.flyTo([lat, lon], 14);
+      });
+      results.appendChild(div);
+    });
+    results.style.display = 'block';
+  }
+
+  input.addEventListener('input', () => {
+    clearBtn.style.display = input.value ? 'block' : 'none';
+    // If user edits text after autocomplete selection, invalidate cached coords
+    window._pendingGeocode = null;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => fetchSuggestions(input.value.trim()), 300);
+  });
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { results.style.display = 'none'; input.blur(); }
+    if (e.key === 'Enter') { results.style.display = 'none'; }
+  });
+
+  clearBtn.addEventListener('click', () => {
+    input.value = '';
+    results.style.display = 'none';
+    clearBtn.style.display = 'none';
+    window._pendingGeocode = null;
+    if (window._homeMarker) { window._homeMarker.remove(); window._homeMarker = null; }
+    input.focus();
+  });
+
+  document.addEventListener('click', e => {
+    if (!document.getElementById('address-input-wrap').contains(e.target)) {
       results.style.display = 'none';
     }
   });
@@ -1708,10 +1859,15 @@ async function initMap() {
       });
     });
     document.getElementById('address-btn').addEventListener('click', applyDriveFilter);
+    // Note: address-input Enter is also handled by initAddressAutocomplete (closes dropdown)
+    // so we just trigger the filter here if dropdown is not open
     document.getElementById('address-input').addEventListener('keydown', e => {
-      if (e.key === 'Enter') applyDriveFilter();
+      if (e.key === 'Enter' && document.getElementById('address-results').style.display === 'none') {
+        applyDriveFilter();
+      }
     });
 
+    initAddressAutocomplete();
     initSearch();
     updateMap();
   } catch (err) {
