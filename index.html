@@ -289,17 +289,21 @@
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-padel" checked>
-      <label for="f-padel"><div class="swatch" style="background:#f97316;border:2px solid #c2410c"></div>Padel</label>
+      <label for="f-padel"><div class="swatch" style="background:#fb923c;border:2px solid #9a3412"></div>Padel</label>
     </div>
 
     <div class="section-label">Access</div>
     <div class="filter-row">
       <input type="checkbox" id="f-public" checked>
-      <label for="f-public"><div class="swatch" style="background:#22c55e"></div>First come, first serve</label>
+      <label for="f-public"><div class="swatch" style="background:#22c55e"></div>Free / first come, first serve</label>
+    </div>
+    <div class="filter-row">
+      <input type="checkbox" id="f-permit" checked>
+      <label for="f-permit"><div class="swatch" style="background:#f97316"></div>NYC Parks permit required</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-reservable" checked>
-      <label for="f-reservable"><div class="swatch" style="background:#eab308"></div>Reservable / permit</label>
+      <label for="f-reservable"><div class="swatch" style="background:#eab308"></div>Book by the hour</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-private" checked>
@@ -527,18 +531,18 @@ const OVERRIDES = [
   { match: 'pier 42',           access: 'public',
     website: 'https://www.nycgovparks.org/parks/pier-42/facilities/tennis',
     note: 'Pier 42, East River waterfront, Lower East Side. 4 free hard courts. First come, first served. No permit required.' },
-  { match: 'central park tennis', access: 'reservable',
+  { match: 'central park tennis', access: 'permit',
     website: 'https://www.centralparktenniscenter.com',
     hours: 'Apr–Nov: 7am–8pm daily (seasonal)',
     phone: '(212) 280-0205',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
     photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Central_Park_-_Tennis_Courts_%288038834490%29.jpg/1280px-Central_Park_-_Tennis_Courts_%288038834490%29.jpg',
-    note: 'West Drive & W 96th St, Central Park. 26 clay + 4 hard courts. NYC Parks permit ($200/season) or $15 day pass.' },
-  { match: 'prospect park tennis', access: 'reservable',
+    note: 'West Drive & W 96th St, Central Park. 26 clay + 4 hard courts. NYC Parks permit required: $100/season (adult), $20 (senior 62+), $10 (youth). Single play $15.' },
+  { match: 'prospect park tennis', access: 'permit',
     website: 'https://www.prospectpark.org/visit-the-park/places-to-go/tennis-center/',
     hours: 'Apr–Nov: 8am–8pm daily (seasonal)',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
-    note: 'Prospect Park, Brooklyn. NYC Parks permit required in season ($200/season or $15/day).' },
+    note: 'Parade Ground, Prospect Park, Brooklyn. NYC Parks permit required: $100/season or $15/day.' },
   { match: 'matchpoint',         access: 'reservable', indoor: true,
     website: 'https://matchpoint.nyc',
     hours: 'Mon–Fri 6am–11pm, Sat–Sun 7am–10pm',
@@ -560,7 +564,10 @@ const OVERRIDES = [
     bookingApp: 'Court 16 app / Mindbody',
     note: '2 NYC locations (FiDi + Brooklyn City Point). Indoor cushioned courts. Membership enrollment required.' },
   // PUBLIC / NYC PARKS — named facilities with their own organizations
-  { match: 'alley pond tennis',  access: 'reservable', website: 'https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis', note: 'Alley Pond Park, Queens. Operated by Commonpoint Queens.' },
+  { match: 'alley pond tennis',  access: 'permit',
+    website: 'https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis',
+    bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
+    note: 'Alley Pond Park, Queens. NYC Parks permit required. Operated by Commonpoint Queens.' },
   { match: 'dick savitt',        access: 'reservable', indoor: true,
     website: 'https://perec.columbia.edu/content/dick-savitt-tennis-center',
     hours: 'Mon–Fri 7am–11:30pm, Sat–Sun 8am–10pm',
@@ -571,18 +578,18 @@ const OVERRIDES = [
     website: 'https://www.aptcnyc.com',
     bookingUrl: 'https://www.aptcnyc.com',
     note: 'Active Pickleball & Tennis Center at Queens College. 6 courts. Book at aptcnyc.com.' },
-  { match: 'riverside clay tennis', access: 'reservable',
+  { match: 'riverside clay tennis', access: 'permit',
     website: 'https://riversidetennis.org',
     hours: 'Apr–Nov: 7am–8pm daily (seasonal)',
     phone: '(212) 978-0277',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
-    note: 'Riverside Park at W 96th St. 10 outdoor red clay courts. NYC Parks permit ($200/season or $15/day). Managed by RCTA.' },
-  { match: 'over the tracks',    access: 'reservable',
+    note: 'Riverside Park at W 96th St. 10 outdoor red clay courts. NYC Parks permit required: $100/season or $15/day. Managed by RCTA.' },
+  { match: 'over the tracks',    access: 'permit',
     website: 'https://119ta.tennisgroups.us',
     hours: 'Apr–Nov: 7am–8pm daily (seasonal)',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
-    note: '10 outdoor hard courts in Riverside Park at 119th St. NYC Parks permit required.' },
-  { match: 'brookville park tennis', access: 'reservable',
+    note: '10 outdoor hard courts in Riverside Park at 119th St. NYC Parks permit required: $100/season or $15/day.' },
+  { match: 'brookville park tennis', access: 'permit',
     website: 'https://www.bptainc.org',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
     note: '6 hard courts in Rosedale, Queens. NYC Parks permit required.' },
@@ -591,48 +598,47 @@ const OVERRIDES = [
     hours: 'Apr–Nov: Mon–Fri 6pm–8pm, Sat–Sun 7am–8pm',
     phone: '(212) 737-0185',
     bookingUrl: 'https://eastsidetennis.org',
-    note: '231 E 75th St. 4 outdoor hard courts + 2 quickstart + 2 pickleball. Season Apr 1–Nov 16.' },
+    note: '231 E 75th St. 4 outdoor hard courts + 2 quickstart + 2 pickleball. Season Apr 1–Nov 16. Book by the hour at eastsidetennis.org — no annual permit needed.' },
   { match: 'east side tennis association', access: 'reservable',
     website: 'https://eastsidetennis.org',
     hours: 'Apr–Nov: Mon–Fri 6pm–8pm, Sat–Sun 7am–8pm',
     phone: '(212) 737-0185',
     bookingUrl: 'https://eastsidetennis.org',
-    note: '231 E 75th St. 4 outdoor hard courts + 2 quickstart + 2 pickleball. Season Apr 1–Nov 16.' },
-  { match: 'marcus garvey park',     access: 'public',
+    note: '231 E 75th St. 4 outdoor hard courts + 2 quickstart + 2 pickleball. Season Apr 1–Nov 16. Book by the hour — no annual permit needed.' },
+  { match: 'marcus garvey park',     access: 'permit',
     website: 'https://www.nycgovparks.org/parks/marcus-garvey-park',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
-    note: 'Marcus Garvey Park (formerly Mt. Morris Park), East Harlem. Free outdoor hard courts. First come, first served.' },
-  { match: 'riverside park tennis 153', access: 'reservable',
+    note: 'Marcus Garvey Park (Mt. Morris Park), East Harlem. NYC Parks permit required in season: $100/season or $15/day.' },
+  { match: 'riverside park tennis 153', access: 'permit',
     website: 'https://www.nycgovparks.org/parks/riverside-park/',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
-    note: 'Riverside Park at 153rd St. Outdoor hard courts. NYC Parks permit required.' },
-  { match: 'fort washington park tennis', access: 'public',
+    note: 'Riverside Park at 153rd St. Outdoor hard courts. NYC Parks permit required: $100/season or $15/day.' },
+  { match: 'fort washington park tennis', access: 'permit',
     website: 'https://fortwash.tennisgroups.us/website/home/',
     hours: 'Apr–Nov: 8am–dusk (no lights)',
     phone: '(212) 304-2322',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
-    note: 'Fort Washington Park, Washington Heights. 10 outdoor hard courts. NYC Parks permit required (or FCFS early season).' },
-  { match: 'howard bennett tennis',      access: 'reservable',
+    note: 'Fort Washington Park, Washington Heights. 10 outdoor hard courts. NYC Parks permit required: $100/season or $15/day.' },
+  { match: 'howard bennett tennis',      access: 'permit',
     website: 'https://www.nycgovparks.org/parks/st-nicholas-park/facilities/tennis',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
     note: '32 W 136th St, Harlem. 2 outdoor hard courts. NYC Parks permit required.' },
   { match: 'inwood hill park tennis',    access: 'public',
     website: 'https://www.nycgovparks.org/parks/inwood-hill-park/facilities/tennis',
-    bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
-    note: 'Inwood Hill Park. 9 outdoor hard courts. First come, first served. NYC Parks permit also valid.' },
-  { match: 'riverbank state park tennis', access: 'reservable',
+    note: 'Inwood Hill Park. 9 outdoor hard courts. Free, first come first served — unstaffed.' },
+  { match: 'riverbank state park tennis', access: 'permit',
     website: 'https://parks.ny.gov/parks/84',
     hours: 'Apr–Nov: 7am–8pm daily (seasonal)',
-    note: 'Riverbank State Park, W 145th St & Hudson River. 3 outdoor hard courts. OPRHP permit required.' },
+    note: 'Riverbank State Park, W 145th St & Hudson River. 3 outdoor hard courts. OPRHP permit required (NY State parks).' },
   { match: 'washington market park tennis', access: 'public',
     website: 'https://www.nycgovparks.org/parks/washington-market-park',
-    note: 'Washington Market Park, Tribeca. 1 outdoor hard court. First come, first served.' },
+    note: 'Washington Market Park, Tribeca. 1 outdoor hard court. Free, first come first served — unstaffed.' },
   { match: 'milstein family',            access: 'reservable',
     website: 'https://perec.columbia.edu/content/dick-savitt-tennis-center',
     hours: 'Mon–Fri 7am–11:30pm, Sat–Sun 8am–10pm',
     phone: '(212) 851-7100',
     bookingUrl: 'https://perec.columbia.edu/content/dick-savitt-tennis-center',
-    note: '603 W 218th St, Inwood (Columbia University Baker Athletics). 6 outdoor + 6 indoor hard courts. Open to the public.' },
+    note: '603 W 218th St, Inwood (Columbia University). 6 outdoor + 6 indoor hard courts. Book by the hour — open to public.' },
 ];
 
 const GENERIC_NAMES = new Set([
@@ -792,55 +798,55 @@ const PUBLIC_COURTS = [
   {
     lat: 40.8267, lon: -73.9429,
     name: 'Frederick Johnson Playground',
-    sport: 'tennis', surface: 'hard',
+    sport: 'tennis', surface: 'hard', accessType: 'permit',
     hours: 'Apr–Nov: dawn to dusk',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
-    note: 'W 151st St & Adam Clayton Powell Jr Blvd, Harlem. 8 hard courts. NYC Parks permit required.',
+    note: 'W 151st St & Adam Clayton Powell Jr Blvd, Harlem. 8 hard courts. NYC Parks permit required: $100/season or $15/day.',
     website: 'https://www.nycgovparks.org/parks/M159/facilities/tennis',
   },
   {
     lat: 40.8243, lon: -73.9443,
     name: 'Jackie Robinson Park',
-    sport: 'tennis', surface: 'hard',
+    sport: 'tennis', surface: 'hard', accessType: 'permit',
     hours: 'Apr–Nov: dawn to dusk',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
-    note: 'Bradhurst Ave & W 147th St, Hamilton Heights. 2 hard courts. NYC Parks permit required.',
+    note: 'Bradhurst Ave & W 147th St, Hamilton Heights. 2 hard courts. NYC Parks permit required: $100/season or $15/day.',
     website: 'https://www.nycgovparks.org/parks/jackie-robinson-park_manhattan/facilities/tennis',
   },
   {
     lat: 40.7572, lon: -73.9519,
     name: 'Queensboro Oval Tennis Courts',
-    sport: 'tennis', surface: 'clay',
+    sport: 'tennis', surface: 'clay', accessType: 'permit',
     hours: 'Apr–Nov: 7am–8pm daily (seasonal)',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
-    note: 'York Ave & E 59th–60th St, Manhattan. 6 clay courts. NYC Parks permit required.',
+    note: 'York Ave & E 59th–60th St, Manhattan. 6 clay courts. NYC Parks permit required: $100/season or $15/day.',
     website: 'https://www.nycgovparks.org/parks/queensboro-oval/facilities/tennis',
   },
   {
     lat: 40.6900, lon: -73.7736,
     name: 'Roy Wilkins Recreation Center',
-    sport: 'tennis', surface: 'hard',
+    sport: 'tennis', surface: 'hard', accessType: 'permit',
     hours: 'Apr–Nov: dawn to dusk',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
-    note: '177-00 Baisley Blvd, St. Albans, Queens. 4 outdoor hard courts. NYC Parks permit required.',
+    note: '177-00 Baisley Blvd, St. Albans, Queens. 4 outdoor hard courts. NYC Parks permit required: $100/season or $15/day.',
     website: 'https://www.nycgovparks.org/parks/roy-wilkins-recreation-center/facilities/tennis',
   },
   {
     lat: 40.6247, lon: -74.0290,
     name: 'Shore Park Tennis Courts',
-    sport: 'tennis', surface: 'hard',
+    sport: 'tennis', surface: 'hard', accessType: 'permit',
     hours: 'Apr–Nov: dawn to dusk',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
-    note: 'Shore Road & 95th St, Bay Ridge, Brooklyn. 4 hard courts. NYC Parks permit required.',
+    note: 'Shore Road & 95th St, Bay Ridge, Brooklyn. 4 hard courts. NYC Parks permit required: $100/season or $15/day.',
     website: 'https://www.nycgovparks.org/parks/shore-park-and-parkway/facilities/tennis',
   },
   {
     lat: 40.5985, lon: -73.9400,
     name: 'Marine Park Tennis Courts',
-    sport: 'tennis', surface: 'hard',
+    sport: 'tennis', surface: 'hard', accessType: 'permit',
     hours: 'Apr–Nov: dawn to dusk',
     bookingUrl: 'https://www.nycgovparks.org/tennisreservation',
-    note: 'Fillmore Ave & E 32nd St, Marine Park, Brooklyn. 15 hard courts. NYC Parks permit required.',
+    note: 'Fillmore Ave & E 32nd St, Marine Park, Brooklyn. 15 hard courts. NYC Parks permit required: $100/season or $15/day.',
     website: 'https://www.nycgovparks.org/parks/marine-park/facilities/tennis',
   },
   {
@@ -929,11 +935,19 @@ const RESIDENTIAL_COURTS = [
   },
 ];
 
-const ACCESS_COLOR = { public:'#22c55e', reservable:'#eab308', private:'#a855f7', unknown:'#9ca3af', residential:'#0ea5e9' };
-const SPORT_STROKE = { tennis:'#1d4ed8', padel:'#c2410c' };
+const ACCESS_COLOR = {
+  public:      '#22c55e',
+  permit:      '#f97316',
+  reservable:  '#eab308',
+  private:     '#a855f7',
+  unknown:     '#9ca3af',
+  residential: '#0ea5e9',
+};
+const SPORT_STROKE = { tennis:'#1d4ed8', padel:'#9a3412' };
 const ACCESS_LABEL = {
-  public:      '🟢 First come, first serve',
-  reservable:  '🟡 Reservable / permit required',
+  public:      '🟢 Free / first come, first serve',
+  permit:      '🟠 NYC Parks permit required',
+  reservable:  '🟡 Book by the hour',
   private:     '🟣 Membership only',
   unknown:     '⚪ Access unknown',
   residential: '🔵 Private residential building',
@@ -963,12 +977,12 @@ function classifyAccess(tags) {
 
   if (operator.includes('nyc parks') ||
       operator.includes('new york city department of parks') ||
-      operator.includes('department of parks')) return 'reservable';
+      operator.includes('department of parks')) return 'permit';
 
   if (access === 'private' || access === 'members' || access === 'customers' ||
       member === 'required' || member === 'yes') return 'private';
 
-  if (access === 'permit') return 'reservable';
+  if (access === 'permit') return 'permit';
 
   if (tags.reservation || tags.booking ||
       fee === 'yes' || fee === 'seasonal' || fee === 'interval') return 'reservable';
@@ -1235,22 +1249,23 @@ let driveMinutes = 20;
 
 function updateMap() {
   const show = {
-    tennis:     document.getElementById('f-tennis').checked,
-    padel:      document.getElementById('f-padel').checked,
-    public:     document.getElementById('f-public').checked,
-    reservable: document.getElementById('f-reservable').checked,
-    private:    document.getElementById('f-private').checked,
+    tennis:      document.getElementById('f-tennis').checked,
+    padel:       document.getElementById('f-padel').checked,
+    public:      document.getElementById('f-public').checked,
+    permit:      document.getElementById('f-permit').checked,
+    reservable:  document.getElementById('f-reservable').checked,
+    private:     document.getElementById('f-private').checked,
     unknown:     document.getElementById('f-unknown').checked,
     residential: document.getElementById('f-residential').checked,
     clay:        document.getElementById('f-clay').checked,
-    hard:       document.getElementById('f-hard').checked,
-    grass:      document.getElementById('f-grass').checked,
-    other:      document.getElementById('f-surface-other').checked,
-    indoor:     document.getElementById('f-indoor').checked,
-    outdoor:    document.getElementById('f-outdoor').checked,
+    hard:        document.getElementById('f-hard').checked,
+    grass:       document.getElementById('f-grass').checked,
+    other:       document.getElementById('f-surface-other').checked,
+    indoor:      document.getElementById('f-indoor').checked,
+    outdoor:     document.getElementById('f-outdoor').checked,
   };
 
-  const counts = { tennis: 0, padel: 0, public: 0, reservable: 0, private: 0, unknown: 0, residential: 0 };
+  const counts = { tennis: 0, padel: 0, public: 0, permit: 0, reservable: 0, private: 0, unknown: 0, residential: 0 };
 
   allCourts.forEach((c, idx) => {
     const visible =
@@ -1273,10 +1288,10 @@ function updateMap() {
   document.getElementById('s-tennis').textContent = counts.tennis;
   document.getElementById('s-padel').textContent  = counts.padel;
   document.getElementById('access-stats').innerHTML = `
-    <span style="color:#22c55e">●</span> FCFS: <b>${counts.public}</b> &nbsp;
-    <span style="color:#eab308">●</span> Reservable: <b>${counts.reservable}</b><br>
-    <span style="color:#a855f7">●</span> Members only: <b>${counts.private}</b> &nbsp;
-    <span style="color:#94a3b8">●</span> Unknown: <b>${counts.unknown}</b>
+    <span style="color:#22c55e">●</span> Free: <b>${counts.public}</b> &nbsp;
+    <span style="color:#f97316">●</span> Permit: <b>${counts.permit}</b><br>
+    <span style="color:#eab308">●</span> Book/hr: <b>${counts.reservable}</b> &nbsp;
+    <span style="color:#a855f7">●</span> Members: <b>${counts.private}</b>
   `;
 }
 
@@ -1524,7 +1539,7 @@ async function initMap() {
     buildCourts(elements);
     document.getElementById('loading').style.display = 'none';
 
-    ['f-tennis','f-padel','f-public','f-reservable','f-private','f-unknown','f-residential',
+    ['f-tennis','f-padel','f-public','f-permit','f-reservable','f-private','f-unknown','f-residential',
      'f-clay','f-hard','f-grass','f-surface-other','f-indoor','f-outdoor'].forEach(id =>
       document.getElementById(id).addEventListener('change', updateMap)
     );
