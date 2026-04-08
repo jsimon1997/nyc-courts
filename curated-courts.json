@@ -296,6 +296,7 @@
                           "match":  "sutton east",
                           "access":  "reservable",
                           "indoor":  true,
+                          "surface":  "clay",
                           "website":  "https://suttoneasttennis.com",
                           "hours":  "Mon-Sun 6am-11pm",
                           "phone":  "(212) 751-3452",
@@ -447,6 +448,10 @@
                           "bookingUrl":  "https://www.aptcnyc.com",
                           "note":  "Active Pickleball \u0026 Tennis Center at Queens College. 6 courts. Book at aptcnyc.com.",
                           "address":  "150-35 Reeves Avenue / 153 rd Street \u0026 Reeves Ave, Enter at Security Gate 3, Near Fitzgerald Gym, Flushing, NY 11367, USA"
+                      },
+                      {
+                          "match":  "riverside walk",
+                          "remove":  true
                       },
                       {
                           "match":  "riverside clay tennis",
