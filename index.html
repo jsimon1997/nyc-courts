@@ -463,6 +463,7 @@ const OVERRIDES = [
   { match: 'court 13', remove: true },
   { match: 'court 14', remove: true },
   { match: 'court 15', remove: true },
+  { match: 'court 17', remove: true },
   // PRIVATE
   // RESIDENTIAL — identified via ID_OVERRIDES
   { match: 'sessanta',              access: 'residential', website: 'https://sessanta60.com/the-amenities-sessanta/', note: '60 W 60th St. Private rooftop tennis court. Residents only.' },
@@ -540,19 +541,21 @@ const OVERRIDES = [
     bookingUrl: 'https://suttoneasttennis.com/courttime/',
     note: '488 E 60th St (under the Queensboro Bridge). 8 indoor red clay courts. No membership required.' },
   { match: 'billie jean king',   access: 'reservable',
+    name: 'USTA Billie Jean King National Tennis Center / US Open',
     website: 'https://ntc.usta.com',
     hours: 'Daily 7am–11pm',
     phone: '(718) 760-6200',
     bookingUrl: 'https://www.ntc.usta.com/book-a-court',
     photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/USTA_Billie_Jean_King_National_Tennis_Center.jpg/800px-USTA_Billie_Jean_King_National_Tennis_Center.jpg',
-    note: 'Flushing Meadows–Corona Park, Queens. 33 outdoor + 9 indoor hard courts. Book up to 48 hrs ahead.' },
+    note: 'Flushing Meadows–Corona Park, Queens. 33 outdoor + 9 indoor hard courts. Home of the US Open. Book up to 48 hrs ahead.' },
   { match: 'national tennis center', access: 'reservable',
+    name: 'USTA Billie Jean King National Tennis Center / US Open',
     website: 'https://ntc.usta.com',
     hours: 'Daily 7am–11pm',
     phone: '(718) 760-6200',
     bookingUrl: 'https://www.ntc.usta.com/book-a-court',
     photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/USTA_Billie_Jean_King_National_Tennis_Center.jpg/800px-USTA_Billie_Jean_King_National_Tennis_Center.jpg',
-    note: 'Flushing Meadows–Corona Park, Queens. 33 outdoor + 9 indoor hard courts. Book up to 48 hrs ahead.' },
+    note: 'Flushing Meadows–Corona Park, Queens. 33 outdoor + 9 indoor hard courts. Home of the US Open. Book up to 48 hrs ahead.' },
   { match: 'sportime',           access: 'reservable',
     website: 'https://www.sportimeny.com/manhattan',
     hours: 'Daily 6:30am–11pm',
@@ -1438,6 +1441,7 @@ function buildCourts(elements) {
     court.note        = note;
     court.surface     = normalizeSurface(tags);
     court.indoor      = ov?.indoor ?? (tags.indoor === 'yes' || tags['location:indoor'] === 'yes');
+    if (ov?.name) tags.name = ov.name;
     court.photo       = ov?.photo       || null;
     court.hours       = ov?.hours       || tags.opening_hours || null;
     court.phone       = ov?.phone       || tags.phone || null;
