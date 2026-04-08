@@ -391,73 +391,69 @@
     <div class="section-label">Sport</div>
     <div class="filter-row">
       <input type="checkbox" id="f-tennis" checked>
-      <label for="f-tennis"><div class="swatch" style="background:#C0E0DE;border:2px solid #162521"></div>Tennis</label>
+      <label for="f-tennis"><span id="legend-tennis"></span>Tennis</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-padel" checked>
-      <label for="f-padel"><div class="swatch" style="background:#C0E0DE;border:2px solid #2a5a82"></div>Padel</label>
+      <label for="f-padel"><span id="legend-padel"></span>Padel</label>
     </div>
 
     <div class="section-label">Access</div>
     <div class="filter-row">
       <input type="checkbox" id="f-public" checked>
-      <label for="f-public"><div class="swatch" style="background:#9EEFE5;border:1px solid #3C474B"></div>Free / first come, first serve</label>
+      <label for="f-public">Free / first come, first serve</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-permit" checked>
-      <label for="f-permit"><div class="swatch" style="background:#4F7CAC"></div>NYC Parks Permit</label>
+      <label for="f-permit">NYC Parks Permit</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-reservable" checked>
-      <label for="f-reservable"><div class="swatch" style="background:#7A9E8E"></div>Reservable</label>
+      <label for="f-reservable">Reservable</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-private" checked>
-      <label for="f-private"><div class="swatch" style="background:#8C705F"></div>Membership only</label>
+      <label for="f-private">Membership only</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-school" checked>
-      <label for="f-school"><div class="swatch" style="background:#B5C4A0;border:1px solid #3C474B"></div>School / Limited Public</label>
+      <label for="f-school">School / Limited Public</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-unknown" checked>
-      <label for="f-unknown"><div class="swatch" style="background:#C0E0DE;border:1px solid #3C474B"></div>Unknown access</label>
+      <label for="f-unknown">Unknown access</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-residential" checked>
-      <label for="f-residential"><div class="swatch" style="background:#3C474B"></div>Private residential building</label>
+      <label for="f-residential">Private residential building</label>
     </div>
 
     <div class="section-label">Surface</div>
     <div class="filter-row">
       <input type="checkbox" id="f-hard" checked>
-      <label for="f-hard"><div class="swatch" style="background:#003087"></div>Hard</label>
+      <label for="f-hard"><span id="legend-hard"></span>Hard</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-clay" checked>
-      <label for="f-clay"><div class="swatch" style="background:#C84E1C"></div>Clay</label>
+      <label for="f-clay"><span id="legend-clay"></span>Clay</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-grass" checked>
-      <label for="f-grass"><div class="swatch" style="background:#00703C"></div>Grass</label>
+      <label for="f-grass"><span id="legend-grass"></span>Grass</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-surface-other" checked>
-      <label for="f-surface-other"><div class="swatch" style="background:#9EAAB4"></div>Other / Unknown</label>
+      <label for="f-surface-other"><span id="legend-other"></span>Other / Unknown</label>
     </div>
 
     <div class="section-label">Location</div>
     <div class="filter-row">
       <input type="checkbox" id="f-outdoor" checked>
-      <label for="f-outdoor"><div class="swatch" style="background:#9EAAB4"></div>Outdoor</label>
+      <label for="f-outdoor"><span id="legend-outdoor"></span>Outdoor</label>
     </div>
     <div class="filter-row">
       <input type="checkbox" id="f-indoor" checked>
-      <label for="f-indoor">
-        <div class="swatch" style="background:#9EAAB4;position:relative">
-          <div style="position:absolute;top:2px;left:2px;right:2px;height:2px;background:#162521;border-radius:1px"></div>
-        </div>Indoor (line above icon)
-      </label>
+      <label for="f-indoor"><span id="legend-indoor"></span>Indoor</label>
     </div>
 
     <div class="divider"></div>
@@ -1496,7 +1492,7 @@ function updateMap() {
     outdoor:     document.getElementById('f-outdoor').checked,
   };
 
-  const counts = { tennis: 0, padel: 0, public: 0, permit: 0, reservable: 0, private: 0, unknown: 0, residential: 0 };
+  const counts = { tennis: 0, padel: 0, public: 0, permit: 0, reservable: 0, private: 0, school: 0, unknown: 0, residential: 0 };
 
   allCourts.forEach((c, idx) => {
     const visible =
@@ -1518,11 +1514,10 @@ function updateMap() {
   document.getElementById('s-total').textContent  = total;
   document.getElementById('s-tennis').textContent = counts.tennis;
   document.getElementById('s-padel').textContent  = counts.padel;
+  const other = counts.school + counts.unknown + counts.residential;
   document.getElementById('access-stats').innerHTML = `
-    <span style="color:#9EEFE5;-webkit-text-stroke:.5px #3C474B">●</span> Free: <b>${counts.public}</b> &nbsp;
-    <span style="color:#4F7CAC">●</span> Permit: <b>${counts.permit}</b><br>
-    <span style="color:#7A9E8E">●</span> Reservable: <b>${counts.reservable}</b> &nbsp;
-    <span style="color:#8C705F">●</span> Members: <b>${counts.private}</b>
+    Free: <b>${counts.public}</b> &nbsp; Permit: <b>${counts.permit}</b><br>
+    Reservable: <b>${counts.reservable}</b> &nbsp; Members: <b>${counts.private}</b>${other > 0 ? `<br>Other: <b>${other}</b>` : ''}
   `;
 }
 
@@ -1953,6 +1948,52 @@ async function fetchNominatimSuggestions(query) {
   } catch { return []; }
 }
 
+function makeLegendSVG(fill, sport, indoor) {
+  const stroke  = '#162521';
+  const strings = fill === SURFACE_COLOR.hard ? 'rgba(255,255,255,0.75)' : stroke;
+  let racket;
+  if (sport === 'padel') {
+    racket = `<svg width="13" height="19" viewBox="0 0 18 26" xmlns="http://www.w3.org/2000/svg">
+      <rect x="1" y="1" width="16" height="15" rx="3.5" fill="${fill}" stroke="${stroke}" stroke-width="1.6"/>
+      <line x1="5"  y1="1.5" x2="5"  y2="15.5" stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="9"  y1="1"   x2="9"  y2="16"   stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="13" y1="1.5" x2="13" y2="15.5" stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="1"  y1="5.5" x2="17" y2="5.5"  stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="1"  y1="8.5" x2="17" y2="8.5"  stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="1"  y1="11.5" x2="17" y2="11.5" stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <rect x="7.5" y="16" width="3" height="9" rx="1.5" fill="${fill}" stroke="${stroke}" stroke-width="1.6"/>
+    </svg>`;
+  } else {
+    racket = `<svg width="13" height="19" viewBox="0 0 18 26" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="9" cy="9" rx="8" ry="8" fill="${fill}" stroke="${stroke}" stroke-width="1.6"/>
+      <line x1="2"  y1="6"  x2="16" y2="6"  stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="1"  y1="9"  x2="17" y2="9"  stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="2"  y1="12" x2="16" y2="12" stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="6"  y1="1"  x2="6"  y2="17" stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="9"  y1="1"  x2="9"  y2="17" stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <line x1="12" y1="1"  x2="12" y2="17" stroke="${strings}" stroke-width="0.7" opacity="0.6"/>
+      <rect x="7.5" y="17" width="3" height="8" rx="1.5" fill="${fill}" stroke="${stroke}" stroke-width="1.6"/>
+    </svg>`;
+  }
+  if (indoor) {
+    return `<span style="display:inline-flex;flex-direction:column;align-items:center;gap:2px;vertical-align:middle">
+      <span style="display:block;width:13px;height:2px;background:${stroke};border-radius:1px"></span>${racket}</span>`;
+  }
+  return `<span style="display:inline-block;vertical-align:middle">${racket}</span>`;
+}
+
+function initLegend() {
+  const blue = SURFACE_COLOR.hard;
+  document.getElementById('legend-tennis').outerHTML  = makeLegendSVG(blue,                  'tennis', false);
+  document.getElementById('legend-padel').outerHTML   = makeLegendSVG(blue,                  'padel',  false);
+  document.getElementById('legend-hard').outerHTML    = makeLegendSVG(SURFACE_COLOR.hard,    'tennis', false);
+  document.getElementById('legend-clay').outerHTML    = makeLegendSVG(SURFACE_COLOR.clay,    'tennis', false);
+  document.getElementById('legend-grass').outerHTML   = makeLegendSVG(SURFACE_COLOR.grass,   'tennis', false);
+  document.getElementById('legend-other').outerHTML   = makeLegendSVG(SURFACE_COLOR.other,   'tennis', false);
+  document.getElementById('legend-outdoor').outerHTML = makeLegendSVG(blue,                  'tennis', false);
+  document.getElementById('legend-indoor').outerHTML  = makeLegendSVG(blue,                  'tennis', true);
+}
+
 function initAddressAutocomplete() {
   const input    = document.getElementById('address-input');
   const results  = document.getElementById('address-results');
@@ -2116,6 +2157,7 @@ async function initMap() {
 
     initAddressAutocomplete();
     initSearch();
+    initLegend();
     updateMap();
   } catch (err) {
     document.getElementById('loading').innerHTML =
