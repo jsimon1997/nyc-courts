@@ -334,7 +334,7 @@
         padding: 10px 0 8px;
         background: #162521;
         border-radius: 20px 20px 0 0;
-        cursor: pointer;
+        cursor: grab;
         flex-shrink: 0;
       }
       #panel-chevron {
@@ -2072,10 +2072,52 @@ function initMobilePanel() {
   if (window.innerWidth > 600) return;
   const panel  = document.getElementById('panel');
   const handle = document.getElementById('panel-drag-handle');
-  const header = document.getElementById('panel-header');
-  function toggle() { panel.classList.toggle('mob-open'); }
-  handle.addEventListener('click', toggle);
-  header.addEventListener('click', toggle);
+
+  const PEEK = 80;   // must match CSS calc(100% - 80px)
+  let startY, startT, isDragging = false, wasDragged = false;
+
+  // TAP — wasDragged blocks the synthetic click browsers fire after a swipe
+  handle.addEventListener('click', () => {
+    if (wasDragged) { wasDragged = false; return; }
+    panel.classList.toggle('mob-open');
+  });
+
+  // TOUCH START — record position, freeze CSS transition
+  handle.addEventListener('touchstart', e => {
+    startY     = e.touches[0].clientY;
+    startT     = Date.now();
+    isDragging = false;
+    panel.style.transition = 'none';
+  }, { passive: true });
+
+  // TOUCH MOVE — panel follows finger live
+  handle.addEventListener('touchmove', e => {
+    const dy     = e.touches[0].clientY - startY;
+    const isOpen = panel.classList.contains('mob-open');
+    const panelH = panel.offsetHeight;
+    const base   = isOpen ? 0 : panelH - PEEK;
+    const next   = Math.max(0, Math.min(panelH - PEEK, base + dy));
+    panel.style.transform = `translateY(${next}px)`;
+    isDragging = Math.abs(dy) > 5;
+  }, { passive: true });
+
+  // TOUCH END — snap open or closed, re-enable animation
+  handle.addEventListener('touchend', e => {
+    if (!isDragging) return;
+    const dy       = e.changedTouches[0].clientY - startY;
+    const velocity = dy / (Date.now() - startT);   // px/ms
+
+    let shouldOpen = panel.classList.contains('mob-open');
+    if (velocity < -0.3 || dy < -60) shouldOpen = true;   // fast/far up
+    if (velocity >  0.3 || dy >  60) shouldOpen = false;  // fast/far down
+
+    panel.style.transform  = '';
+    panel.style.transition = '';
+    panel.classList.toggle('mob-open', shouldOpen);
+    isDragging = false;
+    wasDragged = true;
+    setTimeout(() => wasDragged = false, 300);
+  }, { passive: true });
 }
 
 function initAddressAutocomplete() {
