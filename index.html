@@ -321,7 +321,7 @@
         width: 100% !important;
         border-radius: 20px 20px 0 0;
         max-height: 75vh;
-        transform: translateY(calc(100% - 80px));
+        transform: translateY(calc(100% - 30vh));
         transition: transform .3s cubic-bezier(.25,.8,.25,1);
       }
       #panel.mob-open {
@@ -353,7 +353,7 @@
       }
       #panel.mob-open #panel-chevron { transform: rotate(180deg); }
       #panel-header { border-radius: 0 !important; }
-      #zoom-controls { bottom: 96px; right: 12px; }
+      #zoom-controls { bottom: calc(30vh + 12px); right: 12px; }
       /* Hide stats / hint section on mobile — panel ends at access filters */
       .divider, #stats-grid, #access-stats, #hint { display: none !important; }
       .zoom-btn {
@@ -2129,7 +2129,7 @@ function initMobilePanel() {
   const handle  = document.getElementById('panel-drag-handle');
   const header  = document.getElementById('panel-header');
 
-  const PEEK     = 80;   // must match CSS calc(100% - 80px)
+  const PEEK     = window.innerHeight * 0.30;   // must match CSS calc(100% - 30vh)
   const OPEN_Y   = 0;    // must match CSS translateY(0) for mob-open
   let startY, startT, isDragging = false, wasDragged = false;
 
