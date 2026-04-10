@@ -1499,7 +1499,7 @@ function buildPopup(court, accessType, website, note, nameOverride) {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-// DRIVE TIME (Nominatim geocode + OSRM table)
+// DRIVE TIME (Nominatim geocode + straight-line estimate)
 // ═══════════════════════════════════════════════════════════════════
 
 async function geocodeAddress(address) {
@@ -1524,59 +1524,15 @@ async function geocodeAddress(address) {
   return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
 }
 
-// Neighbourhood centroids — one OSRM call instead of batching every court
-const NYC_NEIGHBORHOODS = [
-  { lat: 40.710, lon: -74.008 },  // Lower Manhattan
-  { lat: 40.720, lon: -74.003 },  // Tribeca / SoHo
-  { lat: 40.735, lon: -74.000 },  // Greenwich Village / Chelsea
-  { lat: 40.748, lon: -73.990 },  // Midtown South
-  { lat: 40.758, lon: -73.985 },  // Midtown
-  { lat: 40.773, lon: -73.956 },  // Upper East Side
-  { lat: 40.780, lon: -73.980 },  // Upper West Side
-  { lat: 40.810, lon: -73.950 },  // Harlem
-  { lat: 40.850, lon: -73.935 },  // Washington Heights / Inwood
-  { lat: 40.830, lon: -73.910 },  // Bronx South
-  { lat: 40.870, lon: -73.880 },  // Bronx North
-  { lat: 40.715, lon: -73.955 },  // Williamsburg / Greenpoint
-  { lat: 40.695, lon: -73.985 },  // Downtown Brooklyn / DUMBO
-  { lat: 40.670, lon: -73.975 },  // Park Slope / Prospect Park
-  { lat: 40.675, lon: -73.940 },  // Bed-Stuy / Crown Heights
-  { lat: 40.640, lon: -73.955 },  // Flatbush / Midwood
-  { lat: 40.615, lon: -74.020 },  // Bay Ridge / Dyker
-  { lat: 40.620, lon: -73.920 },  // Canarsie / Marine Park
-  { lat: 40.755, lon: -73.930 },  // Long Island City / Astoria
-  { lat: 40.740, lon: -73.830 },  // Flushing / Corona
-  { lat: 40.710, lon: -73.840 },  // Forest Hills / Jamaica
-  { lat: 40.630, lon: -74.080 },  // Staten Island
-  { lat: 40.940, lon: -73.870 },  // Yonkers / Westchester
-  { lat: 40.790, lon: -74.130 },  // NJ (Bergen / Newark)
-  { lat: 40.793, lon: -73.921 },  // Randall's Island
-];
-
-function groupCourtsByNeighborhood(courts) {
+// Estimate drive time instantly from straight-line distance.
+// NYC average driving speed ~10 mph; route-factor 1.4× for road grid.
+// 10 mph × (1/1.4 route efficiency) ≈ 7.1 mph effective → 3.18 m/s
+// So: seconds ≈ haversineMeters / 3.2
+function getDriveTimes(homeLat, homeLon, courts) {
   return courts.map(court => {
-    let bestIdx = 0, bestDist = Infinity;
-    for (let i = 0; i < NYC_NEIGHBORHOODS.length; i++) {
-      const d = haversineMeters(court.lat, court.lon, NYC_NEIGHBORHOODS[i].lat, NYC_NEIGHBORHOODS[i].lon);
-      if (d < bestDist) { bestDist = d; bestIdx = i; }
-    }
-    return bestIdx;
+    const dist = haversineMeters(homeLat, homeLon, court.lat, court.lon);
+    return dist / 3.2;   // estimated seconds (no network call)
   });
-}
-
-async function getDriveTimes(homeLat, homeLon, courts) {
-  const coords = [
-    `${homeLon.toFixed(6)},${homeLat.toFixed(6)}`,
-    ...NYC_NEIGHBORHOODS.map(n => `${n.lon.toFixed(6)},${n.lat.toFixed(6)}`),
-  ].join(';');
-  const resp = await fetch(
-    `https://router.project-osrm.org/table/v1/driving/${coords}?sources=0&annotations=duration`
-  );
-  const data = await resp.json();
-  const raw  = data.durations?.[0] ?? [];
-  const centroidTimes = NYC_NEIGHBORHOODS.map((_, i) => raw[i + 1] ?? null);
-  const neighborhoodIdx = groupCourtsByNeighborhood(courts);
-  return neighborhoodIdx.map(ni => centroidTimes[ni]);
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -1686,7 +1642,7 @@ async function applyDriveFilter() {
       status.textContent = 'Fetching drive times…';
     }
 
-    const times = await getDriveTimes(lat, lon, allCourts);
+    const times = getDriveTimes(lat, lon, allCourts);
     driveFilter = times.map(t => t !== null && t <= driveMinutes * 60);
 
     const within = driveFilter.filter(Boolean).length;
