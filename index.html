@@ -364,12 +364,16 @@
     .racket-icon {
       background: none !important;
       border: none !important;
-      transition: transform .15s ease, filter .15s ease;
       cursor: pointer;
     }
-    .racket-icon:hover {
-      transform: scale(1.35) translateY(-2px);
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,.25));
+    @media (hover: hover) and (pointer: fine) {
+      .racket-icon { transition: transform .15s ease, filter .15s ease; }
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .racket-icon:hover {
+        transform: scale(1.35) translateY(-2px);
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,.25));
+      }
     }
 
     /* ── Popup photo header ──────────────────────────────────── */
@@ -1204,7 +1208,7 @@ const SURFACE_COLOR = {
   hard:  '#003087',
   clay:  '#C84E1C',
   grass: '#00703C',
-  other: '#9EAAB4',
+  other: '#7B4FA6',
 };
 const MARKER_STROKE = '#162521';
 
@@ -1515,22 +1519,59 @@ async function geocodeAddress(address) {
   return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
 }
 
+// Neighbourhood centroids — one OSRM call instead of batching every court
+const NYC_NEIGHBORHOODS = [
+  { lat: 40.710, lon: -74.008 },  // Lower Manhattan
+  { lat: 40.720, lon: -74.003 },  // Tribeca / SoHo
+  { lat: 40.735, lon: -74.000 },  // Greenwich Village / Chelsea
+  { lat: 40.748, lon: -73.990 },  // Midtown South
+  { lat: 40.758, lon: -73.985 },  // Midtown
+  { lat: 40.773, lon: -73.956 },  // Upper East Side
+  { lat: 40.780, lon: -73.980 },  // Upper West Side
+  { lat: 40.810, lon: -73.950 },  // Harlem
+  { lat: 40.850, lon: -73.935 },  // Washington Heights / Inwood
+  { lat: 40.830, lon: -73.910 },  // Bronx South
+  { lat: 40.870, lon: -73.880 },  // Bronx North
+  { lat: 40.715, lon: -73.955 },  // Williamsburg / Greenpoint
+  { lat: 40.695, lon: -73.985 },  // Downtown Brooklyn / DUMBO
+  { lat: 40.670, lon: -73.975 },  // Park Slope / Prospect Park
+  { lat: 40.675, lon: -73.940 },  // Bed-Stuy / Crown Heights
+  { lat: 40.640, lon: -73.955 },  // Flatbush / Midwood
+  { lat: 40.615, lon: -74.020 },  // Bay Ridge / Dyker
+  { lat: 40.620, lon: -73.920 },  // Canarsie / Marine Park
+  { lat: 40.755, lon: -73.930 },  // Long Island City / Astoria
+  { lat: 40.740, lon: -73.830 },  // Flushing / Corona
+  { lat: 40.710, lon: -73.840 },  // Forest Hills / Jamaica
+  { lat: 40.630, lon: -74.080 },  // Staten Island
+  { lat: 40.940, lon: -73.870 },  // Yonkers / Westchester
+  { lat: 40.790, lon: -74.130 },  // NJ (Bergen / Newark)
+  { lat: 40.793, lon: -73.921 },  // Randall's Island
+];
+
+function groupCourtsByNeighborhood(courts) {
+  return courts.map(court => {
+    let bestIdx = 0, bestDist = Infinity;
+    for (let i = 0; i < NYC_NEIGHBORHOODS.length; i++) {
+      const d = haversineMeters(court.lat, court.lon, NYC_NEIGHBORHOODS[i].lat, NYC_NEIGHBORHOODS[i].lon);
+      if (d < bestDist) { bestDist = d; bestIdx = i; }
+    }
+    return bestIdx;
+  });
+}
+
 async function getDriveTimes(homeLat, homeLon, courts) {
-  const BATCH = 99;
-  const results = new Array(courts.length).fill(null);
-  for (let i = 0; i < courts.length; i += BATCH) {
-    const slice  = courts.slice(i, i + BATCH);
-    const coords = [
-      `${homeLon.toFixed(6)},${homeLat.toFixed(6)}`,
-      ...slice.map(c => `${c.lon.toFixed(6)},${c.lat.toFixed(6)}`),
-    ].join(';');
-    const resp = await fetch(
-      `https://router.project-osrm.org/table/v1/driving/${coords}?sources=0&annotations=duration`
-    );
-    const data = await resp.json();
-    data.durations?.[0]?.slice(1).forEach((dur, j) => { results[i + j] = dur; });
-  }
-  return results;
+  const coords = [
+    `${homeLon.toFixed(6)},${homeLat.toFixed(6)}`,
+    ...NYC_NEIGHBORHOODS.map(n => `${n.lon.toFixed(6)},${n.lat.toFixed(6)}`),
+  ].join(';');
+  const resp = await fetch(
+    `https://router.project-osrm.org/table/v1/driving/${coords}?sources=0&annotations=duration`
+  );
+  const data = await resp.json();
+  const raw  = data.durations?.[0] ?? [];
+  const centroidTimes = NYC_NEIGHBORHOODS.map((_, i) => raw[i + 1] ?? null);
+  const neighborhoodIdx = groupCourtsByNeighborhood(courts);
+  return neighborhoodIdx.map(ni => centroidTimes[ni]);
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -1872,16 +1913,17 @@ function makeRacketIcon(surface, sport, indoor) {
   const strings  = whiteStr ? 'rgba(255,255,255,0.9)' : stroke;
   const svg = _racketSVG(fill, strings, stroke, sport, 13, 20);
 
-  const indoorLine = indoor
-    ? `<div style="width:13px;height:2px;background:${stroke};border-radius:1px;margin-bottom:2px"></div>`
-    : '';
+  // Indoor: rotate 45° to visually distinguish from outdoor courts
+  const wrap = indoor
+    ? `<div style="display:inline-block;transform:rotate(45deg);transform-origin:center center">${svg}</div>`
+    : svg;
 
   return L.divIcon({
-    html:        `<div style="display:flex;flex-direction:column;align-items:center">${indoorLine}${svg}</div>`,
+    html:        `<div style="display:flex;align-items:center;justify-content:center">${wrap}</div>`,
     className:   'racket-icon',
-    iconSize:    [13, indoor ? 24 : 20],
-    iconAnchor:  [6, indoor ? 24 : 20],
-    popupAnchor: [0, indoor ? -26 : -22],
+    iconSize:    [20, 20],
+    iconAnchor:  [10, 10],
+    popupAnchor: [0, -14],
   });
 }
 
@@ -2050,8 +2092,7 @@ function makeLegendSVG(fill, sport, indoor) {
   const strings  = whiteStr ? 'rgba(255,255,255,0.9)' : stroke;
   const racket   = _racketSVG(fill, strings, stroke, sport, 20, 29);
   if (indoor) {
-    return `<span style="display:inline-flex;flex-direction:column;align-items:center;gap:2px;vertical-align:middle;margin-right:6px">
-      <span style="display:block;width:20px;height:2px;background:${stroke};border-radius:1px"></span>${racket}</span>`;
+    return `<span style="display:inline-block;vertical-align:middle;margin-right:6px;transform:rotate(45deg);transform-origin:center center">${racket}</span>`;
   }
   return `<span style="display:inline-block;vertical-align:middle;margin-right:6px">${racket}</span>`;
 }
