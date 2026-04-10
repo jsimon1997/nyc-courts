@@ -320,12 +320,12 @@
         right: 0;
         width: 100% !important;
         border-radius: 20px 20px 0 0;
-        max-height: 85vh;
+        max-height: 75vh;
         transform: translateY(calc(100% - 80px));
         transition: transform .3s cubic-bezier(.25,.8,.25,1);
       }
       #panel.mob-open {
-        transform: translateY(16px);
+        transform: translateY(0);
       }
       #panel-drag-handle {
         display: flex;
@@ -1912,8 +1912,7 @@ function _racketSVG(fill, strings, stroke, sport, w, h) {
 function makeRacketIcon(surface, sport, indoor) {
   const fill    = SURFACE_COLOR[surface] || SURFACE_COLOR.other;
   const stroke  = MARKER_STROKE;
-  const whiteStr = surface === 'hard' || surface === 'clay' || surface === 'grass' || surface === 'other';
-  const strings  = whiteStr ? 'rgba(255,255,255,0.9)' : stroke;
+  const strings  = 'rgba(255,255,255,0.9)';   // white strings on all colored fills
   const svg = _racketSVG(fill, strings, stroke, sport, 13, 20);
 
   // Indoor: draw a short line above the racket head (like a ceiling / roof)
@@ -2129,7 +2128,7 @@ function initMobilePanel() {
   const header  = document.getElementById('panel-header');
 
   const PEEK     = 80;   // must match CSS calc(100% - 80px)
-  const OPEN_Y   = 16;   // must match CSS translateY(16px) for mob-open
+  const OPEN_Y   = 0;    // must match CSS translateY(0) for mob-open
   let startY, startT, isDragging = false, wasDragged = false;
 
   // TAP on handle — wasDragged blocks the synthetic click browsers fire after a swipe
