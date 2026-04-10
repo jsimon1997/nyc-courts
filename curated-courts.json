@@ -138,12 +138,14 @@
                           "match":  "stadium tennis center",
                           "access":  "reservable",
                           "indoor":  true,
-                          "website":  "https://www.stadiumtenniscenter.com",
-                          "hours":  "Daily 6am-11pm",
-                          "phone":  "(718) 328-7070",
+                          "website":  "https://www.stadiumtennisnyc.com",
+                          "hours":  "Daily 8am-10pm",
+                          "phone":  "(718) 665-4684",
+                          "bookingUrl":  "https://www.catchcorner.com/facility-page/embedded/rental/stadium-tennis-nyc",
+                          "bookingApp":  "CatchCorner",
                           "courts":  12,
-                          "note":  "725 Gateway Blvd, Hunts Point, Bronx. 12 indoor hard courts. Book by the hour - no membership required.",
-                          "address":  "725 Gateway Center Blvd, Bronx, NY 10451, USA"
+                          "note":  "725 Exterior St, Mill Pond Park, Bronx. 12 indoor hard courts (dome, Oct-Apr) + 4 outdoor. Book online via CatchCorner - no membership required.",
+                          "address":  "725 Exterior St, Bronx, NY 10451, USA"
                       },
                       {
                           "match":  "parkwood",
@@ -153,25 +155,25 @@
                           "courts":  4,
                           "phone":  "(516) 487-4673",
                           "hours":  "Daily 7am-11pm",
-                          "note":  "65 Arrandale Ave, Great Neck, NY. 4 indoor hard courts. Pay-to-play - book by the hour. Part of Great Neck Park District.",
+                          "bookingUrl":  "https://secure.rec1.com/NY/great-neck-park-district-ny/catalog",
+                          "note":  "65 Arrandale Ave, Great Neck, NY. 4 indoor Har-Tru courts + 5 outdoor. Pay-to-play - book online. Part of Great Neck Park District.",
                           "address":  "65 Arrandale Ave, Great Neck, NY 11024"
                       },
                       {
                           "match":  "sound shore",
-                          "access":  "reservable",
-                          "indoor":  true,
-                          "website":  "https://www.soundshoretennis.com",
-                          "courts":  8,
-                          "note":  "2850 E Main St, Mohegan Lake, Westchester. 8 indoor hard courts. No membership required.",
-                          "address":  "2850 E Main St, Mohegan Lake, NY 10547"
+                          "remove":  true
                       },
                       {
                           "match":  "yonkers tennis center",
                           "access":  "reservable",
                           "indoor":  true,
-                          "website":  "https://www.yonkerstenniscenter.com",
-                          "courts":  8,
-                          "note":  "Yonkers, Westchester. 8 indoor hard courts. Book by the hour.",
+                          "website":  "https://yonkerstennis.com",
+                          "hours":  "Mon-Thu 7am-11pm, Fri 7am-8pm, Sat 7am-9pm, Sun 7am-10pm",
+                          "phone":  "(914) 968-6918",
+                          "bookingUrl":  "https://www.catchcorner.com/facility-page/embedded/rental/yonkers-tennis-club",
+                          "bookingApp":  "CatchCorner",
+                          "courts":  6,
+                          "note":  "493 Sprain Rd, Yonkers. 6 indoor Plexicushion hard courts. Book online via CatchCorner - no membership required.",
                           "address":  "493 Sprain Rd, Yonkers, NY 10710, USA"
                       },
                       {
@@ -549,9 +551,11 @@
                       {
                           "match":  "riverbank state park tennis",
                           "access":  "permit",
-                          "website":  "https://parks.ny.gov/parks/84",
+                          "website":  "https://parks.ny.gov/parks/93",
                           "hours":  "Apr-Nov: 7am-8pm daily (seasonal)",
-                          "note":  "Riverbank State Park, W 145th St \u0026 Hudson River. 3 outdoor hard courts. OPRHP permit required (NY State parks).",
+                          "phone":  "(212) 694-3637",
+                          "bookingUrl":  "https://parks.ny.gov/documents/parks/RiverbankATHLETICSTennisCourtApplicationandRulesRegulations.pdf",
+                          "note":  "Riverbank State Park (Denny Farrell), W 145th St. 3 outdoor hard courts. NY State permit required - call (212) 694-3637 or download application to reserve.",
                           "address":  "679 Riverside Dr, New York, NY 10031, USA"
                       },
                       {
@@ -1382,7 +1386,8 @@
                                "courts":  4,
                                "hours":  "Daily 7am-11pm",
                                "phone":  "(516) 487-4673",
-                               "note":  "65 Arrandale Ave, Great Neck, NY. 4 indoor hard courts. Pay-to-play - book by the hour. Part of Great Neck Park District.",
+                               "bookingUrl":  "https://secure.rec1.com/NY/great-neck-park-district-ny/catalog",
+                               "note":  "65 Arrandale Ave, Great Neck, NY. 4 indoor Har-Tru courts + 5 outdoor. Pay-to-play - book online. Part of Great Neck Park District.",
                                "website":  "https://www.gnparksny.gov/facilities/facility/details/Parkwood-Tennis-Center-25",
                                "address":  "65 Arrandale Ave, Great Neck, NY 11024, USA"
                            },
@@ -1395,10 +1400,13 @@
                                "indoor":  true,
                                "accessType":  "reservable",
                                "courts":  5,
-                               "hours":  "Daily - call for hours",
-                               "note":  "212-00 23rd Ave, Bayside, Queens. 5 indoor hard courts. Managed by Commonpoint Queens.",
-                               "website":  "https://www.tennisnewyork.com/court_detail/queens-bay-terrace-tennis-club",
-                               "address":  "217-14 24th Ave, Bayside, NY 11360, USA"
+                               "hours":  "Mon-Sun 6am-midnight",
+                               "phone":  "(718) 229-5151",
+                               "bookingUrl":  "https://www.catchcorner.com/facility-page/embedded/rental/commonpoint-queens-bay-terrace-pool-and-athletic-complex",
+                               "bookingApp":  "CatchCorner",
+                               "note":  "212-00 23rd Ave, Bayside, Queens. 5 indoor hard courts. Managed by Commonpoint Queens. Book online via CatchCorner.",
+                               "website":  "https://www.commonpoint.org/health-wellness/tennis",
+                               "address":  "212-00 23rd Ave, Bayside, NY 11360, USA"
                            },
                            {
                                "lat":  40.8240754,
@@ -1409,25 +1417,13 @@
                                "indoor":  true,
                                "accessType":  "reservable",
                                "courts":  12,
-                               "hours":  "Daily 6am-11pm",
-                               "phone":  "(718) 328-7070",
-                               "note":  "725 Gateway Blvd, Hunts Point, Bronx. 12 indoor hard courts. Book by the hour - no membership required.",
-                               "website":  "https://www.stadiumtenniscenter.com",
-                               "address":  "725 Gateway Center Blvd, Bronx, NY 10451, USA"
-                           },
-                           {
-                               "lat":  41.3360,
-                               "lon":  -73.8540,
-                               "name":  "Sound Shore Indoor Tennis",
-                               "address":  "2850 E Main St, Mohegan Lake, NY 10547",
-                               "sport":  "tennis",
-                               "surface":  "hard",
-                               "indoor":  true,
-                               "accessType":  "reservable",
-                               "courts":  8,
-                               "hours":  "Mon-Fri 6am-11pm, Sat-Sun 7am-10pm",
-                               "note":  "Mohegan Lake, Westchester. 8 indoor hard courts. No membership required.",
-                               "website":  "https://www.soundshoretennis.com"
+                               "hours":  "Daily 8am-10pm",
+                               "phone":  "(718) 665-4684",
+                               "bookingUrl":  "https://www.catchcorner.com/facility-page/embedded/rental/stadium-tennis-nyc",
+                               "bookingApp":  "CatchCorner",
+                               "note":  "725 Exterior St, Mill Pond Park, Bronx. 12 indoor hard courts (dome, Oct-Apr) + 4 outdoor. Book online via CatchCorner - no membership required.",
+                               "website":  "https://www.stadiumtennisnyc.com",
+                               "address":  "725 Exterior St, Bronx, NY 10451, USA"
                            },
                            {
                                "lat":  40.970557,
@@ -1437,10 +1433,13 @@
                                "surface":  "hard",
                                "indoor":  true,
                                "accessType":  "reservable",
-                               "courts":  8,
-                               "hours":  "Mon-Fri 6am-11pm, Sat-Sun 7am-10pm",
-                               "note":  "Yonkers, Westchester. 8 indoor hard courts. Book by the hour.",
-                               "website":  "https://www.yonkerstenniscenter.com",
+                               "courts":  6,
+                               "hours":  "Mon-Thu 7am-11pm, Fri 7am-8pm, Sat 7am-9pm, Sun 7am-10pm",
+                               "phone":  "(914) 968-6918",
+                               "bookingUrl":  "https://www.catchcorner.com/facility-page/embedded/rental/yonkers-tennis-club",
+                               "bookingApp":  "CatchCorner",
+                               "note":  "493 Sprain Rd, Yonkers. 6 indoor Plexicushion hard courts. Book online via CatchCorner - no membership required.",
+                               "website":  "https://yonkerstennis.com",
                                "address":  "493 Sprain Rd, Yonkers, NY 10710, USA"
                            },
                            {
@@ -1460,15 +1459,16 @@
                                "lat":  40.8354,
                                "lon":  -74.0026,
                                "name":  "Bergen County Tennis Center",
-                               "address":  "Overpeck County Park, Leonia, NJ 07605",
+                               "address":  "40 Fort Lee Rd, Leonia, NJ 07605",
                                "sport":  "tennis",
                                "surface":  "hard",
                                "indoor":  false,
-                               "accessType":  "reservable",
-                               "courts":  12,
-                               "hours":  "Year-round",
-                               "note":  "Overpeck County Park, Leonia, NJ. 12 indoor/outdoor courts. County-run pay-to-play. No membership required.",
-                               "website":  "https://www.bergencountytennis.com"
+                               "accessType":  "public",
+                               "courts":  4,
+                               "hours":  "Daily 8am-9pm",
+                               "phone":  "(201) 336-7275",
+                               "note":  "Overpeck County Park, Leonia, NJ. 4 lighted outdoor hard courts. First come, first served - no advance booking. County-run, no membership required.",
+                               "website":  "https://bergencountynj.gov/bergen-county-department-of-parks/overpeck-county-park/"
                            },
                            {
                                "lat":  40.7791052,
@@ -1478,10 +1478,11 @@
                                "surface":  "hard",
                                "indoor":  false,
                                "accessType":  "public",
-                               "courts":  33,
-                               "hours":  "Daily 8am-dusk",
-                               "note":  "Branch Brook Park, Newark NJ. 33 outdoor DecoTurf cushioned courts. Named for Althea Gibson. Open to public - book through Essex County Parks.",
-                               "website":  "https://www.essexcountyparks.org",
+                               "courts":  20,
+                               "hours":  "Daily 7am-9pm",
+                               "phone":  "(973) 575-1000",
+                               "note":  "Branch Brook Park, Newark NJ. 20 outdoor courts (16 hard + 4 clay). Named for Althea Gibson. Open to public - first come first served. Operated in partnership with Greater Newark Tennis & Education.",
+                               "website":  "https://branchbrookpark.org/athletics.html",
                                "address":  "173-235 Heller Pkwy, Newark, NJ 07104, USA"
                            }
                        ],
