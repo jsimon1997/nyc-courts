@@ -143,6 +143,27 @@
       border-top: 1px solid #f0f0f0; text-align: right;
       background: #fafafa; letter-spacing: .01em;
     }
+    /* ── Use my location button ─────────────────────────────── */
+    #locate-btn {
+      width: 100%; margin-bottom: 8px;
+      padding: 9px 14px; border-radius: 10px;
+      background: #f0f4ff; border: 1px solid #c7d2fe;
+      color: #4338ca; font-size: 13px; font-weight: 500;
+      font-family: inherit; cursor: pointer; text-align: center;
+      transition: background .15s, border-color .15s;
+    }
+    #locate-btn:hover  { background: #e0e7ff; border-color: #a5b4fc; }
+    #locate-btn:active { background: #c7d2fe; }
+    #locate-btn:disabled { opacity: .5; cursor: wait; }
+
+    /* ── Reset filters button ────────────────────────────────── */
+    #filter-reset-btn {
+      font-size: 11px; color: #6366f1; background: none; border: none;
+      cursor: pointer; padding: 0; font-family: inherit;
+      text-decoration: underline; white-space: nowrap;
+    }
+    #filter-reset-btn:hover { color: #4338ca; }
+
     #address-btn {
       background: #162521;
       color: white; border: none;
@@ -330,6 +351,20 @@
       #panel.mob-open {
         transform: translateY(0);
       }
+      /* Separate the non-scrolling handle from the scrollable content so
+         overflow: hidden on #panel clips the white bg to the rounded shape
+         without killing the inner scroll */
+      #panel {
+        overflow: hidden !important;
+        display: flex;
+        flex-direction: column;
+      }
+      #panel-scroll {
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-y: contain;
+      }
       #panel-drag-handle {
         display: flex;
         justify-content: center;
@@ -339,9 +374,6 @@
         border-radius: 20px 20px 0 0;
         cursor: grab;
         flex-shrink: 0;
-        position: sticky;
-        top: 0;
-        z-index: 5;
       }
       #panel-chevron {
         display: flex !important;
@@ -428,6 +460,7 @@
   <div id="panel-drag-handle">
     <span id="panel-chevron">▲</span>
   </div>
+  <div id="panel-scroll">
   <div id="panel-header">
     <h2>NYC Courts</h2>
     <p>Manhattan · Brooklyn · Queens · Bronx</p>
@@ -443,6 +476,7 @@
 
     <div class="section-label">Drive Time Filter</div>
     <p class="section-hint">See which courts are within driving distance of your home or office</p>
+    <button id="locate-btn" onclick="useMyLocation()">📍 Use my location</button>
     <div id="address-wrap">
       <div id="address-input-wrap">
         <input id="address-input" type="text" placeholder="e.g. 350 W 42nd St, NY" autocomplete="off">
@@ -459,6 +493,12 @@
       <div id="drive-active-banner"></div>
       <span id="address-clear" onclick="clearDriveFilter()">✕ Remove filter</span>
       <div id="address-status"></div>
+    </div>
+
+    <!-- Filters header with reset -->
+    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:18px">
+      <div class="section-label" style="margin-top:0">Filters</div>
+      <button id="filter-reset-btn" onclick="resetFilters()">Reset all</button>
     </div>
 
     <!-- Sport + Location side by side -->
@@ -559,6 +599,7 @@
 
     <div id="hint">💡 Click a marker for details.<br>Double-click to open its website.</div>
   </div>
+  </div><!-- /panel-scroll -->
 </div>
 
 <!-- Zoom controls -->
@@ -1665,6 +1706,60 @@ async function applyDriveFilter() {
     btn.disabled = false;
     btn.textContent = 'Filter by drive time';
   }
+}
+
+function useMyLocation() {
+  if (!navigator.geolocation) {
+    document.getElementById('address-status').textContent = 'Geolocation not supported on this browser';
+    document.getElementById('address-status').className = 'error';
+    return;
+  }
+  const btn    = document.getElementById('locate-btn');
+  const status = document.getElementById('address-status');
+  btn.disabled = true;
+  btn.textContent = '⌛ Getting location…';
+  status.textContent = '';
+  status.className = '';
+
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+      btn.disabled = false;
+      btn.textContent = '📍 Use my location';
+
+      placeHomePin(lat, lon, 'Your location');
+      gmap.flyTo([lat, lon], 13);
+
+      const times = getDriveTimes(lat, lon, allCourts);
+      driveFilter  = times.map(t => t !== null && t <= driveMinutes * 60);
+
+      const within = driveFilter.filter(Boolean).length;
+      status.textContent = `${within} facilit${within !== 1 ? 'ies' : 'y'} within ${driveMinutes} min`;
+      status.className = 'ok';
+      document.getElementById('address-clear').style.display = 'block';
+      const banner = document.getElementById('drive-active-banner');
+      banner.textContent = `Within ${driveMinutes} min of your location`;
+      banner.style.display = 'block';
+      updateMap();
+    },
+    () => {
+      btn.disabled = false;
+      btn.textContent = '📍 Use my location';
+      status.textContent = 'Location access denied — try typing your address';
+      status.className = 'error';
+    },
+    { enableHighAccuracy: false, timeout: 8000 }
+  );
+}
+
+function resetFilters() {
+  ['f-tennis','f-padel','f-public','f-permit','f-reservable','f-private',
+   'f-school','f-unknown','f-residential','f-clay','f-hard','f-grass',
+   'f-surface-other','f-indoor','f-outdoor'].forEach(id => {
+    document.getElementById(id).checked = true;
+  });
+  updateMap();
 }
 
 function clearDriveFilter() {
