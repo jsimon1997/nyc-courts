@@ -336,14 +336,15 @@
                       {
                           "match":  "sportime",
                           "access":  "reservable",
-                          "website":  "https://www.sportimeny.com/manhattan",
+                          "website":  "https://www.sportimeny.com/nyc/program/289",
                           "hours":  "Daily 6:30am-11pm",
-                          "phone":  "(212) 427-6150",
-                          "bookingUrl":  "https://www.sportimeny.com/manhattan",
+                          "phone":  "(212) 915-9330",
+                          "bookingUrl":  "https://www.sportimeny.com/nyc/program/289",
+                          "bookingApp":  "Email nyc@sportimeny.com or text (212) 915-9330",
                           "photo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Randalls_Island_tennis_courts_jeh.jpg/1280px-Randalls_Island_tennis_courts_jeh.jpg",
                           "courts":  30,
-                          "note":  "Randall\u0027s Island. Home of John McEnroe Tennis Academy. 30+ courts. Non-members can book at sportimeny.com.",
-                          "address":  "1 RandallΓÇÖs Island, New York, NY 10035, USA"
+                          "note":  "Randall\u0027s Island. Home of John McEnroe Tennis Academy. 30+ courts. Book online or contact nyc@sportimeny.com / text (212) 915-9330.",
+                          "address":  "1 Randall's Island, New York, NY 10035, USA"
                       },
                       {
                           "match":  "john mcenroe \u002777",
@@ -355,14 +356,15 @@
                       {
                           "match":  "john mcenroe",
                           "access":  "reservable",
-                          "website":  "https://www.sportimeny.com/manhattan",
+                          "website":  "https://www.sportimeny.com/nyc/program/289",
                           "hours":  "Daily 6:30am-11pm",
-                          "phone":  "(212) 427-6150",
-                          "bookingUrl":  "https://www.sportimeny.com/manhattan",
+                          "phone":  "(212) 915-9330",
+                          "bookingUrl":  "https://www.sportimeny.com/nyc/program/289",
+                          "bookingApp":  "Email nyc@sportimeny.com or text (212) 915-9330",
                           "photo":  "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Randalls_Island_tennis_courts_jeh.jpg/1280px-Randalls_Island_tennis_courts_jeh.jpg",
                           "courts":  30,
-                          "note":  "Randall\u0027s Island. Home of John McEnroe Tennis Academy. 30+ courts. Non-members can book at sportimeny.com.",
-                          "address":  "1 RandallΓÇÖs Island, New York, NY 10035, USA"
+                          "note":  "Randall\u0027s Island. Home of John McEnroe Tennis Academy. 30+ courts. Book online or contact nyc@sportimeny.com / text (212) 915-9330.",
+                          "address":  "1 Randall's Island, New York, NY 10035, USA"
                       },
                       {
                           "match":  "hudson river park tennis",
