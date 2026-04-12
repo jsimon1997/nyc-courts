@@ -1831,6 +1831,7 @@ function buildCourts(elements) {
         // If geocoded name matches a removed override, hide this unnamed court
         if (findOverride(geo.name)?.remove) { marker.remove(); return; }
         court.resolvedName = geo.name; updated = true;
+        if (court.marker.isPopupOpen()) history.replaceState(null, '', `#court=${encodeURIComponent(geo.name)}`);
       }
       if (needsAddress && geo.address) { court.resolvedAddress = geo.address; updated = true; }
       if (updated) marker.setPopupContent(buildPopup(court, accessType, website, note));
@@ -2362,7 +2363,7 @@ async function initMap() {
   // Deep link: update URL hash when a popup opens/closes
   gmap.on('popupopen', (e) => {
     const court = allCourts.find(c => c.marker.getPopup() === e.popup);
-    if (court) history.replaceState(null, '', `#court=${court.lat.toFixed(5)},${court.lon.toFixed(5)}`);
+    if (court) history.replaceState(null, '', `#court=${encodeURIComponent(resolveName(court))}`);
   });
   gmap.on('popupclose', () => {
     history.replaceState(null, '', window.location.pathname + window.location.search);
@@ -2388,12 +2389,12 @@ async function initMap() {
 
     buildCourts(elements);
 
-    // Deep link: if URL has #court=lat,lon, fly to that court and open its popup
-    const hashMatch = window.location.hash.match(/^#court=([0-9.-]+),([0-9.-]+)$/);
+    // Deep link: if URL has #court=name, fly to that court and open its popup
+    const hashMatch = window.location.hash.match(/#court=(.+)/);
     if (hashMatch) {
-      const lat = parseFloat(hashMatch[1]), lon = parseFloat(hashMatch[2]);
-      const court = allCourts.find(c => Math.abs(c.lat - lat) < 0.0001 && Math.abs(c.lon - lon) < 0.0001);
-      if (court) { gmap.flyTo([lat, lon], 15); gmap.once('moveend', () => court.marker.fire('click')); }
+      const courtName = decodeURIComponent(hashMatch[1]);
+      const court = allCourts.find(c => resolveName(c) === courtName);
+      if (court) { gmap.flyTo([court.lat, court.lon], 15); gmap.once('moveend', () => court.marker.fire('click')); }
     }
     document.getElementById('loading').style.display = 'none';
 
