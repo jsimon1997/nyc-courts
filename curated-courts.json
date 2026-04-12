@@ -335,8 +335,9 @@
                       },
                       {
                           "match":  "sportime",
+                          "name":  "Sporttime / John McEnroe Tennis Academy",
                           "access":  "reservable",
-                          "website":  "https://www.sportimeny.com/nyc/program/289",
+                          "website":  "https://www.johnmcenroetennisacademy.com/",
                           "hours":  "Daily 6:30am-11pm",
                           "phone":  "(212) 915-9330",
                           "bookingUrl":  "https://www.sportimeny.com/nyc/program/289",
@@ -355,8 +356,9 @@
                       },
                       {
                           "match":  "john mcenroe",
+                          "name":  "Sporttime / John McEnroe Tennis Academy",
                           "access":  "reservable",
-                          "website":  "https://www.sportimeny.com/nyc/program/289",
+                          "website":  "https://www.johnmcenroetennisacademy.com/",
                           "hours":  "Daily 6:30am-11pm",
                           "phone":  "(212) 915-9330",
                           "bookingUrl":  "https://www.sportimeny.com/nyc/program/289",
