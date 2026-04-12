@@ -2359,6 +2359,15 @@ async function initMap() {
   document.getElementById('zoom-in') .addEventListener('click', () => gmap.setZoom(gmap.getZoom() + 1));
   document.getElementById('zoom-out').addEventListener('click', () => gmap.setZoom(gmap.getZoom() - 1));
 
+  // Deep link: update URL hash when a popup opens/closes
+  gmap.on('popupopen', (e) => {
+    const court = allCourts.find(c => c.marker.getPopup() === e.popup);
+    if (court) history.replaceState(null, '', `#court=${court.lat.toFixed(5)},${court.lon.toFixed(5)}`);
+  });
+  gmap.on('popupclose', () => {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  });
+
   try {
     // Load OSM court data and curated overrides/courts in parallel
     const [elements, curated] = await Promise.all([
@@ -2378,6 +2387,14 @@ async function initMap() {
     }
 
     buildCourts(elements);
+
+    // Deep link: if URL has #court=lat,lon, fly to that court and open its popup
+    const hashMatch = window.location.hash.match(/^#court=([0-9.-]+),([0-9.-]+)$/);
+    if (hashMatch) {
+      const lat = parseFloat(hashMatch[1]), lon = parseFloat(hashMatch[2]);
+      const court = allCourts.find(c => Math.abs(c.lat - lat) < 0.0001 && Math.abs(c.lon - lon) < 0.0001);
+      if (court) { gmap.flyTo([lat, lon], 15); gmap.once('moveend', () => court.marker.fire('click')); }
+    }
     document.getElementById('loading').style.display = 'none';
 
     ['f-tennis','f-padel','f-public','f-permit','f-reservable','f-private','f-school','f-unknown','f-residential',
