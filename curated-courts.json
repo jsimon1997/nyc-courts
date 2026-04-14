@@ -857,7 +857,71 @@
     448775719,
     448775718,
     448775713,
-    448775710
+    448775710,
+    26615871,
+    1057223620,
+    1057223621,
+    1057223622,
+    1057223623,
+    180508842,
+    180508845,
+    180508847,
+    283844038,
+    853299872,
+    908944898,
+    908944899,
+    902551430,
+    902551431,
+    902551433,
+    902551434,
+    902551435,
+    902551436,
+    902551437,
+    902551438,
+    295640605,
+    415467338,
+    415467340,
+    415467342,
+    415467344,
+    1069716569,
+    404120662,
+    404120663,
+    404120664,
+    404120665,
+    404120666,
+    404120667,
+    404120668,
+    404120669,
+    270270775,
+    270270776,
+    270270777,
+    270270778,
+    270270779,
+    270270780,
+    270270781,
+    270270782,
+    413654407,
+    413654408,
+    413654409,
+    413654410,
+    413654411,
+    413654412,
+    1223282498,
+    1223282499,
+    1223282500,
+    1223282501,
+    1223282502,
+    1223282503,
+    1223282504,
+    1223282505,
+    1223282506,
+    1223282507,
+    1485873352,
+    1485873353,
+    1485873354,
+    1485873355,
+    1485873356,
+    1202082412
   ],
   "id_overrides": {
     "164720437": {
@@ -1807,17 +1871,11 @@
     },
     "415705940": {
       "name": "Prospect Park Tennis Center",
-      "access": "reservable",
-      "website": "https://www.prospectpark.org/tennis-center",
-      "address": "50 Parkside Ave, Brooklyn, NY 11218",
-      "note": "Year-round indoor and outdoor clay courts. Reserve online or call (718) 436-2500."
+      "access": "customers"
     },
     "415705943": {
       "name": "Prospect Park Tennis Center",
-      "access": "reservable",
-      "website": "https://www.prospectpark.org/tennis-center",
-      "address": "50 Parkside Ave, Brooklyn, NY 11218",
-      "note": "Year-round indoor and outdoor clay courts. Reserve online or call (718) 436-2500."
+      "access": "customers"
     },
     "241816251": {
       "name": "Prospect Park Tennis Center",
@@ -1828,66 +1886,39 @@
     },
     "415705945": {
       "name": "Prospect Park Tennis Center",
-      "access": "reservable",
-      "website": "https://www.prospectpark.org/tennis-center",
-      "address": "50 Parkside Ave, Brooklyn, NY 11218",
-      "note": "Year-round indoor and outdoor clay courts. Reserve online or call (718) 436-2500."
+      "access": "customers"
     },
     "241816249": {
       "name": "Prospect Park Tennis Center",
-      "access": "reservable",
-      "website": "https://www.prospectpark.org/tennis-center",
-      "address": "50 Parkside Ave, Brooklyn, NY 11218",
-      "note": "Year-round indoor and outdoor clay courts. Reserve online or call (718) 436-2500."
+      "access": "customers"
     },
     "415705947": {
       "name": "Prospect Park Tennis Center",
-      "access": "reservable",
-      "website": "https://www.prospectpark.org/tennis-center",
-      "address": "50 Parkside Ave, Brooklyn, NY 11218",
-      "note": "Year-round indoor and outdoor clay courts. Reserve online or call (718) 436-2500."
+      "access": "customers"
     },
     "415705929": {
       "name": "Prospect Park Tennis Center",
-      "access": "reservable",
-      "website": "https://www.prospectpark.org/tennis-center",
-      "address": "50 Parkside Ave, Brooklyn, NY 11218",
-      "note": "Year-round indoor and outdoor clay courts. Reserve online or call (718) 436-2500."
+      "access": "customers"
     },
     "415705949": {
       "name": "Prospect Park Tennis Center",
-      "access": "reservable",
-      "website": "https://www.prospectpark.org/tennis-center",
-      "address": "50 Parkside Ave, Brooklyn, NY 11218",
-      "note": "Year-round indoor and outdoor clay courts. Reserve online or call (718) 436-2500."
+      "access": "customers"
     },
     "415705931": {
       "name": "Prospect Park Tennis Center",
-      "access": "reservable",
-      "website": "https://www.prospectpark.org/tennis-center",
-      "address": "50 Parkside Ave, Brooklyn, NY 11218",
-      "note": "Year-round indoor and outdoor clay courts. Reserve online or call (718) 436-2500."
+      "access": "customers"
     },
     "415705933": {
       "name": "Prospect Park Tennis Center",
-      "access": "reservable",
-      "website": "https://www.prospectpark.org/tennis-center",
-      "address": "50 Parkside Ave, Brooklyn, NY 11218",
-      "note": "Year-round indoor and outdoor clay courts. Reserve online or call (718) 436-2500."
+      "access": "customers"
     },
     "415705936": {
       "name": "Prospect Park Tennis Center",
-      "access": "reservable",
-      "website": "https://www.prospectpark.org/tennis-center",
-      "address": "50 Parkside Ave, Brooklyn, NY 11218",
-      "note": "Year-round indoor and outdoor clay courts. Reserve online or call (718) 436-2500."
+      "access": "customers"
     },
     "415705938": {
       "name": "Prospect Park Tennis Center",
-      "access": "reservable",
-      "website": "https://www.prospectpark.org/tennis-center",
-      "address": "50 Parkside Ave, Brooklyn, NY 11218",
-      "note": "Year-round indoor and outdoor clay courts. Reserve online or call (718) 436-2500."
+      "access": "customers"
     },
     "280381270": {
       "name": "Williamsbridge Oval Tennis Courts",
@@ -4336,20 +4367,6 @@
       "note": "Van Cortlandt Park, Bronx. 8 outdoor hard courts. NYC Parks permit required.",
       "website": "https://www.nycgovparks.org/parks/van-cortlandt-park/facilities/tennis",
       "address": "John Kieran Nature Trail, Bronx, NY 10471, USA"
-    },
-    {
-      "lat": 40.8404693,
-      "lon": -73.8949432,
-      "name": "Crotona Park Tennis Courts",
-      "sport": "tennis",
-      "surface": "hard",
-      "accessType": "permit",
-      "courts": 6,
-      "hours": "Apr-Nov: dawn to dusk",
-      "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
-      "note": "Crotona Park, Tremont, Bronx. 6 outdoor hard courts. NYC Parks permit required.",
-      "website": "https://www.nycgovparks.org/parks/crotona-park/facilities/tennis",
-      "address": "Crotona Ave & E. 173d St, Bronx, NY 10457, USA"
     },
     {
       "lat": 40.8498125,
