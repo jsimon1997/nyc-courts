@@ -4176,20 +4176,6 @@
       "address": "E. 32nd St &, Ave. S, Brooklyn, NY 11229, USA"
     },
     {
-      "lat": 40.7691902,
-      "lon": -73.9495306,
-      "name": "John Jay Park Tennis Court",
-      "sport": "tennis",
-      "surface": "hard",
-      "accessType": "public",
-      "courts": 1,
-      "hours": "Dawn to dusk",
-      "bookingUrl": null,
-      "note": "FDR Dr & E 76th St, Manhattan. 1 outdoor hard court. First come, first served. No permit required.",
-      "website": "https://www.nycgovparks.org/parks/john-jay-park/facilities/tennis",
-      "address": "FDR Dr, New York, NY 10021, USA"
-    },
-    {
       "lat": 40.7203756,
       "lon": -73.8764403,
       "name": "Juniper Valley Park Tennis",
@@ -4340,19 +4326,6 @@
       "address": "404 Cumberland St, Brooklyn, NY 11238, USA"
     },
     {
-      "lat": 40.6972937,
-      "lon": -73.9789385,
-      "name": "Commodore Barry Park Tennis Courts",
-      "sport": "tennis",
-      "surface": "hard",
-      "accessType": "public",
-      "courts": 4,
-      "hours": "Dawn to dusk",
-      "note": "Commodore Barry Park, Fort Greene, Brooklyn. 4 free outdoor hard courts. First come, first served.",
-      "website": "https://www.nycgovparks.org/parks/commodore-barry-park/facilities/tennis",
-      "address": "Flushing Ave, Brooklyn, NY 11201, USA"
-    },
-    {
       "lat": 40.6624365,
       "lon": -73.9134108,
       "name": "Betsy Head Park Tennis Courts",
@@ -4378,6 +4351,35 @@
       "note": "Fort Greene Park, Brooklyn. Free outdoor courts open dawn to dusk. Day-of signup sheet posted at 6:30am - reserve 1 hr singles or 2 hrs doubles for that day. Managed by Fort Greene Tennis Association.",
       "website": "https://www.fortgreenetennis.org/",
       "address": "136-144, Dekalb Ave, Brooklyn, NY 11217, USA"
+    },
+    {
+      "lat": 40.7219,
+      "lon": -73.9538,
+      "name": "McCarren Tennis Center",
+      "sport": "tennis",
+      "surface": "hard",
+      "indoor": true,
+      "courts": 7,
+      "hours": "Daily 6am-midnight",
+      "phone": "(347) 873-9698",
+      "note": "50 Bedford Ave, Williamsburg, Brooklyn. 7 indoor hard courts. Book online or via email.",
+      "website": "https://www.mccarrentennisnyc.com/",
+      "bookingUrl": "https://www.mccarrentennisnyc.com/",
+      "address": "50 Bedford Ave, Brooklyn, NY 11222, USA",
+      "accessType": "reservable"
+    },
+    {
+      "lat": 40.7748,
+      "lon": -73.9892,
+      "name": "John Jay College Tennis Court",
+      "sport": "tennis",
+      "surface": "hard",
+      "indoor": false,
+      "courts": 1,
+      "note": "445 W 59th St, Hell's Kitchen, Manhattan. Students only.",
+      "website": "https://johnjayathletics.com/facilities/tennis-court/4",
+      "address": "445 W 59th St, New York, NY 10019, USA",
+      "accessType": "school"
     }
   ],
   "private_courts": [
@@ -4634,6 +4636,21 @@
       "note": "Branch Brook Park, Newark NJ. 20 outdoor courts (16 hard + 4 clay). Named for Althea Gibson. Open to public - first come first served. Operated in partnership with Greater Newark Tennis & Education.",
       "website": "https://branchbrookpark.org/athletics.html",
       "address": "173-235 Heller Pkwy, Newark, NJ 07104, USA"
+    },
+    {
+      "lat": 40.7135,
+      "lon": -74.0153,
+      "name": "Hudson River Tennis Club",
+      "sport": "tennis",
+      "surface": "hard",
+      "indoor": true,
+      "courts": 4,
+      "hours": "Daily 6am-10pm",
+      "phone": "(212) 931-4782",
+      "note": "300 Vesey St (One North End Ave), Battery Park City. 4 indoor hard courts. Members only.",
+      "website": "https://www.hudsonrivertennisclub.com/",
+      "address": "300 Vesey St, New York, NY 10282, USA",
+      "accessType": "private"
     }
   ],
   "millennium_courts": [
