@@ -3964,22 +3964,16 @@
       "surface": "hard"
     },
     "1117878124": {
-      "name": "Randall's Island Tennis",
-      "access": "reservable",
-      "surface": "hard",
-      "note": "JMTA / NYC Parks; bookable online"
+      "name": "Sportime Tennis",
+      "access": "customers"
     },
     "1117878125": {
-      "name": "Randall's Island Tennis",
-      "access": "reservable",
-      "surface": "hard",
-      "note": "JMTA / NYC Parks; bookable online"
+      "name": "Sportime Tennis",
+      "access": "customers"
     },
     "1117878126": {
-      "name": "Randall's Island Tennis",
-      "access": "reservable",
-      "surface": "hard",
-      "note": "JMTA / NYC Parks; bookable online"
+      "name": "Sportime Tennis",
+      "access": "customers"
     },
     "284864049": {
       "name": "Go Tennis at Bayside Marina",
@@ -4097,6 +4091,58 @@
     },
     "1098170199": {
       "name": "Riverside Clay Tennis Association",
+      "access": "customers"
+    },
+    "1117878122": {
+      "name": "Sportime Tennis",
+      "access": "customers"
+    },
+    "1117878123": {
+      "name": "Sportime Tennis",
+      "access": "customers"
+    },
+    "1117878127": {
+      "name": "Sportime Tennis",
+      "access": "customers"
+    },
+    "1117878128": {
+      "name": "Sportime Tennis",
+      "access": "customers"
+    },
+    "1117878129": {
+      "name": "Sportime Tennis",
+      "access": "customers"
+    },
+    "1117878130": {
+      "name": "Sportime Tennis",
+      "access": "customers"
+    },
+    "1117878131": {
+      "name": "Sportime Tennis",
+      "access": "customers"
+    },
+    "1117878132": {
+      "name": "Sportime Tennis",
+      "access": "customers"
+    },
+    "1117878133": {
+      "name": "Sportime Tennis",
+      "access": "customers"
+    },
+    "1117878134": {
+      "name": "Sportime Tennis",
+      "access": "customers"
+    },
+    "1117878135": {
+      "name": "Sportime Tennis",
+      "access": "customers"
+    },
+    "1117878136": {
+      "name": "Sportime Tennis",
+      "access": "customers"
+    },
+    "1117878137": {
+      "name": "Sportime Tennis",
       "access": "customers"
     }
   },
