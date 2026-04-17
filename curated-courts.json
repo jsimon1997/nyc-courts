@@ -385,6 +385,14 @@
       "address": "E River Greenway, New York, NY 10002, USA"
     },
     {
+      "match": "congress street",
+      "name": "Van Voorhees Park",
+      "access": "public",
+      "website": "https://www.nycgovparks.org/parks/van-voorhees-park/facilities/tennis",
+      "note": "Van Voorhees Park, Red Hook, Brooklyn. Free outdoor hard courts. First come, first served. Sign-up sheet available in the mornings.",
+      "address": "Congress St, Brooklyn, NY 11231, USA"
+    },
+    {
       "match": "central park tennis",
       "remove": true
     },
