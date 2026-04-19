@@ -4266,7 +4266,8 @@
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "note": "W 151st St & Adam Clayton Powell Jr Blvd, Harlem. 8 hard courts. NYC Parks permit required: $100/season or $15/day.",
       "website": "https://www.nycgovparks.org/parks/M159/facilities/tennis",
-      "address": "Adam Clayton Powell Blvd. &, W 151st St, New York, NY 10039, USA"
+      "address": "Adam Clayton Powell Blvd. &, W 151st St, New York, NY 10039, USA",
+      "phone": "(212) 639-9675"
     },
     {
       "lat": 40.6803125,
@@ -4310,7 +4311,8 @@
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "note": "Shore Road & 95th St, Bay Ridge, Brooklyn. 4 hard courts. NYC Parks permit required: $100/season or $15/day.",
       "website": "https://www.nycgovparks.org/parks/shore-park-and-parkway/facilities/tennis",
-      "address": "9500 Shore Rd, Brooklyn, NY 11209, USA"
+      "address": "9500 Shore Rd, Brooklyn, NY 11209, USA",
+      "phone": "(718) 259-4016"
     },
     {
       "lat": 40.6084001,
@@ -4339,7 +4341,8 @@
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "note": "Juniper Valley Park, Middle Village, Queens. 12 outdoor hard courts. NYC Parks permit required: $100/season or $15/day.",
       "website": "https://www.nycgovparks.org/parks/juniper-valley-park/facilities/tennis",
-      "address": "80th Street Juniper Valley Park, Middle Village, NY 11379, USA"
+      "address": "80th Street Juniper Valley Park, Middle Village, NY 11379, USA",
+      "phone": "(718) 326-2877"
     },
     {
       "lat": 40.730472,
@@ -4353,7 +4356,8 @@
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "note": "Cunningham Park, Fresh Meadows, Queens. 16 outdoor hard courts. NYC Parks permit required.",
       "website": "https://www.nycgovparks.org/parks/cunningham-park/facilities/tennis",
-      "address": "196-00 Union Tpke, Fresh Meadows, NY 11366, USA"
+      "address": "196-00 Union Tpke, Fresh Meadows, NY 11366, USA",
+      "phone": "(718) 740-6800"
     },
     {
       "lat": 40.7756292,
@@ -4381,7 +4385,8 @@
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "note": "Forest Park, Woodhaven, Queens. 8 outdoor hard courts. NYC Parks permit required.",
       "website": "https://www.nycgovparks.org/parks/forest-park/facilities/tennis",
-      "address": "89-20 Park Ln S, Woodhaven, NY 11421, USA"
+      "address": "89-20 Park Ln S, Woodhaven, NY 11421, USA",
+      "phone": "(718) 235-5871"
     },
     {
       "lat": 40.8908643,
@@ -4395,7 +4400,8 @@
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "note": "Van Cortlandt Park, Bronx. 8 outdoor hard courts. NYC Parks permit required.",
       "website": "https://www.nycgovparks.org/parks/van-cortlandt-park/facilities/tennis",
-      "address": "John Kieran Nature Trail, Bronx, NY 10471, USA"
+      "address": "John Kieran Nature Trail, Bronx, NY 10471, USA",
+      "phone": "(718) 549-6494"
     },
     {
       "lat": 40.8498125,
@@ -4409,7 +4415,8 @@
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "note": "Pelham Bay Park, Bronx. 6 outdoor hard courts. NYC Parks permit required.",
       "website": "https://www.nycgovparks.org/parks/pelham-bay-park/facilities/tennis",
-      "address": "Pelham Bay Park, Bronx, NY 10465"
+      "address": "Pelham Bay Park, Bronx, NY 10465",
+      "phone": "(718) 885-3442"
     },
     {
       "lat": 40.8738658,
@@ -4437,7 +4444,8 @@
       "bookingUrl": "https://www.nycgovparks.org/tennisreservation",
       "note": "Dyker Beach Park, Dyker Heights, Brooklyn. 6 outdoor hard courts. NYC Parks permit required.",
       "website": "https://www.nycgovparks.org/parks/dyker-beach-park/facilities/tennis",
-      "address": "334 Bay 8th St, Brooklyn, NY 11228, USA"
+      "address": "334 Bay 8th St, Brooklyn, NY 11228, USA",
+      "phone": "(212) 639-9675"
     },
     {
       "lat": 40.6277696,
@@ -4477,7 +4485,8 @@
       "hours": "Dawn to dusk",
       "note": "Betsy Head Park, Brownsville, Brooklyn. 4 free outdoor hard courts. First come, first served.",
       "website": "https://www.nycgovparks.org/parks/betsy-head-park/facilities/tennis",
-      "address": "Dumont Ave, Brooklyn, NY 11212, USA"
+      "address": "Dumont Ave, Brooklyn, NY 11212, USA",
+      "phone": "(212) 639-9675"
     },
     {
       "lat": 40.690555,
