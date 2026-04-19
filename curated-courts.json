@@ -4533,6 +4533,171 @@
       "accessType": "school",
       "phone": "(212) 237-8000",
       "hours": "Monday: 8:47 AM – 10:00 PM"
+    },
+    {
+      "name": "Sutton East Tennis Club",
+      "lat": 40.7589484,
+      "lon": -73.9598017,
+      "phone": "(212) 751-3452",
+      "website": "https://suttoneasttennis.com/",
+      "address": "488 E 60th St, New York, NY 10022, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
+    },
+    {
+      "name": "Binghamton Racquet Club",
+      "lat": 40.8211523,
+      "lon": -73.976463,
+      "phone": "(201) 945-9500",
+      "website": "https://www.infinitefuturetennis.com/edgewater-tennis-center",
+      "address": "737 River Rd, Edgewater, NJ 07020, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
+    },
+    {
+      "name": "Tennis Lab FX",
+      "lat": 40.7560214,
+      "lon": -73.9687574,
+      "phone": "(646) 669-8444",
+      "website": "https://www.tennislabfx.com/",
+      "address": "235 E 51st St, New York, NY 10022, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
+    },
+    {
+      "name": "Mink Padel",
+      "lat": 40.8134849,
+      "lon": -73.9547794,
+      "phone": "(828) 888-0242",
+      "website": "https://mink.playbypoint.com/",
+      "address": "439 W 127th St, New York, NY 10027, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
+    },
+    {
+      "name": "Washington Market Park Tennis Court",
+      "lat": 40.7171732,
+      "lon": -74.0122513,
+      "phone": "(212) 639-9675",
+      "website": "http://www.washingtonmarketpark.org/tennis-and-basketball/tennis/",
+      "address": "Washington Market Park Chambers St. &, Tribeca Bridge, New York, NY 10013, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
+    },
+    {
+      "name": "Over the Tracks 119th Street Tennis Courts",
+      "lat": 40.8120593,
+      "lon": -73.9653744,
+      "phone": "(212) 978-0277",
+      "website": "https://www.nycgovparks.org/parks/riversidepark/facilities/tennis",
+      "address": "W 119th St, New York, NY 10025, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
+    },
+    {
+      "name": "Matchpoint Tennis",
+      "lat": 40.6164641,
+      "lon": -73.9068868,
+      "phone": "(718) 769-0001",
+      "website": "http://www.matchpoint.nyc/",
+      "address": "2781 Shell Rd, Brooklyn, NY 11223, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
+    },
+    {
+      "name": "Dick Savitt Tennis Center",
+      "lat": 40.8740652,
+      "lon": -73.9168028,
+      "phone": "(212) 851-7100",
+      "website": "https://gocolumbialions.com/facilities/dick-savitt-tennis-center/38",
+      "address": "603 W 218th St, New York, NY 10034, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
+    },
+    {
+      "name": "Alley Pond Tennis Center",
+      "lat": 40.7393265,
+      "lon": -73.7358432,
+      "phone": "(718) 255-2127",
+      "website": "http://commonpointqueens.org/tennis",
+      "address": "79-20 Winchester Blvd, Queens, NY 11427, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
+    },
+    {
+      "name": "West Side Tennis Club",
+      "lat": 40.7198523,
+      "lon": -73.8485929,
+      "phone": "(718) 268-2300",
+      "website": "http://www.thewestsidetennisclub.com/",
+      "address": "1 Tennis Pl, Forest Hills, NY 11375, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
+    },
+    {
+      "name": "Park Hill Racquet Club",
+      "lat": 40.9233504,
+      "lon": -73.890649,
+      "phone": "(914) 969-6770",
+      "website": "http://www.parkhillracquetclub.org/",
+      "address": "253 Van Cortlandt Park Ave, Yonkers, NY 10705, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
+    },
+    {
+      "name": "Port Washington Tennis Academy",
+      "lat": 40.8410234,
+      "lon": -73.6941668,
+      "phone": "(516) 853-7519",
+      "website": "https://www.sportimeny.com/portwashington",
+      "address": "100 Harbor Rd, Port Washington, NY 11050, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
+    },
+    {
+      "name": "Brookville Park Tennis Courts",
+      "lat": 40.6617569,
+      "lon": -73.7444603,
+      "phone": "(718) 255-2620",
+      "website": "https://www.nycgovparks.org/parks/brookville-park/facilities/tennis",
+      "address": "Lansing Ave &, 232nd St, Rosedale, NY 11422, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
+    },
+    {
+      "name": "Yorkville Tennis Club",
+      "lat": 40.7783661,
+      "lon": -73.9463143,
+      "phone": "(212) 987-0301",
+      "website": "https://yorkvilletennisclub.com/",
+      "address": "1725 York Ave, New York, NY 10128, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
+    },
+    {
+      "name": "Queens College Indoor Tennis Center",
+      "lat": 40.7382065,
+      "lon": -73.8204807,
+      "phone": "(718) 264-2600",
+      "website": "https://aptcnyc.com/",
+      "address": "150-35 Reeves Avenue / 153 rd Street & Reeves Ave, Enter at Security Gate 3, Near Fitzgerald Gym, Flushing, NY 11367, USA",
+      "surface": "hard",
+      "access": "unknown",
+      "indoor": false
     }
   ],
   "private_courts": [
