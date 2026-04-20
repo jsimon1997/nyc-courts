@@ -4758,7 +4758,7 @@
       "name": "Town Tennis Club",
       "sport": "tennis",
       "surface": "hard",
-      "indoor": true,
+      "indoor": false,
       "courts": 3,
       "hours": "Mon-Sun 7am-11pm (seasonal)",
       "phone": "(212) 752-4059",
