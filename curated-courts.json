@@ -956,6 +956,7 @@
     1485873354,
     1485873355,
     1485873356,
+    11075386972,
     11175444449,
     11175444453
   ],
@@ -4589,18 +4590,6 @@
       "phone": "(201) 945-9500",
       "website": "https://www.infinitefuturetennis.com/edgewater-tennis-center",
       "address": "737 River Rd, Edgewater, NJ 07020, USA",
-      "surface": "hard",
-      "indoor": false,
-      "accessType": "unknown",
-      "sport": "tennis"
-    },
-    {
-      "name": "Tennis Lab FX",
-      "lat": 40.7560214,
-      "lon": -73.9687574,
-      "phone": "(646) 669-8444",
-      "website": "https://www.tennislabfx.com/",
-      "address": "235 E 51st St, New York, NY 10022, USA",
       "surface": "hard",
       "indoor": false,
       "accessType": "unknown",

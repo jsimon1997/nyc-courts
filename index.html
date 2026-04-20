@@ -1903,7 +1903,7 @@ function buildCourts(elements) {
       courts:     entry.courts     || null,
       address:    entry.address    || null,
     };
-    const marker = L.marker([entry.lat, entry.lon], { icon: makeRacketIcon(accessType, entry.sport) });
+    const marker = L.marker([entry.lat, entry.lon], { icon: makeRacketIcon(entry.surface || 'other', entry.sport, court.indoor) });
     marker.bindPopup(buildPopup(court, accessType, entry.website, entry.note), { maxWidth: 300 });
     if (entry.website) {
       marker.on('dblclick', (e) => { L.DomEvent.stopPropagation(e); window.open(entry.website, '_blank'); });
