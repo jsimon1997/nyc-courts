@@ -1,15 +1,26 @@
-name: Refresh courts.json
+name: Weekly OSM refresh → PR
+
+# Fetches latest OSM tennis/padel courts, regenerates courts-db.json via
+# consolidate.js, and opens a PR. Does NOT auto-merge — human review.
 
 on:
   schedule:
     - cron: '0 4 * * 1'   # Every Monday at 4am UTC
-  workflow_dispatch:        # Allow manual trigger from GitHub Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
       - name: Fetch courts from Overpass API
         run: |
@@ -19,12 +30,26 @@ jobs:
             https://overpass-api.de/api/interpreter \
             | python3 -c "import json,sys; d=json.load(sys.stdin); print(json.dumps(d['elements']))" \
             > courts.json
-          echo "Fetched $(python3 -c "import json; print(len(json.load(open('courts.json'))))" ) elements"
+          echo "Fetched $(python3 -c "import json; print(len(json.load(open('courts.json'))))") elements"
 
-      - name: Commit if changed
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add courts.json
-          git diff --cached --quiet && echo "No changes" || \
-            git commit -m "chore: refresh courts.json [skip ci]" && git push
+      - name: Regenerate courts-db.json
+        run: node consolidate.js
+
+      - name: Open PR if either file changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: osm-weekly-refresh
+          commit-message: "chore: weekly OSM refresh"
+          title: "Weekly OSM refresh"
+          body: |
+            Automated weekly refresh. Review the diff on `courts-db.json`
+            (the file the app actually loads) — added/removed pins will show
+            as JSON-array changes.
+
+            If a previously deleted court reappears (e.g. OSM editor
+            restored a mis-tag), add its OSM id to `blocked_ids` in
+            `curated-courts.json` and re-run `node consolidate.js` locally
+            before merging.
+          add-paths: |
+            courts.json
+            courts-db.json

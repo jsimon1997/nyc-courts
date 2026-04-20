@@ -1,0 +1,30 @@
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.key
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local dev files
+*.ps1
+*.sh
+enrichment-report.json
+google-places-*.json
+google-results*.json
+address-*.json
+places-audit*.ps1
+places-audit*.sh

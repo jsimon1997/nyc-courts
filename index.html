@@ -1819,103 +1819,47 @@ function normalizeSurface(tags) {
   return 'hard';
 }
 
-function buildCourts(elements) {
-  const clusters = clusterCourts(elements);
+// buildCourts — consumes pre-consolidated courts-db.json records.
+// Each record is a single pin with flat fields (name, lat, lon, sport, surface,
+// indoor, accessType, phone, website, hours, address, note, photo, needsName, …).
+// All clustering / override / dedupe logic is done offline by consolidate.js.
+function buildCourts(records) {
+  for (const r of records) {
+    // tags shim — keeps resolveName() and buildPopup() working without changes
+    r.tags = {
+      name:          r.name || '',
+      website:       r.website || null,
+      phone:         r.phone || null,
+      opening_hours: r.hours || null,
+    };
 
-  for (const court of clusters) {
-    const { lat, lon, tags, sport } = court;
-    const name = tags.name || '';
-    const ov   = findOverride(name);
+    const marker = L.marker([r.lat, r.lon], {
+      icon: makeRacketIcon(r.surface || 'other', r.sport, r.indoor),
+    });
+    marker.bindPopup(buildPopup(r, r.accessType, r.website, r.note), { maxWidth: 300 });
 
-    const accessType = ov?.access || classifyAccess(tags);
-    const website    = ov?.website || tags.website || null;
-    const operator   = (tags.operator || '').toLowerCase();
-    const note       = ov?.note || (
-      (operator.includes('nyc parks') || operator.includes('department of parks'))
-        ? 'NYC Parks permit required Apr–Nov. $15/session or $100/season.'
-        : null
-    );
-
-    court.accessType  = accessType;
-    court.website     = website;
-    court.note        = note;
-    court.surface     = ov?.surface || normalizeSurface(tags);
-    court.indoor      = ov?.indoor ?? (tags.indoor === 'yes' || tags['location:indoor'] === 'yes');
-    if (ov?.name) tags.name = ov.name;
-    court.photo       = ov?.photo       || null;
-    court.hours       = ov?.hours       || tags.opening_hours || null;
-    court.phone       = ov?.phone       || tags.phone || null;
-    court.bookingUrl  = ov?.bookingUrl  || null;
-    court.bookingApp  = ov?.bookingApp  || null;
-    court.address     = ov?.address     || null;
-
-    const marker = L.marker([lat, lon], { icon: makeRacketIcon(court.surface, sport, court.indoor) });
-
-    // Bind popup once — Leaflet handles open/close toggle on click automatically
-    marker.bindPopup(buildPopup(court, accessType, website, note), { maxWidth: 300 });
-
-    // On click: reverse-geocode name (unnamed courts) and address (all courts) on first click
+    // Lazy reverse-geocode on first click for pins that lack a name or address
     marker.on('click', async () => {
-      const needsName    = court.needsName && !court.resolvedName;
-      const needsAddress = !court.address  && !court.resolvedAddress;
+      const needsName    = r.needsName && !r.resolvedName;
+      const needsAddress = !r.address  && !r.resolvedAddress;
       if (!needsName && !needsAddress) return;
-      const geo = await reverseGeocode(court.lat, court.lon);
+      const geo = await reverseGeocode(r.lat, r.lon);
       let updated = false;
       if (needsName && geo.name) {
-        // If geocoded name matches a removed override, hide this unnamed court
-        if (findOverride(geo.name)?.remove) { marker.remove(); return; }
-        court.resolvedName = geo.name; updated = true;
-        if (court.marker.isPopupOpen()) history.replaceState(null, '', `#court=${encodeURIComponent(geo.name)}`);
+        r.resolvedName = geo.name; updated = true;
+        if (r.marker.isPopupOpen()) history.replaceState(null, '', `#court=${encodeURIComponent(geo.name)}`);
       }
-      if (needsAddress && geo.address) { court.resolvedAddress = geo.address; updated = true; }
-      if (updated) marker.setPopupContent(buildPopup(court, accessType, website, note));
+      if (needsAddress && geo.address) { r.resolvedAddress = geo.address; updated = true; }
+      if (updated) marker.setPopupContent(buildPopup(r, r.accessType, r.website, r.note));
     });
 
-    // Double click → open website
-    const link = website || tags.website;
-    if (link) {
-      marker.on('dblclick', (e) => { L.DomEvent.stopPropagation(e); window.open(link, '_blank'); });
+    if (r.website) {
+      marker.on('dblclick', (e) => { L.DomEvent.stopPropagation(e); window.open(r.website, '_blank'); });
     }
 
-    court.marker = marker;
-    allCourts.push(court);
+    r.marker = marker;
+    allCourts.push(r);
   }
-
-  // Add hardcoded curated courts (public parks missing from OSM + residential buildings)
-  function addCuratedCourt(entry, accessType) {
-    const court = {
-      lat: entry.lat, lon: entry.lon,
-      tags: { name: entry.name, surface: entry.surface || 'other' },
-      sport: entry.sport,
-      accessType,
-      website:    entry.website,
-      note:       entry.note,
-      surface:    entry.surface || 'other',
-      indoor:     entry.indoor ?? false,
-      count:      1,
-      needsName:  false,
-      resolvedName: null,
-      photo:      entry.photo      || null,
-      hours:      entry.hours      || null,
-      phone:      entry.phone      || null,
-      bookingUrl: entry.bookingUrl || null,
-      bookingApp: entry.bookingApp || null,
-      courts:     entry.courts     || null,
-      address:    entry.address    || null,
-    };
-    const marker = L.marker([entry.lat, entry.lon], { icon: makeRacketIcon(entry.surface || 'other', entry.sport, court.indoor) });
-    marker.bindPopup(buildPopup(court, accessType, entry.website, entry.note), { maxWidth: 300 });
-    if (entry.website) {
-      marker.on('dblclick', (e) => { L.DomEvent.stopPropagation(e); window.open(entry.website, '_blank'); });
-    }
-    court.marker = marker;
-    allCourts.push(court);
-  }
-
-  for (const entry of PUBLIC_COURTS)       addCuratedCourt(entry, entry.accessType || 'reservable');
-  for (const entry of PRIVATE_COURTS)      addCuratedCourt(entry, entry.accessType || 'private');
-  for (const entry of MILLENNIUM_COURTS)   addCuratedCourt(entry, 'private');
-  for (const entry of RESIDENTIAL_COURTS)  addCuratedCourt(entry, 'residential');
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -2404,24 +2348,11 @@ async function initMap() {
   });
 
   try {
-    // Load OSM court data and curated overrides/courts in parallel
-    const [elements, curated] = await Promise.all([
-      fetchFromOverpass(),
-      fetch('./curated-courts.json').then(r => r.json()).catch(() => null),
-    ]);
+    // Single consolidated database: all OSM clustering + curated overrides +
+    // blocked IDs are pre-baked by consolidate.js into courts-db.json.
+    const records = await fetch('./courts-db.json').then(r => r.json());
 
-    // If JSON loaded successfully, overwrite in-memory data with it
-    if (curated) {
-      OVERRIDES          = curated.overrides          || OVERRIDES;
-      BLOCKED_IDS        = new Set(curated.blocked_ids || []);
-      ID_OVERRIDES       = curated.id_overrides        || ID_OVERRIDES;
-      PUBLIC_COURTS      = curated.public_courts        || PUBLIC_COURTS;
-      PRIVATE_COURTS     = curated.private_courts       || PRIVATE_COURTS;
-      MILLENNIUM_COURTS  = curated.millennium_courts    || MILLENNIUM_COURTS;
-      RESIDENTIAL_COURTS = curated.residential_courts   || RESIDENTIAL_COURTS;
-    }
-
-    buildCourts(elements);
+    buildCourts(records);
 
     // Deep link: if URL has #court=name, fly to that court and open its popup
     const hashMatch = window.location.hash.match(/#court=(.+)/);
