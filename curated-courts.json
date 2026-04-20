@@ -4543,7 +4543,8 @@
       "address": "488 E 60th St, New York, NY 10022, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "tennis"
     },
     {
       "name": "Binghamton Racquet Club",
@@ -4554,7 +4555,8 @@
       "address": "737 River Rd, Edgewater, NJ 07020, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "tennis"
     },
     {
       "name": "Tennis Lab FX",
@@ -4565,7 +4567,8 @@
       "address": "235 E 51st St, New York, NY 10022, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "tennis"
     },
     {
       "name": "Mink Padel",
@@ -4576,7 +4579,8 @@
       "address": "439 W 127th St, New York, NY 10027, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "padel"
     },
     {
       "name": "Washington Market Park Tennis Court",
@@ -4587,7 +4591,8 @@
       "address": "Washington Market Park Chambers St. &, Tribeca Bridge, New York, NY 10013, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "tennis"
     },
     {
       "name": "Over the Tracks 119th Street Tennis Courts",
@@ -4598,7 +4603,8 @@
       "address": "W 119th St, New York, NY 10025, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "tennis"
     },
     {
       "name": "Matchpoint Tennis",
@@ -4609,7 +4615,8 @@
       "address": "2781 Shell Rd, Brooklyn, NY 11223, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "tennis"
     },
     {
       "name": "Dick Savitt Tennis Center",
@@ -4620,7 +4627,8 @@
       "address": "603 W 218th St, New York, NY 10034, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "tennis"
     },
     {
       "name": "Alley Pond Tennis Center",
@@ -4631,7 +4639,8 @@
       "address": "79-20 Winchester Blvd, Queens, NY 11427, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "tennis"
     },
     {
       "name": "West Side Tennis Club",
@@ -4642,7 +4651,8 @@
       "address": "1 Tennis Pl, Forest Hills, NY 11375, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "tennis"
     },
     {
       "name": "Park Hill Racquet Club",
@@ -4653,7 +4663,8 @@
       "address": "253 Van Cortlandt Park Ave, Yonkers, NY 10705, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "tennis"
     },
     {
       "name": "Port Washington Tennis Academy",
@@ -4664,7 +4675,8 @@
       "address": "100 Harbor Rd, Port Washington, NY 11050, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "tennis"
     },
     {
       "name": "Brookville Park Tennis Courts",
@@ -4675,7 +4687,8 @@
       "address": "Lansing Ave &, 232nd St, Rosedale, NY 11422, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "tennis"
     },
     {
       "name": "Yorkville Tennis Club",
@@ -4686,7 +4699,8 @@
       "address": "1725 York Ave, New York, NY 10128, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "tennis"
     },
     {
       "name": "Queens College Indoor Tennis Center",
@@ -4697,7 +4711,8 @@
       "address": "150-35 Reeves Avenue / 153 rd Street & Reeves Ave, Enter at Security Gate 3, Near Fitzgerald Gym, Flushing, NY 11367, USA",
       "surface": "hard",
       "indoor": false,
-      "accessType": "unknown"
+      "accessType": "unknown",
+      "sport": "tennis"
     },
     {
       "id": 46422037,
@@ -29463,7 +29478,8 @@
       "phone": "(212) 752-4059",
       "note": "430 E 56th St between 1st & 2nd Ave. 3 indoor hard courts. Founded 1954. Membership only.",
       "website": "https://towntennisclub.com",
-      "address": "430 E 56th St #12, New York, NY 10022, USA"
+      "address": "430 E 56th St #12, New York, NY 10022, USA",
+      "accessType": "private"
     },
     {
       "lat": 40.7455126,
@@ -29479,7 +29495,8 @@
       "photo": null,
       "note": "43-34 32nd Pl, Long Island City, Queens. 7 indoor Har-Tru clay courts in a climate-controlled bubble. Also has 3 padel courts + squash. Membership only.",
       "website": "https://cityviewracquet.com",
-      "address": "43-34 32nd Pl, Long Island City, NY 11101, USA"
+      "address": "43-34 32nd Pl, Long Island City, NY 11101, USA",
+      "accessType": "private"
     },
     {
       "lat": 40.7455126,
@@ -29495,7 +29512,8 @@
       "photo": null,
       "note": "43-34 32nd Pl, Long Island City, Queens. 3 indoor padel courts in a 50ft climate-controlled bubble. Also has 7 clay tennis courts + squash. Membership only.",
       "website": "https://cityviewracquet.com",
-      "address": "43-34 32nd Pl, Long Island City, NY 11101, USA"
+      "address": "43-34 32nd Pl, Long Island City, NY 11101, USA",
+      "accessType": "private"
     },
     {
       "lat": 40.7598393,
@@ -29511,7 +29529,8 @@
       "photo": null,
       "note": "E 61st St, Upper East Side. 2 indoor courts with 28-ft ceilings. Full gym, lap pool & cold plunges. Members only.",
       "website": "https://www.reservepadel.com/61st-streetold",
-      "address": "1113 York Ave, New York, NY 10065, USA"
+      "address": "1113 York Ave, New York, NY 10065, USA",
+      "accessType": "private"
     },
     {
       "lat": 40.7523554,
@@ -29736,7 +29755,8 @@
       "phone": "(212) 758-1234",
       "note": "1 United Nations Plaza, 39th floor, Midtown East. 1 indoor hard court. Operated by Tennis Point NYC - clinics only, no hourly rentals. Hotel guests also welcome.",
       "website": "https://www.tennispointnyc.com/",
-      "address": "1 United Nations Plaza, New York, NY 10017, USA"
+      "address": "1 United Nations Plaza, New York, NY 10017, USA",
+      "accessType": "private"
     }
   ],
   "residential_courts": [
@@ -29749,7 +29769,8 @@
       "surface": "hard",
       "note": "645 W 59th St, Manhattan. Indoor regulation-size tennis court. Residents only.",
       "website": "https://waterlinesquare.com",
-      "address": "645 W 59th St, Manhattan, NY 10069"
+      "address": "645 W 59th St, Manhattan, NY 10069",
+      "accessType": "residential"
     },
     {
       "lat": 40.7479686,
@@ -29758,7 +29779,8 @@
       "sport": "tennis",
       "note": "4545 Center Blvd, Long Island City. 2 outdoor rooftop tennis courts on 50,000 sq ft roof garden overlooking the East River. Residents only.",
       "website": "https://tfc.com/apartments/4545-center-blvd",
-      "address": "45-45 Center Blvd, Long Island City, NY 11109, USA"
+      "address": "45-45 Center Blvd, Long Island City, NY 11109, USA",
+      "accessType": "residential"
     },
     {
       "lat": 40.9069523,
@@ -29767,7 +29789,8 @@
       "sport": "tennis",
       "note": "5700 Arlington Ave, Riverdale. Night-lit outdoor tennis & pickleball courts on a 23-acre campus. Residents only.",
       "website": "https://skyviewriverdale.com/amenities/",
-      "address": "5700, 5800, 5900, 5700 Arlington Ave, Bronx, NY 10471, USA"
+      "address": "5700, 5800, 5900, 5700 Arlington Ave, Bronx, NY 10471, USA",
+      "accessType": "residential"
     },
     {
       "lat": 40.7718,
@@ -29776,7 +29799,8 @@
       "sport": "tennis",
       "note": "1725 York Ave, Manhattan. Private tennis courts. Residents only.",
       "website": "https://www.eastrivertowernyc.com/",
-      "address": "1725 York Ave, Upper East Side, Manhattan, NY 10128"
+      "address": "1725 York Ave, Upper East Side, Manhattan, NY 10128",
+      "accessType": "residential"
     },
     {
       "lat": 40.7022249,
@@ -29786,7 +29810,8 @@
       "courts": 1,
       "note": "30 Front St, Brooklyn. 1 full-size outdoor court on The Bridge level (10th floor), overlooking the Brooklyn Bridge and Manhattan skyline. Residents only.",
       "website": "https://olympiadumbo.com/amenities/",
-      "address": "60 Front St, Brooklyn, NY 11201, USA"
+      "address": "60 Front St, Brooklyn, NY 11201, USA",
+      "accessType": "residential"
     }
   ]
 }
