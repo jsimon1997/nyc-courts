@@ -587,6 +587,11 @@
       "courts": 12,
       "note": "603 W 218th St, Inwood (Columbia University). 6 outdoor + 6 indoor hard courts. Book by the hour - open to public.",
       "address": "603 W 218th St, Inwood, Manhattan, NY 10034"
+    },
+    {
+      "match": "riverdale tennis center",
+      "name": "Riverdale Tennis Center",
+      "address": "3671 Hudson Manor Terrace, Riverdale, NY 10463"
     }
   ],
   "blocked_ids": [
@@ -1185,6 +1190,14 @@
       "access": "permit",
       "address": "Seton Park, W 235th St, Bronx, NY 10463",
       "website": "https://www.nycgovparks.org/parks/seton-park"
+    },
+    "245842348": {
+      "name": "Riverdale Tennis Center",
+      "access": "private",
+      "indoor": "yes",
+      "surface": "hard",
+      "website": "http://www.riverdaletennis.com/",
+      "phone": "+1 718-796-7400"
     },
     "261701834": {
       "name": "Highland Park Tennis Courts",
@@ -3180,28 +3193,36 @@
       "surface": "hard"
     },
     "984997986": {
-      "name": "Riverdale Country School",
-      "access": "school",
+      "name": "Riverdale Tennis Center",
+      "access": "private",
+      "indoor": "yes",
       "surface": "hard",
-      "address": "4890 Palisade Ave, Bronx, NY 10471"
+      "website": "http://www.riverdaletennis.com/",
+      "phone": "+1 718-796-7400"
     },
     "984997987": {
-      "name": "Riverdale Country School",
-      "access": "school",
+      "name": "Riverdale Tennis Center",
+      "access": "private",
+      "indoor": "yes",
       "surface": "hard",
-      "address": "4890 Palisade Ave, Bronx, NY 10471"
+      "website": "http://www.riverdaletennis.com/",
+      "phone": "+1 718-796-7400"
     },
     "984997988": {
-      "name": "Riverdale Country School",
-      "access": "school",
+      "name": "Riverdale Tennis Center",
+      "access": "private",
+      "indoor": "yes",
       "surface": "hard",
-      "address": "4890 Palisade Ave, Bronx, NY 10471"
+      "website": "http://www.riverdaletennis.com/",
+      "phone": "+1 718-796-7400"
     },
     "984997989": {
-      "name": "Riverdale Country School",
-      "access": "school",
+      "name": "Riverdale Tennis Center",
+      "access": "private",
+      "indoor": "yes",
       "surface": "hard",
-      "address": "4890 Palisade Ave, Bronx, NY 10471"
+      "website": "http://www.riverdaletennis.com/",
+      "phone": "+1 718-796-7400"
     },
     "994976030": {
       "name": "Lucille Ferrier Tennis Courts",
