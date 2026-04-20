@@ -1370,6 +1370,40 @@ function clusterCourts(elements) {
     }
   }
 
+  // ── Step 2b: merge same-name named groups whose centroids are within 1 km ─
+  // Fixes boundary-split issues where a single park straddles two 2 km grid cells
+  {
+    const list = [...namedGroups.values()];
+    const centroid = g => ({
+      lat: g.lats.reduce((a,b)=>a+b,0) / g.lats.length,
+      lon: g.lons.reduce((a,b)=>a+b,0) / g.lons.length,
+    });
+    const merged = [];
+    const used2 = new Uint8Array(list.length);
+    for (let i = 0; i < list.length; i++) {
+      if (used2[i]) continue;
+      const g = list[i];
+      const gName = (g.tags.name || '').toLowerCase();
+      used2[i] = 1;
+      for (let j = i + 1; j < list.length; j++) {
+        if (used2[j]) continue;
+        const h = list[j];
+        if (h.sport !== g.sport) continue;
+        if ((h.tags.name || '').toLowerCase() !== gName) continue;
+        const ga = centroid(g), hb = centroid(h);
+        if (haversineMeters(ga.lat, ga.lon, hb.lat, hb.lon) < 1000) {
+          g.lats.push(...h.lats);
+          g.lons.push(...h.lons);
+          mergeTags(g.tags, h.tags);
+          used2[j] = 1;
+        }
+      }
+      merged.push(g);
+    }
+    namedGroups.clear();
+    merged.forEach((g, i) => namedGroups.set(`merged_${i}`, g));
+  }
+
   // ── Step 3: greedy spatial clustering for unnamed (300 m radius) ─
   const unnamedGroups = [];
   const used = new Uint8Array(unnamed.length);
