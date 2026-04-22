@@ -1,0 +1,43 @@
+name: Check weekend court availability
+
+# Calls each facility in facilities-to-call.json via Retell AI and commits the
+# results to data/availability.json. 14:00 UTC = 10:00 ET during EDT (most of
+# the year). During EST (early Nov – early Mar) this fires at 09:00 ET.
+
+on:
+  schedule:
+    - cron: "0 14 * * 3,4"   # Wed & Thu, 10am ET (during EDT)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  call-facilities:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run phone agent
+        env:
+          RETELL_API_KEY:     ${{ secrets.RETELL_API_KEY }}
+          RETELL_AGENT_ID:    ${{ secrets.RETELL_AGENT_ID }}
+          RETELL_FROM_NUMBER: ${{ secrets.RETELL_FROM_NUMBER }}
+        run: node check-courts.js
+
+      - name: Commit results
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/availability.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "data: availability check $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi
