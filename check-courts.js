@@ -22,7 +22,7 @@ const OUTPUT_FILE = path.join(OUTPUT_DIR, 'availability.json');
 const RETELL_BASE         = 'https://api.retellai.com';
 const POLL_INTERVAL_MS    = 15_000;
 const POLL_TIMEOUT_MS     = 20 * 60 * 1000;
-const DEDUPE_WINDOW_HOURS = 12; // skip a facility if it was called within this many hours
+const DEDUPE_WINDOW_HOURS = 15; // skip a facility if it was called within this many hours
 
 // --- date helpers ----------------------------------------------------------
 
