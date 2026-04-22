@@ -173,9 +173,18 @@ async function main() {
     };
 
     try {
+      const nowEt = new Date().toLocaleString('en-US', {
+        timeZone: 'America/New_York',
+        weekday: 'long', hour: 'numeric', minute: '2-digit', hour12: true,
+      });
       const callId = await createCall({
         apiKey, agentId, fromNumber, toNumber,
-        vars: { facility_name: name, saturday_date: saturday, sunday_date: sunday },
+        vars: {
+          facility_name: name,
+          saturday_date: saturday,
+          sunday_date: sunday,
+          current_time_et: nowEt,
+        },
       });
       const call     = await waitForCall({ apiKey, callId });
       const analysis = call.call_analysis || {};
