@@ -1,6 +1,10 @@
 {
-  "_note": "Trimmed to one facility for first live test. Restore the full list after validating.",
   "facility_ids": [
+    "osm-842765800",
+    "osm-241816249",
+    "osm-663795041",
+    "osm-284865839",
+    "curated-quik-park-tennis-courts",
     "curated-dick-savitt-tennis-center"
   ]
 }
