@@ -247,6 +247,35 @@
       background: #f8f8f8; border-radius: 8px;
     }
 
+    /* Weekend availability list */
+    .avail-meta { font-size: 10.5px; color: #a0a0a0; margin: -4px 0 9px; line-height: 1.5; }
+    .avail-card {
+      background: #f8f8f8; border-radius: 10px; padding: 10px 12px;
+      border: 1px solid #f0f0f0; margin-bottom: 7px;
+    }
+    .avail-card:last-child { margin-bottom: 0; }
+    .avail-card-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 8px; margin-bottom: 6px;
+    }
+    .avail-name { font-size: 12.5px; font-weight: 600; color: #162521; line-height: 1.25; }
+    .avail-status {
+      font-size: 9px; font-weight: 600; color: #888;
+      text-transform: uppercase; letter-spacing: .08em; white-space: nowrap;
+    }
+    .avail-status.ok   { color: #2a7a4a; }
+    .avail-status.miss { color: #b85c2e; }
+    .avail-row {
+      font-size: 11.5px; color: #444; margin: 3px 0; line-height: 1.4;
+      display: flex; gap: 6px;
+    }
+    .avail-row-lbl {
+      color: #a0a0a0; min-width: 56px; flex-shrink: 0; font-size: 10px;
+      text-transform: uppercase; letter-spacing: .06em; font-weight: 500; padding-top: 1px;
+    }
+    .avail-dim { color: #a0a0a0; }
+    .avail-empty { font-size: 11.5px; color: #a0a0a0; line-height: 1.5; padding: 6px 2px; }
+
     /* ── Zoom controls ───────────────────────────────────── */
     #zoom-controls {
       position: absolute;
@@ -578,6 +607,12 @@
       <input type="checkbox" id="f-residential" checked>
       <label for="f-residential">Private residential building</label>
     </div>
+
+    <div class="divider"></div>
+
+    <div class="section-label">Weekend Availability</div>
+    <div class="avail-meta" id="avail-meta">Loading…</div>
+    <div id="weekend-availability"></div>
 
     <div class="divider"></div>
 
@@ -2400,6 +2435,103 @@ async function initMap() {
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>initMap();</script>
+
+<script>
+// ── Weekend availability panel ──────────────────────────────────────────
+(async function renderAvailability() {
+  const metaEl = document.getElementById('avail-meta');
+  const listEl = document.getElementById('weekend-availability');
+  if (!metaEl || !listEl) return;
+
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g,
+    (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+
+  try {
+    const res = await fetch('data/availability.json', { cache: 'no-cache' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const records = await res.json();
+
+    if (!Array.isArray(records) || records.length === 0) {
+      metaEl.textContent = 'No checks yet';
+      listEl.innerHTML = '<div class="avail-empty">Weekend availability will appear here after the next scheduled call.</div>';
+      return;
+    }
+
+    // Latest record per facility
+    const latest = new Map();
+    for (const r of records) {
+      if (!r.facility_id || !r.batch_timestamp) continue;
+      const prev = latest.get(r.facility_id);
+      if (!prev || r.batch_timestamp > prev.batch_timestamp) latest.set(r.facility_id, r);
+    }
+    const rows = [...latest.values()].sort((a, b) => a.facility_name.localeCompare(b.facility_name));
+
+    // As-of = newest batch across all records
+    const newest = records.reduce((a, b) => a.batch_timestamp > b.batch_timestamp ? a : b);
+    const asOf = new Date(newest.batch_timestamp).toLocaleString('en-US', {
+      month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York',
+    });
+    const target = (newest.target_saturday && newest.target_sunday)
+      ? ` · Target: Sat ${newest.target_saturday}, Sun ${newest.target_sunday}` : '';
+    metaEl.textContent = `As of ${asOf} ET${target}`;
+
+    const dim = (v) => {
+      const t = String(v).trim().toLowerCase();
+      return t === 'none' || t === 'unknown' || t === 'n/a' || t === 'not applicable';
+    };
+    const slotCell = (v) => {
+      if (v == null || v === '') return '<span class="avail-dim">—</span>';
+      return dim(v) ? `<span class="avail-dim">${esc(v)}</span>` : esc(v);
+    };
+    const row = (lbl, val) => val == null
+      ? ''
+      : `<div class="avail-row"><span class="avail-row-lbl">${lbl}</span>${slotCell(val)}</div>`;
+
+    listEl.innerHTML = rows.map((r) => {
+      const cad = r.custom_analysis_data || {};
+      const reached = cad.reached_human === true;
+      const statusHtml = reached
+        ? '<span class="avail-status ok">Reached</span>'
+        : '<span class="avail-status miss">No answer</span>';
+
+      if (!reached) {
+        const note = cad.additional_notes || r.call_summary || 'Call did not reach a human.';
+        return `
+          <div class="avail-card">
+            <div class="avail-card-head">
+              <div class="avail-name">${esc(r.facility_name)}</div>
+              ${statusHtml}
+            </div>
+            <div class="avail-row"><span class="avail-row-lbl">Note</span><span class="avail-dim">${esc(note)}</span></div>
+          </div>`;
+      }
+
+      // Fall back to legacy flat slot fields if split fields aren't present
+      const satIn  = cad.saturday_indoor_slots  ?? cad.saturday_slots ?? null;
+      const satOut = cad.saturday_outdoor_slots ?? null;
+      const sunIn  = cad.sunday_indoor_slots    ?? cad.sunday_slots   ?? null;
+      const sunOut = cad.sunday_outdoor_slots   ?? null;
+
+      return `
+        <div class="avail-card">
+          <div class="avail-card-head">
+            <div class="avail-name">${esc(r.facility_name)}</div>
+            ${statusHtml}
+          </div>
+          ${row('Sat in',  satIn)}
+          ${row('Sat out', satOut)}
+          ${row('Sun in',  sunIn)}
+          ${row('Sun out', sunOut)}
+          ${cad.pricing    ? `<div class="avail-row"><span class="avail-row-lbl">Price</span>${esc(cad.pricing)}</div>`    : ''}
+          ${cad.court_type ? `<div class="avail-row"><span class="avail-row-lbl">Courts</span>${esc(cad.court_type)}</div>` : ''}
+        </div>`;
+    }).join('');
+  } catch (err) {
+    metaEl.textContent = 'Failed to load';
+    listEl.innerHTML = `<div class="avail-empty">Could not load data/availability.json — ${esc(err.message)}</div>`;
+  }
+})();
+</script>
 
 </body>
 </html>
