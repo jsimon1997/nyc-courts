@@ -2567,19 +2567,9 @@ async function initMap() {
     const s = seg.replace(
       /\b(?:until|til|till|thru|through)\s+(?:close|closing|end of day|end)\b/gi,
       'to 11 PM'
-    );
-    const re =
-      /(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)?\s*(?:-|–|—|to|till|until|thru|through)\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)?/i;
-    const m = s.match(re);
-    if (!m) return null;
-    const [, sH, sM, sMer, eH, eM, eMer] = m;
+    ).trim();
 
     const norm = (x) => (x ? x.toLowerCase().replace(/\./g, '') : null);
-    let startMer = norm(sMer);
-    let endMer   = norm(eMer);
-    if (!startMer && endMer) startMer = endMer;
-    if (!endMer && startMer) endMer = startMer;
-
     const toH = (h, mm, mer) => {
       let hh = parseInt(h, 10);
       const min = mm ? parseInt(mm, 10) : 0;
@@ -2588,15 +2578,37 @@ async function initMap() {
       return hh + min / 60;
     };
 
-    let start = toH(sH, sM, startMer);
-    let end   = toH(eH, eM, endMer);
+    // Try range first: "7-9 AM", "12:30 to 5 PM", "9 PM-close"
+    const rangeRe =
+      /(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)?\s*(?:-|–|—|to|till|until|thru|through)\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)?/i;
+    const m = s.match(rangeRe);
+    if (m) {
+      const [, sH, sM, sMer, eH, eM, eMer] = m;
+      let startMer = norm(sMer);
+      let endMer   = norm(eMer);
+      if (!startMer && endMer) startMer = endMer;
+      if (!endMer && startMer) endMer = startMer;
 
-    if (end <= start) {
-      end += 12;
-      if (end > 24) end -= 24;
+      let start = toH(sH, sM, startMer);
+      let end   = toH(eH, eM, endMer);
+      if (end <= start) {
+        end += 12;
+        if (end > 24) end -= 24;
+      }
+      if (end <= start) return null;
+      return { start, end };
     }
-    if (end <= start) return null;
-    return { start, end };
+
+    // Fallback: single time point → 1-hour block (e.g. "6 AM" → 6–7)
+    const singleRe = /^(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)?$/i;
+    const sm = s.match(singleRe);
+    if (sm) {
+      const [, h, mm, mer] = sm;
+      const start = toH(h, mm, norm(mer));
+      return { start, end: start + 1 };
+    }
+
+    return null;
   }
 
   const formatT = (h) => {
