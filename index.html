@@ -292,8 +292,8 @@
       display: inline-block; width: 10px; height: 10px; border-radius: 2px;
       margin-right: 5px; vertical-align: -1px;
     }
-    .wa-legend-chip.indoor  { background: #2a7a4a; }
-    .wa-legend-chip.outdoor { background: #4a7aaa; }
+    .wa-legend-chip.indoor  { background: #9a9a9a; }
+    .wa-legend-chip.outdoor { background: #2a7a4a; }
 
     .wa-body { padding: 14px 22px 18px; }
 
@@ -337,18 +337,8 @@
     .wa-bar {
       position: absolute; top: 0; bottom: 0; border-radius: 3px; opacity: .92;
     }
-    .wa-bar.indoor  { background: #2a7a4a; }
-    .wa-bar.outdoor { background: #4a7aaa; }
-    .wa-track-empty {
-      position: absolute; left: 4px; top: 1px;
-      font-size: 8.5px; color: #c5c5c5;
-      text-transform: uppercase; letter-spacing: .08em; font-weight: 600;
-    }
-    .wa-raw {
-      grid-column: 2;
-      font-size: 10px; color: #aaa; line-height: 1.4;
-      padding: 2px 2px 0;
-    }
+    .wa-bar.indoor  { background: #9a9a9a; }
+    .wa-bar.outdoor { background: #2a7a4a; }
     .wa-empty { font-size: 12px; color: #a0a0a0; padding: 12px 0; line-height: 1.5; }
 
     /* ── Zoom controls ───────────────────────────────────── */
@@ -2554,9 +2544,13 @@ async function initMap() {
     if (text == null) return null;
     const s = String(text).trim();
     if (!s) return null;
-    const lower = s.toLowerCase();
+    const lower = s.toLowerCase().replace(/\.$/, '');
     if (lower === 'none' || lower === 'n/a' || lower === 'not applicable') return [];
     if (lower === 'unknown') return null;
+    // Full-day phrases → single bar spanning the full axis
+    if (/^(open|wide open|all day|full day|available all day|open all day|open availability|availability is open|all day availability)$/.test(lower)) {
+      return [{ start: HOUR_START, end: HOUR_END }];
+    }
 
     const clean = s.replace(/\([^)]*\)/g, '').trim();
     const segs = clean.split(/,|;|\s+and\s+/i).map((x) => x.trim()).filter(Boolean);
@@ -2637,32 +2631,16 @@ async function initMap() {
     return `<div class="wa-axis"><div></div><div class="wa-axis-ticks">${ticks.join('')}</div></div>`;
   }
 
-  function rowHtml(name, inR, outR, inRaw, outRaw) {
+  function rowHtml(name, inR, outR) {
     const indoorBars  = barsHtml(inR,  'indoor');
     const outdoorBars = barsHtml(outR, 'outdoor');
-
-    const indoorTrack = inR == null
-      ? ''
-      : `<div class="wa-track">${indoorBars || '<span class="wa-track-empty">indoor · none</span>'}</div>`;
-    const outdoorTrack = outR == null
-      ? ''
-      : `<div class="wa-track">${outdoorBars || '<span class="wa-track-empty">outdoor · none</span>'}</div>`;
-
-    // Raw fallback if both slots had text but nothing parsed
-    const inHadText  = inRaw  && inR  != null && inR.length  === 0 && !/^(none|n\/a|not applicable)$/i.test(String(inRaw).trim());
-    const outHadText = outRaw && outR != null && outR.length === 0 && !/^(none|n\/a|not applicable)$/i.test(String(outRaw).trim());
-    const rawBits = [];
-    if (inHadText)  rawBits.push(`Indoor: ${inRaw}`);
-    if (outHadText) rawBits.push(`Outdoor: ${outRaw}`);
-
     return `
       <div class="wa-row">
         <div class="wa-name">${esc(name)}</div>
         <div class="wa-tracks">
-          ${indoorTrack}
-          ${outdoorTrack}
+          <div class="wa-track">${indoorBars}</div>
+          <div class="wa-track">${outdoorBars}</div>
         </div>
-        ${rawBits.length ? `<div class="wa-raw">${esc(rawBits.join(' · '))}</div>` : ''}
       </div>`;
   }
 
@@ -2682,7 +2660,7 @@ async function initMap() {
       const outRaw = cad[`${dayPrefix}_outdoor_slots`] ?? null;
       const inR  = parseRanges(inRaw);
       const outR = parseRanges(outRaw);
-      return rowHtml(r.facility_name, inR, outR, inRaw, outRaw);
+      return rowHtml(r.facility_name, inR, outR);
     });
   }
 
