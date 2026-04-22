@@ -297,5 +297,83 @@
       "pricing": ""
     },
     "transcript": "User: Thank you for calling the Roosevelt Island Racquet Club. If you know your party's extension, you may press it at any time. For the front desk and court reservations, press zero. For memberships, seasonal courts, and the assistant general manager, Alina Lexer, press one. For the junior programs and Mike Barbato, press two. For the junior program director, Magnus Gunnarson, press three. For the general manager, Pam Glick, press four. For the adult program director, Tony Huber, press five. For member services, including game arranging, press six. For camps and Bob Ingersoll, press eight. Thank you for calling. \nUser: You've reached the front desk at Roosevelt Island Racquet Club. Sorry we're unavailable to take your call right now. Please leave us your name and number, and someone will return your call as soon as possible. \n"
+  },
+  {
+    "batch_timestamp": "2026-04-22T15:16:39.799Z",
+    "facility_id": "osm-842765800",
+    "facility_name": "Bill Talbert Youth Tennis Center / East Side Tennis Association",
+    "phone": "+12127370185",
+    "target_saturday": "2026-04-25",
+    "target_sunday": "2026-04-26",
+    "call_id": "call_6e859de2bdcd19cebf2e005e71c",
+    "call_status": "ended",
+    "disconnection_reason": "voicemail_reached",
+    "duration_ms": 8096,
+    "call_summary": "The call reached the voicemail of the Eastside Tennis Association, indicating the phone is only monitored during hours of operation. No conversation with a human occurred.",
+    "user_sentiment": "Neutral",
+    "custom_analysis_data": {
+      "additional_notes": "Call reached voicemail; no information was provided beyond hours of operation notice.",
+      "saturday_outdoor_slots": "unknown",
+      "saturday_indoor_slots": "unknown",
+      "sunday_indoor_slots": "unknown",
+      "court_type": "",
+      "reached_human": false,
+      "sunday_outdoor_slots": "unknown",
+      "pricing": "",
+      "current_time_et": "Wednesday, 11:16 AM"
+    },
+    "transcript": "User: Hi. Thank you for calling the Eastside Tennis Association. This phone is only monitored during hours of operation. \n"
+  },
+  {
+    "batch_timestamp": "2026-04-22T15:16:39.799Z",
+    "facility_id": "curated-mccarren-tennis-center",
+    "facility_name": "McCarren Tennis Center",
+    "phone": "+13478739698",
+    "target_saturday": "2026-04-25",
+    "target_sunday": "2026-04-26",
+    "call_id": "call_b631d61a2affcf7fe81e15b37fe",
+    "call_status": "ended",
+    "disconnection_reason": "voicemail_reached",
+    "duration_ms": 64524,
+    "call_summary": "The agent called McCarren Tennis Center to inquire about court availability, navigated the phone menu, but ultimately reached voicemail and was unable to speak with a human.",
+    "user_sentiment": "Neutral",
+    "custom_analysis_data": {
+      "additional_notes": "The facility is currently operating indoors and open daily from 6 AM to 12 AM. Reservations are directed to be made online or via email for private lessons.",
+      "saturday_outdoor_slots": "not applicable",
+      "saturday_indoor_slots": "unknown",
+      "sunday_indoor_slots": "unknown",
+      "court_type": "indoor",
+      "reached_human": false,
+      "sunday_outdoor_slots": "not applicable",
+      "pricing": "",
+      "current_time_et": "Wednesday, 11:17 AM"
+    },
+    "transcript": "User: Hello. Thank you for calling McEaran Tennis Center. We are now indoors, and our hours of operation are six AM to twelve AM daily. For court reservations, clinics, or cardio classes, please book online using the court reserve app. For private lessons, email us at bookings at mccarrantennis n y c dot com. For assistance, please press one. \nAgent: I'll press 1 to speak with someone who can help me with court availability.\nUser: \nUser: Thank you for calling McCarran Tennis Center. Sorry we missed your call. Please leave your name, number, and a brief message. \n"
+  },
+  {
+    "batch_timestamp": "2026-04-22T15:16:39.799Z",
+    "facility_id": "osm-284882418",
+    "facility_name": "Roosevelt Island Racquet Club",
+    "phone": "+12129350250",
+    "target_saturday": "2026-04-25",
+    "target_sunday": "2026-04-26",
+    "call_id": "call_f1f24d8d8a5bc80cfdd5c9de564",
+    "call_status": "ended",
+    "disconnection_reason": "max_duration_reached",
+    "duration_ms": 178004,
+    "call_summary": "The agent called Roosevelt Island Racquet Club to inquire about indoor court availability and pricing for the upcoming weekend. The staff member provided detailed available time slots for both Saturday and Sunday, confirmed that only indoor courts are available with a hard true surface, and explained the pricing structure for different time periods. The call was informative and completed without issues.",
+    "user_sentiment": "Positive",
+    "custom_analysis_data": {
+      "additional_notes": "",
+      "saturday_outdoor_slots": "not applicable",
+      "saturday_indoor_slots": "7-10 AM, 12-4:30 PM, 6-8 PM, 6-11:30 PM",
+      "sunday_indoor_slots": "7-12 PM, 12-1:30 PM, 12:30-3:30 PM, 6:30-8 PM",
+      "court_type": "indoor, hard true",
+      "reached_human": true,
+      "sunday_outdoor_slots": "not applicable",
+      "pricing": "Nonprime (7-8 AM): $132/hr (nonmember); Prime (8 AM-2 PM): $221/hr; 2-6 PM: $210/hr; 6-9 PM: $150/hr; 9-11 PM: $75/hr.",
+      "current_time_et": "Wednesday, 11:18 AM"
+    },
+    "transcript": "User: Thank you for calling the Roosevelt Island Racquet Club. If you know your party's extension, you may press it at any time. For the front desk and court reservations, press zero. For memberships, seasonal courts, and the assistant general manager, Alina Lexer, press one. For the junior programs and Mike Barbato, press two. For the junior program director, Magnus Benarsen, press three. For the general manager, Pam Glick, press four. For the adult program director, Tony Huber, press five. For member services, game arranging, press six. For Camps and Bob Ingersoll, press eight. Thank you for calling. \nUser: Roosevelt on Racket Club. This is Mariela. \nAgent: Hi, I'm checking tennis court availability at Roosevelt Island Racquet Club for this weekend. Do you have indoor and outdoor courts?\nUser: We only have indoor courts. \nAgent: Got it. What indoor court times do you have open on Saturday, April 25th?\nUser: I have from seven AM to ten AM. \nUser: And I have from twelve PM to four thirty PM. \nUser: I have from six to eight PM, and then I have from six to eleven thirty PM. \nAgent: Is that last time slot 6 to 11:30 PM?\nUser: Yep. \nAgent: And what indoor court times do you have open on Sunday, April 26th?\nUser: I have between seven and seven AM and twelve PM. I have twelve PM to one thirty. I have twelve thirty to three thirty PM. I also have six thirty to eight PM \nAgent: Got it. Before I let you go — what is the pricing and court surface?\nUser: The court surface is hard true, um, and the pricing depends on what time you're playing. \nAgent: Could you share the rates?\nUser: So Saturday and Sunday, we have non prime and prime times. So nonprime between seven AM and eight AM would be, if you are a nonmember, a hundred and thirty two dollars. Between eight AM and two PM is prime time, so that would be two hundred twenty one dollars per hour. Um, between two PM and six PM, it is two hundred and ten dollars per hour. Between six PM and nine PM, it's a hundred and fifty dollars an hour. And then between nine PM, and eleven PM, it's seventy five dollars. \nAgent: Thanks \n"
   }
 ]
