@@ -64,12 +64,13 @@ function appendResult(record) {
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(current, null, 2) + '\n', 'utf8');
 }
 
-function recentlyCalled(records, facilityId, nowMs) {
+function recentlyReachedHuman(records, facilityId, nowMs) {
   const cutoff = nowMs - DEDUPE_WINDOW_HOURS * 60 * 60 * 1000;
   return records.some((r) => {
     if (r.facility_id !== facilityId) return false;
     const t = Date.parse(r.batch_timestamp);
-    return Number.isFinite(t) && t >= cutoff;
+    if (!Number.isFinite(t) || t < cutoff) return false;
+    return r.custom_analysis_data && r.custom_analysis_data.reached_human === true;
   });
 }
 
@@ -148,8 +149,8 @@ async function main() {
       console.warn(`[skip] ${name}: no phone number in courts-db.json`);
       continue;
     }
-    if (recentlyCalled(existingRecords, id, nowMs)) {
-      console.log(`[skip] ${name}: called within last ${DEDUPE_WINDOW_HOURS}h`);
+    if (recentlyReachedHuman(existingRecords, id, nowMs)) {
+      console.log(`[skip] ${name}: reached a human within last ${DEDUPE_WINDOW_HOURS}h`);
       continue;
     }
 
