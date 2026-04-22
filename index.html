@@ -247,34 +247,109 @@
       background: #f8f8f8; border-radius: 8px;
     }
 
-    /* Weekend availability list */
-    .avail-meta { font-size: 10.5px; color: #a0a0a0; margin: -4px 0 9px; line-height: 1.5; }
-    .avail-card {
-      background: #f8f8f8; border-radius: 10px; padding: 10px 12px;
-      border: 1px solid #f0f0f0; margin-bottom: 7px;
+    /* ── Weekend availability (desktop-only right-side dropdown) ── */
+    @media (max-width: 900px) {
+      #wa-chip, #wa-panel { display: none !important; }
     }
-    .avail-card:last-child { margin-bottom: 0; }
-    .avail-card-head {
-      display: flex; justify-content: space-between; align-items: baseline;
-      gap: 8px; margin-bottom: 6px;
+    #wa-chip {
+      position: absolute; top: 16px; right: 16px; z-index: 1100;
+      background: #fff; border: none; border-radius: 20px;
+      padding: 10px 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.10), 0 0 0 1px rgba(0,0,0,.05);
+      font: inherit; font-size: 12.5px; font-weight: 600; color: #162521;
+      cursor: pointer; display: flex; align-items: center; gap: 8px;
+      transition: background .15s, color .15s;
     }
-    .avail-name { font-size: 12.5px; font-weight: 600; color: #162521; line-height: 1.25; }
-    .avail-status {
-      font-size: 9px; font-weight: 600; color: #888;
-      text-transform: uppercase; letter-spacing: .08em; white-space: nowrap;
+    #wa-chip:hover { background: #f8f8f8; }
+    #wa-chip .wa-caret { font-size: 10px; color: #888; transition: transform .2s; }
+    #wa-chip.is-open { background: #162521; color: #fff; }
+    #wa-chip.is-open .wa-caret { color: rgba(255,255,255,.5); transform: rotate(180deg); }
+
+    #wa-panel {
+      position: absolute; top: 64px; right: 16px; z-index: 1100;
+      width: min(820px, calc(100vw - 332px));
+      max-height: calc(100vh - 88px);
+      background: #fff; border-radius: 20px;
+      box-shadow: 0 4px 28px rgba(0,0,0,.14), 0 0 0 1px rgba(0,0,0,.05);
+      overflow-y: auto; overflow-x: hidden;
+      display: none;
+      scrollbar-width: thin; scrollbar-color: #e5e5e5 transparent;
     }
-    .avail-status.ok   { color: #2a7a4a; }
-    .avail-status.miss { color: #b85c2e; }
-    .avail-row {
-      font-size: 11.5px; color: #444; margin: 3px 0; line-height: 1.4;
-      display: flex; gap: 6px;
+    #wa-panel.is-open { display: block; }
+    #wa-panel::-webkit-scrollbar { width: 4px; }
+    #wa-panel::-webkit-scrollbar-thumb { background: #e5e5e5; border-radius: 2px; }
+
+    .wa-head {
+      padding: 18px 22px 14px; border-bottom: 1px solid #f0f0f0;
+      position: sticky; top: 0; background: #fff; z-index: 1;
     }
-    .avail-row-lbl {
-      color: #a0a0a0; min-width: 56px; flex-shrink: 0; font-size: 10px;
-      text-transform: uppercase; letter-spacing: .06em; font-weight: 500; padding-top: 1px;
+    .wa-head h3 { font-size: 14px; font-weight: 600; color: #162521; letter-spacing: -.01em; }
+    .wa-meta { font-size: 10.5px; color: #a0a0a0; margin-top: 4px; line-height: 1.5; }
+    .wa-legend {
+      display: flex; gap: 16px; margin-top: 8px; font-size: 10px; color: #666;
     }
-    .avail-dim { color: #a0a0a0; }
-    .avail-empty { font-size: 11.5px; color: #a0a0a0; line-height: 1.5; padding: 6px 2px; }
+    .wa-legend-chip {
+      display: inline-block; width: 10px; height: 10px; border-radius: 2px;
+      margin-right: 5px; vertical-align: -1px;
+    }
+    .wa-legend-chip.indoor  { background: #2a7a4a; }
+    .wa-legend-chip.outdoor { background: #4a7aaa; }
+
+    .wa-body { padding: 14px 22px 18px; }
+
+    .wa-day { margin-bottom: 22px; }
+    .wa-day:last-child { margin-bottom: 0; }
+    .wa-day-title {
+      font-size: 11px; font-weight: 700; color: #162521;
+      text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px;
+    }
+    .wa-day-title .wa-date { color: #a0a0a0; font-weight: 500; margin-left: 6px; }
+
+    .wa-axis {
+      display: grid; grid-template-columns: 140px 1fr;
+      gap: 0 12px; margin-bottom: 4px;
+    }
+    .wa-axis-ticks {
+      position: relative; height: 14px;
+      font-size: 9.5px; color: #a0a0a0;
+    }
+    .wa-axis-ticks span {
+      position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap;
+    }
+
+    .wa-row {
+      display: grid; grid-template-columns: 140px 1fr;
+      gap: 2px 12px; align-items: stretch; margin-bottom: 8px;
+    }
+    .wa-name {
+      font-size: 11.5px; font-weight: 500; color: #162521;
+      line-height: 1.25; padding: 2px 0; word-wrap: break-word;
+    }
+    .wa-tracks {
+      position: relative; padding: 2px 0;
+      border-radius: 4px; overflow: hidden;
+      background: repeating-linear-gradient(
+        to right, transparent 0, transparent calc(100% / 17),
+        #f2f2f2 calc(100% / 17), #f2f2f2 calc(100% / 17 + 1px)
+      );
+    }
+    .wa-track { position: relative; height: 11px; margin: 2px 0; }
+    .wa-bar {
+      position: absolute; top: 0; bottom: 0; border-radius: 3px; opacity: .92;
+    }
+    .wa-bar.indoor  { background: #2a7a4a; }
+    .wa-bar.outdoor { background: #4a7aaa; }
+    .wa-track-empty {
+      position: absolute; left: 4px; top: 1px;
+      font-size: 8.5px; color: #c5c5c5;
+      text-transform: uppercase; letter-spacing: .08em; font-weight: 600;
+    }
+    .wa-raw {
+      grid-column: 2;
+      font-size: 10px; color: #aaa; line-height: 1.4;
+      padding: 2px 2px 0;
+    }
+    .wa-empty { font-size: 12px; color: #a0a0a0; padding: 12px 0; line-height: 1.5; }
 
     /* ── Zoom controls ───────────────────────────────────── */
     #zoom-controls {
@@ -610,12 +685,6 @@
 
     <div class="divider"></div>
 
-    <div class="section-label">Weekend Availability</div>
-    <div class="avail-meta" id="avail-meta">Loading…</div>
-    <div id="weekend-availability"></div>
-
-    <div class="divider"></div>
-
     <div id="stats-grid">
       <div class="stat-card" id="stat-total">
         <div class="stat-val" id="s-total">—</div>
@@ -635,6 +704,23 @@
     <div id="hint">💡 Click a marker for details.<br>Double-click to open its website.</div>
   </div>
   </div><!-- /panel-scroll -->
+</div>
+
+<!-- Weekend availability dropdown (desktop-only) -->
+<button id="wa-chip" type="button" aria-expanded="false" aria-controls="wa-panel">
+  <span>Weekend Availability</span>
+  <span class="wa-caret">▼</span>
+</button>
+<div id="wa-panel" aria-hidden="true">
+  <div class="wa-head">
+    <h3>Weekend Court Availability</h3>
+    <div class="wa-meta" id="wa-meta">Loading…</div>
+    <div class="wa-legend">
+      <span><span class="wa-legend-chip indoor"></span>Indoor</span>
+      <span><span class="wa-legend-chip outdoor"></span>Outdoor</span>
+    </div>
+  </div>
+  <div class="wa-body" id="wa-body"></div>
 </div>
 
 <!-- Zoom controls -->
@@ -2437,99 +2523,216 @@ async function initMap() {
 <script>initMap();</script>
 
 <script>
-// ── Weekend availability panel ──────────────────────────────────────────
-(async function renderAvailability() {
-  const metaEl = document.getElementById('avail-meta');
-  const listEl = document.getElementById('weekend-availability');
-  if (!metaEl || !listEl) return;
+// ── Weekend availability dropdown ─────────────────────────────────────────
+(function () {
+  const HOUR_START  = 6;   // 6am
+  const HOUR_END    = 23;  // 11pm
+  const TOTAL_HOURS = HOUR_END - HOUR_START; // 17
+
+  const chip  = document.getElementById('wa-chip');
+  const panel = document.getElementById('wa-panel');
+  const meta  = document.getElementById('wa-meta');
+  const body  = document.getElementById('wa-body');
+  if (!chip || !panel) return;
+
+  const setOpen = (open) => {
+    chip.classList.toggle('is-open', open);
+    panel.classList.toggle('is-open', open);
+    chip.setAttribute('aria-expanded', open ? 'true' : 'false');
+    panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+  };
+  chip.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setOpen(!panel.classList.contains('is-open'));
+  });
+  document.addEventListener('click', (e) => {
+    if (!panel.contains(e.target) && !chip.contains(e.target)) setOpen(false);
+  });
+
+  // ── text → time ranges ───────────────────────────────────────
+  function parseRanges(text) {
+    if (text == null) return null;
+    const s = String(text).trim();
+    if (!s) return null;
+    const lower = s.toLowerCase();
+    if (lower === 'none' || lower === 'n/a' || lower === 'not applicable') return [];
+    if (lower === 'unknown') return null;
+
+    const clean = s.replace(/\([^)]*\)/g, '').trim();
+    const segs = clean.split(/,|;|\s+and\s+/i).map((x) => x.trim()).filter(Boolean);
+
+    const out = [];
+    for (const seg of segs) {
+      const r = parseSegment(seg);
+      if (r) out.push(r);
+    }
+    return out;
+  }
+
+  function parseSegment(seg) {
+    const s = seg.replace(
+      /\b(?:until|til|till|thru|through)\s+(?:close|closing|end of day|end)\b/gi,
+      'to 11 PM'
+    );
+    const re =
+      /(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)?\s*(?:-|–|—|to|till|until|thru|through)\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)?/i;
+    const m = s.match(re);
+    if (!m) return null;
+    const [, sH, sM, sMer, eH, eM, eMer] = m;
+
+    const norm = (x) => (x ? x.toLowerCase().replace(/\./g, '') : null);
+    let startMer = norm(sMer);
+    let endMer   = norm(eMer);
+    if (!startMer && endMer) startMer = endMer;
+    if (!endMer && startMer) endMer = startMer;
+
+    const toH = (h, mm, mer) => {
+      let hh = parseInt(h, 10);
+      const min = mm ? parseInt(mm, 10) : 0;
+      if (mer === 'pm' && hh < 12) hh += 12;
+      if (mer === 'am' && hh === 12) hh = 0;
+      return hh + min / 60;
+    };
+
+    let start = toH(sH, sM, startMer);
+    let end   = toH(eH, eM, endMer);
+
+    if (end <= start) {
+      end += 12;
+      if (end > 24) end -= 24;
+    }
+    if (end <= start) return null;
+    return { start, end };
+  }
+
+  const formatT = (h) => {
+    const hr = Math.floor(h);
+    const mm = Math.round((h - hr) * 60);
+    const per = hr >= 12 ? 'pm' : 'am';
+    const display = ((hr + 11) % 12) + 1;
+    return mm === 0 ? `${display}${per}` : `${display}:${String(mm).padStart(2, '0')}${per}`;
+  };
 
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g,
     (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 
-  try {
-    const res = await fetch('data/availability.json', { cache: 'no-cache' });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const records = await res.json();
+  function barsHtml(ranges, type) {
+    if (!ranges || ranges.length === 0) return '';
+    return ranges.map((r) => {
+      const a = Math.max(r.start, HOUR_START);
+      const b = Math.min(r.end, HOUR_END);
+      if (b <= a) return '';
+      const left  = ((a - HOUR_START) / TOTAL_HOURS) * 100;
+      const width = ((b - a)          / TOTAL_HOURS) * 100;
+      return `<div class="wa-bar ${type}" style="left:${left.toFixed(2)}%;width:${width.toFixed(2)}%" title="${formatT(r.start)}–${formatT(r.end)}"></div>`;
+    }).join('');
+  }
 
-    if (!Array.isArray(records) || records.length === 0) {
-      metaEl.textContent = 'No checks yet';
-      listEl.innerHTML = '<div class="avail-empty">Weekend availability will appear here after the next scheduled call.</div>';
-      return;
+  function axisHtml() {
+    const ticks = [];
+    for (let h = HOUR_START; h <= HOUR_END; h += 2) {
+      const pct = ((h - HOUR_START) / TOTAL_HOURS) * 100;
+      ticks.push(`<span style="left:${pct.toFixed(2)}%">${formatT(h)}</span>`);
     }
+    return `<div class="wa-axis"><div></div><div class="wa-axis-ticks">${ticks.join('')}</div></div>`;
+  }
 
-    // Latest record per facility
-    const latest = new Map();
-    for (const r of records) {
-      if (!r.facility_id || !r.batch_timestamp) continue;
-      const prev = latest.get(r.facility_id);
-      if (!prev || r.batch_timestamp > prev.batch_timestamp) latest.set(r.facility_id, r);
-    }
-    const rows = [...latest.values()].sort((a, b) => a.facility_name.localeCompare(b.facility_name));
+  function rowHtml(name, inR, outR, inRaw, outRaw) {
+    const indoorBars  = barsHtml(inR,  'indoor');
+    const outdoorBars = barsHtml(outR, 'outdoor');
 
-    // As-of = newest batch across all records
-    const newest = records.reduce((a, b) => a.batch_timestamp > b.batch_timestamp ? a : b);
-    const asOf = new Date(newest.batch_timestamp).toLocaleString('en-US', {
-      month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York',
-    });
-    const target = (newest.target_saturday && newest.target_sunday)
-      ? ` · Target: Sat ${newest.target_saturday}, Sun ${newest.target_sunday}` : '';
-    metaEl.textContent = `As of ${asOf} ET${target}`;
-
-    const dim = (v) => {
-      const t = String(v).trim().toLowerCase();
-      return t === 'none' || t === 'unknown' || t === 'n/a' || t === 'not applicable';
-    };
-    const slotCell = (v) => {
-      if (v == null || v === '') return '<span class="avail-dim">—</span>';
-      return dim(v) ? `<span class="avail-dim">${esc(v)}</span>` : esc(v);
-    };
-    const row = (lbl, val) => val == null
+    const indoorTrack = inR == null
       ? ''
-      : `<div class="avail-row"><span class="avail-row-lbl">${lbl}</span>${slotCell(val)}</div>`;
+      : `<div class="wa-track">${indoorBars || '<span class="wa-track-empty">indoor · none</span>'}</div>`;
+    const outdoorTrack = outR == null
+      ? ''
+      : `<div class="wa-track">${outdoorBars || '<span class="wa-track-empty">outdoor · none</span>'}</div>`;
 
-    listEl.innerHTML = rows.map((r) => {
+    // Raw fallback if both slots had text but nothing parsed
+    const inHadText  = inRaw  && inR  != null && inR.length  === 0 && !/^(none|n\/a|not applicable)$/i.test(String(inRaw).trim());
+    const outHadText = outRaw && outR != null && outR.length === 0 && !/^(none|n\/a|not applicable)$/i.test(String(outRaw).trim());
+    const rawBits = [];
+    if (inHadText)  rawBits.push(`Indoor: ${inRaw}`);
+    if (outHadText) rawBits.push(`Outdoor: ${outRaw}`);
+
+    return `
+      <div class="wa-row">
+        <div class="wa-name">${esc(name)}</div>
+        <div class="wa-tracks">
+          ${indoorTrack}
+          ${outdoorTrack}
+        </div>
+        ${rawBits.length ? `<div class="wa-raw">${esc(rawBits.join(' · '))}</div>` : ''}
+      </div>`;
+  }
+
+  function dayHtml(label, dateStr, rows) {
+    return `
+      <div class="wa-day">
+        <div class="wa-day-title">${label}<span class="wa-date">${esc(dateStr || '')}</span></div>
+        ${axisHtml()}
+        ${rows.join('')}
+      </div>`;
+  }
+
+  function buildDayRows(reached, dayPrefix) {
+    return reached.map((r) => {
       const cad = r.custom_analysis_data || {};
-      const reached = cad.reached_human === true;
-      const statusHtml = reached
-        ? '<span class="avail-status ok">Reached</span>'
-        : '<span class="avail-status miss">No answer</span>';
+      const inRaw  = cad[`${dayPrefix}_indoor_slots`]  ?? cad[`${dayPrefix}_slots`] ?? null;
+      const outRaw = cad[`${dayPrefix}_outdoor_slots`] ?? null;
+      const inR  = parseRanges(inRaw);
+      const outR = parseRanges(outRaw);
+      return rowHtml(r.facility_name, inR, outR, inRaw, outRaw);
+    });
+  }
 
-      if (!reached) {
-        const note = cad.additional_notes || r.call_summary || 'Call did not reach a human.';
-        return `
-          <div class="avail-card">
-            <div class="avail-card-head">
-              <div class="avail-name">${esc(r.facility_name)}</div>
-              ${statusHtml}
-            </div>
-            <div class="avail-row"><span class="avail-row-lbl">Note</span><span class="avail-dim">${esc(note)}</span></div>
-          </div>`;
+  async function render() {
+    try {
+      const res = await fetch('data/availability.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const records = await res.json();
+
+      if (!Array.isArray(records) || !records.length) {
+        meta.textContent = 'No checks yet.';
+        body.innerHTML = '<div class="wa-empty">Availability will appear here after the next scheduled call.</div>';
+        return;
       }
 
-      // Fall back to legacy flat slot fields if split fields aren't present
-      const satIn  = cad.saturday_indoor_slots  ?? cad.saturday_slots ?? null;
-      const satOut = cad.saturday_outdoor_slots ?? null;
-      const sunIn  = cad.sunday_indoor_slots    ?? cad.sunday_slots   ?? null;
-      const sunOut = cad.sunday_outdoor_slots   ?? null;
+      // Latest record per facility
+      const latest = new Map();
+      for (const r of records) {
+        if (!r.facility_id || !r.batch_timestamp) continue;
+        const prev = latest.get(r.facility_id);
+        if (!prev || r.batch_timestamp > prev.batch_timestamp) latest.set(r.facility_id, r);
+      }
+      // Keep only reached-human
+      const reached = [...latest.values()]
+        .filter((r) => r.custom_analysis_data && r.custom_analysis_data.reached_human === true)
+        .sort((a, b) => a.facility_name.localeCompare(b.facility_name));
 
-      return `
-        <div class="avail-card">
-          <div class="avail-card-head">
-            <div class="avail-name">${esc(r.facility_name)}</div>
-            ${statusHtml}
-          </div>
-          ${row('Sat in',  satIn)}
-          ${row('Sat out', satOut)}
-          ${row('Sun in',  sunIn)}
-          ${row('Sun out', sunOut)}
-          ${cad.pricing    ? `<div class="avail-row"><span class="avail-row-lbl">Price</span>${esc(cad.pricing)}</div>`    : ''}
-          ${cad.court_type ? `<div class="avail-row"><span class="avail-row-lbl">Courts</span>${esc(cad.court_type)}</div>` : ''}
-        </div>`;
-    }).join('');
-  } catch (err) {
-    metaEl.textContent = 'Failed to load';
-    listEl.innerHTML = `<div class="avail-empty">Could not load data/availability.json — ${esc(err.message)}</div>`;
+      if (!reached.length) {
+        meta.textContent = 'No successful calls yet.';
+        body.innerHTML = '<div class="wa-empty">Facilities will appear here once the agent reaches a human.</div>';
+        return;
+      }
+
+      const newest = records.reduce((a, b) => a.batch_timestamp > b.batch_timestamp ? a : b);
+      const asOf = new Date(newest.batch_timestamp).toLocaleString('en-US', {
+        month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit',
+        timeZone: 'America/New_York',
+      });
+      meta.textContent = `As of ${asOf} ET · Target weekend: Sat ${newest.target_saturday} / Sun ${newest.target_sunday}`;
+
+      body.innerHTML =
+        dayHtml('Saturday', newest.target_saturday, buildDayRows(reached, 'saturday')) +
+        dayHtml('Sunday',   newest.target_sunday,   buildDayRows(reached, 'sunday'));
+    } catch (err) {
+      meta.textContent = 'Failed to load';
+      body.innerHTML = `<div class="wa-empty">Could not load data — ${esc(err.message)}</div>`;
+    }
   }
+
+  render();
 })();
 </script>
 
