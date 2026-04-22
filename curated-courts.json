@@ -451,7 +451,7 @@
       "phone": "(212) 851-7100",
       "bookingUrl": "https://perec.columbia.edu/content/dick-savitt-tennis-center",
       "courts": 12,
-      "note": "Baker Athletics Complex, 603 W 218th St. Columbia University. 6 indoor + 6 outdoor hard courts. Open to the public.",
+      "note": "Baker Athletics Complex, 603 W 218th St. Columbia University. 6 indoor + 6 outdoor hard courts. Open to the public. Non-members can book up to 48 hours in advance.",
       "address": "603 W 218th St, Inwood, Manhattan, NY 10034"
     },
     {
@@ -585,7 +585,7 @@
       "phone": "(212) 851-7100",
       "bookingUrl": "https://perec.columbia.edu/content/dick-savitt-tennis-center",
       "courts": 12,
-      "note": "603 W 218th St, Inwood (Columbia University). 6 outdoor + 6 indoor hard courts. Book by the hour - open to public.",
+      "note": "603 W 218th St, Inwood (Columbia University). 6 outdoor + 6 indoor hard courts. Book by the hour - open to public. Non-members can book up to 48 hours in advance.",
       "address": "603 W 218th St, Inwood, Manhattan, NY 10034"
     },
     {
@@ -1067,21 +1067,21 @@
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/leif-ericson-park/facilities/tennis",
       "address": "67th-66th Sts bet. 4th Ave & Ft. Hamilton Pkwy, Brooklyn",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "185022019": {
       "name": "Leif Ericson Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/leif-ericson-park/facilities/tennis",
       "address": "67th-66th Sts bet. 4th Ave & Ft. Hamilton Pkwy, Brooklyn",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "185022020": {
       "name": "Leif Ericson Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/leif-ericson-park/facilities/tennis",
       "address": "67th-66th Sts bet. 4th Ave & Ft. Hamilton Pkwy, Brooklyn",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "191840876": {
       "name": "John F. Kennedy High School Tennis Courts",
@@ -1226,7 +1226,7 @@
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/crocheron-park/facilities/tennis",
       "address": "214-41 34th Ave, Bayside, NY 11361",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "244785177": {
       "name": "Seton Park Tennis Courts",
@@ -1252,91 +1252,91 @@
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "261701836": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "261701838": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "261701840": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "261701842": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "261701844": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "261701845": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "261701847": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "261701852": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "261701855": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "261701858": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "261701860": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "261701863": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "261703581": {
       "name": "Police Officer Edward Byrne Park Tennis",
@@ -1367,273 +1367,273 @@
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis",
       "address": "21st St & Hoyt Ave N, Queens, NY 11102",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "270270770": {
       "name": "Astoria Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis",
       "address": "21st St & Hoyt Ave N, Queens, NY 11102",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "270270771": {
       "name": "Astoria Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis",
       "address": "21st St & Hoyt Ave N, Queens, NY 11102",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "270270772": {
       "name": "Astoria Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis",
       "address": "21st St & Hoyt Ave N, Queens, NY 11102",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "270270773": {
       "name": "Astoria Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis",
       "address": "21st St & Hoyt Ave N, Queens, NY 11102",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "270270774": {
       "name": "Astoria Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis",
       "address": "21st St & Hoyt Ave N, Queens, NY 11102",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "270270775": {
       "name": "Astoria Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis",
       "address": "21st St & Hoyt Ave N, Queens, NY 11102",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "270270776": {
       "name": "Astoria Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis",
       "address": "21st St & Hoyt Ave N, Queens, NY 11102",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "270270777": {
       "name": "Astoria Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis",
       "address": "21st St & Hoyt Ave N, Queens, NY 11102",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "270270778": {
       "name": "Astoria Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis",
       "address": "21st St & Hoyt Ave N, Queens, NY 11102",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "270270779": {
       "name": "Astoria Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis",
       "address": "21st St & Hoyt Ave N, Queens, NY 11102",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "270270780": {
       "name": "Astoria Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis",
       "address": "21st St & Hoyt Ave N, Queens, NY 11102",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "270270781": {
       "name": "Astoria Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis",
       "address": "21st St & Hoyt Ave N, Queens, NY 11102",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "270270782": {
       "name": "Astoria Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/astoria-park/facilities/tennis",
       "address": "21st St & Hoyt Ave N, Queens, NY 11102",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "277268741": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268742": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268743": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268744": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268745": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268746": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268747": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268748": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268749": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268750": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268751": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268752": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268753": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268754": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268755": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "277268756": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "280381270": {
       "name": "Williamsbridge Oval Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/williamsbridge-oval/facilities/tennis",
       "address": "3225 Reservoir Oval East, Bronx, NY 10467",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "280381271": {
       "name": "Williamsbridge Oval Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/williamsbridge-oval/facilities/tennis",
       "address": "3225 Reservoir Oval East, Bronx, NY 10467",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "280381273": {
       "name": "Williamsbridge Oval Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/williamsbridge-oval/facilities/tennis",
       "address": "3225 Reservoir Oval East, Bronx, NY 10467",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "280381274": {
       "name": "Williamsbridge Oval Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/williamsbridge-oval/facilities/tennis",
       "address": "3225 Reservoir Oval East, Bronx, NY 10467",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "280381276": {
       "name": "Williamsbridge Oval Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/williamsbridge-oval/facilities/tennis",
       "address": "3225 Reservoir Oval East, Bronx, NY 10467",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "280381277": {
       "name": "Williamsbridge Oval Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/williamsbridge-oval/facilities/tennis",
       "address": "3225 Reservoir Oval East, Bronx, NY 10467",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "280381280": {
       "name": "Williamsbridge Oval Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/williamsbridge-oval/facilities/tennis",
       "address": "3225 Reservoir Oval East, Bronx, NY 10467",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "280381282": {
       "name": "Williamsbridge Oval Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/williamsbridge-oval/facilities/tennis",
       "address": "3225 Reservoir Oval East, Bronx, NY 10467",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "283261589": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "283806886": {
       "name": "Baisley Park Tennis Courts",
@@ -1658,7 +1658,7 @@
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "284637275": {
       "name": "I.S. 10 Horace Greeley",
@@ -1829,63 +1829,63 @@
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/leif-ericson-park/facilities/tennis",
       "address": "67th-66th Sts bet. 4th Ave & Ft. Hamilton Pkwy, Brooklyn",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "400014460": {
       "name": "Leif Ericson Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/leif-ericson-park/facilities/tennis",
       "address": "67th-66th Sts bet. 4th Ave & Ft. Hamilton Pkwy, Brooklyn",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "400014461": {
       "name": "Leif Ericson Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/leif-ericson-park/facilities/tennis",
       "address": "67th-66th Sts bet. 4th Ave & Ft. Hamilton Pkwy, Brooklyn",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "400014465": {
       "name": "Leif Ericson Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/leif-ericson-park/facilities/tennis",
       "address": "67th-66th Sts bet. 4th Ave & Ft. Hamilton Pkwy, Brooklyn",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "400014466": {
       "name": "Leif Ericson Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/leif-ericson-park/facilities/tennis",
       "address": "67th-66th Sts bet. 4th Ave & Ft. Hamilton Pkwy, Brooklyn",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "400014467": {
       "name": "Leif Ericson Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/leif-ericson-park/facilities/tennis",
       "address": "67th-66th Sts bet. 4th Ave & Ft. Hamilton Pkwy, Brooklyn",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "400014468": {
       "name": "Leif Ericson Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/leif-ericson-park/facilities/tennis",
       "address": "67th-66th Sts bet. 4th Ave & Ft. Hamilton Pkwy, Brooklyn",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "400014469": {
       "name": "Leif Ericson Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/leif-ericson-park/facilities/tennis",
       "address": "67th-66th Sts bet. 4th Ave & Ft. Hamilton Pkwy, Brooklyn",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "400014471": {
       "name": "Leif Ericson Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/leif-ericson-park/facilities/tennis",
       "address": "67th-66th Sts bet. 4th Ave & Ft. Hamilton Pkwy, Brooklyn",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "404120662": {
       "name": "Cunningham Park Tennis Courts",
@@ -2173,7 +2173,7 @@
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/mcdonald-playground/facilities/tennis",
       "address": "McDonald Ave & Ave S, Brooklyn, NY 11223",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "457010056": {
       "name": "Baisley Pond Park Tennis Courts",
@@ -2186,70 +2186,70 @@
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/detective-keith-l-williams-park/facilities/tennis",
       "address": "Liberty Ave & 172nd St, Jamaica, NY 11433",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "459488227": {
       "name": "Detective Keith L. Williams Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/detective-keith-l-williams-park/facilities/tennis",
       "address": "Liberty Ave & 172nd St, Jamaica, NY 11433",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "459488228": {
       "name": "Detective Keith L. Williams Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/detective-keith-l-williams-park/facilities/tennis",
       "address": "Liberty Ave & 172nd St, Jamaica, NY 11433",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "459488229": {
       "name": "Detective Keith L. Williams Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/detective-keith-l-williams-park/facilities/tennis",
       "address": "Liberty Ave & 172nd St, Jamaica, NY 11433",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "459488230": {
       "name": "Detective Keith L. Williams Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/detective-keith-l-williams-park/facilities/tennis",
       "address": "Liberty Ave & 172nd St, Jamaica, NY 11433",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "459488231": {
       "name": "Detective Keith L. Williams Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/detective-keith-l-williams-park/facilities/tennis",
       "address": "Liberty Ave & 172nd St, Jamaica, NY 11433",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "459488232": {
       "name": "Detective Keith L. Williams Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/detective-keith-l-williams-park/facilities/tennis",
       "address": "Liberty Ave & 172nd St, Jamaica, NY 11433",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "459488233": {
       "name": "Detective Keith L. Williams Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/detective-keith-l-williams-park/facilities/tennis",
       "address": "Liberty Ave & 172nd St, Jamaica, NY 11433",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "459488234": {
       "name": "Detective Keith L. Williams Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/detective-keith-l-williams-park/facilities/tennis",
       "address": "Liberty Ave & 172nd St, Jamaica, NY 11433",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "459488235": {
       "name": "Detective Keith L. Williams Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/detective-keith-l-williams-park/facilities/tennis",
       "address": "Liberty Ave & 172nd St, Jamaica, NY 11433",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "515115623": {
       "name": "P.S. 112 Dutch Kills",
@@ -2460,140 +2460,140 @@
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/crocheron-park/facilities/tennis",
       "address": "214-41 34th Ave, Bayside, NY 11361",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "564802652": {
       "name": "Crocheron Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/crocheron-park/facilities/tennis",
       "address": "214-41 34th Ave, Bayside, NY 11361",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "564802653": {
       "name": "Crocheron Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/crocheron-park/facilities/tennis",
       "address": "214-41 34th Ave, Bayside, NY 11361",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "564802654": {
       "name": "Crocheron Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/crocheron-park/facilities/tennis",
       "address": "214-41 34th Ave, Bayside, NY 11361",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "564802655": {
       "name": "Crocheron Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/crocheron-park/facilities/tennis",
       "address": "214-41 34th Ave, Bayside, NY 11361",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "564802656": {
       "name": "Crocheron Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/crocheron-park/facilities/tennis",
       "address": "214-41 34th Ave, Bayside, NY 11361",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "564802657": {
       "name": "Crocheron Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/crocheron-park/facilities/tennis",
       "address": "214-41 34th Ave, Bayside, NY 11361",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "564802658": {
       "name": "Crocheron Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/crocheron-park/facilities/tennis",
       "address": "214-41 34th Ave, Bayside, NY 11361",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "564802659": {
       "name": "Crocheron Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/crocheron-park/facilities/tennis",
       "address": "214-41 34th Ave, Bayside, NY 11361",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "722371258": {
       "name": "Lincoln Terrace Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/lincoln-terrace-arthur-s-somers-park/facilities/tennis",
       "address": "299 Buffalo Ave, Brooklyn, NY 11213",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "722371259": {
       "name": "Lincoln Terrace Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/lincoln-terrace-arthur-s-somers-park/facilities/tennis",
       "address": "299 Buffalo Ave, Brooklyn, NY 11213",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "722371260": {
       "name": "Lincoln Terrace Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/lincoln-terrace-arthur-s-somers-park/facilities/tennis",
       "address": "299 Buffalo Ave, Brooklyn, NY 11213",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "722371261": {
       "name": "Lincoln Terrace Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/lincoln-terrace-arthur-s-somers-park/facilities/tennis",
       "address": "299 Buffalo Ave, Brooklyn, NY 11213",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "722371262": {
       "name": "Lincoln Terrace Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/lincoln-terrace-arthur-s-somers-park/facilities/tennis",
       "address": "299 Buffalo Ave, Brooklyn, NY 11213",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "722371263": {
       "name": "Lincoln Terrace Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/lincoln-terrace-arthur-s-somers-park/facilities/tennis",
       "address": "299 Buffalo Ave, Brooklyn, NY 11213",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "722371264": {
       "name": "Lincoln Terrace Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/lincoln-terrace-arthur-s-somers-park/facilities/tennis",
       "address": "299 Buffalo Ave, Brooklyn, NY 11213",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "722371265": {
       "name": "Lincoln Terrace Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/lincoln-terrace-arthur-s-somers-park/facilities/tennis",
       "address": "299 Buffalo Ave, Brooklyn, NY 11213",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "722371266": {
       "name": "Lincoln Terrace Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/lincoln-terrace-arthur-s-somers-park/facilities/tennis",
       "address": "299 Buffalo Ave, Brooklyn, NY 11213",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "722371267": {
       "name": "Lincoln Terrace Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/lincoln-terrace-arthur-s-somers-park/facilities/tennis",
       "address": "299 Buffalo Ave, Brooklyn, NY 11213",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "722371268": {
       "name": "Lincoln Terrace Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/lincoln-terrace-arthur-s-somers-park/facilities/tennis",
       "address": "299 Buffalo Ave, Brooklyn, NY 11213",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "723629959": {
       "name": "Sessanta"
@@ -2646,35 +2646,35 @@
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "886517964": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "886517965": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "886517966": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "886517967": {
       "name": "Highland Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/highland-park/facilities/tennis",
       "address": "Elton St & Jamaica Ave, Queens",
-      "note": "NYC Parks permit required Apr–Nov. Phone: (718) 235-5871."
+      "note": "NYC Parks permit required Apr\u2013Nov. Phone: (718) 235-5871."
     },
     "902516178": {
       "name": "Manhattan Beach Park Tennis Courts",
@@ -2730,287 +2730,287 @@
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/kaiser-park/facilities/tennis",
       "address": "Neptune Ave & W 25th St, Brooklyn, NY 11224",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902536228": {
       "name": "Kaiser Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/kaiser-park/facilities/tennis",
       "address": "Neptune Ave & W 25th St, Brooklyn, NY 11224",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902536229": {
       "name": "Kaiser Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/kaiser-park/facilities/tennis",
       "address": "Neptune Ave & W 25th St, Brooklyn, NY 11224",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902536230": {
       "name": "Kaiser Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/kaiser-park/facilities/tennis",
       "address": "Neptune Ave & W 25th St, Brooklyn, NY 11224",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902536231": {
       "name": "Kaiser Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/kaiser-park/facilities/tennis",
       "address": "Neptune Ave & W 25th St, Brooklyn, NY 11224",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902536232": {
       "name": "Kaiser Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/kaiser-park/facilities/tennis",
       "address": "Neptune Ave & W 25th St, Brooklyn, NY 11224",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902536233": {
       "name": "Kaiser Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/kaiser-park/facilities/tennis",
       "address": "Neptune Ave & W 25th St, Brooklyn, NY 11224",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902536234": {
       "name": "Kaiser Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/kaiser-park/facilities/tennis",
       "address": "Neptune Ave & W 25th St, Brooklyn, NY 11224",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902536235": {
       "name": "Kaiser Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/kaiser-park/facilities/tennis",
       "address": "Neptune Ave & W 25th St, Brooklyn, NY 11224",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902536236": {
       "name": "Kaiser Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/kaiser-park/facilities/tennis",
       "address": "Neptune Ave & W 25th St, Brooklyn, NY 11224",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902536237": {
       "name": "Kaiser Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/kaiser-park/facilities/tennis",
       "address": "Neptune Ave & W 25th St, Brooklyn, NY 11224",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902536238": {
       "name": "Kaiser Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/kaiser-park/facilities/tennis",
       "address": "Neptune Ave & W 25th St, Brooklyn, NY 11224",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902545331": {
       "name": "McDonald Playground Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/mcdonald-playground/facilities/tennis",
       "address": "McDonald Ave & Ave S, Brooklyn, NY 11223",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902545332": {
       "name": "McDonald Playground Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/mcdonald-playground/facilities/tennis",
       "address": "McDonald Ave & Ave S, Brooklyn, NY 11223",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902545333": {
       "name": "McDonald Playground Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/mcdonald-playground/facilities/tennis",
       "address": "McDonald Ave & Ave S, Brooklyn, NY 11223",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902545334": {
       "name": "McDonald Playground Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/mcdonald-playground/facilities/tennis",
       "address": "McDonald Ave & Ave S, Brooklyn, NY 11223",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902545335": {
       "name": "McDonald Playground Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/mcdonald-playground/facilities/tennis",
       "address": "McDonald Ave & Ave S, Brooklyn, NY 11223",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902545336": {
       "name": "McDonald Playground Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/mcdonald-playground/facilities/tennis",
       "address": "McDonald Ave & Ave S, Brooklyn, NY 11223",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902545337": {
       "name": "McDonald Playground Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/mcdonald-playground/facilities/tennis",
       "address": "McDonald Ave & Ave S, Brooklyn, NY 11223",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551427": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551428": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551429": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551430": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551431": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551432": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551433": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551434": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551435": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551436": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551437": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551438": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551439": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551440": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "902551441": {
       "name": "Marine Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/marine-park/facilities/tennis",
       "address": "Fillmore Ave & Stuart St, Brooklyn, NY 11234",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "903650163": {
       "name": "Linden Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/linden-park/facilities/tennis",
       "address": "Stanley Ave & Vermont St, Brooklyn, NY 11207",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "903650164": {
       "name": "Linden Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/linden-park/facilities/tennis",
       "address": "Stanley Ave & Vermont St, Brooklyn, NY 11207",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "903650165": {
       "name": "Linden Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/linden-park/facilities/tennis",
       "address": "Stanley Ave & Vermont St, Brooklyn, NY 11207",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "903650166": {
       "name": "Linden Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/linden-park/facilities/tennis",
       "address": "Stanley Ave & Vermont St, Brooklyn, NY 11207",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "903650167": {
       "name": "Linden Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/linden-park/facilities/tennis",
       "address": "Stanley Ave & Vermont St, Brooklyn, NY 11207",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "903650168": {
       "name": "Linden Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/linden-park/facilities/tennis",
       "address": "Stanley Ave & Vermont St, Brooklyn, NY 11207",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "903650169": {
       "name": "Linden Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/linden-park/facilities/tennis",
       "address": "Stanley Ave & Vermont St, Brooklyn, NY 11207",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "907145263": {
       "name": "Jacob Riis Park",
@@ -3273,63 +3273,63 @@
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/dyker-beach-park/facilities/tennis",
       "address": "286-298 Firefighter Jimmy Riches Way, Brooklyn, NY 11228",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "994976031": {
       "name": "Lucille Ferrier Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/dyker-beach-park/facilities/tennis",
       "address": "286-298 Firefighter Jimmy Riches Way, Brooklyn, NY 11228",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "994976032": {
       "name": "Lucille Ferrier Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/dyker-beach-park/facilities/tennis",
       "address": "286-298 Firefighter Jimmy Riches Way, Brooklyn, NY 11228",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "994976033": {
       "name": "Lucille Ferrier Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/dyker-beach-park/facilities/tennis",
       "address": "286-298 Firefighter Jimmy Riches Way, Brooklyn, NY 11228",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "994976034": {
       "name": "Lucille Ferrier Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/dyker-beach-park/facilities/tennis",
       "address": "286-298 Firefighter Jimmy Riches Way, Brooklyn, NY 11228",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "994976035": {
       "name": "Lucille Ferrier Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/dyker-beach-park/facilities/tennis",
       "address": "286-298 Firefighter Jimmy Riches Way, Brooklyn, NY 11228",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "994976036": {
       "name": "Lucille Ferrier Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/dyker-beach-park/facilities/tennis",
       "address": "286-298 Firefighter Jimmy Riches Way, Brooklyn, NY 11228",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "994976037": {
       "name": "Lucille Ferrier Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/dyker-beach-park/facilities/tennis",
       "address": "286-298 Firefighter Jimmy Riches Way, Brooklyn, NY 11228",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "994976038": {
       "name": "Lucille Ferrier Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/dyker-beach-park/facilities/tennis",
       "address": "286-298 Firefighter Jimmy Riches Way, Brooklyn, NY 11228",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1020473751": {
       "name": "I.S. 10 Horace Greeley",
@@ -3353,98 +3353,98 @@
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1052774661": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1052774662": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1052774663": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1052774664": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1052774665": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1052774666": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1052774667": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1052774668": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1052774669": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1052774670": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1052774671": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1052774672": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1052774673": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1057223620": {
       "name": "Jackie Robinson Park Tennis Courts",
@@ -3841,91 +3841,91 @@
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/bayswater-park/facilities/tennis",
       "address": "32nd St & Dickens Ave, Far Rockaway, NY 11691",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1183842916": {
       "name": "Bayswater Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/bayswater-park/facilities/tennis",
       "address": "32nd St & Dickens Ave, Far Rockaway, NY 11691",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1183842917": {
       "name": "Bayswater Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/bayswater-park/facilities/tennis",
       "address": "32nd St & Dickens Ave, Far Rockaway, NY 11691",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1183842918": {
       "name": "Bayswater Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/bayswater-park/facilities/tennis",
       "address": "32nd St & Dickens Ave, Far Rockaway, NY 11691",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1183842919": {
       "name": "Bayswater Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/bayswater-park/facilities/tennis",
       "address": "32nd St & Dickens Ave, Far Rockaway, NY 11691",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1183842920": {
       "name": "Bayswater Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/bayswater-park/facilities/tennis",
       "address": "32nd St & Dickens Ave, Far Rockaway, NY 11691",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1183842922": {
       "name": "Bayswater Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/bayswater-park/facilities/tennis",
       "address": "32nd St & Dickens Ave, Far Rockaway, NY 11691",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1183842923": {
       "name": "Bayswater Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/bayswater-park/facilities/tennis",
       "address": "32nd St & Dickens Ave, Far Rockaway, NY 11691",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1183842924": {
       "name": "Bayswater Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/bayswater-park/facilities/tennis",
       "address": "32nd St & Dickens Ave, Far Rockaway, NY 11691",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1183842925": {
       "name": "Bayswater Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/bayswater-park/facilities/tennis",
       "address": "32nd St & Dickens Ave, Far Rockaway, NY 11691",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1183842926": {
       "name": "Bayswater Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/bayswater-park/facilities/tennis",
       "address": "32nd St & Dickens Ave, Far Rockaway, NY 11691",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1183842927": {
       "name": "Bayswater Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/bayswater-park/facilities/tennis",
       "address": "32nd St & Dickens Ave, Far Rockaway, NY 11691",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1183845125": {
       "name": "Alley Pond Park Tennis Courts",
       "access": "permit",
       "website": "https://www.nycgovparks.org/parks/alley-pond-park/facilities/tennis",
       "address": "79-20 Winchester Blvd, Queens NY 11427",
-      "note": "NYC Parks permit required Apr–Nov."
+      "note": "NYC Parks permit required Apr\u2013Nov."
     },
     "1205110622": {
       "name": "Brooklyn College Tennis Courts",
@@ -4194,28 +4194,28 @@
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "1471512805": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "1471512806": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "1471512807": {
       "name": "Stadium Tennis Center",
       "access": "reservable",
       "website": "https://www.stadiumtennisnyc.com",
       "address": "725 Gateway Center Blvd, Bronx, NY 10451",
-      "note": "12 indoor courts (dome Oct–Apr) + 4 outdoor. Call (718) 665-4684."
+      "note": "12 indoor courts (dome Oct\u2013Apr) + 4 outdoor. Call (718) 665-4684."
     },
     "1485873352": {
       "name": "Pelham Bay Park Tennis Courts",
@@ -4617,7 +4617,7 @@
       "address": "445 W 59th St, New York, NY 10019, USA",
       "accessType": "school",
       "phone": "(212) 237-8000",
-      "hours": "Monday: 8:47 AM – 10:00 PM"
+      "hours": "Monday: 8:47\u202fAM\u2009\u2013\u200910:00\u202fPM"
     },
     {
       "name": "Sutton East Tennis Club",
@@ -4701,7 +4701,8 @@
       "surface": "hard",
       "indoor": false,
       "accessType": "unknown",
-      "sport": "tennis"
+      "sport": "tennis",
+      "note": "Non-members can book up to 48 hours in advance."
     },
     {
       "name": "Alley Pond Tennis Center",
