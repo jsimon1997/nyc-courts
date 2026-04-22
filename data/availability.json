@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "batch_timestamp": "2026-04-22T01:00:08.910Z",
+    "facility_id": "curated-dick-savitt-tennis-center",
+    "facility_name": "Dick Savitt Tennis Center",
+    "phone": "+12128517100",
+    "target_saturday": "2026-04-25",
+    "target_sunday": "2026-04-26",
+    "call_id": "call_5d107067177f13771a1c63ca421",
+    "call_status": "ended",
+    "disconnection_reason": "agent_hangup",
+    "duration_ms": 191991,
+    "call_summary": "The agent called Milstein Tennis and spoke with Megan to inquire about indoor court availability for the weekend. Megan provided detailed time slots for both Saturday and Sunday, explained the pricing structure, cancellation policy, and booking increments. The agent thanked Megan for the information and ended the call.",
+    "user_sentiment": "Positive",
+    "custom_analysis_data": {
+      "additional_notes": "24-hour cancellation policy; bookings in 30-minute increments with no minimum.",
+      "sunday_slots": "7-10 AM, 12:30-2 PM, 6-11:30 PM (a couple of courts)",
+      "court_type": "indoor",
+      "saturday_slots": "7-9 AM, 12:30-5 PM, 9-11:30 PM (indoor courts)",
+      "reached_human": true,
+      "booking_method": "phone",
+      "pricing": "$60 for first hour in the morning, $160/hour from 8 AM-6 PM, $120/hour from 6 PM-close"
+    },
+    "transcript": "User: Thank you for calling. Tennis Center. Please hold while I try to connect you. \nAgent: Thank you for holding. I appreciate it.\n\nwaiting on the line\nUser: Milstein Tennis. This is Megan. \nAgent: Hi Megan, thanks for picking up. I'm calling to check on tennis court availability for this coming weekend. Do you have any open times on Saturday, April 25th?\nUser: What times are you looking at? \nUser: We are pretty full for indoors, but we have open availability for outdoors. And then some courts available as well. \nUser: Inside. \nAgent: Got it. So you've got some indoor courts available on Saturday the 25th. What times do you have open throughout the day?\nUser: Um, we have the mornings, uh, seven to nine, We have earliest for one core is at twelve thirty until five. And then we have our evening nine until we close. \nUser: At eleven thirty. \nAgent: Perfect, so on Saturday the 25th you've got 7 to 9 in the morning, 12:30 to 5 in the afternoon, and 9 to 11:30 in the evening. What about \nUser: Yes. \nAgent: Sunday the 26th — do you have similar availability throughout the day?\nUser: No. So that one we have a bit more in the morning from seven to ten. Only a couple of quarts midday. The earliest is at twelve thirty until two. And then six PM until closing. \nUser: At eleven thirty just for a couple of cords. \nAgent: Got it. So Sunday the 26th you've got 7 to 10 in the morning, 12:30 to 2 in the afternoon, and then 6 PM to 11:30 in the evening for a couple of courts. What's \nUser: Yes. \nAgent: the pricing for these indoor courts?\nUser: So the indoor courts, depending on the time of day, which will be let's see. One sixty for an hour. So that'll be typically from eight and until six PM and then six PM until closing is one twenty. And then the first hour, we do have our morning discounts, which will be at sixty dollars. \nUser: For that first hour alone. \nAgent: Thanks for that detail. So it's $60 for the first hour in the morning, $160 an hour from 8 AM to 6 PM, and $120 an hour from 6 PM until closing. Do \nUser: Yes. \nAgent: you have a cancellation policy I should know about?\nUser: Yes. Twenty four hours in advance. So if you book on Sunday, we ask that you just call and let us know on Saturday. \nAgent: Got it — 24 hours notice to cancel. Is there anything else I should know about booking, like a minimum court time or any other rules?\nUser: No. There is no minimum, but we do book on thirty minute increments. \nUser: in our system. \nAgent: Perfect. So you book in 30-minute increments with no minimum. Thanks so much for all that information, Megan. I really appreciate your help.\n"
+  }
+]
