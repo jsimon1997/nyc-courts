@@ -197,5 +197,105 @@
       "pricing": ""
     },
     "transcript": "User: Thank you for calling the Roosevelt Island Racquet Club. If you know your party's extension, you may press it at any time. For the front desk and court reservations, press zero. For memberships, seasonal courts, and the assistant general manager, Alina Lexer, press one. For the junior programs and Mike Barbato, press two. For the junior program director, Magnus Gunnarson, press three. For the general manager, Pam Glick, press four. For the adult program director, Tony Huber, press five. For member services, including game arranging, press six. For camps and Bob Ingersoll, press eight. Thank you for calling. \nAgent: I'll press zero for court reservations.\nUser: Invalid input. Please try again. \nAgent: I'll press \nUser: Thank you for calling the Roosevelt Island Racquet Club. If you know your party's extension, you may press it at any time. For the front desk and court reservations, press zero. For memberships, seasonal courts, and the assistant general manager, Alina Lexer, press one. For the junior programs and Mike Barbato, press two. For the junior program director, Magnus Gunnarson, press three. For the general manager, Pam Glick, press four. For the adult program director, Tony Huber, press five. For member services, including game arranging, press six. For camps and Bob Ingersoll, press eight. Thank you for calling. \nAgent: I'll press zero for court reservations.\nUser: Thank you for calling the Roosevelt Island Racquet Club. If you know your party's extension, you may press it at any time. For the front desk and court reservations, press zero. For memberships, seasonal courts, and our assistant general manager, Alina Lexer, press one. For junior programs and Mike Barbato, press two. For junior program director, Magnus, press three. For the general manager, Pam Glick, press four. For the adult program director, Tony Hubert, press five. For member services, including game arranging, press six. And for Camps and Bob Ingersoll, press eight. Thank you for calling. \nAgent: I'll \n"
+  },
+  {
+    "batch_timestamp": "2026-04-22T14:11:59.104Z",
+    "facility_id": "osm-842765800",
+    "facility_name": "Bill Talbert Youth Tennis Center / East Side Tennis Association",
+    "phone": "+12127370185",
+    "target_saturday": "2026-04-25",
+    "target_sunday": "2026-04-26",
+    "call_id": "call_b40c4192e099c5f42568d50d05e",
+    "call_status": "ended",
+    "disconnection_reason": "voicemail_reached",
+    "duration_ms": 8057,
+    "call_summary": "The call reached the voicemail of the Eastside Tennis Association, which stated that the phone is only monitored during hours of operation. No conversation with a human occurred.",
+    "user_sentiment": "Neutral",
+    "custom_analysis_data": {
+      "additional_notes": "The phone is only monitored during hours of operation.",
+      "saturday_outdoor_slots": "unknown",
+      "saturday_indoor_slots": "unknown",
+      "sunday_indoor_slots": "unknown",
+      "court_type": "",
+      "reached_human": false,
+      "sunday_outdoor_slots": "unknown",
+      "pricing": ""
+    },
+    "transcript": "User: Hi. Thank you for calling the Eastside Tennis Association. This phone is only monitored during hours of operation. \n"
+  },
+  {
+    "batch_timestamp": "2026-04-22T14:11:59.104Z",
+    "facility_id": "osm-241816249",
+    "facility_name": "Prospect Park Tennis Center",
+    "phone": "+17184362500",
+    "target_saturday": "2026-04-25",
+    "target_sunday": "2026-04-26",
+    "call_id": "call_041f0e955ed675350acc62bcef0",
+    "call_status": "ended",
+    "disconnection_reason": "agent_hangup",
+    "duration_ms": 173734,
+    "call_summary": "The agent called the Prospect Park Tennis Center to inquire about indoor and outdoor court availability for the upcoming weekend. The front desk confirmed only indoor courts are available, provided specific available times for Saturday and Sunday, shared pricing for each slot, and clarified that both hard and clay court surfaces are offered.",
+    "user_sentiment": "Neutral",
+    "custom_analysis_data": {
+      "additional_notes": "",
+      "saturday_outdoor_slots": "none",
+      "saturday_indoor_slots": "6 AM, 9 PM, 10 PM",
+      "sunday_indoor_slots": "6 AM, 10 PM",
+      "court_type": "indoor, hard court and clay court",
+      "reached_human": true,
+      "sunday_outdoor_slots": "none",
+      "pricing": "Six AM: $44, Nine PM: $48, Ten PM: $44"
+    },
+    "transcript": "User: You've reached the Prospect Park tennis center operated by the Prospect Park Alliance. Hours of operation are six AM to eleven PM, seven days a week. Except during inclement weather in the outdoor season. If you know your party's extension, you may dial it at any time. To reach the front desk or to leave a general message, dial zero. For holiday hours, please dial two. For directions and for information on the center's programs, including lessons, leagues, and information on outdoor tennis permits. Please visit our website at w w w dot Prospect park dot org slash tennis or press one. To speak with Adrian Clark, head pro and director of the Prospect Park Tennis Center, Dial extension three hundred For Donna Ashton, assistant director, please dial extension three hundred three. For Nigel Liverpool, manager of adult tennis programs and lesson, Dial extension three hundred four. For our business manager, Audrey Hinkson, please dial extension three hundred five And for Tanjima showed, our manager for youth programs, please dial extension three hundred six. \nAgent: I'm listening to the IVR menu. Let me press 0 to reach the front desk for court availability information.\nUser: Thank you for calling. Front desk one. Please hold while I try to connect you. CrossFit core center center. This is Mayank. Can speaking. How can I help? \nAgent: Hi, I'm checking tennis court availability at Prospect Park Tennis Center for this weekend. Do you have indoor and outdoor courts?\nUser: Oh, we have indoor courts at the moment. Go outdoor on basic \nAgent: Got it. What indoor court times do you have open on Saturday, April 25th?\nUser: We have six AM available. Nine PM, and ten PM available. \nAgent: Is that AM or PM for those times?\nUser: Six AM, nine PM, and ten PM. \nAgent: Thanks. And what indoor court times do you have open on Sunday, April 26th?\nUser: Six AM and ten PM. \nAgent: Got it. Before I let you go — what is the pricing and court surface for those courts?\nUser: Forty four at six AM. It's forty eight at nine PM and forty four at ten PM. \nAgent: Thanks. What's the court surface — is it hard court, clay, or something else?\nUser: Both, art court and clay court. \nAgent: Perfect. Thanks so much for your help.\n"
+  },
+  {
+    "batch_timestamp": "2026-04-22T14:11:59.104Z",
+    "facility_id": "curated-mccarren-tennis-center",
+    "facility_name": "McCarren Tennis Center",
+    "phone": "+13478739698",
+    "target_saturday": "2026-04-25",
+    "target_sunday": "2026-04-26",
+    "call_id": "call_573ac1116f553041719804acbfe",
+    "call_status": "ended",
+    "disconnection_reason": "user_hangup",
+    "duration_ms": 30699,
+    "call_summary": "The call reached the voicemail greeting for McEaran Tennis Center, which provided information about hours, booking methods, and contact details. No human was reached and no further conversation occurred.",
+    "user_sentiment": "Neutral",
+    "custom_analysis_data": {
+      "additional_notes": "The center is currently operating indoors with hours from 6 AM to 12 AM daily. Reservations and classes are booked online via the Court Reserve app; private lessons require email contact.",
+      "saturday_outdoor_slots": "not applicable",
+      "saturday_indoor_slots": "unknown",
+      "sunday_indoor_slots": "unknown",
+      "court_type": "indoor",
+      "reached_human": false,
+      "sunday_outdoor_slots": "not applicable",
+      "pricing": ""
+    },
+    "transcript": "User: Hello. Thank you for calling McEaran Tennis Center. We're now indoors, and our hours of operation are six AM to twelve AM daily. Court reservations, clinics, or cardio classes, please book online using the court Reserve app. For private lessons, email us at bookings at mccarran tennis NYC dot com. For assistance, please press one. \nAgent: I'm hearing a voicemail greeting with \n"
+  },
+  {
+    "batch_timestamp": "2026-04-22T14:11:59.104Z",
+    "facility_id": "osm-284882418",
+    "facility_name": "Roosevelt Island Racquet Club",
+    "phone": "+12129350250",
+    "target_saturday": "2026-04-25",
+    "target_sunday": "2026-04-26",
+    "call_id": "call_ebbc7339560e5ccf484b1872f71",
+    "call_status": "ended",
+    "disconnection_reason": "voicemail_reached",
+    "duration_ms": 86720,
+    "call_summary": "The AI agent called the Roosevelt Island Racquet Club, navigated the phone menu to reach the front desk, but reached voicemail and was unable to speak to a human or complete the intended task.",
+    "user_sentiment": "Neutral",
+    "custom_analysis_data": {
+      "additional_notes": "",
+      "saturday_outdoor_slots": "unknown",
+      "saturday_indoor_slots": "unknown",
+      "sunday_indoor_slots": "unknown",
+      "court_type": "",
+      "reached_human": false,
+      "sunday_outdoor_slots": "unknown",
+      "pricing": ""
+    },
+    "transcript": "User: Thank you for calling the Roosevelt Island Racquet Club. If you know your party's extension, you may press it at any time. For the front desk and court reservations, press zero. For memberships, seasonal courts, and the assistant general manager, Alina Lexer, press one. For the junior programs and Mike Barbato, press two. For the junior program director, Magnus Gunnarson, press three. For the general manager, Pam Glick, press four. For the adult program director, Tony Huber, press five. For member services, including game arranging, press six. For camps and Bob Ingersoll, press eight. Thank you for calling. \nUser: You've reached the front desk at Roosevelt Island Racquet Club. Sorry we're unavailable to take your call right now. Please leave us your name and number, and someone will return your call as soon as possible. \n"
   }
 ]
