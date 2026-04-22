@@ -19,9 +19,10 @@ const TARGETS     = path.join(ROOT, 'facilities-to-call.json');
 const OUTPUT_DIR  = path.join(ROOT, 'data');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'availability.json');
 
-const RETELL_BASE      = 'https://api.retellai.com';
-const POLL_INTERVAL_MS = 15_000;
-const POLL_TIMEOUT_MS  = 20 * 60 * 1000;
+const RETELL_BASE         = 'https://api.retellai.com';
+const POLL_INTERVAL_MS    = 15_000;
+const POLL_TIMEOUT_MS     = 20 * 60 * 1000;
+const DEDUPE_WINDOW_HOURS = 12; // skip a facility if it was called within this many hours
 
 // --- date helpers ----------------------------------------------------------
 
@@ -61,6 +62,15 @@ function appendResult(record) {
   const current = fs.existsSync(OUTPUT_FILE) ? readJson(OUTPUT_FILE) : [];
   current.push(record);
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(current, null, 2) + '\n', 'utf8');
+}
+
+function recentlyCalled(records, facilityId, nowMs) {
+  const cutoff = nowMs - DEDUPE_WINDOW_HOURS * 60 * 60 * 1000;
+  return records.some((r) => {
+    if (r.facility_id !== facilityId) return false;
+    const t = Date.parse(r.batch_timestamp);
+    return Number.isFinite(t) && t >= cutoff;
+  });
 }
 
 // --- Retell API ------------------------------------------------------------
@@ -118,8 +128,10 @@ async function main() {
   const courts           = readJson(COURTS_DB);
   const byId             = new Map(courts.map((c) => [c.id, c]));
 
+  const existingRecords = fs.existsSync(OUTPUT_FILE) ? readJson(OUTPUT_FILE) : [];
   const { saturday, sunday } = nextWeekendNY();
   const batchTs = new Date().toISOString();
+  const nowMs   = Date.now();
 
   console.log(`Batch ${batchTs} — target weekend: ${saturday} / ${sunday}`);
 
@@ -134,6 +146,10 @@ async function main() {
     const { name, phone } = facility;
     if (!phone) {
       console.warn(`[skip] ${name}: no phone number in courts-db.json`);
+      continue;
+    }
+    if (recentlyCalled(existingRecords, id, nowMs)) {
+      console.log(`[skip] ${name}: called within last ${DEDUPE_WINDOW_HOURS}h`);
       continue;
     }
 
