@@ -247,10 +247,7 @@
       background: #f8f8f8; border-radius: 8px;
     }
 
-    /* ── Weekend availability (desktop-only right-side dropdown) ── */
-    @media (max-width: 900px) {
-      #wa-chip, #wa-panel { display: none !important; }
-    }
+    /* ── Weekend availability (top-right dropdown) ── */
     #wa-chip {
       position: absolute; top: 16px; right: 16px; z-index: 1100;
       background: #fff; border: none; border-radius: 20px;
@@ -491,6 +488,35 @@
         color: white;
         font-size: 24px;
         box-shadow: 0 2px 12px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.15);
+      }
+      /* Weekend availability: top-drop sheet on mobile */
+      #wa-chip {
+        top: 12px; right: 12px;
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+      #wa-panel {
+        top: 56px; right: 12px; left: 12px;
+        width: auto;
+        max-height: 70vh;
+        border-radius: 16px;
+      }
+      .wa-head { padding: 14px 16px 10px; }
+      .wa-head h3 { font-size: 13px; }
+      .wa-meta { font-size: 10px; }
+      .wa-body { padding: 12px 14px 14px; }
+      .wa-axis, .wa-row {
+        grid-template-columns: 92px 1fr;
+        gap: 0 8px;
+      }
+      .wa-row { gap: 2px 8px; }
+      .wa-name { font-size: 10.5px; }
+      .wa-axis-ticks { font-size: 9px; }
+    }
+    /* Tablet: keep chip visible, keep sidebar panel — shrink dropdown width */
+    @media (min-width: 601px) and (max-width: 900px) {
+      #wa-panel {
+        width: min(640px, calc(100vw - 32px));
       }
     }
 
