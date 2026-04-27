@@ -729,7 +729,7 @@
     "website": "https://gocolumbialions.com/facilities/dick-savitt-tennis-center/38",
     "hours": null,
     "address": "603 W 218th St, New York, NY 10034, USA",
-    "note": null,
+    "note": "Non-members can book up to 48 hours in advance.",
     "photo": null,
     "bookingUrl": null,
     "bookingApp": null,
@@ -1048,32 +1048,6 @@
     "needsName": false,
     "source": "curated",
     "osmIds": []
-  },
-  {
-    "id": "osm-284864049",
-    "name": "Go Tennis at Bayside Marina",
-    "lat": 40.7860703,
-    "lon": -73.7753993,
-    "sport": "tennis",
-    "surface": "hard",
-    "indoor": false,
-    "accessType": "unknown",
-    "count": 3,
-    "phone": null,
-    "website": null,
-    "hours": null,
-    "address": null,
-    "note": null,
-    "photo": null,
-    "bookingUrl": null,
-    "bookingApp": null,
-    "needsName": false,
-    "source": "osm",
-    "osmIds": [
-      284864049,
-      284864051,
-      284864052
-    ]
   },
   {
     "id": "osm-968001211",
@@ -2702,13 +2676,13 @@
     "sport": "tennis",
     "surface": "other",
     "indoor": true,
-    "accessType": "reservable",
+    "accessType": "private",
     "count": 1,
     "phone": "(212) 935-0250",
     "website": "https://advantagetennisclubs.com/roosevelt-island-racquet-club/",
     "hours": "Mon-Sun 7am-11pm",
     "address": "281 W Main St, New York, NY 10044, USA",
-    "note": "281 Main St, Roosevelt Island. 12 indoor Har-Tru clay courts. Open to the public — book by the hour.",
+    "note": "281 Main St, Roosevelt Island. 12 indoor Har-Tru clay courts. Membership required.",
     "photo": null,
     "bookingUrl": "https://advantagetennisclubs.com/book-courts/",
     "bookingApp": null,
@@ -3753,30 +3727,6 @@
     ]
   },
   {
-    "id": "osm-167413653",
-    "name": null,
-    "lat": 40.9084582,
-    "lon": -73.9069898,
-    "sport": "tennis",
-    "surface": "other",
-    "indoor": false,
-    "accessType": "unknown",
-    "count": 1,
-    "phone": null,
-    "website": null,
-    "hours": null,
-    "address": null,
-    "note": null,
-    "photo": null,
-    "bookingUrl": null,
-    "bookingApp": null,
-    "needsName": true,
-    "source": "osm",
-    "osmIds": [
-      167413653
-    ]
-  },
-  {
     "id": "osm-180338806",
     "name": null,
     "lat": 40.69104985,
@@ -4272,32 +4222,6 @@
     ]
   },
   {
-    "id": "osm-262143467",
-    "name": null,
-    "lat": 40.69937063333333,
-    "lon": -73.79660186666668,
-    "sport": "tennis",
-    "surface": "other",
-    "indoor": false,
-    "accessType": "unknown",
-    "count": 3,
-    "phone": null,
-    "website": null,
-    "hours": null,
-    "address": null,
-    "note": null,
-    "photo": null,
-    "bookingUrl": null,
-    "bookingApp": null,
-    "needsName": true,
-    "source": "osm",
-    "osmIds": [
-      262143467,
-      1433371744,
-      1433371745
-    ]
-  },
-  {
     "id": "osm-262144288",
     "name": null,
     "lat": 40.7104601,
@@ -4319,30 +4243,6 @@
     "source": "osm",
     "osmIds": [
       262144288
-    ]
-  },
-  {
-    "id": "osm-265560952",
-    "name": null,
-    "lat": 40.7277696,
-    "lon": -74.0289954,
-    "sport": "tennis",
-    "surface": "other",
-    "indoor": false,
-    "accessType": "unknown",
-    "count": 1,
-    "phone": null,
-    "website": null,
-    "hours": null,
-    "address": null,
-    "note": null,
-    "photo": null,
-    "bookingUrl": null,
-    "bookingApp": null,
-    "needsName": true,
-    "source": "osm",
-    "osmIds": [
-      265560952
     ]
   },
   {
@@ -4597,30 +4497,6 @@
     "source": "osm",
     "osmIds": [
       284861436
-    ]
-  },
-  {
-    "id": "osm-284864053",
-    "name": null,
-    "lat": 40.7866035,
-    "lon": -73.7759396,
-    "sport": "tennis",
-    "surface": "other",
-    "indoor": false,
-    "accessType": "unknown",
-    "count": 1,
-    "phone": null,
-    "website": null,
-    "hours": null,
-    "address": null,
-    "note": null,
-    "photo": null,
-    "bookingUrl": null,
-    "bookingApp": null,
-    "needsName": true,
-    "source": "osm",
-    "osmIds": [
-      284864053
     ]
   },
   {
@@ -4919,15 +4795,15 @@
     ]
   },
   {
-    "id": "osm-298027567",
+    "id": "osm-298027576",
     "name": null,
-    "lat": 40.6223066,
-    "lon": -73.71148513333334,
+    "lat": 40.622356583333335,
+    "lon": -73.71142836666667,
     "sport": "tennis",
     "surface": "other",
     "indoor": false,
     "accessType": "unknown",
-    "count": 3,
+    "count": 6,
     "phone": null,
     "website": null,
     "hours": null,
@@ -4939,9 +4815,12 @@
     "needsName": true,
     "source": "osm",
     "osmIds": [
-      298027567,
       298027576,
-      298027579
+      1501137869,
+      1501137870,
+      1501137871,
+      1501137872,
+      1501137873
     ]
   },
   {
@@ -5672,30 +5551,6 @@
     ]
   },
   {
-    "id": "osm-453557704",
-    "name": null,
-    "lat": 40.659863,
-    "lon": -73.7624194,
-    "sport": "tennis",
-    "surface": "other",
-    "indoor": false,
-    "accessType": "unknown",
-    "count": 1,
-    "phone": null,
-    "website": null,
-    "hours": null,
-    "address": null,
-    "note": null,
-    "photo": null,
-    "bookingUrl": null,
-    "bookingApp": null,
-    "needsName": true,
-    "source": "osm",
-    "osmIds": [
-      453557704
-    ]
-  },
-  {
     "id": "osm-455778922",
     "name": null,
     "lat": 40.6555291,
@@ -6179,32 +6034,6 @@
     ]
   },
   {
-    "id": "osm-564010901",
-    "name": null,
-    "lat": 40.757068800000006,
-    "lon": -73.6879569,
-    "sport": "tennis",
-    "surface": "other",
-    "indoor": false,
-    "accessType": "unknown",
-    "count": 3,
-    "phone": null,
-    "website": null,
-    "hours": null,
-    "address": null,
-    "note": null,
-    "photo": null,
-    "bookingUrl": null,
-    "bookingApp": null,
-    "needsName": true,
-    "source": "osm",
-    "osmIds": [
-      564010901,
-      564010902,
-      564010905
-    ]
-  },
-  {
     "id": "osm-565965240",
     "name": null,
     "lat": 40.84569245,
@@ -6364,54 +6193,6 @@
     ]
   },
   {
-    "id": "osm-613207296",
-    "name": null,
-    "lat": 40.7792272,
-    "lon": -73.7180564,
-    "sport": "tennis",
-    "surface": "other",
-    "indoor": false,
-    "accessType": "unknown",
-    "count": 1,
-    "phone": null,
-    "website": null,
-    "hours": null,
-    "address": null,
-    "note": null,
-    "photo": null,
-    "bookingUrl": null,
-    "bookingApp": null,
-    "needsName": true,
-    "source": "osm",
-    "osmIds": [
-      613207296
-    ]
-  },
-  {
-    "id": "osm-613613760",
-    "name": null,
-    "lat": 40.7965291,
-    "lon": -73.7524092,
-    "sport": "tennis",
-    "surface": "other",
-    "indoor": false,
-    "accessType": "unknown",
-    "count": 1,
-    "phone": null,
-    "website": null,
-    "hours": null,
-    "address": null,
-    "note": null,
-    "photo": null,
-    "bookingUrl": null,
-    "bookingApp": null,
-    "needsName": true,
-    "source": "osm",
-    "osmIds": [
-      613613760
-    ]
-  },
-  {
     "id": "osm-615653559",
     "name": null,
     "lat": 40.7693732,
@@ -6433,30 +6214,6 @@
     "source": "osm",
     "osmIds": [
       615653559
-    ]
-  },
-  {
-    "id": "osm-616483122",
-    "name": null,
-    "lat": 40.7376375,
-    "lon": -73.6836631,
-    "sport": "tennis",
-    "surface": "other",
-    "indoor": false,
-    "accessType": "unknown",
-    "count": 1,
-    "phone": null,
-    "website": null,
-    "hours": null,
-    "address": null,
-    "note": null,
-    "photo": null,
-    "bookingUrl": null,
-    "bookingApp": null,
-    "needsName": true,
-    "source": "osm",
-    "osmIds": [
-      616483122
     ]
   },
   {
@@ -8693,30 +8450,6 @@
     ]
   },
   {
-    "id": "osm-1039696663",
-    "name": null,
-    "lat": 40.787461,
-    "lon": -73.6811859,
-    "sport": "tennis",
-    "surface": "other",
-    "indoor": false,
-    "accessType": "unknown",
-    "count": 1,
-    "phone": null,
-    "website": null,
-    "hours": null,
-    "address": null,
-    "note": null,
-    "photo": null,
-    "bookingUrl": null,
-    "bookingApp": null,
-    "needsName": true,
-    "source": "osm",
-    "osmIds": [
-      1039696663
-    ]
-  },
-  {
     "id": "osm-1041735905",
     "name": null,
     "lat": 40.771232875,
@@ -9876,30 +9609,6 @@
       1309140159,
       1320126361,
       1320126371
-    ]
-  },
-  {
-    "id": "osm-1313847342",
-    "name": null,
-    "lat": 40.7876256,
-    "lon": -73.7483702,
-    "sport": "tennis",
-    "surface": "other",
-    "indoor": false,
-    "accessType": "unknown",
-    "count": 1,
-    "phone": null,
-    "website": null,
-    "hours": null,
-    "address": null,
-    "note": null,
-    "photo": null,
-    "bookingUrl": null,
-    "bookingApp": null,
-    "needsName": true,
-    "source": "osm",
-    "osmIds": [
-      1313847342
     ]
   },
   {
@@ -11158,39 +10867,15 @@
     ]
   },
   {
-    "id": "osm-1350498250",
-    "name": null,
-    "lat": 40.6102174,
-    "lon": -74.0139217,
-    "sport": "tennis",
-    "surface": "other",
-    "indoor": false,
-    "accessType": "unknown",
-    "count": 1,
-    "phone": null,
-    "website": null,
-    "hours": null,
-    "address": null,
-    "note": null,
-    "photo": null,
-    "bookingUrl": null,
-    "bookingApp": null,
-    "needsName": true,
-    "source": "osm",
-    "osmIds": [
-      1350498250
-    ]
-  },
-  {
     "id": "osm-1356799890",
     "name": null,
-    "lat": 40.804113224999995,
-    "lon": -73.71953965,
+    "lat": 40.8037322,
+    "lon": -73.71914131999999,
     "sport": "tennis",
     "surface": "other",
     "indoor": false,
     "accessType": "unknown",
-    "count": 4,
+    "count": 5,
     "phone": null,
     "website": null,
     "hours": null,
@@ -11205,7 +10890,8 @@
       1356799890,
       1356799924,
       1356799925,
-      1356849142
+      1356849142,
+      1503468662
     ]
   },
   {
@@ -11378,6 +11064,35 @@
     "source": "osm",
     "osmIds": [
       1433222804
+    ]
+  },
+  {
+    "id": "osm-1433371744",
+    "name": null,
+    "lat": 40.69925451666666,
+    "lon": -73.79647025000001,
+    "sport": "tennis",
+    "surface": "other",
+    "indoor": false,
+    "accessType": "unknown",
+    "count": 6,
+    "phone": null,
+    "website": null,
+    "hours": null,
+    "address": null,
+    "note": null,
+    "photo": null,
+    "bookingUrl": null,
+    "bookingApp": null,
+    "needsName": true,
+    "source": "osm",
+    "osmIds": [
+      1433371744,
+      1433371745,
+      1500340343,
+      1500340344,
+      1500340345,
+      1500340346
     ]
   },
   {
@@ -12034,6 +11749,241 @@
       1497138925,
       1497138926,
       1497138927
+    ]
+  },
+  {
+    "id": "osm-1500339820",
+    "name": null,
+    "lat": 40.61022455,
+    "lon": -74.0139068,
+    "sport": "tennis",
+    "surface": "other",
+    "indoor": false,
+    "accessType": "unknown",
+    "count": 2,
+    "phone": null,
+    "website": null,
+    "hours": null,
+    "address": null,
+    "note": null,
+    "photo": null,
+    "bookingUrl": null,
+    "bookingApp": null,
+    "needsName": true,
+    "source": "osm",
+    "osmIds": [
+      1500339820,
+      1500339821
+    ]
+  },
+  {
+    "id": "osm-1500340472",
+    "name": null,
+    "lat": 40.65986525,
+    "lon": -73.76242429999999,
+    "sport": "tennis",
+    "surface": "other",
+    "indoor": false,
+    "accessType": "unknown",
+    "count": 2,
+    "phone": null,
+    "website": null,
+    "hours": null,
+    "address": null,
+    "note": null,
+    "photo": null,
+    "bookingUrl": null,
+    "bookingApp": null,
+    "needsName": true,
+    "source": "osm",
+    "osmIds": [
+      1500340472,
+      1500340473
+    ]
+  },
+  {
+    "id": "osm-1500341059",
+    "name": null,
+    "lat": 40.786065475,
+    "lon": -73.775416,
+    "sport": "tennis",
+    "surface": "other",
+    "indoor": false,
+    "accessType": "unknown",
+    "count": 4,
+    "phone": null,
+    "website": null,
+    "hours": null,
+    "address": null,
+    "note": null,
+    "photo": null,
+    "bookingUrl": null,
+    "bookingApp": null,
+    "needsName": true,
+    "source": "osm",
+    "osmIds": [
+      1500341059,
+      1500341060,
+      1500341061,
+      1500341062
+    ]
+  },
+  {
+    "id": "osm-1500341169",
+    "name": null,
+    "lat": 40.79652806666666,
+    "lon": -73.75240263333335,
+    "sport": "tennis",
+    "surface": "other",
+    "indoor": false,
+    "accessType": "unknown",
+    "count": 3,
+    "phone": null,
+    "website": null,
+    "hours": null,
+    "address": null,
+    "note": null,
+    "photo": null,
+    "bookingUrl": null,
+    "bookingApp": null,
+    "needsName": true,
+    "source": "osm",
+    "osmIds": [
+      1500341169,
+      1500341170,
+      1500341171
+    ]
+  },
+  {
+    "id": "osm-1500341312",
+    "name": null,
+    "lat": 40.787628100000006,
+    "lon": -73.74835706666666,
+    "sport": "tennis",
+    "surface": "other",
+    "indoor": false,
+    "accessType": "unknown",
+    "count": 3,
+    "phone": null,
+    "website": null,
+    "hours": null,
+    "address": null,
+    "note": null,
+    "photo": null,
+    "bookingUrl": null,
+    "bookingApp": null,
+    "needsName": true,
+    "source": "osm",
+    "osmIds": [
+      1500341312,
+      1500341313,
+      1500341314
+    ]
+  },
+  {
+    "id": "osm-1500343332",
+    "name": null,
+    "lat": 40.75712578,
+    "lon": -73.68810656000001,
+    "sport": "tennis",
+    "surface": "other",
+    "indoor": false,
+    "accessType": "unknown",
+    "count": 5,
+    "phone": null,
+    "website": null,
+    "hours": null,
+    "address": null,
+    "note": null,
+    "photo": null,
+    "bookingUrl": null,
+    "bookingApp": null,
+    "needsName": true,
+    "source": "osm",
+    "osmIds": [
+      1500343332,
+      1500343333,
+      1500343334,
+      1500343335,
+      1500343336
+    ]
+  },
+  {
+    "id": "osm-1500343656",
+    "name": null,
+    "lat": 40.78744393333333,
+    "lon": -73.68117903333334,
+    "sport": "tennis",
+    "surface": "other",
+    "indoor": false,
+    "accessType": "unknown",
+    "count": 3,
+    "phone": null,
+    "website": null,
+    "hours": null,
+    "address": null,
+    "note": null,
+    "photo": null,
+    "bookingUrl": null,
+    "bookingApp": null,
+    "needsName": true,
+    "source": "osm",
+    "osmIds": [
+      1500343656,
+      1500343657,
+      1500343658
+    ]
+  },
+  {
+    "id": "osm-1500344440",
+    "name": null,
+    "lat": 40.7376354,
+    "lon": -73.6836715,
+    "sport": "tennis",
+    "surface": "other",
+    "indoor": false,
+    "accessType": "unknown",
+    "count": 2,
+    "phone": null,
+    "website": null,
+    "hours": null,
+    "address": null,
+    "note": null,
+    "photo": null,
+    "bookingUrl": null,
+    "bookingApp": null,
+    "needsName": true,
+    "source": "osm",
+    "osmIds": [
+      1500344440,
+      1500344441
+    ]
+  },
+  {
+    "id": "osm-1500579418",
+    "name": null,
+    "lat": 40.923347975,
+    "lon": -73.8906509,
+    "sport": "tennis",
+    "surface": "other",
+    "indoor": false,
+    "accessType": "unknown",
+    "count": 4,
+    "phone": null,
+    "website": null,
+    "hours": null,
+    "address": null,
+    "note": null,
+    "photo": null,
+    "bookingUrl": null,
+    "bookingApp": null,
+    "needsName": true,
+    "source": "osm",
+    "osmIds": [
+      1500579418,
+      1500579419,
+      1500579420,
+      1500579421
     ]
   }
 ]
