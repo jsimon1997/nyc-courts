@@ -331,16 +331,31 @@
       );
     }
     .wa-track {
-      position: relative; height: 11px; margin: 2px 0;
-      display: flex; align-items: center;
+      position: relative; margin: 2px 0;
+    }
+    .wa-track-bars {
+      height: 14px;
     }
     .wa-track-empty,
     .wa-track-text {
+      display: flex; align-items: center;
+      min-height: 14px; height: auto;
       background: rgba(255,255,255,.85);
       border-radius: 3px;
       padding: 0 4px;
-      min-height: 11px;
-      height: auto;
+    }
+    .wa-bar-caption {
+      position: absolute; left: 0; top: calc(100% + 1px);
+      font-size: 9px; line-height: 1.2;
+      color: #2a7a4a; font-weight: 600;
+      white-space: nowrap;
+    }
+    .wa-row-open .wa-name { color: #1a5c35; }
+    .wa-row-open { margin-bottom: 12px; }
+    .wa-slot-note {
+      display: block; margin-top: 2px;
+      font-size: 9.5px; line-height: 1.25;
+      color: #2a7a4a; font-weight: 600;
     }
     .wa-empty-tag {
       font-size: 9px;
@@ -351,6 +366,7 @@
       color: #9a9a9a;
     }
     .wa-empty-tag.none { color: #b34a4a; }
+    .wa-empty-tag.booked { color: #b34a4a; }
     .wa-text-tag {
       font-size: 9px;
       line-height: 1.3;
@@ -538,6 +554,8 @@
       }
       .wa-row { gap: 2px 8px; }
       .wa-name { font-size: 10.5px; }
+      .wa-track-bars { height: 16px; }
+      .wa-bar-caption { font-size: 8.5px; }
       .wa-axis-ticks { font-size: 9px; }
     }
     /* Tablet: keep chip visible, keep sidebar panel — shrink dropdown width */
@@ -751,7 +769,7 @@
 
 <!-- Weekend availability dropdown (desktop-only) -->
 <button id="wa-chip" type="button" aria-expanded="false" aria-controls="wa-panel">
-  <span>Weekend Availability</span>
+  <span id="wa-chip-label">Weekend Availability</span>
   <span class="wa-caret">▼</span>
 </button>
 <div id="wa-panel" aria-hidden="true">
@@ -2711,16 +2729,55 @@ async function initMap() {
     return `<div class="wa-axis"><div></div><div class="wa-axis-ticks">${ticks.join('')}</div></div>`;
   }
 
+  function isNotApplicable(raw) {
+    const label = String(raw ?? '').trim().toLowerCase();
+    return label === 'n/a' || label === 'not applicable';
+  }
+
+  function hasOpenBars(inRaw, outRaw) {
+    const inR = parseRanges(inRaw);
+    const outR = parseRanges(outRaw);
+    return Boolean((inR && inR.length) || (outR && outR.length));
+  }
+
+  function slotSummary(inRaw, outRaw) {
+    const parts = [];
+    for (const [raw, kind] of [[inRaw, 'Indoor'], [outRaw, 'Outdoor']]) {
+      if (raw == null || isNotApplicable(raw)) continue;
+      const label = String(raw).trim().toLowerCase();
+      if (!label || label === 'unknown') continue;
+      if (label === 'none') {
+        parts.push(`${kind}: fully booked`);
+        continue;
+      }
+      parts.push(`${kind}: ${String(raw).trim()}`);
+    }
+    return parts.join(' · ');
+  }
+
+  function dayRowSortKey(inRaw, outRaw) {
+    if (hasOpenBars(inRaw, outRaw)) return 0;
+    for (const raw of [inRaw, outRaw]) {
+      if (raw == null || isNotApplicable(raw)) continue;
+      const label = String(raw).trim().toLowerCase();
+      if (label && label !== 'unknown') return 1;
+    }
+    return 2;
+  }
+
   function trackHtml(raw, type) {
     if (raw == null || String(raw).trim() === '') return '';
+    if (isNotApplicable(raw)) return '';
+
     const ranges = parseRanges(raw);
     const bars = barsHtml(ranges, type);
-    if (bars) return `<div class="wa-track">${bars}</div>`;
+    if (bars) {
+      return `<div class="wa-track wa-track-bars">${bars}<span class="wa-bar-caption">${esc(String(raw).trim())}</span></div>`;
+    }
 
     const label = String(raw).trim().toLowerCase();
-    if (label === 'none' || label === 'n/a' || label === 'not applicable') {
-      const tag = label === 'not applicable' ? 'n/a' : label;
-      return `<div class="wa-track wa-track-empty"><span class="wa-empty-tag none">${tag}</span></div>`;
+    if (label === 'none') {
+      return `<div class="wa-track wa-track-empty"><span class="wa-empty-tag booked">fully booked</span></div>`;
     }
     if (label === 'unknown') {
       return `<div class="wa-track wa-track-empty"><span class="wa-empty-tag">unknown</span></div>`;
@@ -2732,9 +2789,11 @@ async function initMap() {
     const indoorTrack  = trackHtml(inRaw,  'indoor');
     const outdoorTrack = trackHtml(outRaw, 'outdoor');
     if (!indoorTrack && !outdoorTrack) return '';
+    const isOpen = hasOpenBars(inRaw, outRaw);
+    const note = slotSummary(inRaw, outRaw);
     return `
-      <div class="wa-row">
-        <div class="wa-name">${esc(name)}</div>
+      <div class="wa-row${isOpen ? ' wa-row-open' : ''}">
+        <div class="wa-name">${esc(name)}${note ? `<span class="wa-slot-note">${esc(note)}</span>` : ''}</div>
         <div class="wa-tracks">
           ${indoorTrack}
           ${outdoorTrack}
@@ -2752,12 +2811,20 @@ async function initMap() {
   }
 
   function buildDayRows(reached, dayPrefix) {
-    return reached.map((r) => {
-      const cad = r.custom_analysis_data || {};
-      const inRaw  = cad[`${dayPrefix}_indoor_slots`]  ?? cad[`${dayPrefix}_slots`] ?? null;
-      const outRaw = cad[`${dayPrefix}_outdoor_slots`] ?? null;
-      return rowHtml(r.facility_name, inRaw, outRaw);
-    }).filter(Boolean);
+    return reached
+      .map((r) => {
+        const cad = r.custom_analysis_data || {};
+        const inRaw  = cad[`${dayPrefix}_indoor_slots`]  ?? cad[`${dayPrefix}_slots`] ?? null;
+        const outRaw = cad[`${dayPrefix}_outdoor_slots`] ?? null;
+        return {
+          html: rowHtml(r.facility_name, inRaw, outRaw),
+          sortKey: dayRowSortKey(inRaw, outRaw),
+          name: r.facility_name,
+        };
+      })
+      .filter((row) => row.html)
+      .sort((a, b) => a.sortKey - b.sortKey || a.name.localeCompare(b.name))
+      .map((row) => row.html);
   }
 
   async function render() {
@@ -2826,7 +2893,36 @@ async function initMap() {
         month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit',
         timeZone: 'America/New_York',
       });
-      meta.textContent = `As of ${asOf} ET · Target weekend: Sat ${newest.target_saturday} / Sun ${newest.target_sunday}`;
+
+      const openIds = new Set();
+      const bookedIds = new Set();
+      for (const day of ['saturday', 'sunday']) {
+        for (const r of reached) {
+          const cad = r.custom_analysis_data || {};
+          const inRaw  = cad[`${day}_indoor_slots`]  ?? cad[`${day}_slots`] ?? null;
+          const outRaw = cad[`${day}_outdoor_slots`] ?? null;
+          if (hasOpenBars(inRaw, outRaw)) openIds.add(r.facility_id);
+          for (const raw of [inRaw, outRaw]) {
+            if (String(raw ?? '').trim().toLowerCase() === 'none') bookedIds.add(r.facility_id);
+          }
+        }
+      }
+
+      const chipLabel = document.getElementById('wa-chip-label');
+      if (chipLabel) {
+        chipLabel.textContent = openIds.size
+          ? `Weekend Availability · ${openIds.size} open`
+          : 'Weekend Availability';
+      }
+
+      const summaryParts = [];
+      if (openIds.size) summaryParts.push(`${openIds.size} with openings`);
+      if (bookedIds.size) summaryParts.push(`${bookedIds.size} fully booked`);
+      const unknownCount = reached.length - new Set([...openIds, ...bookedIds]).size;
+      if (unknownCount > 0) summaryParts.push(`${unknownCount} unchecked`);
+      const summary = summaryParts.length ? summaryParts.join(' · ') + ' · ' : '';
+
+      meta.textContent = `${summary}As of ${asOf} ET · Sat ${newest.target_saturday} / Sun ${newest.target_sunday}`;
 
       body.innerHTML =
         dayHtml('Saturday', newest.target_saturday, buildDayRows(reached, 'saturday')) +
