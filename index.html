@@ -330,7 +330,34 @@
         #f2f2f2 calc(100% / 17), #f2f2f2 calc(100% / 17 + 1px)
       );
     }
-    .wa-track { position: relative; height: 11px; margin: 2px 0; }
+    .wa-track {
+      position: relative; height: 11px; margin: 2px 0;
+      display: flex; align-items: center;
+    }
+    .wa-track-empty,
+    .wa-track-text {
+      background: rgba(255,255,255,.85);
+      border-radius: 3px;
+      padding: 0 4px;
+      min-height: 11px;
+      height: auto;
+    }
+    .wa-empty-tag {
+      font-size: 9px;
+      line-height: 1;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      color: #9a9a9a;
+    }
+    .wa-empty-tag.none { color: #b34a4a; }
+    .wa-text-tag {
+      font-size: 9px;
+      line-height: 1.3;
+      color: #555;
+      white-space: normal;
+      word-break: break-word;
+    }
     .wa-bar {
       position: absolute; top: 0; bottom: 0; border-radius: 3px; opacity: .92;
     }
@@ -2578,6 +2605,20 @@ async function initMap() {
       return [{ start: HOUR_START, end: HOUR_END }];
     }
 
+    // "Any time except 10:30 AM–noon" → full day minus the blocked window
+    const exceptMatch = s.match(
+      /^(?:any\s*time|anytime|all\s*day|open)\s+except\s+(.+)$/i,
+    );
+    if (exceptMatch) {
+      const exc = parseSegment(exceptMatch[1].trim());
+      if (exc) {
+        const out = [];
+        if (exc.start > HOUR_START) out.push({ start: HOUR_START, end: exc.start });
+        if (exc.end < HOUR_END) out.push({ start: exc.end, end: HOUR_END });
+        if (out.length) return out;
+      }
+    }
+
     const clean = s.replace(/\([^)]*\)/g, '').trim();
     const segs = clean.split(/,|;|\s+and\s+/i).map((x) => x.trim()).filter(Boolean);
 
@@ -2590,10 +2631,11 @@ async function initMap() {
   }
 
   function parseSegment(seg) {
-    const s = seg.replace(
-      /\b(?:until|til|till|thru|through)\s+(?:close|closing|end of day|end)\b/gi,
-      'to 11 PM'
-    ).trim();
+    const s = seg
+      .replace(/\b(?:until|til|till|thru|through)\s+(?:close|closing|end of day|end)\b/gi, 'to 11 PM')
+      .replace(/\bnoon\b/gi, '12 PM')
+      .replace(/\bmidnight\b/gi, '12 AM')
+      .trim();
 
     const norm = (x) => (x ? x.toLowerCase().replace(/\./g, '') : null);
     const toH = (h, mm, mer) => {
@@ -2669,15 +2711,33 @@ async function initMap() {
     return `<div class="wa-axis"><div></div><div class="wa-axis-ticks">${ticks.join('')}</div></div>`;
   }
 
-  function rowHtml(name, inR, outR) {
-    const indoorBars  = barsHtml(inR,  'indoor');
-    const outdoorBars = barsHtml(outR, 'outdoor');
+  function trackHtml(raw, type) {
+    if (raw == null || String(raw).trim() === '') return '';
+    const ranges = parseRanges(raw);
+    const bars = barsHtml(ranges, type);
+    if (bars) return `<div class="wa-track">${bars}</div>`;
+
+    const label = String(raw).trim().toLowerCase();
+    if (label === 'none' || label === 'n/a' || label === 'not applicable') {
+      const tag = label === 'not applicable' ? 'n/a' : label;
+      return `<div class="wa-track wa-track-empty"><span class="wa-empty-tag none">${tag}</span></div>`;
+    }
+    if (label === 'unknown') {
+      return `<div class="wa-track wa-track-empty"><span class="wa-empty-tag">unknown</span></div>`;
+    }
+    return `<div class="wa-track wa-track-text"><span class="wa-text-tag">${esc(raw)}</span></div>`;
+  }
+
+  function rowHtml(name, inRaw, outRaw) {
+    const indoorTrack  = trackHtml(inRaw,  'indoor');
+    const outdoorTrack = trackHtml(outRaw, 'outdoor');
+    if (!indoorTrack && !outdoorTrack) return '';
     return `
       <div class="wa-row">
         <div class="wa-name">${esc(name)}</div>
         <div class="wa-tracks">
-          <div class="wa-track">${indoorBars}</div>
-          <div class="wa-track">${outdoorBars}</div>
+          ${indoorTrack}
+          ${outdoorTrack}
         </div>
       </div>`;
   }
@@ -2696,10 +2756,8 @@ async function initMap() {
       const cad = r.custom_analysis_data || {};
       const inRaw  = cad[`${dayPrefix}_indoor_slots`]  ?? cad[`${dayPrefix}_slots`] ?? null;
       const outRaw = cad[`${dayPrefix}_outdoor_slots`] ?? null;
-      const inR  = parseRanges(inRaw);
-      const outR = parseRanges(outRaw);
-      return rowHtml(r.facility_name, inR, outR);
-    });
+      return rowHtml(r.facility_name, inRaw, outRaw);
+    }).filter(Boolean);
   }
 
   async function render() {
