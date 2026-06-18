@@ -2714,15 +2714,47 @@ async function initMap() {
         return;
       }
 
-      // Latest record per facility
-      const latest = new Map();
-      for (const r of records) {
+      const newest = records.reduce((a, b) => a.batch_timestamp > b.batch_timestamp ? a : b);
+      const weekendRecords = records.filter(
+        (r) => r.target_saturday === newest.target_saturday
+          && r.target_sunday === newest.target_sunday,
+      );
+
+      function recordQuality(r) {
+        if (r.error) return 0;
+        const cad = r.custom_analysis_data || {};
+        if (cad.reached_human !== true) return 1;
+        const slots = [
+          cad.saturday_indoor_slots, cad.saturday_outdoor_slots,
+          cad.sunday_indoor_slots, cad.sunday_outdoor_slots,
+          cad.saturday_slots, cad.sunday_slots,
+        ];
+        const hasDefinitive = slots.some((v) => {
+          if (v == null) return false;
+          const s = String(v).trim().toLowerCase();
+          return s && s !== 'unknown' && s !== 'n/a';
+        });
+        if (hasDefinitive) return 3;
+        return 2;
+      }
+
+      // Best record per facility for this target weekend (not just the newest call).
+      const best = new Map();
+      for (const r of weekendRecords) {
         if (!r.facility_id || !r.batch_timestamp) continue;
-        const prev = latest.get(r.facility_id);
-        if (!prev || r.batch_timestamp > prev.batch_timestamp) latest.set(r.facility_id, r);
+        const prev = best.get(r.facility_id);
+        if (!prev) {
+          best.set(r.facility_id, r);
+          continue;
+        }
+        const q = recordQuality(r);
+        const pq = recordQuality(prev);
+        if (q > pq || (q === pq && r.batch_timestamp > prev.batch_timestamp)) {
+          best.set(r.facility_id, r);
+        }
       }
       // Keep only reached-human
-      const reached = [...latest.values()]
+      const reached = [...best.values()]
         .filter((r) => r.custom_analysis_data && r.custom_analysis_data.reached_human === true)
         .sort((a, b) => a.facility_name.localeCompare(b.facility_name));
 
@@ -2732,7 +2764,6 @@ async function initMap() {
         return;
       }
 
-      const newest = records.reduce((a, b) => a.batch_timestamp > b.batch_timestamp ? a : b);
       const asOf = new Date(newest.batch_timestamp).toLocaleString('en-US', {
         month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit',
         timeZone: 'America/New_York',

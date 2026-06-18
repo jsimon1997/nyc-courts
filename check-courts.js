@@ -57,11 +57,73 @@ function readJson(p) {
   return JSON.parse(fs.readFileSync(p, 'utf8'));
 }
 
+const SLOT_FIELDS = [
+  'saturday_indoor_slots',
+  'saturday_outdoor_slots',
+  'sunday_indoor_slots',
+  'sunday_outdoor_slots',
+  'saturday_slots',
+  'sunday_slots',
+];
+
+function slotValues(cad = {}) {
+  return SLOT_FIELDS.map((k) => cad[k]);
+}
+
+function isDefinitiveSlot(value) {
+  if (value == null) return false;
+  const s = String(value).trim().toLowerCase();
+  return s && s !== 'unknown' && s !== 'n/a';
+}
+
+// Higher score = more useful for publishing weekend availability.
+function recordQuality(record) {
+  if (record.error) return 0;
+  const cad = record.custom_analysis_data || {};
+  if (cad.reached_human !== true) return 1;
+  if (slotValues(cad).some(isDefinitiveSlot)) return 3;
+  return 2;
+}
+
+function bestForWeekend(records, facilityId, saturday, sunday) {
+  const matches = records.filter(
+    (r) => r.facility_id === facilityId
+      && r.target_saturday === saturday
+      && r.target_sunday === sunday,
+  );
+  if (!matches.length) return null;
+  return matches.reduce((best, r) => {
+    const q = recordQuality(r);
+    const bq = recordQuality(best);
+    if (q > bq) return r;
+    if (q < bq) return best;
+    return r.batch_timestamp > best.batch_timestamp ? r : best;
+  });
+}
+
 function appendResult(record) {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   const current = fs.existsSync(OUTPUT_FILE) ? readJson(OUTPUT_FILE) : [];
   current.push(record);
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(current, null, 2) + '\n', 'utf8');
+}
+
+function maybeAppendResult(record, existingRecords) {
+  const prior = bestForWeekend(
+    existingRecords,
+    record.facility_id,
+    record.target_saturday,
+    record.target_sunday,
+  );
+  if (prior && recordQuality(record) < recordQuality(prior)) {
+    console.log(
+      `[keep] ${record.facility_name}: keeping prior data from ${prior.batch_timestamp} (new call did not improve on it)`,
+    );
+    return false;
+  }
+  appendResult(record);
+  existingRecords.push(record);
+  return true;
 }
 
 function recentlyReachedHuman(records, facilityId, nowMs) {
@@ -205,7 +267,7 @@ async function main() {
       console.error(`[error] ${name}: ${e.message}`);
     }
 
-    appendResult(record);
+    maybeAppendResult(record, existingRecords);
   }
 
   if (errors > 0) process.exitCode = 1;
