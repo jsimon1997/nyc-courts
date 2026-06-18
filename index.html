@@ -2722,37 +2722,43 @@ async function initMap() {
     return 2;
   }
 
-  function trackHtml(raw, reachedHuman) {
-    if (isNotApplicable(raw)) return '';
+  function applicableSlots(inRaw, outRaw) {
+    return [inRaw, outRaw].filter((raw) => raw != null && !isNotApplicable(raw));
+  }
+
+  function combinedTrackHtml(inRaw, outRaw, reachedHuman) {
+    const slots = applicableSlots(inRaw, outRaw);
+    if (!slots.length) return reachedHuman ? '' : statusHtml('unknown');
     if (!reachedHuman) return statusHtml('unknown');
 
-    const label = String(raw ?? '').trim().toLowerCase();
-    if (!label || label === 'unknown') return statusHtml('unknown');
-    if (isConfirmedNoAvailability(raw)) return statusHtml('none');
-
-    const ranges = parseRanges(raw);
-    if (ranges && ranges.length) {
+    const ranges = [];
+    for (const raw of slots) {
+      const label = String(raw).trim().toLowerCase();
+      if (!label || label === 'none' || label === 'unknown') continue;
+      const parsed = parseRanges(raw);
+      if (parsed && parsed.length) ranges.push(...parsed);
+    }
+    if (ranges.length) {
       const bars = barsHtml(ranges);
       if (bars) return `<div class="wa-track wa-track-bars">${bars}</div>`;
     }
+
+    const labels = slots.map((raw) => String(raw).trim().toLowerCase());
+    const allNone = labels.every((l) => l === 'none');
+    const anyNone = labels.some((l) => l === 'none');
+    const restUnknown = labels.filter((l) => l !== 'none').every((l) => l === 'unknown' || !l);
+    if (allNone || (anyNone && restUnknown)) return statusHtml('none');
+
     return statusHtml('unknown');
   }
 
   function rowHtml(name, inRaw, outRaw, reachedHuman) {
-    let indoorTrack  = trackHtml(inRaw, reachedHuman);
-    let outdoorTrack = trackHtml(outRaw, reachedHuman);
-    if (!reachedHuman && indoorTrack && outdoorTrack
-        && indoorTrack.includes('Unknown') && outdoorTrack.includes('Unknown')) {
-      outdoorTrack = '';
-    }
-    if (!indoorTrack && !outdoorTrack) return '';
+    const track = combinedTrackHtml(inRaw, outRaw, reachedHuman);
+    if (!track) return '';
     return `
       <div class="wa-row">
         <div class="wa-name">${esc(name)}</div>
-        <div class="wa-tracks">
-          ${indoorTrack}
-          ${outdoorTrack}
-        </div>
+        <div class="wa-tracks">${track}</div>
       </div>`;
   }
 
